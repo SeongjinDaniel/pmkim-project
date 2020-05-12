@@ -1,0 +1,202 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- good Table Create SQL
+CREATE TABLE good
+(
+    goodId      INT             NOT NULL, 
+    goodName    VARCHAR2(60)    NOT NULL, 
+    CONSTRAINT GOOD_PK PRIMARY KEY (goodId, goodName)
+)
+/
+
+COMMENT ON COLUMN good.goodId IS '상품아이디'
+/
+
+COMMENT ON COLUMN good.goodName IS '상품명'
+/
+
+
+-- good Table Create SQL
+CREATE TABLE entp
+(
+    entpId      INT             NOT NULL, 
+    entpName    VARCHAR2(40)    NOT NULL, 
+    CONSTRAINT ENTP_PK PRIMARY KEY (entpId)
+)
+/
+
+COMMENT ON COLUMN entp.entpId IS '업체아이디'
+/
+
+COMMENT ON COLUMN entp.entpName IS '업체명'
+/
+
+
+-- good Table Create SQL
+CREATE TABLE goodInfo
+(
+    goodId             INT             NOT NULL, 
+    goodBaseCnt        INT             NULL, 
+    goodUnitDivCode    VARCHAR2(20)    NULL, 
+    goodSmlclsCode     LONG            NULL, 
+    CONSTRAINT GOODINFO_PK PRIMARY KEY (goodId)
+)
+/
+
+COMMENT ON COLUMN goodInfo.goodId IS '상품아이디'
+/
+
+COMMENT ON COLUMN goodInfo.goodBaseCnt IS '상품단위량'
+/
+
+COMMENT ON COLUMN goodInfo.goodUnitDivCode IS '상품단위구분코드'
+/
+
+COMMENT ON COLUMN goodInfo.goodSmlclsCode IS '상품소분류코드'
+/
+
+ALTER TABLE goodInfo
+    ADD CONSTRAINT FK_goodInfo_goodId_good_goodId FOREIGN KEY (goodId)
+        REFERENCES good (goodId)
+/
+
+
+-- good Table Create SQL
+CREATE TABLE entpInfo
+(
+    entpId            INT             NOT NULL, 
+    entpName          VARCHAR2(40)    NULL, 
+    entpTypeCode      VARCHAR2(20)    NULL, 
+    entpAreaCode      LONG            NULL, 
+    areaDetailCode    LONG            NULL, 
+    entpTelno         VARCHAR2(20)    NULL, 
+    postNo            INT             NULL, 
+    roadAddrBasic     VARCHAR2(60)    NULL, 
+    roadAddrDetail    VARCHAR2(60)    NULL, 
+    xMapCoord         FLOAT (53)      NULL, 
+    yMapCoord         FLOAT (53)      NULL, 
+    CONSTRAINT ENTPINFO_PK PRIMARY KEY (entpId)
+)
+/
+
+COMMENT ON COLUMN entpInfo.entpId IS '업체아이디'
+/
+
+COMMENT ON COLUMN entpInfo.entpName IS '업체명'
+/
+
+COMMENT ON COLUMN entpInfo.entpTypeCode IS '업체업태코드'
+/
+
+COMMENT ON COLUMN entpInfo.entpAreaCode IS '업체지역코드'
+/
+
+COMMENT ON COLUMN entpInfo.areaDetailCode IS '지역상세코드'
+/
+
+COMMENT ON COLUMN entpInfo.entpTelno IS '전화번호'
+/
+
+COMMENT ON COLUMN entpInfo.postNo IS '우편번호'
+/
+
+COMMENT ON COLUMN entpInfo.roadAddrBasic IS '도로기본주소명'
+/
+
+COMMENT ON COLUMN entpInfo.roadAddrDetail IS '도로상세주소명'
+/
+
+COMMENT ON COLUMN entpInfo.xMapCoord IS 'X지도좌표'
+/
+
+COMMENT ON COLUMN entpInfo.yMapCoord IS 'Y지도좌표'
+/
+
+ALTER TABLE entpInfo
+    ADD CONSTRAINT FK_entpInfo_entpId_entp_entpId FOREIGN KEY (entpId)
+        REFERENCES entp (entpId)
+/
+
+
+-- good Table Create SQL
+CREATE TABLE goodPrice
+(
+    goodId            INT             NOT NULL, 
+    entpId            INT             NULL, 
+    goodInspectDay    INT             NULL, 
+    goodPrice         INT             NULL, 
+    plusoneYn         VARCHAR2(10)    NULL, 
+    goodDcYn          VARCHAR2(10)    NULL, 
+    inputDttm         DATE            NULL, 
+    CONSTRAINT GOODPRICE_PK PRIMARY KEY (goodId)
+)
+/
+
+COMMENT ON COLUMN goodPrice.goodId IS '상품아이디'
+/
+
+COMMENT ON COLUMN goodPrice.entpId IS '업체아이디'
+/
+
+COMMENT ON COLUMN goodPrice.goodInspectDay IS '상품조사일'
+/
+
+COMMENT ON COLUMN goodPrice.goodPrice IS '상품가격'
+/
+
+COMMENT ON COLUMN goodPrice.plusoneYn IS '원플러스원여부'
+/
+
+COMMENT ON COLUMN goodPrice.goodDcYn IS '상품할인여부'
+/
+
+COMMENT ON COLUMN goodPrice.inputDttm IS '입력일시'
+/
+
+ALTER TABLE goodPrice
+    ADD CONSTRAINT FK_goodPrice_goodId_good_goodI FOREIGN KEY (goodId)
+        REFERENCES good (goodId)
+/
+
+ALTER TABLE goodPrice
+    ADD CONSTRAINT FK_goodPrice_entpId_entp_entpI FOREIGN KEY (entpId)
+        REFERENCES entp (entpId)
+/
+
+
+-- good Table Create SQL
+CREATE TABLE eventGood
+(
+    eventGood     VARCHAR2(60)    NOT NULL, 
+    eventName     VARCHAR2(20)    NULL, 
+    searchDate    DATE            NULL, 
+    shopName      VARCHAR2(20)    NULL, 
+    eventPrice    INT             NULL, 
+    prodName      VARCHAR2(20)    NULL, 
+    saleImg       BLOB            NULL, 
+    CONSTRAINT EVENTGOOD_PK PRIMARY KEY (eventGood)
+)
+/
+
+COMMENT ON COLUMN eventGood.eventGood IS '행사상품명'
+/
+
+COMMENT ON COLUMN eventGood.eventName IS '행사형태'
+/
+
+COMMENT ON COLUMN eventGood.searchDate IS '기준날짜'
+/
+
+COMMENT ON COLUMN eventGood.shopName IS '판매업소'
+/
+
+COMMENT ON COLUMN eventGood.eventPrice IS '판매가격'
+/
+
+COMMENT ON COLUMN eventGood.prodName IS '제조사'
+/
+
+COMMENT ON COLUMN eventGood.saleImg IS '이미지'
+/
+
+
