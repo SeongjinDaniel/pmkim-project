@@ -11,6 +11,8 @@ remDr$navigate(url)
 plusone <- remDr$findElement("css","#tabNew > ul > li:nth-child(2) > h4 > a")
 plusone$clickElement()
 
+
+#1+1 크롤링
 date <- Sys.Date()
 totalInform <- NULL
 type <- "1+1"
@@ -53,7 +55,7 @@ repeat{
 
 write.csv(totalInform,"emart24_1+1.csv")
 
-
+#2+1 크롤링
 plustwo <- remDr$findElement("css","#tabNew > ul > li:nth-child(3) > h4 > a")
 plustwo$clickElement()
 
