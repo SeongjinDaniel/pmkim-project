@@ -36,36 +36,29 @@ plus1photo <- NULL
       
       #상품명
       plus1sample <- remDr$findElement(using='css',paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(3) > ul > li:nth-child(",n,") > div > p.tit"))
-      plus1name<- append(plus1name,plus1sample$getElementText())
       
+      plus1name<- append(plus1name,plus1sample$getElementText())
+      print(plus1name)
       #가격
       plus1sample <- remDr$findElement(using='css', paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(3) > ul > li:nth-child(",n,") > div > p.price > span"))
       plus1price<- append(plus1price,plus1sample$getElementText())
       
       
-      
       #사진
       
-      #plus1selector <- paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(3) > ul > li:nth-child(",n,") > div > p.img > img")
-      #plus1sample <- remDr$findElement(using='css', plus1selector)
-      #plus1sample <- plus1sample$getElementAttribute("src")
-      #plus1photo<- append(plus1photo,plus1sample)
-      
-      
-      
-      #plus1selector2<-remDr$findElement(using="xpath", value=paste0('//*[@id="contents"]/div[2]/div[3]/div/div/div[1]/ul/li[1]/div/p[',n,']'))
-      #plus1sample<- plus1sample$getElementAttribute("src")
-      #plus1photo<- append(plus1photo,plus1sample)
-      
-      plus1selector1<-remDr$findElement(using="xpath", value=paste0('//*[@id="contents"]/div[2]/div[3]/div/div/div[1]/ul/li[1]/div/p[',n,']/img'))
-      plus1selector1$clickElement()
-      plus1selector1$getElementTagName()
-      plus1sample<- plus1selector1$getElementAttribute("src")
-      plus1photo<- append(plus1photo,plus1sample)
-      
-     
+      try(
+        {
+          plus1selector1<-remDr$findElement(using="css", value=paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(3) > ul > li:nth-child(",n,") > div > p.img > img"))
+          plus1selector1$clickElement()
+          plus1selector1$findElement()
+        }
+      )
+        plus1sample<- plus1selector1$getElementAttribute("src")
+        plus1photo<- append(plus1photo,plus1sample)
+
       
       print(plus1photo)
+      
       
       #날짜
       plus1date <- append(plus1date, Sys.Date())
@@ -80,7 +73,25 @@ plus1photo <- NULL
     more$clickElement()
     #Sys.sleep(1)
   }
+
+
+
 typeof(plus1photo)
+
+#같은거 거르기기
+for( i in 1: 4){
+  plus1photo[1] -> a
+  plus1photo[i+1] -> b
+  gsub("[http://gs25appimg.gsretail.com/imgsvr/item/]","",a ) ->a
+  gsub("[http://gs25appimg.gsretail.com/imgsvr/item/]","",b ) ->b
+  if(a == b){
+    plus1photo[1+1]<-"plus1sample"
+  }
+}
+
+(plus1photo)
+
+
 
 #제조사) 가져오기
 plus1name%>% str_extract(., "[[가-힣]\\w]{1,}[)]" )%>% gsub(")","",.)->plus1manuf

@@ -33,11 +33,7 @@ for(i in 1:83){
     plus2sample <- remDr$findElement(using='css', paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(5) > ul > li:nth-child(",n,") > div > p.price > span"))
     plus2price<- append(plus2price,plus2sample$getElementText())
     
-    #사진
-    plus2sample <- remDr$findElement(using='css', paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(5) > ul > li:nth-child(",n,") > div > p.img > img"))
-    plus2sample<- plus2sample$getElementAttribute("src")
-    plus2photo<- append(plus2photo,plus2sample)
-    
+  
     #날짜
     plus2date <- append(plus2date, as.Date(Sys.Date()))
     
@@ -63,9 +59,9 @@ plus2price%>% gsub("원","",.) ->plus2price
 
 #cbind
 
-gsplus2product <- data.frame(plus2date, plus2name, plus2store, plus2price, plus2manuf, plus2photo)
+gsplus2product <- data.frame(plus2date, plus2name, plus2store, plus2price, plus2manuf)
 View(gsplus2product)
-names(gsplus2product)=c("기준날짜","상품명","판매업소","판매가격","제조사", "사진")
+names(gsplus2product)=c("기준날짜","상품명","판매업소","판매가격","제조사")
 
 write.csv(gsplus2product,paste0(Sys.Date(),"_GS2+1.csv"))
 
