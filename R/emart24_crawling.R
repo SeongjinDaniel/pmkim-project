@@ -2,7 +2,7 @@ library(RSelenium)
 library(dplyr)
 library(stringr)
 
-
+#edit test
 remDr <- remoteDriver(remoteServerAddr = "localhost", port = 4445, browserName = "chrome")
 remDr$open()
 url <- 'https://www.emart24.co.kr/product/eventProduct.asp'
