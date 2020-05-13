@@ -42,7 +42,7 @@ clickType <- function(optionType, index){
   # index
   # optionType <- "goodId"
   selectInfo <- paste("//*[@id=\"",optionType,"\"]/option[",index,"]", sep="")
-  try(optionDay <- remDr$findElement(using='xpath', value=selectInfo), silent=T)
+  try({optionDay <- remDr$findElement(using='xpath', value=selectInfo)}, silent=T)
   return(optionDay)
 }
 searchDate <- "기준날짜"
@@ -78,6 +78,7 @@ repeat{
       cat("종료\n")
       break;
     }
+    #--------------------------------------------------------------------------------------    
     # 지역 클릭
     repeat{
       optionLoc <- NULL
@@ -90,6 +91,7 @@ repeat{
       optionLoc$clickElement()
       Sys.sleep(1)
       
+      #--------------------------------------------------------------------------------------
       # 판매점 전체로만 클릭해서 사용!! -> 따로 클릭 안해도됨 default가 전체임
       # 품목 클릭
       repeat{
@@ -101,6 +103,7 @@ repeat{
           break;
         }
         optionProType$clickElement()
+        print("품목클릭")
         Sys.sleep(1)
         
         # 상품 클릭 (전체로하면 안됨)
@@ -117,8 +120,8 @@ repeat{
           # 조회 클릭
           clickFind <- remDr$findElement(using='css',"#search_btn")
           clickFind$clickElement()
+          print("상품클릭")
           Sys.sleep(1)
-          
 
           for(index in 2:6){
             # 추후에 전체 상품개수 확인하고 Sequence 변경하기
@@ -133,35 +136,33 @@ repeat{
             #index <- 2
             selectInfo <- paste("#tab_menu > ul > li:nth-child(",index,") > span > a", sep="")
             click_Stores <- remDr$findElement(using='css', selectInfo)
+            storeType <- click_Stores$getElementText()
             click_Stores$clickElement()
+            #print("stssssss")
+            #storeType <- click_Stores$getElementText()
             Sys.sleep(1)
             print("storeType")
-            # storeType <- click_Stores$getElementText()
-            # limit <- gsub("[^[:digit:]]", "", storeType)
-            # limit
-            # Sys.sleep(1)
+            # #tab_menu > ul > li.on > span > a
+            #tab_menu > ul > li:nth-child(1) > span > a
+            #tab_menu > ul > li.on > span > a
+            #tab_menu > ul > li.on > span > a
+            #tab_menu > ul > li:nth-child(1) > span > a
+            #tab_menu > ul > li:nth-child(3) > span > a
             
-            ## 여기부터!!!!!!!!!!!!!!!!!!!!!!
-            # if(limit <= 10){
-              
               #Date#################################################################
-              
               #shopName#################################################################
               # #resultTable > tbody > tr:nth-child(1) > td:nth-child(2)
-              # #resultTable > tbody > tr:nth-child(2) > td:nth-child(2)
               # :
               # #resultTable > tbody > tr:nth-child(10) > td:nth-child(2)
-              #idx <- 1
+
               # 페이지 next
-              oldPage <- 1
-              newPage <- 1
+              oldPage <- 3
+              newPage <- 3
+              curPage <- 3
               repeat{
                 limit <- 0
                 for(idx in 1:10){
                   # 개수가 10개 이하이면!! -> 처리하기!!
-                  selectInfo <- paste("#tab_menu > ul > li:nth-child(",index,") > span > a", sep="")
-                  stores <- remDr$findElement(using='css', selectInfo)
-                  storeType <- stores$getElementText()
                   limit <- gsub("[^[:digit:]]", "", storeType)
                   limit <- as.numeric(limit)
                   Sys.sleep(1)
@@ -186,9 +187,10 @@ repeat{
                   goodName <- append(goodName, unlist(good))
                   #good#################################################################
                   # 판매점 크롤링
+                  #resultTable > tbody > tr:nth-child(3) > td:nth-child(2)
                   temp <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(2)")
                   shopTemp <- NULL
-                  try(shopTemp <- remDr$findElement(using='css', temp), silent=T)
+                  try({shopTemp <- remDr$findElement(using='css', temp)}, silent=T)
                   if(is.null(shopTemp)){
                     print("상품 List 크롤링 종료");
                     break;
@@ -201,7 +203,7 @@ repeat{
                   #prodName###############################################################
                   # 위에서 NULL로 break해서 반복문을 나가면 이하 코드에서는 break 코드가 필요없음
                   temp2 <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(3)")
-                  try(productTemp <- remDr$findElement(using='css', temp2), silent=T)
+                  try({productTemp <- remDr$findElement(using='css', temp2)}, silent=T)
                   product <- productTemp$getElementText()
                   prodName <- append(prodName, unlist(product))
                   #prodName###############################################################
@@ -212,20 +214,20 @@ repeat{
                   # :
                   # #resultTable > tbody > tr:nth-child(10) > td:nth-child(4)
                   temp3 <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(4)")
-                  try(priceTemp <- remDr$findElement(using='css', temp3), silent=T)
+                  try({priceTemp <- remDr$findElement(using='css', temp3)}, silent=T)
                   price <- priceTemp$getElementText()
                   goodPrice <- append(goodPrice, unlist(price))
                   #goodPrice###############################################################
                   
                   #image###############################################################
                   #schForm > div.product > div.product_info > div > img
-                  try(imageTemp <- remDr$findElement(using='css', "#schForm > div.product > div.product_info > div > img[src]"), silent=T)
+                  try({imageTemp <- remDr$findElement(using='css', "#schForm > div.product > div.product_info > div > img[src]")}, silent=T)
                   imageSrc <- imageTemp$getElementAttribute("src")
                   image <- append(image, unlist(imageSrc))
                   #image###############################################################
                   
                   #Location#################################################################
-                  try(loc <- remDr$findElement(using='css', "#entpAreaCode > option[selected]"), silent=T)
+                  try({loc <- remDr$findElement(using='css', "#entpAreaCode > option[selected]")}, silent=T)
                   selectedLoc <- loc$getElementText()
                   location <- append(location, unlist(selectedLoc))
                   #Location#################################################################
@@ -233,54 +235,78 @@ repeat{
                   # beforeWeekPrice <- "1주전"
                   #beforeWeekPrice#################################################################
                   temp4 <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(5)")
-                  try(wPriceTemp <- remDr$findElement(using='css', temp4), silent=T)
+                  try({wPriceTemp <- remDr$findElement(using='css', temp4)}, silent=T)
                   wPrice <- wPriceTemp$getElementText()
                   beforeWeekPrice <- append(beforeWeekPrice, unlist(wPrice))
                   #beforeWeekPrice#################################################################
                   
                   #beforeMonthPrice#################################################################
                   temp5 <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(6)")
-                  try(mPriceTemp <- remDr$findElement(using='css', temp5), silent=T)
+                  try({mPriceTemp <- remDr$findElement(using='css', temp5)}, silent=T)
                   mPrice <- mPriceTemp$getElementText()
                   beforeMonthPrice <- append(beforeMonthPrice, unlist(mPrice))
                   #beforeMonthPrice#################################################################
                   
                   #beforeSixMonthPrice#################################################################
                   temp6 <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(7)")
-                  try(smPriceTemp <- remDr$findElement(using='css', temp6), silent=T)
+                  try({smPriceTemp <- remDr$findElement(using='css', temp6)}, silent=T)
                   smPrice <- smPriceTemp$getElementText()
                   beforeSixMonthPrice <- append(beforeSixMonthPrice, unlist(smPrice))
                   #beforeSixMonthPrice#################################################################
                   
                   #beforeYearPrice#################################################################
                   temp7 <- paste0("#resultTable > tbody > tr:nth-child(",idx,") > td:nth-child(8)")
-                  try(yPriceTemp <- remDr$findElement(using='css', temp7), silent=T)
+                  try({yPriceTemp <- remDr$findElement(using='css', temp7)}, silent=T)
                   yPrice <- yPriceTemp$getElementText()
                   beforeYearPrice <- append(beforeYearPrice, unlist(yPrice))
                   #beforeYearPrice#################################################################
 
                 }
+                
+                # #schForm > div.pagination > span:nth-child(3) > strong
+                # #schForm > div.pagination > span:nth-child(4) > a
+                # :
+                # #schForm > div.pagination > span:nth-child(12) > a
+                
+                #schForm > div.pagination > span:nth-child(4) > a
+                
                 oldpageNum <- remDr$findElement(using='css',"#schForm > div.pagination strong")
                 oldPage <- as.numeric(oldpageNum$getElementText())
-                str(oldPage)
-                if(limit > 10){
-                  print("in limit")
-                  clickNextPage <- remDr$findElement(using='css',"#schForm > div.pagination > a.next")
-                  clickNextPage$clickElement()
+                
+                if(newPage == 12){
+                  clickNextPages <- remDr$findElement(using='css',"#schForm > div.pagination > a.next")
+                  clickNextPages$clickElement()
+                  newPage <- 3
+                  curPage <- newPage
+                  print("1")
                   Sys.sleep(1)
                 }
+                else{
+                  if(limit <= 10){
+                    print("in limit")
+                    break;
+                    Sys.sleep(1)
+                  }else{
+                    newPage <- curPage + 1
+                    str(newPage)
+                    print("else")
+                    #schForm > div.pagination > span:nth-child(4) > a
+                    temp0 <- paste0("#schForm > div.pagination > span:nth-child(",newPage,") > a")
+                    clickNextPage <- remDr$findElement(using='css',temp0)
+                    clickNextPage$clickElement()
+                    curPage <- newPage
+                    Sys.sleep(1)
+                  }
+                } 
                 
-                newPageNum <- remDr$findElement(using='css',"#schForm > div.pagination strong")
-                print("strong")
-                newPage <- as.numeric(newPageNum$getElementText())
-                str(newPage)
-                if(oldPage == newPage) break
+                newPageNum2 <- remDr$findElement(using='css',"#schForm > div.pagination strong")
+                newPageNum <- as.numeric(newPageNum2$getElementText())
+                #str(newPage)
+                
+                if(oldPage == newPageNum) break
               }
-
               #shopName#################################################################
-            #}else{
-              
-            #}
+
 
           }
         }
