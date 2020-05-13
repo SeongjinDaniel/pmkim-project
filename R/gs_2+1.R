@@ -47,12 +47,35 @@ for(i in 1:83){
   Sys.sleep(1)
 }
 
-#제조사) 가져오기
-plus2name%>% str_extract(., "[[가-힣]\\w]{1,}[)]" )%>% gsub(")","",.)->plus2manuf
-
 
 #상품명만 남기기
-plus2name%>% str_extract(.,"[)]{1}[[가-힣]\\w]{1,}")%>% gsub(")","",.)->plus2name
+#plus2name%>% str_extract(.,"[)]{1}[[가-힣]\\w]{1,}")%>% gsub(")","",.)->plus2name
+plus2name%>% strsplit(.,")")%>% unlist-> names
+
+if(length(names)==3) {
+  plus2name<-append(plus1name,paste(names[2],names[3],sep=")"))
+}else if(length(names)==2&length(grep('\\(',names))==0){ 
+  plus2name<-append(plus1name,names[2])
+}else if(length(names)==2&length(grep('\\(',names))==1){
+  plus2name<-append(plus2name, paste0(names[2],")"))
+}
+
+#제조사) 가져오기
+#plus2name%>% str_extract(. , "[[가-힣]\\w]{1,}[)]" )%>% gsub(")","",.)->plus2manuf
+name%>% strsplit(.,")")%>% unlist->plus2manuf
+
+
+names <- "LG)풍미모락(연어)"
+
+names%>% strsplit(.,")")%>% unlist->names
+
+
+
+  
+
+
+
+
 
 #가격
 plus2price%>% gsub("원","",.) ->plus2price
