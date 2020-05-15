@@ -23,33 +23,33 @@ eventPrice<-NULL
 prodName<-NULL
 eventName<-NULL
 saleImg<-NULL
-csv<-NULL
 more<-NULL
-
+csv<-NULL
 
 #listUl > li:nth-child(2) > ul > li //행사형태
 #listUl > li:nth-child(2) > div > div > div.name //상품이름
 #listUl > li:nth-child(2) > div > div > div.price > span // 가격
 #listUl > li:nth-child(2) > div > img // img url
 
-
-#moreImg > a
-webElem <- remDr$findElement("css", "body")
-#스크롤 바 내려주는 효과
 remDr$navigate(url)
-for(index in 1:4){
-  #더보기 누르기
+for(index in 3:4){
+  #더보기 첫번째 누르기
+  #listUl > li.btn_more > a
   more<-remDr$findElement(using="css","#listUl > li.btn_more > a")
   more$clickElement()
   Sys.sleep(1)
-  repeat{
+  #더보기 첫번째꺼 이후 더보기 누르기
+  #moreImg > a
+  try({repeat{
     more<-remDr$findElement(using="css","#moreImg > a")
     more$clickElement()
     Sys.sleep(1)
   }
+  },T)
+  #상품 번호 cnt
   cnt<-2
-  cnt<-225
-  repeat{
+  #각 내용들 추출해서 뽑아주는 반복문
+  try({repeat{
     names<- remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") div > img"))
     names<- unlist(names$getElementAttribute("alt"))
     names%>%
@@ -63,15 +63,80 @@ for(index in 1:4){
       eventGood<-paste0(names[2],")")
     }
     prodName<-names[1]
-#    names%>%
-#      str_extract(., "[[가-힣]\\w\\W]{1,}[)]" )%>%
-#      gsub(")","",.)->prodName
-#    names%>%
-#      str_extract(.,"[)]{1}[[가-힣]\\w\\W]{1,}")%>%
-#      gsub(")","",.)->eventGood
+    
     eventPrice<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") div.price > span"))
     eventPrice<-unlist(eventPrice$getElementText())
-    eventName<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") >ul > li "))
+    eventName<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") > ul > li"))
+    eventName<-unlist(eventName$getElementText())
+    if(eventName=="할인")
+      eventName<-"SALE"
+    
+    img<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") div > img"))
+    saleImg<-unlist(img$getElementAttribute("src"))
+    csv <- data.frame(eventGood = eventGood
+                      ,shopName = "세븐일레븐"
+                      ,eventPrice = eventPrice
+                      ,prodName = prodName
+                      ,eventName = eventName
+                      ,searchDate = Sys.Date()
+                      ,saleImg = saleImg)
+    #file 변수 초기화 필수! rbind로 한 행씩 채워넣기
+    file<- rbind(file,csv)
+    cnt<-cnt+1 
+    print(paste0(eventGood," ",prodName))
+  }
+  },T)
+  # 다음페이지로 넘기기
+  click <- remDr$findElement(using="css",paste0("#actFrm > div.cont_body > div.wrap_tab > ul > li:nth-child(",index,") > a"))
+  click$clickElement()
+  
+  Sys.sleep(3)
+}
+write.csv(file,file="sevenEleven_11.csv")
+write.csv(file,file="sevenEleven.csv")
+
+
+
+
+
+##여기서 부터는 PB 아이템 크롤링 할 것임
+pb.file<-NULL
+url<-'http://www.7-eleven.co.kr/product/7prodList.asp'
+remDr$navigate(url)
+  #더보기 첫번째 누르기
+  #listUl > li.btn_more > a
+  more<-remDr$findElement(using="css","#listUl > li.btn_more > a")
+  more$clickElement()
+  Sys.sleep(1)
+  #더보기 첫번째꺼 이후 더보기 누르기
+  #moreImg > a
+  try({repeat{
+    more<-remDr$findElement(using="css","#moreImg > a")
+    more$clickElement()
+    Sys.sleep(1)
+  }
+  },T)
+  #상품 번호 cnt
+  cnt<-2
+  #각 내용들 추출해서 뽑아주는 반복문
+  try({repeat{
+    names<- remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") div > img"))
+    names<- unlist(names$getElementAttribute("alt"))
+    names%>%
+      strsplit(.,")")%>%
+      unlist->names
+    if(length(names)==3) {
+      eventGood<-paste(names[2],names[3],sep=")")
+    }else if(length(names)==2&length(grep('\\(',names))==0){ 
+      eventGood<-names[2]
+    }else if(length(names)==2&length(grep('\\(',names))==1){
+      eventGood<-paste0(names[2],")")
+    }
+    prodName<-names[1]
+    
+    eventPrice<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") div.price > span"))
+    eventPrice<-unlist(eventPrice$getElementText())
+    eventName<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") > ul > li.ico_tag_04"))
     eventName<-unlist(eventName$getElementText())
     img<-remDr$findElement(using="css",paste0("#listUl > li:nth-child(",cnt,") div > img"))
     saleImg<-unlist(img$getElementAttribute("src"))
@@ -82,18 +147,74 @@ for(index in 1:4){
                       ,eventName = eventName
                       ,searchDate = Sys.Date()
                       ,saleImg = saleImg)
-    file<- rbind(file,csv)
+    #file 변수 초기화 필수! rbind로 한 행씩 채워넣기
+    
+    pb.file<- rbind(pb.file,csv)
     cnt<-cnt+1 
     print(paste0(eventGood," ",prodName))
   }
+  },T)
+  
+write.csv(pb.file,file="sevenEleven_PB.csv")
 
-  click <- remDr$findElement(using="css",paste0("#actFrm > div.cont_body > div.wrap_tab > ul > li:nth-child(",index,") > a"))
-  click$clickElement()
 
-  Sys.sleep(3)
+
+
+##여기서 부터는 Fresh Food 아이템 크롤링 할 것임
+fresh.file<-NULL
+url<-'http://www.7-eleven.co.kr/product/bestdosirakList.asp'
+remDr$navigate(url)
+#더보기 첫번째 누르기
+#listUl > li.btn_more > a
+more<-remDr$findElement(using="css","#listUl > li.btn_more > a")
+more$clickElement()
+Sys.sleep(1)
+#더보기 첫번째꺼 이후 더보기 누르기
+#moreImg > a
+try({repeat{
+  more<-remDr$findElement(using="css","#moreImg > a")
+  more$clickElement()
+  Sys.sleep(1)
 }
-write.csv(file,file="sevenEleven.csv")
-#그 옆 상품 : #listUl > li:nth-child(54) > a
-#더보기 가려진 상품 : #listUl > li:nth-child(55) > a
-##listUl > li:nth-child(64) > a // #listUl > li:nth-child(65) > a
+},T)
+#상품 번호 cnt
+cnt<-2
+#각 내용들 추출해서 뽑아주는 반복문
+try({repeat{
+  names<- remDr$findElement(using="css",paste0("#listDiv > div.dosirak_list.dosirak_list_01.dosirak_list_01_02 > ul > li:nth-child(",cnt,") > div > img"))
+  names<- unlist(names$getElementAttribute("alt"))
+  names%>%
+    strsplit(.,")")%>%
+    unlist->names
+  if(length(names)==3) {
+    eventGood<-paste(names[2],names[3],sep=")")
+  }else if(length(names)==2&length(grep('\\(',names))==0){ 
+    eventGood<-names[2]
+  }else if(length(names)==2&length(grep('\\(',names))==1){
+    eventGood<-paste0(names[2],")")
+  }
+  prodName<-names[1]
+  
+  eventPrice<-remDr$findElement(using="css",paste0("#listDiv > div.dosirak_list.dosirak_list_01.dosirak_list_01_02 > ul > li:nth-child(",cnt,") > div > div > div.price > span"))
+  eventPrice<-unlist(eventPrice$getElementText())
+  eventName<-remDr$findElement(using="css",paste0("#listDiv > div.dosirak_list.dosirak_list_01.dosirak_list_01_02 > ul > li:nth-child(1) > span"))
+  eventName<-unlist(eventName$getElementText())
+  img<-remDr$findElement(using="css",paste0("#listDiv > div.dosirak_list.dosirak_list_01.dosirak_list_01_02 > ul > li:nth-child(",cnt,") > div > img"))
+  saleImg<-unlist(img$getElementAttribute("src"))
+  csv <- data.frame(eventGood = eventGood
+                    ,shopName = "세븐일레븐"
+                    ,eventPrice = eventPrice
+                    ,prodName = prodName
+                    ,eventName = eventName
+                    ,searchDate = Sys.Date()
+                    ,saleImg = saleImg)
+  #file 변수 초기화 필수! rbind로 한 행씩 채워넣기
+  
+  fresh.file<- rbind(fresh.file,csv)
+  cnt<-cnt+1 
+  print(paste0(eventGood," ",prodName))
+}
+},T)
+
+write.csv(fresh.file,file="sevenEleven_fresh.csv")
 
