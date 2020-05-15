@@ -119,5 +119,7 @@ for(index in 2:7){
 }
 write.csv(cu.file,file="cu_all.csv")
 
+###수정수정수정 여기서 파일 저장해줘야합니다 
+
 
 
