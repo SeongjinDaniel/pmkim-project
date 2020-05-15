@@ -1,5 +1,3 @@
-as.Date(Sys.Date()) #년, 월, 일
-
 library(stringr)
 library(RSelenium)
 library(dplyr)
@@ -22,17 +20,41 @@ plus2price <- NULL
 plus2date <- NULL
 plus2store <- NULL
 plus2photo <- NULL
-for(i in 1:83){
+names<- NULL
+eventGood<-NULL
+k<-1
+for(i in 1:84){
   for(n in 1:8){
-    
     #상품명
     plus2sample <- remDr$findElement(using='css',paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(5) > ul > li:nth-child(",n,") > div > p.tit"))
-    plus2name<- append(plus2name,plus2sample$getElementText())
+    plus2name<- plus2sample$getElementText()
+    plus2name<-as.character(plus2name)
+    plus2name%>%strsplit(.,")")%>%unlist -> names
+
+    # eventGood
+    # 롯데)김밥세트(김치) 라면  // 롯데)김밥세트  // 롯데)김밥세트(김치)
+    #제조사
+    if(length(names)==3) {
+      eventGood<-append(eventGood,paste(names[2],names[3],sep=")"))
+      plus2manuf <- append(plus2manuf,names[1])
+    }
+    else if(length(names)==2&length(grep('\\(',names))==0){ 
+      eventGood<-append(eventGood,names[2])
+      plus2manuf <- append(plus2manuf,names[1])
+    }
+    else if(length(names)==2&length(grep('\\(',names))==1){
+      eventGood<-append(eventGood,paste0(names[2],")"))
+      plus2manuf <- append(plus2manuf,names[1])
+    }else{
+      eventGood<-append(eventGood,paste0(names[1],")"))
+      plus2manuf<-append(plus2manuf, "null")
+    }
+    cat(k)
+    k<-k+1
     
     #가격
     plus2sample <- remDr$findElement(using='css', paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(5) > ul > li:nth-child(",n,") > div > p.price > span"))
     plus2price<- append(plus2price,plus2sample$getElementText())
-    
   
     #날짜
     plus2date <- append(plus2date, as.Date(Sys.Date()))
@@ -46,43 +68,15 @@ for(i in 1:83){
   more$clickElement()
   Sys.sleep(1)
 }
-
-
-#상품명만 남기기
-#plus2name%>% str_extract(.,"[)]{1}[[가-힣]\\w]{1,}")%>% gsub(")","",.)->plus2name
-plus2name%>% strsplit(.,")")%>% unlist-> names
-
-if(length(names)==3) {
-  plus2name<-append(plus1name,paste(names[2],names[3],sep=")"))
-}else if(length(names)==2&length(grep('\\(',names))==0){ 
-  plus2name<-append(plus1name,names[2])
-}else if(length(names)==2&length(grep('\\(',names))==1){
-  plus2name<-append(plus2name, paste0(names[2],")"))
-}
-
-#제조사) 가져오기
-#plus2name%>% str_extract(. , "[[가-힣]\\w]{1,}[)]" )%>% gsub(")","",.)->plus2manuf
-name%>% strsplit(.,")")%>% unlist->plus2manuf
-
-
-names <- "LG)풍미모락(연어)"
-
-names%>% strsplit(.,")")%>% unlist->names
-
-
-
-  
-
-
-
-
-
+plus2manuf<-plus2manuf[-666]
 #가격
 plus2price%>% gsub("원","",.) ->plus2price
 
+
+
 #cbind
 
-gsplus2product <- data.frame(plus2date, plus2name, plus2store, plus2price, plus2manuf)
+gsplus2product <- data.frame(plus2date, eventGood, plus2store, plus2price, plus2manuf)
 View(gsplus2product)
 names(gsplus2product)=c("기준날짜","상품명","판매업소","판매가격","제조사")
 
