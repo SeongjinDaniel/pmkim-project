@@ -92,7 +92,7 @@ k<-1
     more$clickElement()
     Sys.sleep(1)
   }
-
+#please work work work work
 
 
 #가격
