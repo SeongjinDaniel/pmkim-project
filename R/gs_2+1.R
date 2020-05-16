@@ -22,6 +22,8 @@ plus2store <- NULL
 plus2photo <- NULL
 names<- NULL
 eventGood<-NULL
+event2 <- NULL
+img_url<-NULL
 k<-1
 for(i in 1:84){
   for(n in 1:8){
@@ -60,7 +62,18 @@ for(i in 1:84){
     plus2date <- append(plus2date, as.Date(Sys.Date()))
     
     #유통업체
-    plus2store <- append(plus2store, "GS리테일")
+    plus2store <- append(plus2store, "gs")
+    event2<-append(event2, "2+1")
+    
+    
+    #사진
+    try(
+      {
+        img <- remDr$findElement("css", paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(5) > ul > li:nth-child(",n,") > div > p.img > img"))
+        img_url <- append(img_url,unlist(img$getElementAttribute("src")))
+      }
+    )
+    
   }
   more<-remDr$findElement(using='css','#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(5) > div > a.next')
   more$getElementTagName()
@@ -68,7 +81,7 @@ for(i in 1:84){
   more$clickElement()
   Sys.sleep(1)
 }
-plus2manuf<-plus2manuf[-666]
+
 #가격
 plus2price%>% gsub("원","",.) ->plus2price
 
@@ -76,9 +89,9 @@ plus2price%>% gsub("원","",.) ->plus2price
 
 #cbind
 
-gsplus2product <- data.frame(plus2date, eventGood, plus2store, plus2price, plus2manuf)
+gsplus2product <- data.frame(plus2date, eventGood, plus2store, plus2price, plus2manuf, event2, img_url)
 View(gsplus2product)
-names(gsplus2product)=c("기준날짜","상품명","판매업소","판매가격","제조사")
+names(gsplus2product)=c("기준날짜","상품명","판매업소","판매가격","제조사", "event","img_url")
 
 write.csv(gsplus2product,paste0(Sys.Date(),"_GS2+1.csv"))
 

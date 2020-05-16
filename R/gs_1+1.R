@@ -31,6 +31,8 @@ plus1store <- NULL
 plus1photo <- NULL
 names<-NULL
 eventGood1<-NULL
+event1<-NULL
+img_url<-NULL
 k<-1
 
   for(i in 1:22){
@@ -72,7 +74,16 @@ k<-1
       plus1date <- append(plus1date, Sys.Date())
       
       #유통업체
-      plus1store <- append(plus1store, "GS리테일")
+      plus1store <- append(plus1store, "gs")
+      event1<-append(event1, "1+1")
+      
+      
+      
+      #사진
+      try(
+        {img <- remDr$findElement("css", paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(3) > ul > li:nth-child(",n,") > div > p.img > img"))
+        img_url <- append(img_url,unlist(img$getElementAttribute("src")))}
+      )
   }
 
     more<-remDr$findElement(using='css','#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(3) > div > a.next')
@@ -89,9 +100,9 @@ plus1price%>% gsub("원","",.) ->plus1price
 
 #cbind
 
-gsplus1product <- data.frame(plus1date, eventGood1, plus1store, plus1price, plus1manuf)
+gsplus1product <- data.frame(plus1date, eventGood1, plus1store, plus1price, plus1manuf, event1, img_url)
 View(gsplus1product)
-names(gsplus1product)=c("기준날짜","상품명","판매업소","판매가격","제조사")
+names(gsplus1product)=c("기준날짜","상품명","판매업소","판매가격","제조사","event", "img_url")
 
 
 write.csv(gsplus1product,paste0(Sys.Date(),"_GS1+1.csv"))
