@@ -9,9 +9,7 @@ url <- 'http://gs25.gsretail.com/gscvs/ko/products/event-goods'
 remDr$navigate(url)
 
 
-
 #덤덤
-
 
 more<-remDr$findElement(using='css','#GIFT ')
 more$getElementTagName()
@@ -24,6 +22,7 @@ plusGiftmanuf<-NULL
 plusGiftprice <- NULL
 plusGiftdate <- NULL
 plusGiftstore <- NULL
+plusGiftphoto <- NULL
 for(i in 1:1){
   for(n in 1:8){
     
@@ -34,6 +33,12 @@ for(i in 1:1){
     #가격
     plusGiftsample <- remDr$findElement(using='css', paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(7) > ul > li:nth-child(",n,") > div > p.price > span"))
     plusGiftprice<- append(plusGiftprice,plusGiftsample$getElementText())
+    
+    
+    #사진
+    plusGiftsample <- remDr$findElement(using='css', paste0("#contents > div.cnt > div.cnt_section.mt50 > div > div > div:nth-child(7) > ul > li:nth-child(",n,") > div > div.dum_box > div.dum_prd > p.img > img"))
+    plusGiftsample<- plusGiftsample$getElementAttribute("src")
+    plusGiftphoto<- append(plusGiftphoto,plusGiftsample)
     
     #날짜
     plusGiftdate <- append(plusGiftdate, Sys.Date())
@@ -60,9 +65,7 @@ plusGiftprice%>% gsub("원","",.) ->plusGiftprice
 
 #cbind
 
-gsplusGiftproduct <- cbind(plusGiftdate, plusGiftname, plusGiftstore, plusGiftprice, plusGiftmanuf)
+gsplusGiftproduct <- data.frame(plusGiftdate, plusGiftname, plusGiftstore, plusGiftprice, plusGiftmanuf, plusGiftphoto)
 View(gsplusGiftproduct)
-names(gsplusGiftproduct)=c("기준날짜","상품명","판매업소","판매가격","제조사")
-
-
-write.csv(gsplusGiftproduct,"gs덤.csv")
+names(gsplusGiftproduct)=c("기준날짜","상품명","판매업소","판매가격","제조사", "사진")
+write.csv(gsplusGiftproduct,paste0(Sys.Date(),"_GS덤.csv"))
