@@ -109,6 +109,6 @@ repeat{
       more$clickElement()
     }, silent = T)
     # if(is.null(more)) break;
-    
+     
   }
 }
