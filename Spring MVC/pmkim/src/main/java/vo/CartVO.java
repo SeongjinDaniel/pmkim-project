@@ -11,7 +11,18 @@ public class CartVO {
     // 상품 아이디 
     private String goodId;
 
-    public int getCartId() {
+    // 주문 갯수
+    private int cnt;
+    
+    public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
+	public int getCartId() {
         return cartId;
     }
 
