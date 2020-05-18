@@ -8,6 +8,7 @@ remDr$open()
 url <- 'http://gs25.gsretail.com/gscvs/ko/products/event-goods'
 remDr$navigate(url)
 
+#please work work work work
 
 #덤덤
 
