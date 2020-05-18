@@ -1,4 +1,4 @@
-## 20200513
+## :green_book: day3_ 20200513
 
 I, Haley, feel really sorry to all...
 
@@ -17,3 +17,10 @@ Especially, I made code to crawl `img` tag, but because of things that does not 
 
 
 My conclusion today is that i will stop to find Elements of that at the moment, and focus on other activity!
+
+
+
+
+
+## :green_book: day8_20200518
+
