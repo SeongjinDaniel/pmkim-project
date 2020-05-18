@@ -39,7 +39,7 @@ for(index in 2:7){
   try(repeat{
   more<-remDr$findElement(using="css","#dataTable > div.prodListBtn > div.prodListBtn-w > a")
   more$clickElement()
-  Sys.sleep(3)
+  Sys.sleep(5)
   },silent=T)
 
   try(repeat{
@@ -65,6 +65,7 @@ for(index in 2:7){
 
     ##제조사 한글자인 경우 PB 상품 처리
     ##비비고 잡아주는 기능 및 샐,도,햄,,,등등 찾아주는 기능
+    ## %in% 으로 잡아주는 구문 잘 외울것
     if(names[1] %in% pb.list|nchar(names[1])>=5){
       if(length(grep('\\비비고',names))==1){
         prodName<-"비비고"
@@ -107,10 +108,7 @@ for(index in 2:7){
   }
   print(paste0(eventGood," ",prodName," cnt=",cnt, " ",p.list))
   Sys.sleep(1)
-  names<- remDr$findElement(using="css",paste0("#dataTable > div:nth-child(",p.list,") > ul > li:nth-child(",cnt,") > p.prodName > span"))
-  ##빠져나가는 구문 체크
-  if(is.null(names))
-    break;
+
   },T)
   ##category click
   category<-remDr$findElement(using="css",paste0("#lnb > div > div.depth3.depth3Lnb > ul > li.prodInfo_0",index," > a"))
@@ -119,5 +117,9 @@ for(index in 2:7){
 }
 write.csv(cu.file,file="cu_all.csv")
 
+###수정수정수정 여기서 파일 저장해줘야합니다 
+##원하는 행 지우는 부분
+#cu.file<-cu.file[-c(3339:3342),]
+cu.file.2<-NULL
 
 
