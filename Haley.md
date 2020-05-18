@@ -24,3 +24,15 @@ My conclusion today is that i will stop to find Elements of that at the moment, 
 
 ## :green_book: day8_20200518
 
+gs 매장명, 주소, 전화번호 크롤링 - 일부 append 오류로 ***day9에 오전에 다시 수집 필요***
+
+event.jsp 담당
+
+style_event.css 수정 
+
+visual studio code, eclipse모두 사용 
+
+##### 내일 할일(day9_ 20200519) 
+
+1. gs 매장명, 주소, 전화번호 크롤링
+2. data-filter 정리해서 사진 링크로 보내는 것 구현하기
