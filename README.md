@@ -10,5 +10,29 @@ big-data project
 1. master : 최종 개발 프로젝트
 2. release : 중간중간에 version 관리하는 프로젝트
 3. develop : release 올리기전 프로젝트
+<<<<<<< HEAD
 4. feature branches : 각자 자유로운 개발 업로드 프로젝트, 여기서 develop branch에 저장
 
+=======
+4. feature branches : 각자 자유로운 개발 업로드 프로젝트, 여기서 develop branch에 
+
+# 스프링 MVC 우리의 약속
+1. 프로젝트 이름 : pmkim
+
+2. 변수명 : 첫글자는 소문자 중간중간에 _금지
+  ex) pmKimBears
+
+3. 최대한 클래스를 쪼개기
+
+4. 두번 이상 반복되는 구문들은 함수로 짜기
+
+5. 전역 변수선언은 클래스 맨 위에 정리
+
+6. 클래스명 맨앞은 대문자로 
+
+   ex) BearKim.class
+
+7. 의미있는 숫자는 const 변수사용 하던가 enum사용해서 사용하기!!! 
+
+   ex)단순히 for 1 ~ 10이 아니라 1 ~ maxCount 이런식으로!! 
+>>>>>>> 367ca1004d10ebaceba9b2bb14c951bf731e3b32
