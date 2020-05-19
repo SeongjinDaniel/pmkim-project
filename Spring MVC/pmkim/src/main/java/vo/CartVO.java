@@ -3,43 +3,53 @@ package vo;
 public class CartVO {
 
     // 장바구니 아이디 
-    private int cartId;
+    private int cart_id;
 
     // 아이디 
     private String id;
 
     // 상품 아이디 
-    private String goodId;
+    private String good_id;
 
-    public int getCartId() {
-        return cartId;
-    }
+    // 주문 갯수
+    private int cnt;
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
+	public int getCart_id() {
+		return cart_id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setCart_id(int cart_id) {
+		this.cart_id = cart_id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getGoodId() {
-        return goodId;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setGoodId(String goodId) {
-        this.goodId = goodId;
-    }
+	public String getGood_id() {
+		return good_id;
+	}
 
-    // Cart 모델 복사
-    public void CopyData(CartVO param)
-    {
-        this.cartId = param.getCartId();
-        this.id = param.getId();
-        this.goodId = param.getGoodId();
-    }
+	public void setGood_id(String good_id) {
+		this.good_id = good_id;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
+	@Override
+	public String toString() {
+		return "CartVO [cart_id=" + cart_id + ", id=" + id + ", good_id=" + good_id + ", cnt=" + cnt + "]";
+	}
+   
+    
 }

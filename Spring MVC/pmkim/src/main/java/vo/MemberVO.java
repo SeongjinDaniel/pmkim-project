@@ -14,118 +14,113 @@ public class MemberVO {
     private String name;
 
     // 전화 번호 
-    private String telNum;
+    private String tel_num;
 
     // 이메일 
     private String email;
 
     // 가입 날짜 
-    private Date signDate;
+    private Date sign_date;
 
     // 별칭 명 
-    private String nickName;
+    private String nick_name;
 
     // 도로 주소 
-    private String roadAddr;
+    private String road_addr;
 
     // 로그인 종류 
-    private String loginType;
+    private String login_type;
 
     // 멤버 종류 
-    private String memberType;
+    private String member_type;
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getPw() {
-        return pw;
-    }
+	public String getPw() {
+		return pw;
+	}
 
-    public void setPw(String pw) {
-        this.pw = pw;
-    }
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getTelNum() {
-        return telNum;
-    }
+	public String getTel_num() {
+		return tel_num;
+	}
 
-    public void setTelNum(String telNum) {
-        this.telNum = telNum;
-    }
+	public void setTel_num(String tel_num) {
+		this.tel_num = tel_num;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public Date getSignDate() {
-        return signDate;
-    }
+	public Date getSign_date() {
+		return sign_date;
+	}
 
-    public void setSignDate(Date signDate) {
-        this.signDate = signDate;
-    }
+	public void setSign_date(Date sign_date) {
+		this.sign_date = sign_date;
+	}
 
-    public String getNickName() {
-        return nickName;
-    }
+	public String getNick_name() {
+		return nick_name;
+	}
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
+	}
 
-    public String getRoadAddr() {
-        return roadAddr;
-    }
+	public String getRoad_addr() {
+		return road_addr;
+	}
 
-    public void setRoadAddr(String roadAddr) {
-        this.roadAddr = roadAddr;
-    }
+	public void setRoad_addr(String road_addr) {
+		this.road_addr = road_addr;
+	}
 
-    public String getLoginType() {
-        return loginType;
-    }
+	public String getLogin_type() {
+		return login_type;
+	}
 
-    public void setLoginType(String loginType) {
-        this.loginType = loginType;
-    }
+	public void setLogin_type(String login_type) {
+		this.login_type = login_type;
+	}
 
-    public String getMemberType() {
-        return memberType;
-    }
+	public String getMember_type() {
+		return member_type;
+	}
 
-    public void setMemberType(String memberType) {
-        this.memberType = memberType;
-    }
+	public void setMember_type(String member_type) {
+		this.member_type = member_type;
+	}
 
-    // Member 모델 복사
-    public void CopyData(MemberVO param)
-    {
-        this.id = param.getId();
-        this.pw = param.getPw();
-        this.name = param.getName();
-        this.telNum = param.getTelNum();
-        this.email = param.getEmail();
-        this.signDate = param.getSignDate();
-        this.nickName = param.getNickName();
-        this.roadAddr = param.getRoadAddr();
-        this.loginType = param.getLoginType();
-        this.memberType = param.getMemberType();
-    }
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", tel_num=" + tel_num + ", email=" + email
+				+ ", sign_date=" + sign_date + ", nick_name=" + nick_name + ", road_addr=" + road_addr + ", login_type="
+				+ login_type + ", member_type=" + member_type + "]";
+	}
+    
+    
+
 }

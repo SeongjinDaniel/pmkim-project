@@ -5,7 +5,7 @@ import java.util.Date;
 public class BoardVO {
 
     // 게시 아이디 
-    private Integer writeId;
+    private Integer write_id;
 
     // 아이디 
     private String id;
@@ -22,62 +22,58 @@ public class BoardVO {
     // 내용 
     private String content;
 
-    public Integer getWriteId() {
-        return writeId;
-    }
+	public Integer getWrite_id() {
+		return write_id;
+	}
 
-    public void setWriteId(Integer writeId) {
-        this.writeId = writeId;
-    }
+	public void setWrite_id(Integer write_id) {
+		this.write_id = write_id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public Integer getCnt() {
-        return cnt;
-    }
+	public Integer getCnt() {
+		return cnt;
+	}
 
-    public void setCnt(Integer cnt) {
-        this.cnt = cnt;
-    }
+	public void setCnt(Integer cnt) {
+		this.cnt = cnt;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    // Board 모델 복사
-    public void CopyData(BoardVO param)
-    {
-        this.writeId = param.getWriteId();
-        this.id = param.getId();
-        this.date = param.getDate();
-        this.title = param.getTitle();
-        this.cnt = param.getCnt();
-        this.content = param.getContent();
-    }
+	@Override
+	public String toString() {
+		return "BoardVO [write_id=" + write_id + ", id=" + id + ", date=" + date + ", title=" + title + ", cnt=" + cnt
+				+ ", content=" + content + "]";
+	}
+	
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace ="resource.Map_Mapper">
+ 
+<!--  	<select id="loginCheck" resultType="String">
+ 		select customer_name from customer_info
+ 		where customer_id = #{customer_id} and customer_pwd = #{customer_pwd}
+ 	</select>
+ 	
+ 	<select id="viewCustomer" resultType="vo.WeetCustomerInfoVO">
+ 		select customer_name, customer_id, customer_email, customer_phone, customer_date, customer_kindof_login
+ 		from customer_info
+ 		where customer_id = #{customer_id} and customer_pwd = #{customer_pwd}
+ 	</select>
+ 	
+ 	<select id="viewCustomerInfoAll" resultType="vo.WeetCustomerInfoVO">
+		select customer_seq_id, customer_kindof_login, customer_id, customer_pwd, customer_name, 
+				customer_email, customer_phone, customer_addr, customer_nickname, customer_rank, customer_date
+		from customer_info
+	</select>
+ 	
+ 	<select id="selectCustomerIdOne" resultType="vo.WeetCustomerInfoVO">
+	 	select customer_seq_id, customer_kindof_login, customer_id, customer_pwd, customer_name, customer_email, 
+	 			customer_phone, customer_addr, customer_nickname, customer_rank, customer_date
+	 	from customer_info 
+	 	where customer_seq_id = #{customer_seq_id}
+ 	</select> -->
+ 	
+ 	<!-- 회원 추가 -->
+<!--  	<insert id="insertCustomerId" parameterType="vo.WeetCustomerInfoVO">
+		<selectKey resultType="_int" keyProperty="customer_seq_id" order="BEFORE">
+			SELECT CUSTOMER_INFO_SEQ.nextval FROM dual
+		</selectKey>
+		insert into customer_info(customer_seq_id, customer_kindof_login, customer_id, customer_pwd, customer_name, 
+				customer_email, customer_phone, customer_addr, customer_nickname, customer_rank, customer_date)
+		values(#{customer_seq_id}, #{customer_kindof_login}, #{customer_id}, #{customer_pwd}, #{customer_name},
+			#{customer_email}, #{customer_phone}, #{customer_addr}, #{customer_nickname}, 1, sysdate)
+	</insert> -->
+	<!-- 회원 삭제 -->
+<!-- 	<delete id="deleteCustomer" parameterType="_int">
+		delete from customer_info where customer_seq_id = #{customer_seq_id}
+	</delete> -->
+	
+	<!--<update id ="updateCustomerCount" parameterType="_int">
+		update customer_info set customer_seq_id = customer_seq_id + 1 
+	</update> -->
+<!--  	<insert id="viewThumbsUp" parameterType="vo.WeetVideoVO">
+      <selectKey resultType="_int" keyProperty="video_good_count" order="BEFORE">
+         select video_good_seq.nextval from dual
+      </selectKey>
+      insert into video_info(video_good_count)
+      values (#{video_good_count}) 
+	</insert>
+	<insert id="viewThumbsDown" parameterType="vo.WeetVideoVO">
+      <selectKey resultType="_int" keyProperty="video_bad_count" order="BEFORE">
+         select video_bad_seq.nextval from dual
+      </selectKey>
+      insert into video_info(video_bad_count)
+      values (#{video_bad_count})
+	</insert> -->
+	
+<!-- 	<select id ="selectThumbsTwo" resultType="vo.WeetVideoVO">
+		select video_good_count, video_bad_count from video_info 
+		where video_good_count = #{video_good_count}
+	</select> -->
+ </mapper>
