@@ -35,21 +35,22 @@ more$getElementText()
 more$clickElement()
 Sys.sleep(1)
 
-
-#gsStorestore <- NULL # 브랜드명
+gsStorestore <- NULL # 브랜드명
 
 gsStorename <-NULL # 매장
 gsStoresample<-NULL # 매장명 샘플
 gsStorenames<-NULL
+names <- NULL
 
-#gsStoreTel <- NULL
+gsStoreTel <- NULL
 
-#gsStoreAddrSample<-NULL #주소 샘플
-#gsStoreAddr <- NULL # 주소
+gsStoreAddrSample<-NULL #주소 샘플
+gsStoreAddr <- NULL # 주소
 
-
-#finished <- FALSE
 num<-0
+shopId<-NULL
+finished <- FALSE
+
 Sys.sleep(1)
 
 for(i in 1:598){
@@ -57,41 +58,36 @@ for(i in 1:598){
   for(n in 1:5){
     
     #브랜드명
-    #gsStorestore <- append(gsStorestore, "gs")
+    gsStorestore <- append(gsStorestore, "gs")
     
     #매장명
-    gsStoresample <- NULL
     gsStoresample <- remDr$findElement(using='css',paste0("#storeInfoList > tr:nth-child(",n,") > td:nth-child(1) > a"))
     
     gsStorename<- gsStoresample$getElementText()
-    gsStorenames<- append(gsStorenames, as.character(gsStorename))
+    names<- append(names, gsStorename)
+   
     
     
-    #gsStoreTel <- append(gsStoreTel,"1644-5425")
+    gsStoreTel <- append(gsStoreTel,"1644-5425")
     
     
     #매장주소
-    #gsStoreAddrSample <- remDr$findElement(using='css', paste0("#storeInfoList > tr:nth-child(",n,") > td:nth-child(2) > a"))
-    #getstoreAddrSample2<- gsStoreAddrSample$getElementText()
-    #gsStoreAddr<- append(gsStoreAddr,getstoreAddrSample2)
+    gsStoreAddrSample <- remDr$findElement(using='css', paste0("#storeInfoList > tr:nth-child(",n,") > td:nth-child(2) > a"))
+    gsStoreAddr<- append(gsStoreAddr,gsStoreAddrSample$getElementText())
     
-    
-    #num<-num+1
-    #if(nchar(num)==1){
-    #  enum <- paste0('0000',num)
-    #}else if(nchar(num)==2){
-    #  enum <- paste0('000',num)
-    #}else if(nchar(num)==3){
-    #  enum <- paste0('00',num)
-    #}else if(nchar(num)==4){
-    #  enum <- paste0('0',num)
-    #}
-    #shopId <- append(shopId,paste0('gs',enum))
-    
-    #출력해보기 (ID, 매장명, 매장주소)
     num<-num+1
-    cat(num,  ",  ")
+    if(nchar(num)==1){
+      enum<-paste0('0000', num)
+    }else if (nchar(num)==2){
+      enum <-paste0('000',num)
+    }else if(nchar(num)==3){
+      enum <-paste0('00',num)
+    }else if(nchar(num)==4){
+      enum <-paste0('0',num)
+    }
+    shopId <- append(shopId, paste0('gs',enum))
     
+    cat(num, ", ", as.character(gsStorename))
   }
   
   Sys.sleep(1)
@@ -101,40 +97,17 @@ for(i in 1:598){
   more$clickElement()
   Sys.sleep(1)
   
+  
 }
-
-#shopId 생성
-#shopId<-NULL
-#for(num in 1: 2988){
-#  if(nchar(num)==1){
-#    enum <- paste0('0000',num)
-#  }else if(nchar(num)==2){
-#    enum <- paste0('000',num)
-#  }else if(nchar(num)==3){
-#    enum <- paste0('00',num)
-#  }else if(nchar(num)==4){
-#    enum <- paste0('0',num)
-#  }
-#  shopId <- append(shopId,paste0('gs',enum))
-}
-
-
-
-
-#gsStorename%>%gsub("GS25","",.)%>%append(gsStorenames, .)->gsStorenames
-
-
-as.character(gsStoreAddr2) ->gsStoreAddr2
-typeof(gsStoreAddr2)
-#cbind 2988이 맞음
-
-gsgsStoreproduct <- data.frame(shopId, gsStorestore, gsStorenames, gsStoreTel, gsStoreAddr2) 
-names(gsgsStoreproduct)=c("shop_id","브랜드","상세명","전화번호","주소")
+as.character(names)->names2
 View(gsgsStoreproduct)
-write.csv(gsgsStoreproduct,paste0(Sys.Date(),"_GS_SeoulAddr.csv"))
+typeof(gsStoreTel)
 
+gsStorename%>%gsub("GS25","",.)%>%append(gsStorename,.)->gsStorenames
 
+#cbind
+gsgsStoreproduct <- data.frame(shopId,gsStorestore, names2, gsStoreTel, gsStoreAddr2) 
+names(gsgsStoreproduct)=c("shopId","브랜드","상세명","전화번호","주소")
 
-
-
-
+write.csv(gsgsStoreproduct,paste0(Sys.Date(),"_GSPB_SeoulAddr.csv"))
+getwd()
