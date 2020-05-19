@@ -5,10 +5,10 @@ import java.util.Date;
 public class ReplyVO {
 
     // 댓글 아이디 
-    private Integer replyId;
+    private Integer reply_id;
 
     // 게시 아이디 
-    private Integer writeId;
+    private Integer write_id;
 
     // 내용 
     private String content;
@@ -17,55 +17,53 @@ public class ReplyVO {
     private String id;
 
     // 날짜 
-    private Date date;
+    private Date write_date;
 
-    public Integer getReplyId() {
-        return replyId;
-    }
+	public Integer getReply_id() {
+		return reply_id;
+	}
 
-    public void setReplyId(Integer replyId) {
-        this.replyId = replyId;
-    }
+	public void setReply_id(Integer reply_id) {
+		this.reply_id = reply_id;
+	}
 
-    public Integer getWriteId() {
-        return writeId;
-    }
+	public Integer getWrite_id() {
+		return write_id;
+	}
 
-    public void setWriteId(Integer writeId) {
-        this.writeId = writeId;
-    }
+	public void setWrite_id(Integer write_id) {
+		this.write_id = write_id;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Date getWrite_date() {
+		return write_date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setWrite_date(Date write_date) {
+		this.write_date = write_date;
+	}
 
-    // Reply 모델 복사
-    public void CopyData(ReplyVO param)
-    {
-        this.replyId = param.getReplyId();
-        this.writeId = param.getWriteId();
-        this.content = param.getContent();
-        this.id = param.getId();
-        this.date = param.getDate();
-    }
+	@Override
+	public String toString() {
+		return "ReplyVO [reply_id=" + reply_id + ", write_id=" + write_id + ", content=" + content + ", id=" + id
+				+ ", write_date=" + write_date + "]";
+	}
+
+    
 }

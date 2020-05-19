@@ -5,7 +5,7 @@
  
 <mapper namespace="resource.CartMapper">
 	<select id="selectCart" resultType="vo.CartVO">
-		select cartId,id,goodId 
+		select cart_id,id,good_id 
 		from cart 
 		where id = #{id}
 	</select>
@@ -18,12 +18,40 @@
 		<selectKey resultType="_int" keyProperty="cartId" order="BEFORE">
 			select cart_seq.nextval from dual
 		</selectKey>
-		insert into cart (cartId, id, goodId) values (#{cartId},#{id},#{goodId})
+		insert into cart (cart_id, id, good_id) values (#{cartId},#{id},#{goodId})
 	</insert>
 	
 	<select id="searchGoods" resultType="vo.GoodsVO">
-		select goodId, goodName, goodPrice, mfgName, goodImg 
+		select good_id, good_name, good_price, mfg_name, good_img 
 		from goods 
 		where goodName like '%'||#{keyword}||'%'
 	</select>
+	
+	<select id="listCount" resultType="_int"> <!-- paging하기 위해 갯수 count -->
+  		select count(id) from goods where shop
+  	</select>
+  	
+  	<select id="goodsListAll" resultType="vo.GoodsVO">
+  		select good_id, good_name, search_date, good_price, mfg_name, good_img 
+  		from goods
+  	</select>
+  	
+  	<select id="goodsList_shopName" resultType="vo.GoodsVO"> <!-- shopname으로 검색 -->
+  		select good_id, good_name, search_date, good_price, mfg_name, good_img 
+  		from goods 
+  		where good_id = (select good_id from goods_shop where shop_name = #{shopName})
+  	</select>
+  	
+  	<select id="goodsList_eventName" resultType="vo.GoodsVO"> <!-- eventname으로 검색 -->
+  		select good_id, good_name, search_date, good_price, mfg_name, good_img 
+  		from goods 
+  		where good_id = (select good_id from event where event_name = #{eventName})
+  	</select>
+  	
+  	<select id="goodsList_shopEvent" resultType="vo.GoodsVO"> <!-- shop&eventname으로 검색 -->
+  		select good_id, good_name, search_date, good_price, mfg_name, good_img 
+  		from goods 
+  		where good_id = (select good_id from event where event_name = #{eventName})
+  		and good_id = (select good_id from goods_shop where shop_name = #{shopName})
+  	</select>
 </mapper>

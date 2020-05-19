@@ -3,43 +3,43 @@ package vo;
 public class EventVO {
 
     // 상품 아이디 
-    private String goodId;
+    private String good_id;
 
     // 행사 명 
-    private String eventName;
+    private String event_name;
 
     // 행사 아이디 
-    private String eventId;
+    private int event_id;
 
-    public String getGoodId() {
-        return goodId;
-    }
+	public String getGood_id() {
+		return good_id;
+	}
 
-    public void setGoodId(String goodId) {
-        this.goodId = goodId;
-    }
+	public void setGood_id(String good_id) {
+		this.good_id = good_id;
+	}
 
-    public String getEventName() {
-        return eventName;
-    }
+	public String getEvent_name() {
+		return event_name;
+	}
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
 
-    public String getEventId() {
-        return eventId;
-    }
+	public int getEvent_id() {
+		return event_id;
+	}
 
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
-    }
+	public void setEvent_id(int event_id) {
+		this.event_id = event_id;
+	}
 
-    // Event 모델 복사
-    public void CopyData(EventVO param)
-    {
-        this.goodId = param.getGoodId();
-        this.eventName = param.getEventName();
-        this.eventId = param.getEventId();
-    }
+	@Override
+	public String toString() {
+		return "EventVO [good_id=" + good_id + ", event_name=" + event_name + ", event_id=" + event_id + "]";
+	}
+    
+    
+
 }
