@@ -5,8 +5,8 @@ public class GoodsShopVO {
     // 상품 판매점 아이디 
     private String good_shop_id;
 
-    // 판매점 명 
-    private String shop_name;
+    // 판매점 코드
+    private String shop_code;
 
     // 상품 아이디 
     private String good_id;
@@ -19,12 +19,12 @@ public class GoodsShopVO {
 		this.good_shop_id = good_shop_id;
 	}
 
-	public String getShop_name() {
-		return shop_name;
+	public String getShop_code() {
+		return shop_code;
 	}
 
-	public void setShop_name(String shop_name) {
-		this.shop_name = shop_name;
+	public void setShop_code(String shop_code) {
+		this.shop_code = shop_code;
 	}
 
 	public String getGood_id() {
@@ -37,7 +37,7 @@ public class GoodsShopVO {
 
 	@Override
 	public String toString() {
-		return "GoodsShopVO [good_shop_id=" + good_shop_id + ", shop_name=" + shop_name + ", good_id=" + good_id + "]";
+		return "GoodsShopVO [good_shop_id=" + good_shop_id + ", shop_code=" + shop_code + ", good_id=" + good_id + "]";
 	}
     
     

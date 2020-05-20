@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import vo.CartVO;
+import vo.EventVO;
+import vo.GoodsEventShopVO;
 import vo.GoodsVO;
 
 @Repository
@@ -38,7 +40,7 @@ public class CartDAO {
 	}
 	
 	//저장된 카트 보여주기
-	public List<CartVO> cartOne(String id) {
+	public List<CartVO> cartView(String id) {
 		List<CartVO> list = new ArrayList<CartVO>();
 		String statement = "resource.CartMapper.selectCart";
 		list = session.selectList(statement,id);
@@ -55,7 +57,6 @@ public class CartDAO {
 	
 	//paging
 	public int listCount(String type) {
-		//System.out.println("sql : "+sql);
 		int count = 0;
 		String statement = "resource.CartMapper.listCount";
 		if(session.selectOne(statement)!=null) {
@@ -66,37 +67,49 @@ public class CartDAO {
 		return count;
 	}
 	//상품 전체 리스트 출력
-	public List<GoodsVO> goodsAll(){
-		List<GoodsVO> list = new ArrayList<GoodsVO>();
+	public List<GoodsEventShopVO> goodsAll(){
+		List<GoodsEventShopVO> list = new ArrayList<GoodsEventShopVO>();
 		String statement = "resource.CartMapper.goodsListAll";
 		list = session.selectList(statement);
+		for(int i=0;i<10;i++) {
+			System.out.println(list);
+		}
 		return list;
 	}
 	
 	//shopName으로 찾아오기
-	public List<GoodsVO> goodsSortShop(String shopName) {
+	public List<GoodsVO> goodsSortShop(String shop_code) {
 		List<GoodsVO> list = new ArrayList<GoodsVO>();
 		String statement = "resource.CartMapper.goodsList_shopName";
-		list = session.selectList(statement,shopName);
+		list = session.selectList(statement,shop_code);
 		return list;
 	}
 	
 	//eventName으로 찾아오기
-	public List<GoodsVO> goodsSortEvent(String eventName){
+	public List<GoodsVO> goodsSortEvent(String event_name){
 		List<GoodsVO> list = new ArrayList<GoodsVO>();
 		String statement = "resource.CartMapper.goodsList_eventName";
-		list = session.selectList(statement,eventName);
+		list = session.selectList(statement,event_name);
 		return list;
 	}
 	
 	//shopName&eventName 모두로 찾아오기
-	public List<GoodsVO> goodsShopEvent(String eventName, String shopName){
+	public List<GoodsVO> goodsShopEvent(String event_name, String shop_code){
 		List<GoodsVO> list = new ArrayList<GoodsVO>();
 		String statement = "resource.CartMapper.goodsList_shopEvent";
 		Map<String,String> map = new HashMap<String,String>();
-		map.put("eventName", eventName);
-		map.put("shopName", shopName);
+		map.put("eventName", event_name);
+		map.put("shopName", shop_code);
 		list = session.selectList(statement,map);
 		return list;
+	}
+	
+	//event 정보 가져오기
+	public EventVO eventInfo(GoodsVO gvo) {
+		EventVO evo = new EventVO();
+		String statement = "resource.CartMapper.eventInfo";
+		evo = session.selectOne(statement,gvo);
+		System.out.println("받아오는 goodvo : "+ gvo);
+		return evo;
 	}
 }

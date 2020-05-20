@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
+<!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
@@ -15,7 +15,7 @@
 	</delete>
 
 	<insert id="insertCart" parameterType="vo.CartVO">
-		<selectKey resultType="_int" keyProperty="cartId" order="BEFORE">
+		<selectKey resultType="_int" keyProperty="cart_id" order="BEFORE">
 			select cart_seq.nextval from dual
 		</selectKey>
 		insert into cart (cart_id, id, good_id) values (#{cartId},#{id},#{goodId})
@@ -31,27 +31,33 @@
   		select count(id) from goods where shop
   	</select>
   	
-  	<select id="goodsListAll" resultType="vo.GoodsVO">
-  		select good_id, good_name, search_date, good_price, mfg_name, good_img 
-  		from goods
+  	<select id="goodsListAll" resultType="vo.GoodsEventShopVO">
+  		select a.good_name as shop_name, b.event_name as event_name
+		from goods a, event b
+		where a.good_id = b.good_id
   	</select>
   	
   	<select id="goodsList_shopName" resultType="vo.GoodsVO"> <!-- shopname으로 검색 -->
   		select good_id, good_name, search_date, good_price, mfg_name, good_img 
   		from goods 
-  		where good_id = (select good_id from goods_shop where shop_name = #{shopName})
+  		
+  		where good_id = (select good_id from goods_shop where shop_code = (select shop_code from shop_code where shop_name=#{shop_name}))
   	</select>
   	
   	<select id="goodsList_eventName" resultType="vo.GoodsVO"> <!-- eventname으로 검색 -->
   		select good_id, good_name, search_date, good_price, mfg_name, good_img 
   		from goods 
-  		where good_id = (select good_id from event where event_name = #{eventName})
+  		where good_id = (select good_id from event where event_name = #{event_name})
   	</select>
   	
   	<select id="goodsList_shopEvent" resultType="vo.GoodsVO"> <!-- shop&eventname으로 검색 -->
   		select good_id, good_name, search_date, good_price, mfg_name, good_img 
   		from goods 
-  		where good_id = (select good_id from event where event_name = #{eventName})
-  		and good_id = (select good_id from goods_shop where shop_name = #{shopName})
+  		where good_id = (select good_id from event where event_name = #{event_name})
+  		and good_id = (select good_id from goods_shop where shop_code = (select shop_code from shop_code where shop_name=#{shop_name}))
+  	</select>
+  	
+  	<select id = "eventInfo" resultType="vo.EventVO">
+  		select event_name from event where good_id = #{good_id}
   	</select>
 </mapper>

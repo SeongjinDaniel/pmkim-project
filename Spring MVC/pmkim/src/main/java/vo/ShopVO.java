@@ -11,8 +11,8 @@ public class ShopVO {
     // 전화 번호 
     private String tel_num;
 
-    // 판매점 명 
-    private String shop_name;
+    // 판매점 코드
+    private String shop_code;
 
     // 판매점 명 상세 
     private String shop_name_detail;
@@ -41,12 +41,12 @@ public class ShopVO {
 		this.tel_num = tel_num;
 	}
 
-	public String getShop_name() {
-		return shop_name;
+	public String getShop_code() {
+		return shop_code;
 	}
 
-	public void setShop_name(String shop_name) {
-		this.shop_name = shop_name;
+	public void setShop_code(String shop_code) {
+		this.shop_code = shop_code;
 	}
 
 	public String getShop_name_detail() {
@@ -59,8 +59,8 @@ public class ShopVO {
 
 	@Override
 	public String toString() {
-		return "ShopVO [shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num + ", shop_name="
-				+ shop_name + ", shop_name_detail=" + shop_name_detail + "]";
+		return "ShopVO [shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num + ", shop_code="
+				+ shop_code + ", shop_name_detail=" + shop_name_detail + "]";
 	}
     
     
