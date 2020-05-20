@@ -41,5 +41,14 @@ write.csv(df, "encoding_test_euc_kr.csv",  row.names = F, fileEncoding = "utf-8"
 
 으아 javascript문에서 null 유무를 제대로 체크 못한다. 뭐지..............
 
+-----------
 
+# 20200520
 
+### Today's Development Diary
+
+카카오 서울만 기준으로 나오게  -> cu만 검색하면 우리나라 기준으로 보여줌!!
+
+개발은 끝이 없고 올라야할 산봉우리는 너무 끝에 있도돠!!!!!!!!!!
+
+**개발 플로우를 정리하고 개발할것!!!!** 

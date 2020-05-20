@@ -32,4 +32,27 @@ public class MapController {
 		return "/test";
 	}
 	
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public String test2(Model model) {
+		//logger.info("Welcome home! The client locale is {}.", locale);
+		
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//		String formattedDate = dateFormat.format(date);
+//		model.addAttribute("serverTime", formattedDate );
+		
+		return "/mapTemp";
+	}
+	
+	@RequestMapping(value = "/test3", method = RequestMethod.GET)
+	public String test3(Model model) {
+
+		return "/test2";
+	}
+	
+	@RequestMapping(value = "/test4", method = RequestMethod.GET)
+	public String test4(Model model) {
+
+		return "/test3";
+	}
 }
