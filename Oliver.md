@@ -51,4 +51,4 @@ write.csv(df, "encoding_test_euc_kr.csv",  row.names = F, fileEncoding = "utf-8"
 
 개발은 끝이 없고 올라야할 산봉우리는 너무 끝에 있도돠!!!!!!!!!!
 
-**개발 플로우를 정리하고 개발할것!!!!** 
+**개발 플로우를 정리하고 개발할것!!!!**  
