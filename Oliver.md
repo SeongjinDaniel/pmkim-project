@@ -10,3 +10,45 @@
 
 빨리 Back-end 부분으로 넘어가서!! 재밌는 개발을 하고 싶다!!
 
+# 20200519
+
+- R write.csv
+
+```R
+write.csv(
+  x,              # 파일에 저장할 데이터 프레임 또는 행렬
+  file="",        # 데이터를 저장할 파일명
+  row.names=TRUE  # TRUE면 행 이름을 CSV 파일에 포함하여 저장한다.
+)
+write.csv(df, "encoding_test_euc_kr.csv",  row.names = F, fileEncoding = "utf-8")
+```
+
+- 오라클 데이터 import export
+
+  https://blog.naver.com/app337/60203195966
+
+  https://offbyone.tistory.com/162
+
+  사이트 참고!!!!
+
+- **Map 사이트**
+
+  각 편의점 지점에 내가 검색한 행사상품이 있는지 보여준다!!ex) 아이스크림이면 아이스크림 행사상품이 있는지 볼수 있음!!
+
+### Today's Development Diary
+
+으아 DB...........
+
+으아 javascript문에서 null 유무를 제대로 체크 못한다. 뭐지..............
+
+-----------
+
+# 20200520
+
+### Today's Development Diary
+
+카카오 서울만 기준으로 나오게  -> cu만 검색하면 우리나라 기준으로 보여줌!!
+
+개발은 끝이 없고 올라야할 산봉우리는 너무 끝에 있도돠!!!!!!!!!!
+
+**개발 플로우를 정리하고 개발할것!!!!** 

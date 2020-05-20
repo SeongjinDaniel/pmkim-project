@@ -50,6 +50,5 @@ public class CartVO {
 	public String toString() {
 		return "CartVO [cart_id=" + cart_id + ", id=" + id + ", good_id=" + good_id + ", cnt=" + cnt + "]";
 	}
-   
-    
+
 }

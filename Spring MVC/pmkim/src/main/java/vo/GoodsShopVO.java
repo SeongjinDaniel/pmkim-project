@@ -19,6 +19,7 @@ public class GoodsShopVO {
 		this.good_shop_id = good_shop_id;
 	}
 
+
 	public String getShop_code() {
 		return shop_code;
 	}
@@ -37,7 +38,9 @@ public class GoodsShopVO {
 
 	@Override
 	public String toString() {
+
 		return "GoodsShopVO [good_shop_id=" + good_shop_id + ", shop_code=" + shop_code + ", good_id=" + good_id + "]";
+
 	}
     
     
