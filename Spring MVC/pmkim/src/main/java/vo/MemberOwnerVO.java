@@ -6,28 +6,28 @@ public class MemberOwnerVO {
     private String id;
 
     // 판매점 아이디 
-    private String shopId;
+    private String shop_id;
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getShopId() {
-        return shopId;
-    }
+	public String getShop_id() {
+		return shop_id;
+	}
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
+	public void setShop_id(String shop_id) {
+		this.shop_id = shop_id;
+	}
 
-    // MemberOwner 모델 복사
-    public void CopyData(MemberOwnerVO param)
-    {
-        this.id = param.getId();
-        this.shopId = param.getShopId();
-    }
+	@Override
+	public String toString() {
+		return "MemberOwnerVO [id=" + id + ", shop_id=" + shop_id + "]";
+	}
+	
+	
 }

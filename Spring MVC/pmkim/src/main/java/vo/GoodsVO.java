@@ -5,79 +5,75 @@ import java.util.Date;
 public class GoodsVO {
 
     // 상품 아이디 
-    private String goodId;
+    private String good_id;
 
     // 상품 명 
-    private String goodName;
+    private String good_name;
 
     // 조사 날짜 
-    private Date searchDate;
+    private Date search_date;
 
     // 상품 가격 
-    private String goodPrice;
+    private String good_price;
 
     // 제조사 명 
-    private String mfgName;
+    private String mfg_name;
 
     // 상품 이미지 
-    private String goodImg;
+    private String good_img;
 
-    public String getGoodId() {
-        return goodId;
-    }
+	@Override
+	public String toString() {
+		return "GoodsVO [good_id=" + good_id + ", good_name=" + good_name + ", search_date=" + search_date
+				+ ", good_price=" + good_price + ", mfg_name=" + mfg_name + ", good_img=" + good_img + "]";
+	}
 
-    public void setGoodId(String goodId) {
-        this.goodId = goodId;
-    }
+	public String getGood_id() {
+		return good_id;
+	}
 
-    public String getGoodName() {
-        return goodName;
-    }
+	public void setGood_id(String good_id) {
+		this.good_id = good_id;
+	}
 
-    public void setGoodName(String goodName) {
-        this.goodName = goodName;
-    }
+	public String getGood_name() {
+		return good_name;
+	}
 
-    public Date getSearchDate() {
-        return searchDate;
-    }
+	public void setGood_name(String good_name) {
+		this.good_name = good_name;
+	}
 
-    public void setSearchDate(Date searchDate) {
-        this.searchDate = searchDate;
-    }
+	public Date getSearch_date() {
+		return search_date;
+	}
 
-    public String getGoodPrice() {
-        return goodPrice;
-    }
+	public void setSearch_date(Date search_date) {
+		this.search_date = search_date;
+	}
 
-    public void setGoodPrice(String goodPrice) {
-        this.goodPrice = goodPrice;
-    }
+	public String getGood_price() {
+		return good_price;
+	}
 
-    public String getMfgName() {
-        return mfgName;
-    }
+	public void setGood_price(String good_price) {
+		this.good_price = good_price;
+	}
 
-    public void setMfgName(String mfgName) {
-        this.mfgName = mfgName;
-    }
+	public String getMfg_name() {
+		return mfg_name;
+	}
 
-    public String getGoodImg() {
-        return goodImg;
-    }
+	public void setMfg_name(String mfg_name) {
+		this.mfg_name = mfg_name;
+	}
 
-    public void setGoodImg(String goodImg) {
-        this.goodImg = goodImg;
-    }
+	public String getGood_img() {
+		return good_img;
+	}
 
-    // Goods 모델 복사
-    public void CopyData(GoodsVO param)
-    {
-        this.goodId = param.getGoodId();
-        this.goodName = param.getGoodName();
-        this.searchDate = param.getSearchDate();
-        this.goodPrice = param.getGoodPrice();
-        this.mfgName = param.getMfgName();
-        this.goodImg = param.getGoodImg();
-    }
+	public void setGood_img(String good_img) {
+		this.good_img = good_img;
+	}
+
 }

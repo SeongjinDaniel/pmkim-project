@@ -3,91 +3,65 @@ package vo;
 public class ShopVO {
 
     // 판매점 아이디 
-    private String shopId;
+    private String shop_id;
 
     // 판매점 주소 
-    private String shopAddr;
-
-    // 위도 
-    private Float lat;
-
-    // 경도 
-    private Float lng;
+    private String shop_addr;
 
     // 전화 번호 
-    private String telNum;
+    private String tel_num;
 
-    // 판매점 명 
-    private String shopName;
+    // 판매점 코드
+    private String shop_code;
 
     // 판매점 명 상세 
-    private String shopNameDetail;
+    private String shop_name_detail;
 
-    public String getShopId() {
-        return shopId;
-    }
+	public String getShop_id() {
+		return shop_id;
+	}
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
+	public void setShop_id(String shop_id) {
+		this.shop_id = shop_id;
+	}
 
-    public String getShopAddr() {
-        return shopAddr;
-    }
+	public String getShop_addr() {
+		return shop_addr;
+	}
 
-    public void setShopAddr(String shopAddr) {
-        this.shopAddr = shopAddr;
-    }
+	public void setShop_addr(String shop_addr) {
+		this.shop_addr = shop_addr;
+	}
 
-    public Float getLat() {
-        return lat;
-    }
+	public String getTel_num() {
+		return tel_num;
+	}
 
-    public void setLat(Float lat) {
-        this.lat = lat;
-    }
+	public void setTel_num(String tel_num) {
+		this.tel_num = tel_num;
+	}
 
-    public Float getLng() {
-        return lng;
-    }
+	public String getShop_code() {
+		return shop_code;
+	}
 
-    public void setLng(Float lng) {
-        this.lng = lng;
-    }
+	public void setShop_code(String shop_code) {
+		this.shop_code = shop_code;
+	}
 
-    public String getTelNum() {
-        return telNum;
-    }
+	public String getShop_name_detail() {
+		return shop_name_detail;
+	}
 
-    public void setTelNum(String telNum) {
-        this.telNum = telNum;
-    }
+	public void setShop_name_detail(String shop_name_detail) {
+		this.shop_name_detail = shop_name_detail;
+	}
 
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public String getShopNameDetail() {
-        return shopNameDetail;
-    }
-
-    public void setShopNameDetail(String shopNameDetail) {
-        this.shopNameDetail = shopNameDetail;
-    }
-
-    // Shop 모델 복사
-    public void CopyData(ShopVO param)
-    {
-        this.shopId = param.getShopId();
-        this.shopAddr = param.getShopAddr();
-        this.lat = param.getLat();
-        this.lng = param.getLng();
-        this.telNum = param.getTelNum();
-        this.shopName = param.getShopName();
-        this.shopNameDetail = param.getShopNameDetail();
-    }
+	@Override
+	public String toString() {
+		return "ShopVO [shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num + ", shop_code="
+				+ shop_code + ", shop_name_detail=" + shop_name_detail + "]";
+	}
+    
+    
 }
