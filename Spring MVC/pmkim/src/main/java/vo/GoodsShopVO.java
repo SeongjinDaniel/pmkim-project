@@ -19,7 +19,6 @@ public class GoodsShopVO {
 		this.good_shop_id = good_shop_id;
 	}
 
-
 	public String getShop_code() {
 		return shop_code;
 	}
@@ -43,6 +42,4 @@ public class GoodsShopVO {
 
 	}
     
-    
-
 }

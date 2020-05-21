@@ -11,7 +11,6 @@ public class ShopVO {
     // 전화 번호 
     private String tel_num;
 
-
     // 판매점 코드
     private String shop_code;
 
@@ -62,11 +61,9 @@ public class ShopVO {
 
 	@Override
 	public String toString() {
-
 		return "ShopVO [shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num + ", shop_code="
 				+ shop_code + ", shop_name_detail=" + shop_name_detail + "]";
 
 	}
-    
     
 }
