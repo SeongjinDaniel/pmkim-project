@@ -5,7 +5,9 @@
 <mapper namespace="resource.ThemeMapper">
     
     <select id="allGoodsTheme"  resultType="vo.GoodsInfoThemeVO">
-       select good_name, good_img from goods
+       <!-- select good_name, good_img from goods -->
+       select g.good_name, g.good_img, e.event_name, s.shop_name
+        from goods g, event e, shop_code s where g.good_id = e.good_id
     </select>
  	 	
 </mapper>

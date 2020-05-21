@@ -19,6 +19,8 @@ public class ThemeDAO {
 		List<GoodsInfoThemeVO> li = new ArrayList<GoodsInfoThemeVO>();
 		String statement = "resource.ThemeMapper.allGoodsTheme";
 		li = session.selectList(statement,vo);
+		//list 값 잘 넘어오는지 확인
+		//System.out.println(li.get(0).toString());
 		return li;
 	}
 
