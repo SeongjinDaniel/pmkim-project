@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO, java.util.List, java.util.ArrayList"%>
+	pageEncoding="UTF-8" import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,java.util.List,java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,9 +41,11 @@
 </head>
 
 <body>
-	<% List<CartVO> cartList = (ArrayList<CartVO>) request.getAttribute("cartList");
-	   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
-	   EventVO eventInfo = (EventVO) request.getAttribute("eventInfo");%>
+	<%
+		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
+		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
+		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
+	%>
 	<!-- Start Main Top -->
 	<header class="main-header">
 		<!-- Start Navigation -->
@@ -145,7 +147,7 @@
 			<div class="search-product">
 				<form action="/pmkim/cart" method="get">
 					<input type="hidden" name="action" value = "search">
-					<input class="form-control" placeholder="Search here..." type="text">
+					<input class="form-control" name="keyword" placeholder="Search here..." type="text">
 					<button type="submit">
 						<i class="fa fa-search"></i>
 					</button>
@@ -153,51 +155,53 @@
 			</div>
 			<!-- 검색 조건 검색 -->
 			<div class="row">
-			
-
 				<div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
 					<div class="right-product-box">
-						<div class="product-item-filter row">
-							<div class="col-12 col-sm-8 text-center text-sm-left">
-								<form method="GET" action="/pmkim/cart">
-									<input type ="hidden" name ="action" value = "sortShop">
-									<div class="toolbar-sorter-right">
-										<span>편의점 </span> 
-										<select id="basic" class="selectpicker show-tick form-control">
-											<option data-display="Select" value="GS">GS25</option>
-											<option value="CU">CU</option>
-											<option value="MS">ministop</option>
-											<option value="SE">7eleven</option>
-											<option value="EM">emart24</option>
-										</select>
-									</div>
-									<br>
-									<br>
-									<input type ="hidden" name ="action" value = "sortEvent">
-									<div class="toolbar-sorter-right">
-										<span>행사 종류</span> 
-										<select id="basic" class="selectpicker show-tick form-control">
-											<option data-display="Select" value="1+1">1+1</option>
-											<option value="2+1">2+1</option>
-											<option value="SALE">Sale</option>
-											<option value="Fresh Food">FreshFood</option>
-											<option value="PB">PB</option>
-										</select>
-									</div>
-							</form>
-								<!-- <p>Showing all 4 results</p> -->
-							</div>
-							<div class="col-12 col-sm-4 text-center text-sm-right">
-								<ul class="nav nav-tabs ml-auto">
-									<li><a class="nav-link active" href="#grid-view"
-										data-toggle="tab"> <i class="fa fa-th"></i>
-									</a></li>
-									<li><a class="nav-link" href="#list-view"
-										data-toggle="tab"> <i class="fa fa-list-ul"></i>
-									</a></li>
-								</ul>
-							</div>
+						<form method="GET" action="/pmkim/cart">
+							<div class="product-item-filter row">
+								<div class="col-12 col-sm-8 text-center text-sm-left">
+										<input type ="hidden" name ="action" value = "sort">
+										<div class="toolbar-sorter-right">
+											<span>편의점 </span> 
+											<select name="shop_code" class="selectpicker show-tick form-control">
+												<option value="GS">GS25</option>
+												<option value="CU">CU</option>
+												<option value="MS">ministop</option>
+												<option value="SE">7eleven</option>
+												<option value="EM">emart24</option>
+											</select>
+										</div>
+										<br>
+										<br>
+										<div class="toolbar-sorter-right">
+											<span>행사 종류</span> 
+											<select name="event_name" class="selectpicker show-tick form-control">
+												<option value="1+1">1+1</option>
+												<option value="2+1">2+1</option>
+												<option value="SALE">Sale</option>
+												<option value="Fresh Food">FreshFood</option>
+												<option value="PB">PB</option>
+											</select>
+										</div>
+										
+									<!-- <p>Showing all 4 results</p> -->
+								</div>
+								<div class="col-12 col-sm-4 text-center text-sm-right">
+									<ul class="nav nav-tabs ml-auto">
+										<li><a class="nav-link active" href="#grid-view"
+											data-toggle="tab"> <i class="fa fa-th"></i>
+										</a></li>
+										<li><a class="nav-link" href="#list-view"
+											data-toggle="tab"> <i class="fa fa-list-ul"></i>
+										</a></li>
+									</ul>
+									<button type="submit">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
 						</div>
+					</form>
+						
 
 						<div class="product-categorie-box">
 							<div class="tab-content">
@@ -205,45 +209,49 @@
 									id="grid-view">
 									<div class="row">
 									<!-- 상품출력 반복문 -->
-									<c:forEach var="vo" items="${requestScope.gesList }">
+									<c:forEach var="vo" items="${ gesList }">
 										<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 											<div class="products-single fix">
 												<div class="box-img-hover">
 													<div class="type-lb">
 														<p class="sale">${ vo.shop_name }</p>
 													</div>
-													<img src= ${ vo.good_img } class="img-fluid" alt="Image">
+													<img src= "${ vo.good_img }" class="img-fluid" alt="Image">
 													
 													<div class="mask-icon">
-														<ul>
-															<li>
-																<a href="#" data-toggle="tooltip" data-placement="right" title="View">
-																<i class="fas fa-eye"></i>
-																</a>
-															</li>
-															<li>
-																<a href="#" data-toggle="tooltip" data-placement="right" title="Compare">
-																<i class="fas fa-sync-alt"></i>
-																</a>
-															</li>
-															<li>
-																<a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist">
-																<i class="far fa-heart"></i>
-																</a>
-															</li>
-														</ul>
-														<a class="cart" href="#">Add to Cart</a>
+														<a class="cart" href="/pmkim/cart?action=insert">Add to Cart</a>
 													</div>
 												</div>
 												<div class="why-text">
-													<h4>${vo.good_name }</h4>
-													<h5>${vo.good_price }원</h5>
+													<h4>${ vo.good_name }</h4>
+													<h5>${ vo.good_price }원</h5>
+													<h5>${ vo.event_name }</h5>
 												</div>
 											</div>
 										</div>
 										</c:forEach>
+										
 									</div>
 								</div>
+							</div>
+							<!-- paging -->
+							<div id="paging" style="text-align : center; font-size : 16pt;">
+								<c:if test="${ pgNum != 1 }">
+									<a href ="/pmkim/cart?pgNum=1"> &laquo; </a>
+									<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
+								</c:if>
+								
+								<c:forEach var="num" begin="${ pageStart }" end="${ pageEnd }">
+									<a href = "/pmkim/cart?pgNum=${ num }">${ num } &nbsp;</a>
+								</c:forEach>
+								
+								<c:if test="${ nextData }">
+									<a href = "/pmkim/cart?pgNum=${ pgNum + 1 }"> &gt; &nbsp;</a>
+								</c:if>
+								
+								<c:if test = "${ pgNum != end }">
+								<a href ="/pmkim/cart?pgNum=${ end }"> &raquo; </a>
+							</c:if>
 							</div>
 						</div>
 					</div>
@@ -258,52 +266,19 @@
 								<h3>장바구니</h3>
 							</div>
 							<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-								<div class="list-group-collapse sub-men">
-									<a class="list-group-item list-group-item-action"
-										href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
-										Fruits & Drinks 
-										<small class="text-muted">(100)</small>
-									</a>
-									<div class="collapse show" id="sub-men1"
-										data-parent="#list-group-men">
-										<div class="list-group">
-											<a href="#" class="list-group-item list-group-item-action active">
-											Fruits 1 <small class="text-muted">(50)</small>
-											</a> 
-											<a href="#" class="list-group-item list-group-item-action">
-											Fruits 2 <small class="text-muted">(10)</small>
-											</a> 
-											<a href="#" class="list-group-item list-group-item-action">
-											Fruits 3 <small class="text-muted">(10)</small>
-											</a>
-											<a href="#" class="list-group-item list-group-item-action">
-											Fruits 4 <small class="text-muted">(10)</small>
-											</a> 
-											<a href="#" class="list-group-item list-group-item-action">
-											Fruits 5 <small class="text-muted">(20)</small>
-											</a>
-										</div>
+								<c:forEach var="cvo" items="<%= cartList %>">
+									<c:if test = "${cvo.id ==null}">
+									"로그인이 필요한 서비스입니다."
+									</c:if>
+									<div class="list-group-collapse sub-men">
+										<a class="list-group-item list-group-item-action"
+											href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
+											${cvo.good_name} 
+											<small class="text-muted">(100)</small>
+										</a>
+										
 									</div>
-								</div>
-								<div class="list-group-collapse sub-men">
-									<a class="list-group-item list-group-item-action"
-										href="#sub-men2" data-toggle="collapse" aria-expanded="false"
-										aria-controls="sub-men2">Vegetables <small
-										class="text-muted">(50)</small>
-									</a>
-									<div class="collapse" id="sub-men2"
-										data-parent="#list-group-men">
-										<div class="list-group">
-											<a href="#" class="list-group-item list-group-item-action">Vegetables
-												1 <small class="text-muted">(10)</small>
-											</a> <a href="#" class="list-group-item list-group-item-action">Vegetables
-												2 <small class="text-muted">(20)</small>
-											</a> <a href="#" class="list-group-item list-group-item-action">Vegetables
-												3 <small class="text-muted">(20)</small>
-											</a>
-										</div>
-									</div>
-								</div>
+								</c:forEach>
 								
 							</div>
 						</div>
