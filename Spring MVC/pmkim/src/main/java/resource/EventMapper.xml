@@ -2,19 +2,18 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="resource.EvenetMapper">
+<mapper namespace="resource.EventMapper">
 
-    <select id="stringTest"  resultType="string">
+    <!-- <select id="stringTest"  resultType="string">
        select good_name from goods where good_id= #{good_id}
+    </select> -->
+    
+    <select id="GoodsVOAll"  resultType="vo.GoodsVO">
+       select good_img, good_name, mgf_name, good_price from goods
     </select>
     
-    <select id="GoodsVOTest"  resultType="vo.GoodsVO">
-       select * from goods where good_id= #{good_id}
+    <select id="EventName" resultType="vo.EventVO">
+    	select event_name from EVENT LEFT outer join GOODS on EVENT.good_id = GOODS.good_id;
     </select>
  	 	
 </mapper>
-
-
-
-
-

@@ -1,4 +1,4 @@
-# whatcheap-project
+# pmkim-project(편의점 마스터 김편복)
 big-data project
 
 1. 협업을 하는 공간입니다.
@@ -20,7 +20,7 @@ big-data project
 1. 프로젝트 이름 : pmkim
 
 2. 변수명 : 첫글자는 소문자 중간중간에 _금지
-  ex) pmKimBears
+    ex) pmKimBears
 
 3. 최대한 클래스를 쪼개기
 
@@ -35,4 +35,3 @@ big-data project
 7. 의미있는 숫자는 const 변수사용 하던가 enum사용해서 사용하기!!! 
 
    ex)단순히 for 1 ~ 10이 아니라 1 ~ maxCount 이런식으로!! 
->>>>>>> 367ca1004d10ebaceba9b2bb14c951bf731e3b32
