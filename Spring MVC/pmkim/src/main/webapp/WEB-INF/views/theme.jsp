@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8" import="java.util.List, java.util.ArrayList, vo.GoodsInfoThemeVO"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -157,7 +157,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2>Services</h2>
+					<h2>테마 상품</h2>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
 						<li class="breadcrumb-item active">Services</li>
@@ -174,9 +174,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="title-all text-center">
-						<h1>Our Gallery</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Sed sit amet lacus enim.</p>
+						<h1>테마별 추천 상품</h1>
+						<p>당신은 누구신가요? 당신을 소개하는 테마를 눌러주세요!</p>
 					</div>
 				</div>
 			</div>
@@ -189,30 +188,46 @@
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="shop-cat-box">
 								<img class="img-fluid"
-									src="resources/images/categories_img_01.jpg" alt="" /> <a
-									class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+									src="resources/images/camping_1.jpg" alt="" id="first_theme"/> 
+									<a class="btn hvr-hover" href="#" onclick="location.href='/pmkim/theme?theme_code=cam'">
+									떠나~어디?캠핑!</a> <%-- 나중에 추가 : location.href='/pmkim/theme?theme_code=<%= theme_code %>' --%> 
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="shop-cat-box">
 								<img class="img-fluid"
-									src="resources/images/categories_img_02.jpg" alt="" /> <a
-									class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+									src="resources/images/naduuri_1.jpg" alt="" id="second_theme"/> 
+									<a class="btn hvr-hover" href="#" onclick="location.href='/pmkim/theme?theme_code=hangang'">
+									가보자 한강 나드으리</a>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="shop-cat-box">
 								<img class="img-fluid"
-									src="resources/images/categories_img_03.jpg" alt="" /> <a
-									class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+									src="resources/images/jachui_1.jpg" alt="" id="third_theme"/> <a
+									class="btn hvr-hover" href="#" onclick="location.href='/pmkim/theme?theme_code=jachi'">
+									나는 한다 자취!</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- End Categories -->
-			<!-- 5/19 추가한 3개짜리 카테고리 끝 -->
+			<!-- 추가한 3개짜리 카테고리 끝(0519) -->
+			
+			<!-- 테마 추천 theme_code 없으면 가려주는 기능(0520) 시작-->
+			
+<%-- 			<%
+				String theme_code = request.getParameter("theme_code");
+				if(theme_code == null){
+					theme_code = "";
+				}
+			%> 
 
+			<!-- 테마 추천 상품 코드 추가(0520) 끝-->
+			<%-- <c:if test="${requestScope.theme_code != null}"> --%>
+
+			<!-- 테마 상품 카테고리 버튼 -->
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="special-menu text-center">
@@ -228,16 +243,23 @@
 					</div>
 				</div>
 			</div>
-
-
+<%
+	List<GoodsInfoThemeVO> li = (ArrayList<GoodsInfoThemeVO>)request.getAttribute("theme");
+	System.out.print(li.get(0).getGood_name());
+%>
+			<!-- 테마 추천 상품들 -->
+			
 			<div class="row special-list">
+			
+			<!-- forEach 시작 -->
+			<c:forEach var="index" items="<%=li %>" begin="0" end="11" >
 				<div class="col-lg-3 col-md-6 special-grid bulbs">
 					<div class="products-single fix">
 						<div class="box-img-hover">
 							<div class="type-lb">
-								<p class="sale">Sale</p>
+								<p class="sale">${index.event_name}</p>
 							</div>
-							<img src="resources/images/gallery-img-01.jpg" class="img-fluid"
+							<img src='${index.good_img}' class="img-fluid"
 								alt="Image">
 							<div class="mask-icon">
 								<ul>
@@ -250,466 +272,19 @@
 										data-placement="right" title="Add to Wishlist"><i
 											class="far fa-heart"></i></a></li>
 								</ul>
-								<a class="cart" href="#">Add to Cart</a>
+								<a class="cart" href="#">${index.good_name}</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid fruits">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-02.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid bulbs">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-03.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid fruits">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-04.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-                    <div class="text-slid-box">
-                        <div id="offer-box" class="carouselTicker">
-                            <ul class="offer-box">
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    End Main Top -->
-
-    <!-- Start Main Top -->
-    <header class="main-header">
-        <!-- Start Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-            <div class="container">
-                <!-- Start Header Navigation -->
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                    <a class="navbar-brand" href="index.html"><img src="resources/images/logo.png" class="logo" alt=""></a>
-                </div>
-                <!-- End Header Navigation -->
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
-                        <li class="nav-item"><a class="nav-link" href="map.html">지도</a></li> <!--성진오빠파트-->
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a><!-- 세호오빠가 원하는 li에다가 href해주세요!-->
-                            <ul class="dropdown-menu">
-                        <li><a href="shop.html">Sidebar Shop</a></li>
-                        <li><a href="shop-detail.html">Shop Detail</a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item active"><a class="nav-link" href="event.jsp">행사</a></li> <!-- 지혜파트-->
-                        <li class="nav-item"><a class="nav-link" href="mycart.jsp">장바구니</a></li> <!-- 규영언니파트♡ -->
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-
-                <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
-                    <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-							<p>My Cart</p>
-					</a></li>
-                    </ul>
-                </div>
-                <!-- End Atribute Navigation -->
-            </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="resources/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="resources/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="resources/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
-        </nav>
-        <!-- End Navigation -->
-    </header>
-    <!-- End Main Top -->
-
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- End Top Search -->
-
-    <!-- Start Gallery  -->
-    <div class="products-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>Our Gallery</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="special-menu text-center">
-                        <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">All</button>
-                            <button data-filter=".bulbs">Bulbs</button>
-                            <button data-filter=".fruits">Fruits</button>
-							<button data-filter=".podded-vegetables">Podded vegetables</button>
-							<button data-filter=".root-and-tuberous">Root and tuberous</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row special-list">
-                <div class="col-lg-3 col-md-6 special-grid bulbs">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                            <img src="resources/images/gallery-img-01.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid fruits">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="resources/images/gallery-img-02.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid bulbs">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="resources/images/gallery-img-03.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid fruits">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">                            
-                            <img src="resources/images/gallery-img-04.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>                                
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-
-				<div class="col-lg-3 col-md-6 special-grid bulbs">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-05.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid fruits">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-06.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-07.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-08.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-09.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-10.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-11.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-					<div class="products-single fix">
-						<div class="box-img-hover">
-							<img src="resources/images/gallery-img-12.jpg" class="img-fluid"
-								alt="Image">
-							<div class="mask-icon">
-								<ul>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Compare"><i
-											class="fas fa-sync-alt"></i></a></li>
-									<li><a href="#" data-toggle="tooltip"
-										data-placement="right" title="Add to Wishlist"><i
-											class="far fa-heart"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+				</c:forEach>
+				<!-- forEach 끝 -->
+				
+				<%-- </c:if> --%>
 		</div>
 	</div>
+	
+	<!-- 테마 추천 상품들 -->
 	<!-- End Gallery  -->
 
 	<!-- Start Instagram Feed  -->

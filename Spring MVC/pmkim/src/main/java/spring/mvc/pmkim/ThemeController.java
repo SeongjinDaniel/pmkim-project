@@ -19,11 +19,12 @@ public class ThemeController {
 
 	
 	@RequestMapping(value="/theme")
-	public ModelAndView theme(GoodsInfoThemeVO vo) {
+	public ModelAndView theme(GoodsInfoThemeVO gitvo) {
 
-		List<GoodsInfoThemeVO> li = ThemeDAO.allGoods(vo);
+		List<GoodsInfoThemeVO> li = ThemeDAO.allGoods(gitvo);
 		ModelAndView mav = new ModelAndView();
-
+		//값 확인
+		//System.out.println("Con : " + li.get(0).toString());
 		//goods table
 		mav.addObject("theme", li);
 		mav.setViewName("theme");
