@@ -7,13 +7,10 @@
     <!-- <select id="stringTest"  resultType="string">
        select good_name from goods where good_id= #{good_id}
     </select> -->
-    
-    <select id="GoodsVOAll"  resultType="vo.GoodsVO">
-       select good_img, good_name, mgf_name, good_price from goods
-    </select>
+
     
     <select id="EventName" resultType="vo.EventVO">
-    	select event_name from EVENT LEFT outer join GOODS on EVENT.good_id = GOODS.good_id;
+    	select event_name from event
     </select>
  	 	
 </mapper>
