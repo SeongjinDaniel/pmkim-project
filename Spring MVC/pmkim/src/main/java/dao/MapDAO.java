@@ -1,13 +1,25 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import vo.MemberVO;
 
 @Repository
 public class MapDAO {
     @Autowired
     SqlSession sqlSession; // mybatis 실행 객체
+
+	public List<MemberVO> memberListAll() {
+		System.out.println("Mybatis memberListAll");
+		List<MemberVO> list = null;
+		String statement = "resource.MapMapper.selectMemberList";
+		list = sqlSession.selectList(statement);
+		return list;
+	}
     
 //    // 01_01. 회원 로그인체크
 //    public boolean loginCheck(WeetCustomerInfoVO vo) {
