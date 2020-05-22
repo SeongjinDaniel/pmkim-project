@@ -10,11 +10,8 @@ big-data project
 1. master : 최종 개발 프로젝트
 2. release : 중간중간에 version 관리하는 프로젝트
 3. develop : release 올리기전 프로젝트
-<<<<<<< HEAD
 4. feature branches : 각자 자유로운 개발 업로드 프로젝트, 여기서 develop branch에 저장
 
-=======
-4. feature branches : 각자 자유로운 개발 업로드 프로젝트, 여기서 develop branch에 
 
 # 스프링 MVC 우리의 약속
 1. 프로젝트 이름 : pmkim
