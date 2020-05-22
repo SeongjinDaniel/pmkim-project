@@ -10,101 +10,31 @@
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<!-- favicon -->
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="/pmkim/resources/images/favicon-16x16.png">
     <!-- Site Metas -->
-    <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>편마 김편복</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="/pmkim/resources//pmkim/resources/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/pmkim/resources//pmkim/resources/images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="/pmkim/resources/stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="/pmkim/resources/stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/styleOwnerpage.css">
     <!-- Responsive CSS -->
-    <link rel="/pmkim/resources/stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
     <!-- Custom CSS -->
-    <link rel="/pmkim/resources/stylesheet" href="css/custom.css">
-
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
 
 </head>
 
 <body>
-    <!-- Start Main Top -->
-    <div class="main-top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="custom-select-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-							<option>Â¥ JPY</option>
-							<option>$ USD</option>
-							<option>â¬ EUR</option>
-						</select>
-                    </div>
-                    <div class="right-phone-box">
-                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
-                    </div>
-                    <div class="our-link">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
-                            <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
-                            <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="login-box">
-						<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-							<option>Register Here</option>
-							<option>Sign In</option>
-						</select>
-					</div>
-                    <div class="text-slid-box">
-                        <div id="offer-box" class="carouselTicker">
-                            <ul class="offer-box">
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Main Top -->
 
-    <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -120,11 +50,15 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
-					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown"
+						data-out="fadeOutUp">
 						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-						<li class="dropdown active">
-							<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+						<!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
+						<li class="nav-item"><a class="nav-link" href="/pmkim/map">지도</a></li>
+						<!--성진오빠파트-->
+						<li class="dropdown"><a href="#"
+							class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a>
+							<!-- 세호오빠가 원하는 li에다가 href해주세요!-->
 							<ul class="dropdown-menu">
 								<li><a href="shop.html">Sidebar Shop</a></li>
 								<li><a href="shop-detail.html">Shop Detail</a></li>
@@ -132,12 +66,14 @@
 								<li><a href="checkout.html">Checkout</a></li>
 								<li><a href="my-account.html">My Account</a></li>
 								<li><a href="wishlist.html">Wishlist</a></li>
-							</ul>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
-                    </ul>
-                </div>
+							</ul></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="event.jsp">행사</a></li>
+						<!-- 지혜파트-->
+						<li class="nav-item"><a class="nav-link" href="mycart.jsp">장바구니</a></li>
+						<!-- 규영언니파트♡ -->
+					</ul>
+				</div>
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
@@ -203,10 +139,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>My Account</h2>
+                    <h2>Owner Page</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Owner Page</li>
                     </ul>
                 </div>
             </div>
@@ -223,11 +159,11 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-gift"></i> </a>
+                                    <a href="#"> <i class="fa fa-user" aria-hidden="true"></i> </a>
                                 </div>
                                 <div class="service-desc">
-                                    <h4>Your Orders</h4>
-                                    <p>Track, return, or buy things again</p>
+                                    <h4>회원 정보 수정</h4>
+                                    <p>나만의 정보를 수정해보세요</p>
                                 </div>
                             </div>
                         </div>
@@ -236,11 +172,11 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"><i class="fa fa-lock"></i> </a>
+                                    <a href="#"> <i class="fas fa-question"></i> </a>
                                 </div>
                                 <div class="service-desc">
-                                    <h4>Login &amp; security</h4>
-                                    <p>Edit login, name, and mobile number</p>
+                                    <h4>문의내역</h4>
+                                    <p>문의 해보세요</p>
                                 </div>
                             </div>
                         </div>
@@ -249,11 +185,11 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-location-arrow"></i> </a>
+                                    <a href="#"> <i class="fas fa-sign-out-alt"></i> </a>
                                 </div>
                                 <div class="service-desc">
-                                    <h4>Your Addresses</h4>
-                                    <p>Edit addresses for orders and gifts</p>
+                                    <h4>회원탈퇴</h4>
+                                    <p>더 좋은 서비스를 위해 노력하겠습니다</p>
                                 </div>
                             </div>
                         </div>
@@ -262,11 +198,11 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-credit-card"></i> </a>
+                                    <a href="#"> <i class="fas fa-file-upload"></i> </a>
                                 </div>
                                 <div class="service-desc">
-                                    <h4>Payment options</h4>
-                                    <p>Edit or add payment methods</p>
+                                    <h4>데이터 업로드</h4>
+                                    <p>데이터를 새롭게 업로드하세요</p>
                                 </div>
                             </div>
                         </div>
@@ -275,11 +211,11 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fab fa-paypal"></i> </a>
+                                    <a href="#"> <i class="fas fa-upload"></i> </a>
                                 </div>
                                 <div class="service-desc">
-                                    <h4>PayPal</h4>
-                                    <p>View benefits and payment settings</p>
+                                    <h4>판매 업로드</h4>
+                                    <p>행사 상품을 업로드하세요</p>
                                 </div>
                             </div>
                         </div>
@@ -288,105 +224,17 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fab fa-amazon"></i> </a>
+                                    <a href="#"> <i class="fas fa-edit"></i> </a>
                                 </div>
                                 <div class="service-desc">
-                                    <h4>Amazon Pay balance</h4>
-                                    <p>Add money to your balance</p>
+                                    <h4>메모</h4>
+                                    <p>해야할 리스트를 정리해보세요</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bottom-box">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gold &amp; Diamond Jewellery</h4>
-                                        <ul>
-                                            <li> <a href="#">Apps and more</a> </li>
-                                            <li> <a href="#">Content and devices</a> </li>
-                                            <li> <a href="#">Music settings</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Handloom &amp; Handicraft Store</h4>
-                                        <ul>
-                                            <li> <a href="#">Advertising preferences </a> </li>
-                                            <li> <a href="#">Communication preferences</a> </li>
-                                            <li> <a href="#">SMS alert preferences</a> </li>
-                                            <li> <a href="#">Message center</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>The Designer Boutique</h4>
-                                        <ul>
-                                            <li> <a href="#">Amazon Pay</a> </li>
-                                            <li> <a href="#">Bank accounts for refunds</a> </li>
-                                            <li> <a href="#">Coupons</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gift Boxes, Gift Tags, Greeting Cards</h4>
-                                        <ul>
-                                            <li> <a href="#">Leave delivery feedback</a> </li>
-                                            <li> <a href="#">Lists</a> </li>
-                                            <li> <a href="#">Photo ID proofs</a> </li>
-                                            <li> <a href="#">Profile</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Other accounts</h4>
-                                        <ul>
-                                            <li> <a href="#">Amazon Business registration</a> </li>
-                                            <li> <a href="#">Seller account</a> </li>
-                                            <li> <a href="#">Amazon Web Services</a> </li>
-                                            <li> <a href="#">Login with Amazon</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Shopping programs and rentals</h4>
-                                        <ul>
-                                            <li> <a href="#">Subscribe &amp; Save</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -480,97 +328,118 @@
     <!-- End Instagram Feed  -->
 
 
-    <!-- Start Footer  -->
-    <footer>
-        <div class="footer-main">
-            <div class="container">
+    <!-- 20200521_oliver.yoo -->
+	<!-- Start Footer  -->
+	<footer>
+		<div class="footer-main">
+			<div class="container">
 				<div class="row">
+
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
-							<h3>Business Time</h3>
-							<ul class="list-time">
-								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
+							<h3>챗봇(Coming Soon)</h3>
+
+						</div>
+					</div>
+
+				</div>
+				<hr>
+
+				<div class="container text-centers">
+					<div class="row">
+						<!-- Footer 1-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/haley.png" class="profile"  alt="" /></a>
+						<h2>Haley Oh</h2>
+						<a href="https://github.com/JihyeHaley"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a> 
+						</div>
+
+						<!-- Footer 2-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/seho.png" class="profile"   alt="" /></a>
+						<h2>Seho Oh </h2>
+						<a href="https://github.com/sehooh5"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a> 
+						</div>
+
+						<!-- Footer 3-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/linda.png" class="profile" alt="" /></a>
+							<h2>Linda Eom </h2>
+							<a href="https://github.com/GyuyoungEom"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a>
+						</div>
+
+						<!-- Footer 4-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/oliver.png" class="profile"  /></a>
+							<h2>Oliver Yoo </h2>
+							<a href="https://github.com/SeongjinOliver"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-widget">
+							<h4>About 편마 김편복</h4>
+							<p>편의점 마스터! 김편복
+								데이터, 위치기반을 활용한 편의점 상품 추천 서비스</p>
+							<p>편의점에서 점심을 간단히 먹고 싶은 김편복씨는 자신의 위치에서 먹고자하는
+								상품 어느 편의점에서 행사를 하는지 알고 싶은데 알 수 있는 방법이 없다!!
+								이럴때 필요한 서비스는 "<b>편마 김편복</b>"</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-link">
+							<h4>Information</h4>
+							<ul>
+								<li><a href="#/pmkim/main">HOME</a></li>
+								<li><a href="#/pmkim/map">지도</a></li>
+								<li><a href="#/pmkim/theme">테마</a></li>
+								<li><a href="#/pmkim/event">행사</a></li>
+								<li><a href="#/pmkim/cart">장바구니</a></li>
+								<li><a href="#/pmkim/mypage">마이페이지</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Newsletter</h3>
-							<form class="newsletter-box">
-								<div class="form-group">
-									<input class="" type="email" name="Email" placeholder="Email Address*" />
-									<i class="fa fa-envelope"></i>
-								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<div class="footer-link-contact">
+							<h4>Contact Us</h4>
 							<ul>
-                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
-                            </ul>
+								<li>
+									<p>
+										<i class="fas fa-map-marker-alt"></i>주소: 서울특별시 강남구 
+										테헤란로 212 <br>(역삼동 718-5번지)<br> (우) 06220
+									</p>
+								</li>
+								<li>
+									<p>
+										<i class="fas fa-phone-square"></i>Phone: <a
+											href="tel:+81-1029852154">+82-10 2985 2154</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										<i class="fas fa-envelope"></i>Email: <a
+											href="mailto:ohhojh@gmail.com">ohhojh@gmail.com</a>
+									</p>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
-				<hr>
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-widget">
-                            <h4>About Freshshop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link">
-                            <h4>Information</h4>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Our Sitemap</a></li>
-                                <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link-contact">
-                            <h4>Contact Us</h4>
-                            <ul>
-                                <li>
-                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- End Footer  -->
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer  -->
 
-    <!-- Start copyright  -->
-    <div class="footer-copyright">
-        <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
-    </div>
-    <!-- End copyright  -->
+	<!-- Start copyright  -->
+	<div class="footer-copyright">
+		<p class="footer-company">
+			© PMKIM CORP. ALL RIGHTS RESERVED &copy; 2020 <a href="#PMKIM">PMKIM</a>
+		</p>
+	</div>
+	<!-- End copyright  -->
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
