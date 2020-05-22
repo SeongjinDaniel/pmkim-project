@@ -71,3 +71,7 @@ copy right) https://gist.github.com/singun/bdceaa99ad61ee1296204454f797d579
 
 # 20200521
 
+회원 ID와 연결해서 처리해야하는 부분으로 인하여 MAP site 잠시 정지!! -> 개발할 때는 회원가입 및 로그인을 먼저 처리하는 것이 좋을것 같음!!
+
+# 20200522
+

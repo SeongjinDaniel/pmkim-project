@@ -14,7 +14,7 @@
 	<link rel="icon" type="image/png" sizes="16x16"
 		href="/pmkim/resources/images/favicon-16x16.png">
     <!-- Site Metas -->
-    <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>편마 김편복</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -26,7 +26,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="/pmkim/resources/css/style_mypage.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/styleMypage.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
     <!-- Custom CSS -->
@@ -51,24 +51,30 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
-					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown"
+						data-out="fadeOutUp">
 						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-						<li class="dropdown active">
-							<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+						<!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
+						<li class="nav-item"><a class="nav-link" href="/pmkim/map">지도</a></li>
+						<!--성진오빠파트-->
+						<li class="dropdown"><a href="#"
+							class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a>
+							<!-- 세호오빠가 원하는 li에다가 href해주세요!-->
 							<ul class="dropdown-menu">
-								<li><a href="/pmkim/shop.html">Sidebar Shop</a></li>
-								<li><a href="/pmkim/shop-detail.html">Shop Detail</a></li>
-								<li><a href="/pmkim/cart.html">Cart</a></li>
-								<li><a href="/pmkim/checkout.html">Checkout</a></li>
-								<li><a href="/pmkim/my-account.html">My Page</a></li>
-								<li><a href="/pmkim/wishlist.html">Wishlist</a></li>
-							</ul>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
-                    </ul>
-                </div>
+								<li><a href="shop.html">Sidebar Shop</a></li>
+								<li><a href="shop-detail.html">Shop Detail</a></li>
+								<li><a href="cart.html">Cart</a></li>
+								<li><a href="checkout.html">Checkout</a></li>
+								<li><a href="my-account.html">My Account</a></li>
+								<li><a href="wishlist.html">Wishlist</a></li>
+							</ul></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="event.jsp">행사</a></li>
+						<!-- 지혜파트-->
+						<li class="nav-item"><a class="nav-link" href="mycart.jsp">장바구니</a></li>
+						<!-- 규영언니파트♡ -->
+					</ul>
+				</div>
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
@@ -154,7 +160,7 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-user" aria-hidden="true"></i> </a>
+                                    <a href="/pmkim/memberinfomodify"> <i class="fa fa-user" aria-hidden="true"></i> </a>
                                 </div>
                                 <div class="service-desc">
                                     <h4>회원 정보 수정</h4>
@@ -167,7 +173,7 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fas fa-question"></i> </a>
+                                    <a href="/pmkim/memberinfoinquiry"> <i class="fas fa-question"></i> </a>
                                 </div>
                                 <div class="service-desc">
                                     <h4>문의내역</h4>
@@ -180,7 +186,7 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fas fa-sign-out-alt"></i> </a>
+                                    <a href="/pmkim/memberwithdraw"> <i class="fas fa-sign-out-alt"></i> </a>
                                 </div>
                                 <div class="service-desc">
                                     <h4>회원탈퇴</h4>
