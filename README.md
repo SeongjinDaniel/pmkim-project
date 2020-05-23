@@ -1,4 +1,4 @@
-# whatcheap-project
+# pmkim-project(편의점 마스터 김편복)
 big-data project
 
 1. 협업을 하는 공간입니다.
@@ -10,17 +10,13 @@ big-data project
 1. master : 최종 개발 프로젝트
 2. release : 중간중간에 version 관리하는 프로젝트
 3. develop : release 올리기전 프로젝트
-<<<<<<< HEAD
 4. feature branches : 각자 자유로운 개발 업로드 프로젝트, 여기서 develop branch에 저장
-
-=======
-4. feature branches : 각자 자유로운 개발 업로드 프로젝트, 여기서 develop branch에 
 
 # 스프링 MVC 우리의 약속
 1. 프로젝트 이름 : pmkim
 
 2. 변수명 : 첫글자는 소문자 중간중간에 _금지
-  ex) pmKimBears
+    ex) pmKimBears
 
 3. 최대한 클래스를 쪼개기
 
@@ -35,4 +31,6 @@ big-data project
 7. 의미있는 숫자는 const 변수사용 하던가 enum사용해서 사용하기!!! 
 
    ex)단순히 for 1 ~ 10이 아니라 1 ~ maxCount 이런식으로!! 
->>>>>>> 367ca1004d10ebaceba9b2bb14c951bf731e3b32
+
+# 프로젝트 DB ERD
+![image](https://user-images.githubusercontent.com/55625864/82733544-78082b80-9d4f-11ea-8c8e-e8c792b118dc.png)
