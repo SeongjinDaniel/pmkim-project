@@ -31,3 +31,6 @@ big-data project
 7. 의미있는 숫자는 const 변수사용 하던가 enum사용해서 사용하기!!! 
 
    ex)단순히 for 1 ~ 10이 아니라 1 ~ maxCount 이런식으로!! 
+
+# 프로젝트 DB ERD
+![image](https://user-images.githubusercontent.com/55625864/82733544-78082b80-9d4f-11ea-8c8e-e8c792b118dc.png)
