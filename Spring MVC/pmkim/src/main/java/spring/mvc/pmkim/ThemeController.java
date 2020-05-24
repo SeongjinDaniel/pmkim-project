@@ -34,7 +34,7 @@ public class ThemeController {
 
 		
 		//goods table
-		mav.addObject("area_coname", vo1.getGoodName());
+		mav.addObject("area_coname", vo1.getGood_name());
 
 		return mav;
 	}
