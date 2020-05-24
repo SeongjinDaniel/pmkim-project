@@ -56,3 +56,34 @@ R에  괄호 잘 닫아줬는데도, 말을 듣지 않고 오류를 발생시키
 * 크롤링 정제
 * 상품 아이디 넣어서
 * DAO로 mvc 준비해서 만들기
+
+
+
+## :green_book: day10_20200520
+
+**shope_code** 은 full join 해서 가져오기
+
+```sql
+select shop_code
+from GOODS
+left outer join GOODS_SHOP on GOODS_SHOP.GOOD_ID = GOODS.GOOD_ID;
+```
+
+**good_img, good_name, mfg_name, good_price **은 full join 해서 가져오기
+
+```sql
+select good_img, good_name, mfg_name, good_price
+from EVENT
+LEFT outer join GOODS on EVENT.good_id = GOODS.good_id;
+```
+
+**event_name**
+
+```sql
+select event_name
+from EVENT
+left outer join GOODS on EVENT.GOOD_ID = GOODS.GOOD_ID;
+```
+
+
+

@@ -1,22 +1,27 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import vo.GoodsVO;
+import vo.GoodsInfoThemeVO;
 
 @Repository
 public class ThemeDAO {
-	
+
 	@Autowired
 	SqlSession session = null;
-		
-	public GoodsVO goods(GoodsVO vo){
-		GoodsVO vo1;
-		String statement = "resource.BackstreetMapper.sales_1Area1";////////변경해야함
-		vo1 = session.selectOne(statement,vo);
-		return vo1;
+
+	public List<GoodsInfoThemeVO>  allGoods(GoodsInfoThemeVO vo) {
+		List<GoodsInfoThemeVO> li = new ArrayList<GoodsInfoThemeVO>();
+		String statement = "resource.ThemeMapper.allGoodsTheme";
+		li = session.selectList(statement,vo);
+		//list 값 잘 넘어오는지 확인
+		//System.out.println(li.get(0).toString());
+		return li;
 	}
-	
+
 }
