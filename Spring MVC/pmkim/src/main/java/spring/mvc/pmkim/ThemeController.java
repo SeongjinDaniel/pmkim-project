@@ -26,7 +26,8 @@ public class ThemeController {
 		//값 확인
 		//System.out.println("Con : " + li.get(0).toString());
 		//goods table
-
+		mav.addObject("theme", li);
+		mav.setViewName("theme");
 		return mav;
 	}
 	
