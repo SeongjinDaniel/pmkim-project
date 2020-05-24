@@ -37,9 +37,9 @@ public class GoodsShopVO {
 
 	@Override
 	public String toString() {
+
 		return "GoodsShopVO [good_shop_id=" + good_shop_id + ", shop_code=" + shop_code + ", good_id=" + good_id + "]";
+
 	}
     
-    
-
 }

@@ -1,0 +1,38 @@
+.container {
+    width: 100%;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    margin-right: auto;
+    margin-left: auto; }
+
+.text-centers{
+    text-align:center;}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -1.5rem;
+    margin-left: -1.5rem; }
+
+.col-lg-422 {
+    flex: 0 0 20%;
+    max-width: 20%; }
+
+
+.mb-5{
+    margin-bottom: 3rem !important; 
+    margin-left : 2.5%;
+    margin-right : 2%;}
+
+.mb-lg-0{
+    margin-bottom: 0 !important; }
+
+.git_img{
+    width:40%;
+    border-radius:20px;}
+
+.profile{
+    width:100%;
+    height:200px;
+    border-radius:30px;}
+        
