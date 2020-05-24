@@ -75,3 +75,6 @@ copy right) https://gist.github.com/singun/bdceaa99ad61ee1296204454f797d579
 
 # 20200522
 
+Cart 페이지를 중단하고 우선 효용성있는 빅데이터를 활용할 수 있는 페이지를 만들것 !!
+
+Map 페이지 ----> 로그인 일단 됐다고 가정하고 MAP 페이지 먼저 완성할것!!
