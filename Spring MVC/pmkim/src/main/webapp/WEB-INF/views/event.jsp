@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-import = "vo.GoodsEventShopMemberVO, java.util.List"%>
+import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,java.util.List,java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,11 @@ import = "vo.GoodsEventShopMemberVO, java.util.List"%>
 </head>
 
 <body>
-<% List<GoodsEventShopMemberVO> eventAllView = (List<GoodsEventShopMemberVO>) request.getAttribute("eventAllView"); %>
+<% 
+		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
+		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
+		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
+%>
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
@@ -90,34 +94,7 @@ import = "vo.GoodsEventShopMemberVO, java.util.List"%>
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="/pmkim/resources/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="/pmkim/resources/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="/pmkim/resources/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
+            
         </nav>
         <!-- End Navigation -->
     </header>
@@ -136,54 +113,95 @@ import = "vo.GoodsEventShopMemberVO, java.util.List"%>
     <!-- End Top Search -->
 
     <!-- Start Gallery  -->
-    <div class="products-box">
+    <div class="products-box2">
         <div class="container">
-            <div class="row">
+            <div class=""row>
                 <div class="col-lg-12">
                     <div class="title-all text-center">
                         <h1>행사상품</h1>
                         <p>당신의 선택의 폭을 넓혀주는 편마, 김편복!</p>
-                        <div class="search-product"> <!--  .search-product button  css는 이걸로 편집!!!-->
-                            <form method="get" action="/pmkim/event">
-                                <input class="form-control" placeholder="상품을 검색해보세요!" type="text" name="searchKeyword">
-                                <button type="submit"> <i class="fa fa-search"></i> </button>
-                            </form>
-                        </div>
-                        <p>검색결과 : ${param.searchKeyword}</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
+                        <form method="GET" action="/pmkim/event">
                         <div class="button-group filter-button-group">
+                        	<input type="hidden" name= "action" value="sort">
+                        	<div class="toolbar-sorter-right">
+                        	
+								<span>행사 종류</span> 
+								<select name="event_name">
+									<option value="1+1">1+1</option>
+									<option value="2+1">2+1</option>
+									<option value="PB">PB</option>
+								</select>
+	                        <br>
+							<br>
+							
+                        		<span>편의점</span>
+	                            <button  class="active" >전체보기</button>
+	                            <button  name="shop_code" value ="GS"  type="submit" >GS</button>
+	                            <button  name="shop_code" value = "CU" type="submit">CU</button>
+	                            <button  name="shop_code" value = "MS" type="submit" >ministop </button>
+	                         	<button  name="shop_code" value = "SE" type="submit" >7eleven </button>
+	                         	<button  name="shop_code" value = "EM" type="submit" >emart24 </button>
+                         	
+                         	<div class="search-product"> <!--  .search-product button  css는 이걸로 편집!!!-->
+                                <input class="form-control" placeholder="상품을 검색해보세요!" type="text" name="searchKeyword"><button type="submit"><i class="fa fa-search"></i></button>
+                       		</div>
+                        	<p>검색결과 : ${param.searchKeyword}</p>
                         
-                            <button class="active" data-filter="*">전체보기</button>
-                            <button type="submit" formmethod="get" onclick ="/pmkim/event/onePlusOne" name="onePlusOne" data-filter=".bulbs">1+1</button>
-                            <button type="submit" onclick ="/pmkim/event/twoPlusOne" name="twoPlusOne" data-filter=".fruits">2+1</button>
-                            <button data-filter=".podded-vegetables">PB상품 </button>
-                         
-                        </div>
-                    </div>
+                         	</div>
+					
+							
+						</div>
+						</form>
+					</div>   
                 </div>
             </div>
 
             <div class="row special-list">
-			<c:forEach var="eventAllView" items="${eventAllView}">
+			<c:forEach var="vo" items="${gesList}">
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
+                    <div class="products-single2 fix">
+                        <div class="box-img-hover2">
                             <div class="type-lb">
-                                <p class="sale">${eventAllView.event_name}"</p> <!-- FROM EVENT -->
+                                <p class="sale">${vo.shop_name} ${vo.event_name}</p> <!-- FROM EVENT --> 
                             </div>
-                            <img src="${eventAllView.good_img}" class="img-fluid" alt="Image"> <!-- FROM GOODS -->
+                            <img src="${vo.good_img}" class="img-fluid" alt="Image"> <!-- FROM GOODS -->
                         </div>
-                        <h3>${eventAllView.good_name} ( ${eventAllView.mfg_name} )</h3> <!-- FROM GOODS -->
-                        <h4>${eventAllView.good_price}원</h4> <!-- FROM GOODS -->
+                        <div class="why-text">
+                            <h3>${vo.good_name}</h3> <!-- FROM GOODS -->
+                            <h4>${vo.mfg_name}</h4>
+                            <h5>${vo.good_price}원</h5> <!-- FROM GOODS -->
+                        </div>
                     </div>
                 </div>
 				</c:forEach>
         	</div>
+
+        	<div id="paging" style="text-align : center; font-size : 16pt;" >
+					<c:if test="${ pgNum != 1 }">
+						<a href ="/pmkim/cart?pgNum=1"> &laquo; </a>
+						<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
+					</c:if>
+								
+					<c:forEach var="num" begin="${ pageStart }" end="${ pageEnd }">
+						<a href = "/pmkim/event?pgNum=${ num }">${ num } &nbsp;</a>
+					</c:forEach>
+								
+					<c:if test="${ nextData }">
+						<a href = "/pmkim/event?pgNum=${ pgNum + 1 }"> &gt; &nbsp;</a>
+					</c:if>
+								
+					<c:if test = "${ pgNum != end }">
+						<a href ="/pmkim/event?pgNum=${ end }"> &raquo; </a>
+					</c:if>
+			</div>
+		</div>
+    </div>
     <!-- End Gallery  -->
 
     <!-- 20200521_oliver.yoo -->

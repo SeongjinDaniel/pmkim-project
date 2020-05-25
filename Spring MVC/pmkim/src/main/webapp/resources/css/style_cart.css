@@ -893,10 +893,6 @@
  .products-box{
      padding: 70px 0px;
 }
-.products-box2{
-    margin-left:2%;
-    margin-right:2%;
-}
  .special-menu{
      margin-bottom: 40px;
 }
@@ -921,30 +917,14 @@
      position: relative;
      margin-bottom: 30px;
 }
-.products-single2 {
-    overflow: hidden;
-    height:50.33333%;
-
-}
  .products-single .box-img-hover{
      overflow: hidden;
      position: relative;
-}
-
-.products-single2 {
-    height:40%;
-    overflow: hidden;
-    position: relative;
 }
  .box-img-hover img{
      margin: 0 auto;
      text-align: center;
      display: block;
-}
-.box-img-hover2{
-    height:100%;
-    text-align: center;
-    display: block;
 }
  .type-lb{
      position: absolute;
@@ -2618,3 +2598,24 @@
 	padding: 12px 25px;
 	border: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
