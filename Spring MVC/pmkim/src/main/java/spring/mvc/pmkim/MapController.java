@@ -1,5 +1,7 @@
 package spring.mvc.pmkim;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +14,22 @@ import vo.MemberVO;
 
 @Controller
 public class MapController {
+	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
+
 	@Autowired
 	MapDAO dao;
 
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
-	public ModelAndView map(String searchKeyword, MemberVO memberVO) {
+	public ModelAndView map(String searchKeyword, String searchProduct, MemberVO memberVO) {
+		logger.info("map logger: " + searchProduct);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		if(dao.memberListAll() != null)	mav.addObject("memberList", dao.memberListAll());			
 		
 		mav.addObject("searchKeyword", searchKeyword);
+		mav.addObject("searchProduct", searchProduct);
+		//System.out.println
 		mav.setViewName("/map");
 		return mav;
 	}
