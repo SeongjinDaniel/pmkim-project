@@ -48,7 +48,7 @@
 		where g.good_id = e.good_id
         and sc.shop_code = gs.shop_code
         and gs.good_id = g.good_id
-        and rownum &lt;=20
+
   	</select>
   	
   	<select id="goodsList_shopEvent" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
@@ -59,7 +59,6 @@
         and gs.good_id = g.good_id
         and e.event_name = #{event_name}
         and sc.shop_code = #{shop_code}
-        and rownum &lt;=20
   	</select>
   	
   	<select id="goodsList_shopEvent_paging" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
@@ -72,5 +71,35 @@
         		and e.event_name = #{event_name}
        			and sc.shop_code = #{shop_code})
 		where rnum between #{startNum} and #{endNum}
+  	</select>
+  	
+  	<!-- 20.05.26 추가 -->
+  	<select id="foodsCtg" resultType="vo.GoodsInformVO">
+  		select distinct ctg_1, ctg_2, ctg_3
+		from goods_category
+		where ctg_1 = '식품'
+  	</select>
+  	
+  	<select id="recommendGoods" resultType="vo.GoodsInformVO" parameterType="java.util.HashMap">
+  		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img 
+		from goods g, event e, shop_code sc, goods_shop gs, goods_category gc 
+		where g.good_id = e.good_id
+        and sc.shop_code = gs.shop_code
+        and gs.good_id = g.good_id 
+        and g.good_id = gc.good_id
+        and gc.ctg_3=#{ctg_3} 
+        and g.good_price between #{min} and #{max}
+  	</select>
+  	
+  	<select id="checkCtg" resultType="vo.GoodsInformVO">
+  		select ctg_1, ctg_2, ctg_3 
+  		from goods_category
+  		where good_id=#{good_id}
+  	</select>
+  	
+  	<select id="countCtg3" resultType="_int">
+  		select count(ctg_3)
+		from goods_category
+		where ctg_3 = #{ctg_3}
   	</select>
 </mapper>
