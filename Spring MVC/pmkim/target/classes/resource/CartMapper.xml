@@ -29,7 +29,7 @@
 		where g.good_id = e.good_id
         and sc.shop_code=gs.shop_code
         and gs.good_id = g.good_id
-        and g.good_name like '%'||#{keyword}||'%'
+        and g.good_name like '%'||#{good_name}||'%'
 	</select>
 	
 	<select id="listCount" resultType="_int" parameterType="java.util.HashMap"> <!-- paging하기 위해 갯수 count -->

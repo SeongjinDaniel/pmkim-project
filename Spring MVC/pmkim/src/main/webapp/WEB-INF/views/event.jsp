@@ -11,15 +11,16 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	
     <!-- Site Metas -->
-    <title>행사</title>
+    <title>편마, 김편복 - event</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
 
+    
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" type="image/png" sizes="16x16" href="/pmkim/resources/images/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/pmkim/resources/images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
@@ -44,6 +45,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
 		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
 		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
+		   List<GoodsEventShopMemberVO> gesList2 = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList2");
 %>
     <!-- Start Main Top -->
     <header class="main-header">
@@ -55,7 +57,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="/pmkim/resources/images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -116,52 +118,67 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
     <div class="products-box2">
         <div class="container">
             <div class=""row>
-                <div class="col-lg-12">
+                <div class="col-lg-12"><br><br><br>
                     <div class="title-all text-center">
                         <h1>행사상품</h1>
                         <p>당신의 선택의 폭을 넓혀주는 편마, 김편복!</p>
                     </div>
                 </div>
             </div>
+            
+            <div class="search-product">
+            	<form action="/pmkim/event" method="get">
+            		<input type="hidden" name="action" value = "search">	
+					<input class="form-control" name="good_name" placeholder="상품을 검색해보세요" type="text">
+					<button type="submit"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
                         <form method="GET" action="/pmkim/event">
-                        <div class="button-group filter-button-group">
-                        	<input type="hidden" name= "action" value="sort">
-                        	<div class="toolbar-sorter-right">
-                        	
-								<span>행사 종류</span> 
-								<select name="event_name">
-									<option value="1+1">1+1</option>
-									<option value="2+1">2+1</option>
-									<option value="PB">PB</option>
-								</select>
-	                        <br>
-							<br>
-							
-                        		<span>편의점</span>
-	                            <button  class="active" >전체보기</button>
-	                            <button  name="shop_code" value ="GS"  type="submit" >GS</button>
-	                            <button  name="shop_code" value = "CU" type="submit">CU</button>
-	                            <button  name="shop_code" value = "MS" type="submit" >ministop </button>
-	                         	<button  name="shop_code" value = "SE" type="submit" >7eleven </button>
-	                         	<button  name="shop_code" value = "EM" type="submit" >emart24 </button>
-                         	
-                         	<div class="search-product"> <!--  .search-product button  css는 이걸로 편집!!!-->
-                                <input class="form-control" placeholder="상품을 검색해보세요!" type="text" name="searchKeyword"><button type="submit"><i class="fa fa-search"></i></button>
-                       		</div>
-                        	<p>검색결과 : ${param.searchKeyword}</p>
-                        
+                        	<div class="button-group filter-button-group">
+                        		<input type="hidden" name= "action" value="sort">
+                        		
+                        		<div class="toolbar-sorter-right">
+									<span>편의점</span>
+	                           		<!--<a href="/pmkim/event"><option class="active">전체보기</button></a>-->
+										<button  name="shop_code" value ="GS" type="submit">GS</button>
+										<button  name="shop_code" value = "CU" type="submit">CU</button>
+										<button  name="shop_code" value = "MS"  type="submit">ministop </button>
+										<button  name="shop_code" value = "SE"  type="submit">7eleven </button>
+										<button  name="shop_code" value = "EM"  type="submit">emart24 </button>
+								</div><br><br>
+								
+								<div class="toolbar-sorter-right">    	
+									<span>행사 종류 </span>
+										<select name="event_name" class="event-button" >
+											<option value="1+1">1+1</option>
+											<option value="2+1">2+1</option>
+											<option value="PB">PB</option>
+										</select>
+								</div>
+								
+								<div class="toolbar-sorter-right">
+									<span>카테고리</span>
+									<select name="category" class ="event-button">
+										<option value="농산">전체보기</option>
+										<option value="농산">농산</option>
+										<option value="농산">아이스크림</option>
+										<option value="농산">과자류</option>
+										<option value="농산">얼음</option>
+										<option value="농산">알콜류</option>
+									</select>
+									<button type="submit"><i class="fa fa-search"></i></button>
+								</div>
                          	</div>
-					
-							
-						</div>
-						</form>
+						</form>	
 					</div>   
                 </div>
             </div>
-
+            
+            
             <div class="row special-list">
 			<c:forEach var="vo" items="${gesList}">
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
@@ -184,8 +201,8 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
         	<div id="paging" style="text-align : center; font-size : 16pt;" >
 					<c:if test="${ pgNum != 1 }">
-						<a href ="/pmkim/cart?pgNum=1"> &laquo; </a>
-						<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
+						<a href ="/pmkim/event?pgNum=1"> &laquo; </a>
+						<a href = "/pmkim/event?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
 					</c:if>
 								
 					<c:forEach var="num" begin="${ pageStart }" end="${ pageEnd }">
@@ -328,5 +345,10 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
     <script src="resources/js/contact-form-script.js"></script>
     <script src="resources/js/custom.js"></script>
 </body>
+
+</html>ipt>
+</body>
+
+</html>>
 
 </html>
