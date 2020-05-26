@@ -213,6 +213,8 @@
 			    }; 
 
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new kakao.maps.services.Geocoder();
                 //-------------------------------------------------------------------------------------------
                 var keyword = '<%=keyword%>';
 				var productName = '<%=keywordProduct%>';
@@ -228,6 +230,10 @@
                             var lat = position.coords.latitude, // 위도
                                 lon = position.coords.longitude; // 경도
                             
+							//----------------------------------------------------------
+							//현재위치 기반으로 편의점 검색!!! 
+							//----------------------------------------------------------
+							
                             var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
                                 message = '<div style="padding:5px;">검색할 상품을 적어보세요!</div>'; // 인포윈도우에 표시될 내용입니다
                             
@@ -243,7 +249,18 @@
                         oneDisplayMarker(locPosition, message);
                     }
                 }else{ // keyword 있을시 // 로그인 했을시(선호상품있음)
-                	keyword = "서울 " + keyword;
+					// /GS/i.test(place.place_name)
+					if(/서울/.test(keyword)){
+						console.log("서울 키워드다!")
+					}else{
+						if(keyword == '내위치'){ // 키워드에 내위치라고 썼을 경우
+							// 내위치 기반 서칭!!
+						}else if(ekyword == ''){
+							// 주소만 서칭 하면 + 편의점 해서 검색
+						}
+						keyword = "서울 " + keyword;
+					}
+                	
     				//alert(keyword);
                     // 장소 검색 객체를 생성합니다
                     var ps = new kakao.maps.services.Places(); 
@@ -287,8 +304,20 @@
                         var bounds = new kakao.maps.LatLngBounds();
 
                         for (var i=0; i<data.length; i++) {
-                            searchDisplayMarker(data[i]);    
-                            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                            searchDisplayMarker(data[i]);
+							var location = new kakao.maps.LatLng(data[i].y, data[i].x); 
+                            bounds.extend(location);
+							console.log(location.getLat + location.getLng + "");
+							searchDetailAddrFromCoords(location, function(result, status) {
+								if (status === kakao.maps.services.Status.OK) {
+									var detailAddr = !!result[0].road_address ? '도로명주소 : ' + result[0].road_address.address_name : '';
+									detailAddr += '\n\r지번 주소 : ' + result[0].address.address_name;
+									console.log(detailAddr);
+									var content = '<div class="bAddr">' +
+														detailAddr + 
+													'</도로명주소>';
+								}
+							});
                         }       
 
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
@@ -343,10 +372,15 @@
                     kakao.maps.event.addListener(marker, 'click', function() {
                         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-						console.log("test"+place.place_name);
+						//console.log("test"+place.place_name);
                         infowindow.open(map, marker);
                     });
                 }
+
+				function searchDetailAddrFromCoords(coords, callback) {
+					// 좌표로 법정동 상세 주소 정보를 요청합니다
+					geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+				}
                 //kakao 메서드 end------------------------
 			</script>
 			<div class="row my-4">

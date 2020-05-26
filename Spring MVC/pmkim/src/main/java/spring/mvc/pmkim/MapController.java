@@ -59,4 +59,11 @@ public class MapController {
 
 		return "/test3";
 	}
+
+	@RequestMapping(value = "/coordToAddr", method = RequestMethod.GET)
+	public String coordToAddr(Model model) {
+
+		return "/coordToAddr";
+	}
+	
 }
