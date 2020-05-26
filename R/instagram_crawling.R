@@ -31,28 +31,7 @@ Sys.sleep(5)
 first.click<-remDr$findElement(using="css","#react-root > section > main > article > div.EZdmt > div > div > div:nth-child(1) > div:nth-child(1)")
 first.click$clickElement()
 
-##게시글
-repeat{
-  tryCatch(article<-remDr$findElement(using="css","body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > div.EtaWk > ul > div > li > div > div > div.C4VMK > span"),silent = T)
-  article<-unlist(article$getElementText())
-  article %>% 
-    gsub("\\W"," ",.) %>% 
-    gsub("\\s+"," ",.)->article
-  
-  insta <- data.frame(article=article)
-  insta.file<- rbind(insta.file,insta)
-  
-  ##옆 게시물로 이동 
-  if(nrow(insta.file)==1){
-    r.move<-remDr$findElement(using="css","body > div._2dDPU.CkGkG > div.EfHg9 > div > div > a")
-  }else{
-    r.move<-remDr$findElement(using="css"," body > div._2dDPU.CkGkG > div.EfHg9 > div > div > a._65Bje.coreSpriteRightPaginationArrow")
-  }
-  r.move$clickElement()
-  Sys.sleep(5)
-}
-tail(article)
-
+#게시글 크롤링
 repeat{
   tryCatch({
     article <-
@@ -96,3 +75,5 @@ repeat{
     Sys.sleep(5)
   })
 }
+
+
