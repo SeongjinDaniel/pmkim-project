@@ -32,7 +32,11 @@
 /*------------------------------------------------------------------
     SKELETON
 -------------------------------------------------------------------*/
- body {
+ @font-face{
+  src:url("/pmkim/resources/fonts/GamjaFlower-Regular.ttf");
+  font-family:"gamjaFlower";
+ }
+body {
      color: #666666;
      font-size: 15px;
      font-family: 'Dosis', sans-serif;
@@ -906,15 +910,10 @@
  .filter-button-group button{
      background: #0F694D;
      color: #ffffff;
-     border: none;
-     cursor: pointer;
+     border-radius: 5px;
+     border:0;
      padding: 5px 30px;
      font-size: 18px;
-}
- .filter-button-group button.active{
-     background: #000000;
-}
- .filter-button-group button{
 }
  .products-single {
      overflow: hidden;
@@ -932,7 +931,7 @@
 }
 
 .products-single2 {
-    height:40%;
+    height:60%;
     overflow: hidden;
     position: relative;
 }
@@ -953,8 +952,7 @@
      z-index:8;
 }
  .type-lb .sale{
-     background: #0F694D;
-     color: #ffffff;
+     color:  #0F694D;
      padding: 2px 10px;
      font-weight: 700;
      text-transform: uppercase;
@@ -980,8 +978,7 @@
      font-family: 'Poppins', sans-serif;
      padding: 4px;
 	 display: inline-block;
-	 background: #0F694D;
-	 color: #ffffff;
+	 color: #0F694D;
      font-weight: 600;
 }
  .mask-icon{
@@ -1776,11 +1773,11 @@
      position: relative;
 }
  .search-product input[type="text"] {
-     background: #0F694D;
-     border: 0;
+     background-color:  #ffffff;
+     border-radius: 15px;
+     border-color:#0F694D;
      box-shadow: none;
-     border-radius: 0;
-     color: #ffffff;
+     color:#0F694D;
      height: 55px;
      font-weight: 300;
      font-size: 16px;
@@ -1798,9 +1795,11 @@
      opacity: 1;
 }
  .search-product button {
-     background: #0F694D;
-     color: #ffffff;
+     background-color: #ffffff;
+     border-radius: 15px;
+     border-color: #0F694D;
      font-size: 18px;
+     color:#0F694D;
      position: absolute;
      right: 0px;
      padding: 12px 1��5px;
@@ -1811,7 +1810,7 @@
      height: 100%;
 }
  .search-product button:hover{
-     background: #0F694D;
+     background-color: #ffffff;
 }
  .filter-sidebar-left{
      margin-bottom: 20px;
@@ -1950,19 +1949,19 @@
 }
  .toolbar-sorter-right .bootstrap-select.btn-group > .dropdown-toggle{
      padding: 0px;
-     border-radius: 0px;
+     border-radius: 15px;
      border: none;
 }
  .toolbar-sorter-right .bootstrap-select.btn-group .dropdown-toggle .filter-option{
      padding-left: 15px;
 }
  .toolbar-sorter-right .btn-light{
-     background: #000000;
+     background: #0F694D;
      color: #ffffff;
 }
  .toolbar-sorter-right .btn-light:hover{
-     background: #0F694D;
-     border-radius: 0px;
+     background:  rgb(29, 116, 88);
+     border-radius: 15px;
      border: none;
 }
  .toolbar-sorter-right .show > .btn-light.dropdown-toggle{
@@ -1975,6 +1974,14 @@
      position: absolute;
      right: 15px;
      top: 18px;
+}
+.event-button{
+    background: #0F694D;
+    color: #ffffff;
+    border-radius: 5px;
+    border:0;
+    padding: 5px 30px;
+    font-size: 18px;
 }
  .product-item-filter p{
      float: right;
@@ -2614,6 +2621,11 @@
 .card-outline-secondary .card-body a{
 	color: #ffffff;
 	font-size: 18px;
+	font-weight: 700;
+	padding: 12px 25px;
+	border: none;
+}
+: 18px;
 	font-weight: 700;
 	padding: 12px 25px;
 	border: none;

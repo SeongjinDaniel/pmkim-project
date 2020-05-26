@@ -14,18 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import dao.CartDAO;
 import dao.EventDAO;
 import service.PagingService;
-import vo.CartVO;
-import vo.EventVO;
 import vo.GoodsEventShopMemberVO;
-import vo.GoodsShopVO;
-import vo.GoodsVO;
-import vo.MemberVO;
 
 @Controller
 public class EventController {
-	@Autowired
-	private EventDAO eventDAO;
-	
+
 	@Autowired
 	CartDAO cdao;
 	
@@ -48,7 +41,7 @@ public class EventController {
 	//}
 	
 	@RequestMapping(value = "/event", method = RequestMethod.GET)
-	public ModelAndView cartGet(String action, String keyword, GoodsEventShopMemberVO gesmvo, String event_name,String shop_code, @RequestParam(defaultValue="1")int pgNum) {
+	public ModelAndView cartGet(String action, String good_name, GoodsEventShopMemberVO gesmvo, String event_name,String shop_code, @RequestParam(defaultValue="1")int pgNum) {
 		ModelAndView mav = new ModelAndView();
 		//paging용 시작페이지 num, 끝페이지 num
 		int startNum = ps.getWritingStart(pgNum);
@@ -63,13 +56,13 @@ public class EventController {
 		List<GoodsEventShopMemberVO> clist = null;
 		List<GoodsEventShopMemberVO> geslist = cdao.goodsShopEvent(event_name,shop_code,startNum,endNum);
 		
-		if (action != null && keyword != null) {
-			geslist = cdao.searchGoods(keyword);
+		if (action != null && good_name != null) {
+			geslist = cdao.searchGoods(good_name);
 			
-		} else if (action != null && keyword ==null){
+		} else if (action != null && good_name ==null){
 			if (action.equals("sort")) {
 				geslist = cdao.goodsShopEvent(event_name,shop_code,startNum,endNum);
-			} else if (action.equals("delete")) {
+			}else if (action.equals("delete")) {
 				cdao.cartDelete(gesmvo.getId());
 				if(cdao.cartDelete(gesmvo.getId()))
 					System.out.println("cart 삭제 성공");

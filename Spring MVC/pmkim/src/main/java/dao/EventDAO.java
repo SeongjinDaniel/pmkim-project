@@ -29,10 +29,10 @@ public class EventDAO {
 	
 	
 	//상품검색
-	   public List<GoodsEventShopMemberVO> searchGoods(String keyword){
+	   public List<GoodsEventShopMemberVO> searchGoods(String good_name){
 	      List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
 	      String statement = "resource.CartMapper.searchGoods";
-	      list = session.selectList(statement,keyword);
+	      list = session.selectList(statement,good_name);
 	      return list;
 	   }
 
@@ -96,6 +96,25 @@ public class EventDAO {
 			//System.out.println("list : "+ list);
 			return list;
 		}
-
-
+		
+		//shopName&eventName&goodName 모두로 찾아오기 + paging
+				public List<GoodsEventShopMemberVO> goodsShopEvent(String event_name, String shop_code, String good_name, int startNum, int endNum){
+					List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+					String statement = "resource.CartMapper.searchGoods";
+					Map<String,Object> map = new HashMap<String,Object>();
+					map.put("startNum",startNum);
+					map.put("endNum", endNum);
+					map.put("event_name", event_name);
+					map.put("shop_code", shop_code);
+					map.put("good_name", good_name);
+					System.out.println("startNum" + startNum);
+					System.out.println("endNum" + endNum);
+					System.out.println("eventName" + event_name);
+					System.out.println("shopCode" + shop_code);
+					System.out.println("good_name" + good_name);
+					list = session.selectList(statement,map);
+					//System.out.println("list : "+ list);
+					return list;
+				}
+		
 }
