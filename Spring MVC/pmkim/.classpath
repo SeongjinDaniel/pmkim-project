@@ -26,6 +26,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/HaleyDeveloper/json-simple-1.1.1.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/seouz/Desktop/팀 프로젝트_빅데이터/jar파일 추가/json-simple-1.1.1.jar"/>
+>>>>>>> oliver-sub
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

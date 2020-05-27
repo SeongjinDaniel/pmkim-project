@@ -30,10 +30,14 @@
         and sc.shop_code=gs.shop_code
         and gs.good_id = g.good_id
 <<<<<<< HEAD
+<<<<<<< HEAD
         and g.good_name like '%'||#{keyword}||'%'
 =======
         and g.good_name like '%'||#{good_name}||'%'
 >>>>>>> a8e5f5af968ba0fd92439dd638a804bc85635257
+=======
+        and g.good_name like '%'||#{keyword}||'%'
+>>>>>>> oliver-sub
 	</select>
 	
 	<select id="listCount" resultType="_int" parameterType="java.util.HashMap"> <!-- paging하기 위해 갯수 count -->
@@ -48,19 +52,27 @@
   	
   	<select id="goodsListAll" resultType="vo.GoodsEventShopMemberVO">
 <<<<<<< HEAD
+<<<<<<< HEAD
   		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img 
 =======
   		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img, mfg_name 
 >>>>>>> a8e5f5af968ba0fd92439dd638a804bc85635257
+=======
+  		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img 
+>>>>>>> oliver-sub
 		from goods g, event e, shop_code sc, goods_shop gs
 		where g.good_id = e.good_id
         and sc.shop_code = gs.shop_code
         and gs.good_id = g.good_id
 <<<<<<< HEAD
+<<<<<<< HEAD
         and rownum &lt;=20
 =======
         <!-- and rownum  &lt;=20  --> 
 >>>>>>> a8e5f5af968ba0fd92439dd638a804bc85635257
+=======
+        and rownum &lt;=20
+>>>>>>> oliver-sub
   	</select>
   	
   	<select id="goodsList_shopEvent" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"%>	
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +27,14 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min_map.css">
 <!-- Site CSS -->
-<link rel="stylesheet" href="/pmkim/resources/css/style_map.css">
+<link rel="stylesheet" href="/pmkim/resources/css/styleMap.css">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+
+
+
 
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -46,6 +49,8 @@
 <body>
 	<%
 		String keyword = (String) request.getAttribute("searchKeyword");
+		String keywordProduct = (String) request.getAttribute("searchProduct");
+		List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
 	%>
 	<header class="main-header">
 		<!-- Start Navigation -->
@@ -177,167 +182,27 @@
 	<!-- Start About Page  -->
 	<div class="about-box-main">
 		<div class="container">
-			<div class="row my-5">
-				<div class="col-sm col-lg-4">
-					<div class="service-block-inner">
-						<h3>선호 상품1을 설정하세요!</h3>
-						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> -->
+			<form action="/pmkim/map" method="GET">
+				<div class="row my-5">
+					<div class="col-sm col">
+						<div class="service-block-inner">
+							<h3>검색할 상품을 적어보세요!</h3>
+								<input class="form-control" name="searchProduct"
+									placeholder="Write product..." type="text">
+						</div>
 					</div>
 				</div>
-				<div class="col-sm col-lg-4">
-					<div class="service-block-inner">
-						<h3>선호 상품2을 설정하세요!</h3>
-						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> -->
-					</div>
+				<div class="search-product">
+						<input class="form-control" name="searchKeyword"
+							placeholder="Search here..." type="text">
+						<button type="submit">
+							<i class="fa fa-search"></i>
+						</button>
 				</div>
-				<div class="col-sm col-lg-4">
-					<div class="service-block-inner">
-						<h3>선호 상품3을 설정하세요!</h3>
-						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> -->
-					</div>
-				</div>
-			</div>
-			<div class="search-product">
-				<form action="/pmkim/map" method="GET">
-					<input class="form-control" name="searchKeyword"
-						placeholder="Search here..." type="text">
-					<button type="submit">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
-			</div>
+			</form>
 			<div id="map" style="width: 100%; height: 500px;"></div>
 			<script>
-				// var lat, lon;
-				// var map = null, options = null;
-				// // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-				// var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-				// // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-				// if (navigator.geolocation) {
-				//     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-				//     navigator.geolocation.getCurrentPosition(function(position) {
-				//         lat = position.coords.latitude, // 위도
-				//         lon = position.coords.longitude; // 경도
-						
-				//         var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-				//             message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-				// 		options = {
-				// 			//center: new kakao.maps.LatLng(33.450701, 126.570667),// 지도의 중심좌표
-				// 			center: new kakao.maps.LatLng(lat, lon),// 지도의 중심좌표
-				// 			level: 3 // 지도의 확대 레벨
-				// 		};
-				// 		//alert(options.center);
-				// 		// 지도를 표시할 div
-				// 		var container = document.getElementById('map');
-				// 		// 지도 생성
-				// 		map = new kakao.maps.Map(container, options);
-						
-				// 		// 로드맵뷰, 스카이뷰 클릭 컨트롤러
-				// 		var mapTypeControl = new kakao.maps.MapTypeControl();
-				// 		// 지도 오른쪽 위에 지도 타입 컨트롤이 표시되도록 지도에 컨트롤을 추가한다.
-				// 		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-				//         // 마커와 인포윈도우를 표시합니다
-				//         displayMarker(locPosition, message);
-				//     });
-				// }else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-				// 	var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-				// 		message = 'geolocation을 사용할수 없어요..'
-						
-				// 	displayMarker(locPosition, message);
-				// }
-
-
-				// // 장소 검색 객체를 생성합니다
-				// // var ps = new kakao.maps.services.Places(); 
-				
-				// // //------------------------------------------------------------------------------------------------------------------------
-				// // 키워드로 장소를 검색합니다
-				// // var keyword = '<%=keyword%>';
-				// // console.log(keyword)
-				// // // console.log(typeof(keyword))
-				// // // console.log(keyword == null)
-				// // // console.log(keyword != null)
-				// // var markerImage = null;
-				// // if(keyword == 'null' || keyword == ""){
-					
-				// // }else{
-				// // 	console.log("keyword not null")
-				// // 	//다른 이미지로 마커 생성하기----------------------------------------------------------------------------------------------------
-				// // 	var imageSrc = '/pmkim/resources/images/map/cu_1+1.png', // 마커이미지의 주소입니다    
-				// // 	imageSize = new kakao.maps.Size(60, 65), // 마커이미지의 크기입니다
-				// // 	imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-					
-				// // 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-				// // 	markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-				// // 	//----------------------------------------------------------------------------------------------------
-				// // }
-				// // if(keyword == ""){
-				// // 	console.log("in0");
-				// // }else{
-				// // 	ps.keywordSearch(keyword, placesSearchCB);
-				// // 	console.log("in");
-				// // }
-
-				// // // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-				// // function placesSearchCB(data, status, pagination) {
-				// // 	if (status === kakao.maps.services.Status.OK) {
-
-				// // 		// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-				// // 		// LatLngBounds 객체에 좌표를 추가합니다
-				// // 		var bounds = new kakao.maps.LatLngBounds();
-
-				// // 		if(keyword == null){
-				// // 			displayMarker(data[i]);
-
-				// // 			bounds.extend(new kakao.maps.LatLng(lat, lon));
-				// // 		}else{
-				// // 			for (var i = 0; i < data.length; i++) {
-				// // 			displayMarker(data[i]);
-
-				// // 			bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-				// // 			//bounds.extend(new kakao.maps.LatLng(37.5108246, 127.02935099999999));
-							
-				// // 			//alert(data[i].y + "," + data[i].x);
-				// // 			}
-				// // 		}
-
-				// // 		// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-				// // 		map.setBounds(bounds);
-				// // 	}
-				// // }
-
-				// // 지도에 마커를 표시하는 함수입니다
-				// function displayMarker(place) {
-				// 	// 마커를 생성하고 지도에 표시합니다
-				// 	var marker = new kakao.maps.Marker({
-				// 		map : map,
-				// 		position: locPosition,
-				// 		//position : new kakao.maps.LatLng(place.y, place.x),
-				// 		//position : new kakao.maps.LatLng(37.5108246, 127.02935099999999),
-						
-				// 		//image: markerImage // 마커이미지 설정
-				// 		//image: null
-				// 	});
-				// 	// 마커가 지도 위에 표시되도록 설정합니다
-				// 	// marker.setMap(map);
-				// 	// 마커에 클릭이벤트를 등록합니다
-				// 	kakao.maps.event
-				// 			.addListener(
-				// 					marker,
-				// 					'click',
-				// 					function() {
-				// 						// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-				// 						infowindow
-				// 								.setContent('<div style="padding:5px;font-size:12px;">'
-				// 										+ place.place_name
-				// 										+ '</div>');	
-				// 						infowindow.open(map, marker);
-				// 					});
-				// }
-				
-				                // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
                 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -348,10 +213,14 @@
 			    }; 
 
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new kakao.maps.services.Geocoder();
                 //-------------------------------------------------------------------------------------------
                 var keyword = '<%=keyword%>';
-
-                if(keyword == 'null' || keyword == ""){
+				var productName = '<%=keywordProduct%>';
+				// alert('<%=keywordProduct%>');
+				// console.log('<%=keywordProduct%>');
+                if(keyword == 'null' || keyword == ""){ // 로그인 안했을시!
                     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
                     if (navigator.geolocation) {
                         
@@ -361,22 +230,38 @@
                             var lat = position.coords.latitude, // 위도
                                 lon = position.coords.longitude; // 경도
                             
+							//----------------------------------------------------------
+							//현재위치 기반으로 편의점 검색!!! 
+							//----------------------------------------------------------
+							
                             var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-                                message = '<div style="padding:5px;">선호 편의점이 없어요. 위치와 편의점을 함께 검색하세요!</div>'; // 인포윈도우에 표시될 내용입니다
+                                message = '<div style="padding:5px;">검색할 상품을 적어보세요!</div>'; // 인포윈도우에 표시될 내용입니다
                             
                             // 마커와 인포윈도우를 표시합니다   
                             oneDisplayMarker(locPosition, message);
-                                
                         });
                         
                     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
                         
-                        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+                        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
                             message = '현재 위치를 찾을 수 없어요..'
                             
                         oneDisplayMarker(locPosition, message);
                     }
-                }else{ // keyword 있을시
+                }else{ // keyword 있을시 // 로그인 했을시(선호상품있음)
+					// /GS/i.test(place.place_name)
+					if(/서울/.test(keyword)){
+						console.log("서울 키워드다!")
+					}else{
+						if(keyword == '내위치'){ // 키워드에 내위치라고 썼을 경우
+							// 내위치 기반 서칭!!
+						}else if(ekyword == ''){
+							// 주소만 서칭 하면 + 편의점 해서 검색
+						}
+						keyword = "서울 " + keyword;
+					}
+                	
+    				//alert(keyword);
                     // 장소 검색 객체를 생성합니다
                     var ps = new kakao.maps.services.Places(); 
 
@@ -414,23 +299,25 @@
                 function placesSearchCB (data, status, pagination) {
                     if (status === kakao.maps.services.Status.OK) {
 
-						// 버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
-						var points = [
-							new kakao.maps.LatLng(37.616405, 126.928856), //은평구
-							new kakao.maps.LatLng(37.6662274, 126.994853),//도봉구,
-							new kakao.maps.LatLng(37.5492942, 127.1114079), //강동구
-							new kakao.maps.LatLng(37.517235, 127.047325), //강남구
-							new kakao.maps.LatLng(33.451744, 126.901627), //금천구
-							new kakao.maps.LatLng(37.5765442, 126.7847451) //강서구 방화동
-						];
-
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                         // LatLngBounds 객체에 좌표를 추가합니다
                         var bounds = new kakao.maps.LatLngBounds();
 
                         for (var i=0; i<data.length; i++) {
-                            searchDisplayMarker(data[i]);    
-                            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                            searchDisplayMarker(data[i]);
+							var location = new kakao.maps.LatLng(data[i].y, data[i].x); 
+                            bounds.extend(location);
+							console.log(location.getLat + location.getLng + "");
+							searchDetailAddrFromCoords(location, function(result, status) {
+								if (status === kakao.maps.services.Status.OK) {
+									var detailAddr = !!result[0].road_address ? '도로명주소 : ' + result[0].road_address.address_name : '';
+									detailAddr += '\n\r지번 주소 : ' + result[0].address.address_name;
+									console.log(detailAddr);
+									var content = '<div class="bAddr">' +
+														detailAddr + 
+													'</도로명주소>';
+								}
+							});
                         }       
 
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
@@ -447,13 +334,53 @@
                         position: new kakao.maps.LatLng(place.y, place.x) 
                     });
 
+					// 대소문자 구분 하지 않음
+					// 만약 GS 실행
+					if(/GS/i.test(place.place_name)){
+						console.log("GS입니다!" + place.place_name);
+					}else if(/GS25/.test(place.place_name)){
+						console.log("GS25입니다!" + place.place_name);
+					}else if(/지에스/.test(place.place_name)){
+						console.log("지에스입니다!" + place.place_name);
+					}else if(/지에스25/.test(place.place_name)){
+						console.log("지에스25입니다!" + place.place_name);
+					}else if(/CU/i.test(place.place_name)){
+						console.log("CU입니다!" + place.place_name);
+					}else if(/씨유/.test(place.place_name)){
+						console.log("씨유입니다!" + place.place_name);
+					}else if(/세븐일레븐/.test(place.place_name)){
+						console.log("세븐일레븐입니다!" + place.place_name);
+					}else if(/sevenEleven/i.test(place.place_name)){
+						console.log("sevenEleven입니다!" + place.place_name);
+					}else if(/7eleven/i.test(place.place_name)){
+						console.log("7eleven입니다!" + place.place_name);
+					}else if(/miniStop/i.test(place.place_name)){
+						console.log("miniStop입니다!" + place.place_name);
+					}else if(/미니스톱/.test(place.place_name)){
+						console.log("미니스톱입니다!" + place.place_name);
+					}else if(/미니스탑/.test(place.place_name)){
+						console.log("미니스톱입니다!" + place.place_name);
+					}else if(/이마트/.test(place.place_name)){
+						console.log("이마트24입니다!" + place.place_name);
+					}else if(/이마트24/.test(place.place_name)){
+						console.log("이마트24입니다!" + place.place_name);
+					}else if(/emart24/i.test(place.place_name)){
+						console.log("emart24입니다!" + place.place_name);
+					}
+
                     // 마커에 클릭이벤트를 등록합니다
                     kakao.maps.event.addListener(marker, 'click', function() {
                         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+						//console.log("test"+place.place_name);
                         infowindow.open(map, marker);
                     });
                 }
+
+				function searchDetailAddrFromCoords(coords, callback) {
+					// 좌표로 법정동 상세 주소 정보를 요청합니다
+					geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+				}
                 //kakao 메서드 end------------------------
 			</script>
 			<div class="row my-4">
@@ -463,167 +390,77 @@
 	</div>
 	<!-- End About Page -->
 
-	<!-- Start Instagram Feed  -->
-	<div class="instagram-box">
-		<div class="main-instagram owl-carousel owl-theme">
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-01.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-02.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-03.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-04.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-05.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-06.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-07.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-08.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-09.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ins-inner-box">
-					<img src="resources/images/instagram-img-05.jpg" alt="" />
-					<div class="hov-in">
-						<a href="#"><i class="fab fa-instagram"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Instagram Feed  -->
-
-
+	<!-- 20200521_oliver.yoo -->
 	<!-- Start Footer  -->
 	<footer>
 		<div class="footer-main">
 			<div class="container">
 				<div class="row">
+
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
-							<h3>Business Time</h3>
-							<ul class="list-time">
-								<li>Monday - Friday: 08.00am to 05.00pm</li>
-								<li>Saturday: 10.00am to 08.00pm</li>
-								<li>Sunday: <span>Closed</span></li>
-							</ul>
+							<h3>챗봇(Coming Soon)</h3>
+
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Newsletter</h3>
-							<form class="newsletter-box">
-								<div class="form-group">
-									<input class="" type="email" name="Email"
-										placeholder="Email Address*" /> <i class="fa fa-envelope"></i>
-								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
-							</form>
+
+				</div>
+				<hr>
+
+				<div class="container text-centers">
+					<div class="row">
+						<!-- Footer 1-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/haley.png" class="profile"  alt="" /></a>
+						<h2>Haley Oh</h2>
+						<a href="https://github.com/JihyeHaley"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a> 
 						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<ul>
-								<li><a href="#"><i class="fab fa-facebook"
-										aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"
-										aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fab fa-linkedin"
-										aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fab fa-google-plus"
-										aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fab fa-pinterest-p"
-										aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fab fa-whatsapp"
-										aria-hidden="true"></i></a></li>
-							</ul>
+
+						<!-- Footer 2-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/seho.png" class="profile"   alt="" /></a>
+						<h2>Seho Oh </h2>
+						<a href="https://github.com/sehooh5"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a> 
+						</div>
+
+						<!-- Footer 3-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/linda.png" class="profile" alt="" /></a>
+							<h2>Linda Eom </h2>
+							<a href="https://github.com/GyuyoungEom"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a>
+						</div>
+
+						<!-- Footer 4-->
+						<div class="col-lg-422 mb-5 mb-lg-0">
+							<a><img src="/pmkim/resources/images/oliver.png" class="profile"  /></a>
+							<h2>Oliver Yoo </h2>
+							<a href="https://github.com/SeongjinOliver"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a>
 						</div>
 					</div>
 				</div>
-				<hr>
+
+
 				<div class="row">
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-widget">
-							<h4>About Freshshop</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore et dolore magna
-								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-								ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore et dolore magna
-								aliqua.</p>
+							<h4>About 편마 김편복</h4>
+							<p>편의점 마스터! 김편복
+								데이터, 위치기반을 활용한 편의점 상품 추천 서비스</p>
+							<p>편의점에서 점심을 간단히 먹고 싶은 김편복씨는 자신의 위치에서 먹고자하는
+								상품 어느 편의점에서 행사를 하는지 알고 싶은데 알 수 있는 방법이 없다!!
+								이럴때 필요한 서비스는 "<b>편마 김편복</b>"</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-link">
 							<h4>Information</h4>
 							<ul>
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Customer Service</a></li>
-								<li><a href="#">Our Sitemap</a></li>
-								<li><a href="#">Terms &amp; Conditions</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Delivery Information</a></li>
+								<li><a href="#/pmkim/main">HOME</a></li>
+								<li><a href="#/pmkim/map">지도</a></li>
+								<li><a href="#/pmkim/theme">테마</a></li>
+								<li><a href="#/pmkim/event">행사</a></li>
+								<li><a href="#/pmkim/cart">장바구니</a></li>
+								<li><a href="#/pmkim/mypage">마이페이지</a></li>
 							</ul>
 						</div>
 					</div>
@@ -633,20 +470,20 @@
 							<ul>
 								<li>
 									<p>
-										<i class="fas fa-map-marker-alt"></i>Address: Michael I. Days
-										3756 <br>Preston Street Wichita,<br> KS 67213
+										<i class="fas fa-map-marker-alt"></i>주소: 서울특별시 강남구 
+										테헤란로 212 <br>(역삼동 718-5번지)<br> (우) 06220
 									</p>
 								</li>
 								<li>
 									<p>
 										<i class="fas fa-phone-square"></i>Phone: <a
-											href="tel:+1-888705770">+1-888 705 770</a>
+											href="tel:+81-1029852154">+82-10 2985 2154</a>
 									</p>
 								</li>
 								<li>
 									<p>
 										<i class="fas fa-envelope"></i>Email: <a
-											href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a>
+											href="mailto:ohhojh@gmail.com">ohhojh@gmail.com</a>
 									</p>
 								</li>
 							</ul>
@@ -661,8 +498,7 @@
 	<!-- Start copyright  -->
 	<div class="footer-copyright">
 		<p class="footer-company">
-			All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By
-			: <a href="https://html.design/">html design</a>
+			© PMKIM CORP. ALL RIGHTS RESERVED &copy; 2020 <a href="#PMKIM">PMKIM</a>
 		</p>
 	</div>
 	<!-- End copyright  -->
@@ -677,7 +513,7 @@
 	<script src="resources/js/jquery.superslides.min.js"></script>
 	<script src="resources/js/bootstrap-select.js"></script>
 	<script src="resources/js/inewsticker.js"></script>
-	<!-- <script src="/resources/js/bootsnav.js."></script> -->
+	<script src="resources/js/bootsnav.js"></script>
 	<script src="resources/js/images-loded.min.js"></script>
 	<script src="resources/js/isotope.min.js"></script>
 	<script src="resources/js/owl.carousel.min.js"></script>
