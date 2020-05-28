@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dao.CartDAO;
 import dao.EventDAO;
 import service.PagingService;
+import vo.GoodsCategoryEventShopMemberVO;
 import vo.GoodsEventShopMemberVO;
 
 @Controller
@@ -23,23 +24,11 @@ public class EventController {
 	CartDAO cdao;
 	
 	@Autowired
+	EventDAO edao;
+	
+	@Autowired
 	PagingService ps;
 
-	
-	//event매핑으로 전체 다 보여주기
-	//@RequestMapping(value = "/event", method = RequestMethod.GET)
-	//public ModelAndView eventMain(GoodsEventShopMemberVO gesmVO) {
-	//	
-	//	ModelAndView mav = new ModelAndView();
-	//	List <GoodsEventShopMemberVO> eventAllView = eventDAO.eventAllView();
-	//	
-	//	
-	//	mav.addObject("eventAllView", eventAllView);
-	//
-	//	mav.setViewName("event");
-	//	return mav;
-	//}
-	
 	@RequestMapping(value = "/event", method = RequestMethod.GET)
 	public ModelAndView cartGet(String action, String good_name, GoodsEventShopMemberVO gesmvo, String event_name,String shop_code, @RequestParam(defaultValue="1")int pgNum) {
 		ModelAndView mav = new ModelAndView();
@@ -62,12 +51,6 @@ public class EventController {
 		} else if (action != null && good_name ==null){
 			if (action.equals("sort")) {
 				geslist = cdao.goodsShopEvent(event_name,shop_code,startNum,endNum);
-			}else if (action.equals("delete")) {
-				cdao.cartDelete(gesmvo.getId());
-				if(cdao.cartDelete(gesmvo.getId()))
-					System.out.println("cart 삭제 성공");
-			}else if (action.equals("cartOne")) {
-				clist = cdao.cartView(gesmvo.getId());
 			}
 		}
 		//mav.addObject("gvo", gvo);
@@ -83,10 +66,11 @@ public class EventController {
 		mav.addObject("pageStart",ps.getPageStart(pgNum));
 		mav.addObject("pageEnd",ps.getPageEnd(pgNum,event_name,shop_code));
 		mav.addObject("nextData",ps.isNextData(pgNum,event_name,shop_code));
-		mav.addObject("cartList", clist);
 		mav.addObject("gesList", geslist);
 		mav.setViewName("event");
 		return mav;
 	}
+	
+
 	
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,java.util.List,java.util.ArrayList" %>
+import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,vo.GoodsCategoryEventShopMemberVO,java.util.List,java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
 		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
 		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
-		   List<GoodsEventShopMemberVO> gesList2 = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList2");
+		   List<GoodsCategoryEventShopMemberVO> gesList2 = (ArrayList<GoodsCategoryEventShopMemberVO>) request.getAttribute("gesList2");
 %>
     <!-- Start Main Top -->
     <header class="main-header">
@@ -64,8 +64,8 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
-                        <li class="nav-item"><a class="nav-link" href="map.html">지도</a></li> <!--성진오빠파트-->
+                        <li class="nav-item"><a class="nav-link" href="/pmkim/main">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
+                        <li class="nav-item"><a class="nav-link" href="/pmkim/map">지도</a></li> <!--성진오빠파트-->
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a><!-- 세호오빠가 원하는 li에다가 href해주세요!-->
                             <ul class="dropdown-menu">
@@ -77,26 +77,10 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                                 <li><a href="wishlist.html">Wishlist</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item active"><a class="nav-link" href="event.jsp">행사</a></li> <!-- 지혜파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
                         <li class="nav-item"><a class="nav-link" href="mycart.jsp">장바구니</a></li> <!-- 규영언니파트♡ -->
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
-
-                <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
-                    <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-							<p>My Cart</p>
-					</a></li>
-                    </ul>
-                </div>
-                <!-- End Atribute Navigation -->
-            </div>
-            
         </nav>
         <!-- End Navigation -->
     </header>
@@ -141,16 +125,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                         	<div class="button-group filter-button-group">
                         		<input type="hidden" name= "action" value="sort">
                         		
-                        		<div class="toolbar-sorter-right">
-									<span>편의점</span>
-	                           		<!--<a href="/pmkim/event"><option class="active">전체보기</button></a>-->
-										<button  name="shop_code" value ="GS" type="submit">GS</button>
-										<button  name="shop_code" value = "CU" type="submit">CU</button>
-										<button  name="shop_code" value = "MS"  type="submit">ministop </button>
-										<button  name="shop_code" value = "SE"  type="submit">7eleven </button>
-										<button  name="shop_code" value = "EM"  type="submit">emart24 </button>
-								</div><br><br>
-								
+
 								<div class="toolbar-sorter-right">    	
 									<span>행사 종류 </span>
 										<select name="event_name" class="event-button" >
@@ -162,16 +137,33 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 								
 								<div class="toolbar-sorter-right">
 									<span>카테고리</span>
-									<select name="category" class ="event-button">
-										<option value="농산">전체보기</option>
-										<option value="농산">농산</option>
-										<option value="농산">아이스크림</option>
-										<option value="농산">과자류</option>
-										<option value="농산">얼음</option>
-										<option value="농산">알콜류</option>
+									<select name="ctg_1" class ="event-button">
+										<option >전체보기</option>
+										<option value="식품">식품</option>
+										<option value="패션의류">패션의류</option>
+										<option value="패션잡화">패션잡화</option>
+										<option value="화장품/미용">화장품/미용</option>
+										<option value="가구/인테리어">가구/인테리어</option>
+										<option value="스포츠/레저">스포츠/레저</option>
+										<option value="출산/육아">출산/육아</option>
+										<option value="여가/생활편의">여가/생활편의</option>
+										<option value="디지털/가전">디지털/가전</option>
+										<option value="면세점">면세점</option>
+										<option value="생활/건강">생활/건강</option>
+										<option value="기타">기타</option>
 									</select>
-									<button type="submit"><i class="fa fa-search"></i></button>
-								</div>
+									<!-- <button type="submit"><i class="fa fa-search"></i></button> -->
+								</div><br><br>
+								
+								<div class="toolbar-sorter-right">
+									<span>편의점</span>
+	                           		<!--<a href="/pmkim/event"><option class="active">전체보기</button></a>-->
+										<button  name="shop_code" value ="GS" type="submit">GS</button>
+										<button  name="shop_code" value = "CU" type="submit">CU</button>
+										<button  name="shop_code" value = "MS"  type="submit">ministop </button>
+										<button  name="shop_code" value = "SE"  type="submit">7eleven </button>
+										<button  name="shop_code" value = "EM"  type="submit">emart24 </button>
+								</div><br><br>
                          	</div>
 						</form>	
 					</div>   

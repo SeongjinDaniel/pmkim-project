@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vo.GoodsCategoryEventShopMemberVO;
 import vo.GoodsEventShopMemberVO;
 
 @Repository
@@ -35,6 +36,14 @@ public class EventDAO {
 	      list = session.selectList(statement,good_name);
 	      return list;
 	   }
+	   
+	 //상품검색
+		public List<GoodsCategoryEventShopMemberVO> searchGoods2(String good_name){
+			List<GoodsCategoryEventShopMemberVO> list = new ArrayList<>();
+			String statement = "resource.EventMapper.goodsList_shopEventCategory";
+			list = session.selectList(statement,good_name);
+			return list;
+		}
 
 	//paging
 	public int listCount(String event_name, String shop_code) {
@@ -57,7 +66,13 @@ public class EventDAO {
 		list = session.selectList(statement);
 		return list;
 	}
-
+	//shopName으로 찾아오기
+	public List<GoodsEventShopMemberVO> goodsSortShop(String shop_code) {
+		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+		String statement = "resource.CartMapper.goodsList_shopName";
+		list = session.selectList(statement,shop_code);
+		return list;
+	}
 	//eventName으로 찾아오기
 	public List<GoodsEventShopMemberVO> goodsSortEvent(String event_name){
 		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
@@ -87,7 +102,7 @@ public class EventDAO {
 			map.put("startNum",startNum);
 			map.put("endNum", endNum);
 			map.put("event_name", event_name);
-			map.put("shop_code", shop_code);
+			map.put("shop_code", shop_code); 
 			System.out.println("startNum" + startNum);
 			System.out.println("endNum" + endNum);
 			System.out.println("eventName" + event_name);
@@ -97,24 +112,61 @@ public class EventDAO {
 			return list;
 		}
 		
-		//shopName&eventName&goodName 모두로 찾아오기 + paging
-				public List<GoodsEventShopMemberVO> goodsShopEvent(String event_name, String shop_code, String good_name, int startNum, int endNum){
-					List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
-					String statement = "resource.CartMapper.searchGoods";
+		//shopName&eventName&Category 모두로 찾아오기 + paging
+				public List<GoodsCategoryEventShopMemberVO> goodsShopEventCategory(String event_name, String shop_code, String ctg_1, int startNum, int endNum){
+					List<GoodsCategoryEventShopMemberVO> list = new ArrayList<GoodsCategoryEventShopMemberVO>();
+					String statement = "resource.EventMapper.goodsList_shopEventCategory";
 					Map<String,Object> map = new HashMap<String,Object>();
 					map.put("startNum",startNum);
 					map.put("endNum", endNum);
 					map.put("event_name", event_name);
-					map.put("shop_code", shop_code);
-					map.put("good_name", good_name);
+					map.put("shop_code", shop_code); 
+					map.put("ctg_1", ctg_1); 
 					System.out.println("startNum" + startNum);
 					System.out.println("endNum" + endNum);
 					System.out.println("eventName" + event_name);
 					System.out.println("shopCode" + shop_code);
-					System.out.println("good_name" + good_name);
+					System.out.println("ctg_1" + ctg_1);
 					list = session.selectList(statement,map);
 					//System.out.println("list : "+ list);
 					return list;
 				}
-		
+				
+	//Home에서 쓸거
+				//shopName&eventName 모두로 찾아오기
+				public List<GoodsEventShopMemberVO> homeEventOne(String event_name, String shop_code){
+					List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+					String statement = "resource.EventMapper.goodsList_One";
+					Map<String,String> map = new HashMap<String,String>();
+					map.put("event_name", event_name);
+					map.put("shop_code", shop_code);
+					//System.out.println(map.keySet());
+					list = session.selectList(statement,map);
+					//System.out.println("list : "+ list);
+					return list;
+				}
+				//shopName&eventName 모두로 찾아오기
+				public List<GoodsEventShopMemberVO> homeEventTwo(String event_name, String shop_code){
+					List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+					String statement = "resource.EventMapper.goodsList_Two";
+					Map<String,String> map = new HashMap<String,String>();
+					map.put("event_name", event_name);
+					map.put("shop_code", shop_code);
+					//System.out.println(map.keySet());
+					list = session.selectList(statement,map);
+					//System.out.println("list : "+ list);
+					return list;
+				}
+				//shopName&eventName 모두로 찾아오기
+				public List<GoodsEventShopMemberVO> homeEventPB(String event_name, String shop_code){
+					List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+					String statement = "resource.EventMapper.goodsList_PB";
+					Map<String,String> map = new HashMap<String,String>();
+					map.put("event_name", event_name);
+					map.put("shop_code", shop_code);
+					//System.out.println(map.keySet());
+					list = session.selectList(statement,map);
+					//System.out.println("list : "+ list);
+					return list;
+				}
 }

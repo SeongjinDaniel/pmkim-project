@@ -12,5 +12,50 @@
     <select id="EventName" resultType="vo.EventVO">
     	select event_name from event
     </select>
+    
+    <select id="goodsList_shopEventCategory" resultType="vo.GoodsCategoryEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
+  	select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img , g.search_date as search_date, g.mfg_name as mfg_name, gc.ctg_1 
+		from goods g, event e, shop_code sc, goods_shop gs, goods_category gc
+		where g.good_id = e.good_id
+        and sc.shop_code=gs.shop_code
+        and gs.good_id = g.good_id
+        and e.event_name = #{event_name}
+        and sc.shop_code = #{shop_code}
+        and gc.ctg_1=#{ctg_1}
+        <!-- and rownum &lt;=20 -->
+  	</select>
+  	
+  	<select id="goodsList_One" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
+  		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img , g.search_date as search_date, g.mfg_name as mfg_name 
+		from goods g, event e, shop_code sc, goods_shop gs
+		where g.good_id = e.good_id
+        and sc.shop_code=gs.shop_code
+        and gs.good_id = g.good_id
+        and e.event_name = '1+1'
+        and sc.shop_code = #{shop_code}
+        <!-- and rownum &lt;=20 -->
+  	</select>
+  	
+  	<select id="goodsList_Two" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
+  		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img , g.search_date as search_date, g.mfg_name as mfg_name 
+		from goods g, event e, shop_code sc, goods_shop gs
+		where g.good_id = e.good_id
+        and sc.shop_code=gs.shop_code
+        and gs.good_id = g.good_id
+        and e.event_name = '2+1'
+        and sc.shop_code = #{shop_code}
+        <!-- and rownum &lt;=20 -->
+  	</select>
+  	
+  	<select id="goodsList_PB" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
+  		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img , g.search_date as search_date, g.mfg_name as mfg_name 
+		from goods g, event e, shop_code sc, goods_shop gs
+		where g.good_id = e.good_id
+        and sc.shop_code=gs.shop_code
+        and gs.good_id = g.good_id
+        and e.event_name = 'PB'
+        and sc.shop_code = 'CU'
+        <!-- and rownum &lt;=20 -->
+  	</select>
  	 	
 </mapper>
