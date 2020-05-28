@@ -87,3 +87,17 @@ left outer join GOODS on EVENT.GOOD_ID = GOODS.GOOD_ID;
 
 
 
+
+
+
+
+## :green_book: day14_20200526 (화)
+
+PageNum 넘길때 Search 기능도 함께 가져가는 구현
+
+query 잘 전달되는지
+
+카테고리 적용하기
+
+페이지 CSS로 재정립하기
+

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace ="resource.Map_Mapper">
+ <mapper namespace ="resource.MapMapper">
  
 <!--  	<select id="loginCheck" resultType="String">
  		select customer_name from customer_info
@@ -65,4 +65,11 @@
 		select video_good_count, video_bad_count from video_info 
 		where video_good_count = #{video_good_count}
 	</select> -->
+	
+	<select id="selectMemberList" resultType="vo.MemberVO">
+ 		select id, prefer_good_1, prefer_good_2, prefer_good_3, prefer_shop
+ 		from member_customer
+ 		where id = #{id}
+ 	</select>
+	
  </mapper>

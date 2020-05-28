@@ -75,3 +75,37 @@ copy right) https://gist.github.com/singun/bdceaa99ad61ee1296204454f797d579
 
 # 20200522
 
+Cart 페이지를 중단하고 우선 효용성있는 빅데이터를 활용할 수 있는 페이지를 만들것 !!
+
+Map 페이지 ----> 로그인 일단 됐다고 가정하고 MAP 페이지 먼저 완성할것!!
+
+# 20200525
+
+카테고리 분류(by Linda) -> Naver API
+
+# 20200526
+
+[https://velog.io/@dlrmsghks7/%ED%83%90%EC%83%89-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%84-%EC%95%8C%EC%95%84%EB%B4%85%EC%8B%9C%EB%8B%A4](https://velog.io/@dlrmsghks7/탐색-알고리즘을-알아봅시다)
+
+이진탐색 추후에 해싱 알고리즘 !! 적용하기!!
+
+#### 주소 확인 - 유사도 분석
+
+https://www.adams.ai/apiPage;jsessionid=0FA2148C1FF03727EC544F0DEEB7ECD7?sentsim
+
+
+
+- jar 파일 원래 위치
+  - C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib
+
+
+
+- 카카오맵과 DB에 저장된 주소가 일치하지 않아 유사도 분석을 하려고 했지만 API가 한정적으로 제공되고 유료화 되는 부분이 있어서 해당 알고리즘을 적용시켜려 했지만, 효율성 측면에서 데이터 전처리를 하여 주소를 일치화 시키는 것이 효율적라고 생각된다 !! -> 결론 : 데이터 전처리
+
+
+
+- 맵 사이트 전체 알고리즘 구성 완료!!!!! -> 내일 안에 프로그래밍 완성할것!
+
+
+
+- 오늘따라 프로젝트 기간에 촉박함을 느껴 최대한 내일 Map site를 끝내기로 결정!!
