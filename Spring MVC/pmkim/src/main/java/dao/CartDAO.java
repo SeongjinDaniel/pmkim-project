@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import vo.CartVO;
 import vo.GoodsEventShopMemberVO;
+import vo.GoodsInformVO;
 
 @Repository
 public class CartDAO {
@@ -72,6 +73,7 @@ public class CartDAO {
 		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
 		String statement = "resource.CartMapper.goodsListAll";
 		list = session.selectList(statement);
+		System.out.println(list.get(0));
 		return list;
 	}
 	
@@ -105,21 +107,53 @@ public class CartDAO {
 	}
 	
 	//shopName&eventName 모두로 찾아오기 + paging
-		public List<GoodsEventShopMemberVO> goodsShopEvent(String event_name, String shop_code, int startNum, int endNum){
-			List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
-			String statement = "resource.CartMapper.goodsList_shopEvent_paging";
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("startNum",startNum);
-			map.put("endNum", endNum);
-			map.put("event_name", event_name);
-			map.put("shop_code", shop_code);
-			System.out.println("startNum" + startNum);
-			System.out.println("endNum" + endNum);
-			System.out.println("eventName" + event_name);
-			System.out.println("shopCode" + shop_code);
-			list = session.selectList(statement,map);
-			//System.out.println("list : "+ list);
-			return list;
-		}
+	public List<GoodsEventShopMemberVO> goodsShopEvent(String event_name, String shop_code, int startNum, int endNum){
+		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+		String statement = "resource.CartMapper.goodsList_shopEvent_paging";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startNum",startNum);
+		map.put("endNum", endNum);
+		map.put("event_name", event_name);
+		map.put("shop_code", shop_code);
+
+		list = session.selectList(statement,map);
+		//System.out.println("list : "+ list);
+		return list;
+	}
+	
+	//2020.05.26 추가
+	//ctg_1='식품'인 세부 카테고리 가져오기
+	public List<GoodsInformVO> foodsCtg() {
+		List<GoodsInformVO> list = new ArrayList<>();
+		String statement = "resource.CartMapper.foodsCtg";
+		list = session.selectList(statement);
+		return list;
+	}
+	
+	//ctg_3에 따른 추천 상품 정보
+	public List<GoodsInformVO> recomGoodsList(String ctg_3,int min, int max){
+		List<GoodsInformVO> list = new ArrayList<>();
+		String statement = "resource.CartMapper.recommendGoods";
+		Map<String, Object> map = new HashMap<>();
+		map.put("ctg_3",ctg_3);
+		map.put("min",min);
+		map.put("max",max);
+		list = session.selectList(statement,map);
+		return list;
+	}
+	
+	//카테고리 체크해줌
+	public GoodsInformVO checkCtg(String good_id){
+		GoodsInformVO vo = new GoodsInformVO();
+		String statement = "resource.CartMapper.checkCtg";
+		vo = session.selectOne(statement,good_id);
+		return vo;
+	}
+	
+	//ctg_3 갯수 count (Random함수 사용하기 위함)
+	public int countCtg3(String ctg_3) {
+		String statement = "resource.CartMapper.countCtg3";
+		return session.selectOne(statement,ctg_3);
+	}
 	
 }

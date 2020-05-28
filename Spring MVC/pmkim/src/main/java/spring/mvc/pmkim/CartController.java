@@ -1,22 +1,24 @@
 package spring.mvc.pmkim;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.CartDAO;
+import service.ManHappy;
 import service.PagingService;
-import vo.CartVO;
-import vo.EventVO;
 import vo.GoodsEventShopMemberVO;
-import vo.GoodsShopVO;
-import vo.GoodsVO;
-import vo.MemberVO;
+import vo.GoodsInformVO;
 
 @Controller
 public class CartController {
@@ -26,6 +28,9 @@ public class CartController {
 	
 	@Autowired
 	PagingService ps;
+	
+	@Autowired
+	ManHappy mh;
 	
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	// delete search listone
@@ -76,16 +81,16 @@ public class CartController {
 
 	@RequestMapping(value = "/cart", method = RequestMethod.POST)
 	// insert update
-	public ModelAndView cartPost(String action, CartVO cvo, GoodsShopVO gsvo, EventVO evo, GoodsVO gvo, MemberVO mvo) {
+	public ModelAndView cartPost(String action, GoodsEventShopMemberVO gesmvo) {
 		ModelAndView mav = new ModelAndView();
 
 		List<GoodsEventShopMemberVO> clist = null;
 		List<GoodsEventShopMemberVO> geslist = cdao.goodsAll();
 		boolean flag = false;
 		if (action.equals("insert")) {
-			flag = cdao.cartInsert(cvo);
+			//flag = cdao.cartInsert(gesmvo);
 			if (flag)
-				clist = cdao.cartView(mvo.getId());
+				clist = cdao.cartView(gesmvo.getId());
 		}
 
 		//mav.addObject("gvo", gvo);
@@ -94,5 +99,17 @@ public class CartController {
 		mav.setViewName("mycart");
 		return mav;
 	}
-
+	
+	//만원의 행복
+	@RequestMapping(value="/happy", method = RequestMethod.GET)
+	@ResponseBody
+	public void happyGet(String maxM,String minM, GoodsInformVO givo, HttpServletResponse response) throws ServletException, IOException{
+		List<GoodsInformVO> gilist= null;
+		int max = Integer.parseInt(maxM.replace(",", ""));
+		int min = Integer.parseInt(minM.replace(",",""));
+		gilist = cdao.recomGoodsList(givo.getCtg_3(), min, max);
+		int num = cdao.countCtg3(givo.getCtg_3());
+		int rand = (int)Math.random() * num;
+		gilist.get(rand);
+	}
 }
