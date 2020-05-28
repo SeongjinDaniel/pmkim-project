@@ -12,7 +12,7 @@ data.table<-NULL
 ##more더보기 누르기
 #listUl > li.btn_more > a
 #moreImg > a
-#moreImg > agdgd
+#moreImg > a
 
 ##이미지 url
 #www.7-eleven.co.kr/upload/product/8801104/220200.1.jpg
