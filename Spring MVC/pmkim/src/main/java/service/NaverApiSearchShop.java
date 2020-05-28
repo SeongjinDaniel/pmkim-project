@@ -22,7 +22,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class NaverApiSearchShop {
-	
+	//scheduling 으로 바꾸는거까지 하기
     public static void main(String[] args) throws Exception{
         String clientId = "FZqBsDALM8L8w7aa_vY5"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "RDK08h85bB"; //애플리케이션 클라이언트 시크릿값"

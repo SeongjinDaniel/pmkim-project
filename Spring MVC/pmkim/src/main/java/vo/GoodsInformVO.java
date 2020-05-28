@@ -45,7 +45,16 @@ public class GoodsInformVO {
 
     // 소분류 3 
     private String ctg_3;
+ 
+    // 장바구니 아이디 
+    private int cart_id;
 
+    // 아이디 
+    private String id;
+
+    // 주문 갯수
+    private int cnt;
+    
 	public String getGood_id() {
 		return good_id;
 	}
@@ -158,12 +167,37 @@ public class GoodsInformVO {
 		this.ctg_3 = ctg_3;
 	}
 
+	public int getCart_id() {
+		return cart_id;
+	}
+
+	public void setCart_id(int cart_id) {
+		this.cart_id = cart_id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	@Override
 	public String toString() {
-		return "GoodsInform [good_id=" + good_id + ", good_name=" + good_name + ", search_date=" + search_date
+		return "GoodsInformVO [good_id=" + good_id + ", good_name=" + good_name + ", search_date=" + search_date
 				+ ", good_price=" + good_price + ", mfg_name=" + mfg_name + ", good_img=" + good_img + ", good_shop_id="
 				+ good_shop_id + ", shop_code=" + shop_code + ", event_name=" + event_name + ", event_id=" + event_id
-				+ ", shop_name=" + shop_name + ", ctg_1=" + ctg_1 + ", ctg_2=" + ctg_2 + ", ctg_3=" + ctg_3 + "]";
+				+ ", shop_name=" + shop_name + ", ctg_1=" + ctg_1 + ", ctg_2=" + ctg_2 + ", ctg_3=" + ctg_3
+				+ ", cart_id=" + cart_id + ", id=" + id + ", cnt=" + cnt + "]";
 	}
-    
+	
 }

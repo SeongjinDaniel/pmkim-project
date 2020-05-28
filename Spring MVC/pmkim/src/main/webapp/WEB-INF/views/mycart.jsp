@@ -6,47 +6,47 @@
 <!-- Basic -->
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- Mobile Metas -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Site Metas -->
-<title>편의점 마스터, 김편복</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Site Icons -->
-<link rel="icon" type="image/png" sizes="16x16"
-    href="/pmkim/resources/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico"
-	type="image/x-icon">
-<link rel="apple-touch-icon"
-	href="/pmkim/resources/images/apple-touch-icon.png">
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
-<!-- Site CSS -->
-<link rel="stylesheet" href="/pmkim/resources/css/style_linda.css">
-<!-- Responsive CSS -->
-<link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="/pmkim/resources/css/custom.css">
-<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
-
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Site Metas -->
+	<title>편의점 마스터, 김편복</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- Site Icons -->
+	<link rel="icon" type="image/png" sizes="16x16"
+	    href="/pmkim/resources/images/favicon-16x16.png">
+	<link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico"
+		type="image/x-icon">
+	<link rel="apple-touch-icon"
+		href="/pmkim/resources/images/apple-touch-icon.png">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/style_linda.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+	<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
+	
+	<!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
 
 </head>
 
 <body>
 	<%
 		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
-		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
+		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) session.getAttribute("goodsList");
 		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
 	%>
 	<!-- Start Main Top -->
@@ -205,9 +205,9 @@
 						</div>
 					</form>
 						
-
 						<div class="product-categorie-box">
-							<div class="tab-content">
+<!-- 							<form method="GET" action="/pmkim/happy" id="listform" name="listform">
+ -->							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane fade show active"
 									id="grid-view">
 									<div class="row">
@@ -222,21 +222,23 @@
 													<img src= "${ vo.good_img }" class="img-fluid" alt="Image">
 													
 													<div class="mask-icon">
-														<a class="cart" href="/pmkim/cart?action=insert">Add to Cart</a>
+														<a class="cart" onclick="add('${vo.good_id}'); return false;">Add</a>
 													</div>
 												</div>
 												<div class="why-text">
-													<h4>${ vo.good_name }</h4>
-													<h5>${ vo.good_price }원</h5>
-													<h5>${ vo.event_name }</h5>
+													<input type="hidden" id="good_id" value="${ vo.good_id }">
+													<h4 id="good_name">${ vo.good_name }</h4>
+													<h5 id="good_price">${ vo.good_price }원</h5>
+													<h5 id="event_name">${ vo.event_name }</h5>
 												</div>
 											</div>
 										</div>
-										</c:forEach>
-										
+									</c:forEach>
 									</div>
 								</div>
 							</div>
+<!-- 							</form>										
+ -->							
 							<!-- paging -->
 							<div id="paging" style="text-align : center; font-size : 16pt;">
 								<c:if test="${ pgNum != 1 }">
@@ -261,15 +263,39 @@
 				</div>
 				
 				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
-				<!-- 여기에 장바구니 들어옴!! -->
+				<!-- 여기에 만원의 행복 들어옴!! -->
 					<div class="product-categori">
 						
-						<div class="filter-sidebar-left">
-							<div class="title-left">
-								<h3>장바구니</h3>
-							</div>
+						
 							<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-								<c:forEach var="cvo" items="<%= cartList %>">
+								<div class="filter-price-left">
+		                            <div class="title-left">
+		                                <h3>Price</h3>
+		                            </div>
+		                            <div class="price-box-slider">
+		                                <div id="slider-range"></div>
+		                                <p>
+		                                    <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
+		                                    <button class="btn hvr-hover" onclick="recommend(); return false;">Filter</button>
+		                                    <button class="btn hvr-hover" onclick="deleteCart(); return false;">Reset</button>		                                    
+		                                </p>
+		                            </div>
+		                            <div id ="cart-View">
+		                            <!-- 담은 상품 여기에 나타내기 -->
+		                            	<c:if test="${requestScope.newVO != null }">
+		                            		<c:forEach var="nvo" items="${ newVO }">
+		                            			<%= request.getAttribute("newVO") %>
+		                            			<img src="${ requestScope.good_img }" class="img-fluid" alt="Image">
+		                            		</c:forEach>
+		                            		
+		                            	</c:if>
+		                            	<c:if test="${requestScope.newVO == null }">
+		                            		상품을 클릭하세요.
+		                            	</c:if>
+		                            </div>
+		                        </div>
+								
+								<%-- <c:forEach var="cvo" items="<%= cartList %>">
 									<c:if test = "${cvo.id ==null}">
 									"로그인이 필요한 서비스입니다."
 									</c:if>
@@ -281,10 +307,9 @@
 										</a>
 										
 									</div>
-								</c:forEach>
+								</c:forEach> --%>
 								
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -416,12 +441,85 @@
 	<script src="/pmkim/resources/js/images-loded.min.js"></script>
 	<script src="/pmkim/resources/js/isotope.min.js"></script>
 	<script src="/pmkim/resources/js/owl.carousel.min.js"></script>
+	
 	<script src="/pmkim/resources/js/baguetteBox.min.js"></script>
 	<script src="/pmkim/resources/js/jquery-ui.js"></script>
 	<script src="/pmkim/resources/js/jquery.nicescroll.min.js"></script>
 	<script src="/pmkim/resources/js/form-validator.min.js"></script>
 	<script src="/pmkim/resources/js/contact-form-script.js"></script>
-	<script src="/pmkim/resources/js/custom.js"></script>
+	<script src="/pmkim/resources/js/custom_linda.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+	<!-- custom js -->
+	<script>
+		function recommend(){
+			//alert("hi");
+			
+			//클릭한 아이템 받아오기
+			//그 아이템에 대해서 추천 아이템 가져오기
+			$.ajax({
+				type :"get",// 전송 방식 
+				url :"/pmkim/happy",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"good_id" : listform.good_id.value,
+						"minM" : 1000,
+						"maxM" : 3000},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					if(data=="1"){
+						alert("추천");
+					}else{
+						alert("추천 실패");
+					}
+				},
+				error : function(){
+					alert("ajax 실행 실패");
+				}
+			});
+			
+		}
+		
+		//클릭 상품 저장
+		function add(good_id){
+			$.ajax({
+				type :"post",// 전송 방식 
+				url :"/pmkim/cart",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"action" : "insert",
+						"good_id" : good_id},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					if(data=="1"){
+						//alert("추천");
+					}else{
+						//alert("추천 실패");
+					}
+				},
+				error : function(){
+					alert("ajax 실행 실패");
+				}
+			});
+		}
+		
+		//클릭상품 해제
+		function deleteCart(){
+			$.ajax({
+				type :"post",// 전송 방식 
+				url :"/pmkim/cart",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"action" : "delete"},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					if(data=="1"){
+						//alert("추천");
+					}else{
+						//alert("추천 실패");
+					}
+				},
+				error : function(){
+					alert("ajax 실행 실패");
+				}
+			});
+		}
+	</script>
+	
 </body>
 
 </html>

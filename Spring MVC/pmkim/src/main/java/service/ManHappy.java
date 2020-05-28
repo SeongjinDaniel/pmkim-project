@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import dao.CartDAO;
+import vo.GoodsEventShopMemberVO;
 
 @Repository
 @Service
@@ -26,5 +27,19 @@ public class ManHappy {
 		}
 	}
 	
+	public void insertCart(GoodsEventShopMemberVO vo, HttpServletResponse response) throws IOException{
+		if(cdao.cartInsert2(vo)) {
+			response.getWriter().print("1");
+		}else {
+			response.getWriter().print("0");
+		}
+	}
 
+	public void deleteCart(HttpServletResponse response) throws IOException{
+		if(cdao.cartDelete2()) {
+			response.getWriter().print("1");
+		}else {
+			response.getWriter().print("0");
+		}
+	}
 }

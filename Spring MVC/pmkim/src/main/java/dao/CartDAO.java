@@ -28,6 +28,16 @@ public class CartDAO {
 		return result;
 	}
 	
+	//cart담기 - 2버전 (2020.05.28 수정)
+	public boolean cartInsert2(GoodsEventShopMemberVO vo) {
+		boolean result = false;
+		String statement = "resource.CartMapper.insertCart2";
+		if(session.insert(statement,vo)==1) {
+			result=true;
+		}
+		return result;
+	}
+
 	//장바구니 비우기
 	public boolean cartDelete(String id) {
 		boolean result = false;
@@ -38,6 +48,15 @@ public class CartDAO {
 		return result;
 	}
 	
+	//장바구니 비우기 - 2버전  (2020.05.28 수정)
+	public boolean cartDelete2() {
+		boolean result = false;
+		String statement = "resource.CartMapper.deleteCart2";
+		if(session.delete(statement)>=1) {
+			result = true;
+		}
+		return result;
+	}
 	//저장된 카트 보여주기
 	public List<GoodsEventShopMemberVO> cartView(String id) {
 		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
@@ -73,7 +92,7 @@ public class CartDAO {
 		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
 		String statement = "resource.CartMapper.goodsListAll";
 		list = session.selectList(statement);
-		System.out.println(list.get(0));
+		//System.out.println(list.get(0));
 		return list;
 	}
 	
@@ -154,6 +173,15 @@ public class CartDAO {
 	public int countCtg3(String ctg_3) {
 		String statement = "resource.CartMapper.countCtg3";
 		return session.selectOne(statement,ctg_3);
+	}
+	
+	//2020.05.28 추가
+	//이름, 이미지 가져옴
+	public List<GoodsEventShopMemberVO> getNameImg(String good_id) {
+		List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+		String statement = "resource.CartMapper.getNameImg";
+		list = session.selectList(statement,good_id);
+		return list;
 	}
 	
 }
