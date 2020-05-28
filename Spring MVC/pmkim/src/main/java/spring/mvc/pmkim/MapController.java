@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.MapDAO;
+import vo.GoodsEventShopMemberVO;
 import vo.MemberVO;
 
 @Controller
@@ -25,8 +26,15 @@ public class MapController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(dao.memberListAll() != null)	mav.addObject("memberList", dao.memberListAll());			
-		
+		//if(dao.memberListAll() != null)	mav.addObject("memberList", dao.memberListAll());
+		//List<GoodsEventShopMemberVO> shopCodeTableList = dao.shopCodeTableList();
+		//GoodsEventShopMemberVO goodsEvtShopMemVO = new GoodsEventShopMemberVO();
+
+		if(dao.mapAlgorithmDBList() != null) mav.addObject("mapAlgorithmDBList", dao.mapAlgorithmDBList());
+		else logger.info("map mapAlgorithmDBList NULL");
+		if(dao.shopCodeTableList() != null) mav.addObject("shopCodeTableList", dao.shopCodeTableList());
+		else logger.info("map shopCodeTableList NULL");
+
 		mav.addObject("searchKeyword", searchKeyword);
 		mav.addObject("searchProduct", searchProduct);
 		//System.out.println
