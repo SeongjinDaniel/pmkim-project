@@ -71,5 +71,6 @@
  		from member_customer
  		where id = #{id}
  	</select>
+ 
 	
  </mapper>
