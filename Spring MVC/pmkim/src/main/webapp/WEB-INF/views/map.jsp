@@ -203,14 +203,14 @@
 			</form>
 			<div id="map" style="width: 100%; height: 500px;"></div>
 			<script>
-				var goodId = ${mapAlgorithmDB.good_id}
-				console.log(goodId);
+				//var goodId = ${mapAlgorithmDB.good_id}
+				//console.log(goodId);
 				//console.log(mapAlgorithmDBList.getGood_id);
 				// 카카오 맵에서 넘어 오는 편의점명 -> CU, GS25, 세븐일레븐, 이마트24, 미니스톱
 				const EMART24 = "EM", CU = "CU", GS25 = "GS", SEVENELEVEN = "SE", MINISTOP = "MS";
 				var keyword = '<%=keyword%>';
 				var productName = '<%=keywordProduct%>';
-				console.log(productName);
+				//console.log(productName);
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
                 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -273,7 +273,7 @@
 					//----------------------------------------------------------
 				}else{
 					console.log(curPositionFlag);
-					console.log(keyword);
+					console.log("키워드: " + keyword);
 					// 키워드로 장소를 검색합니다
                     //ps.keywordSearch(keyword, placesSearchCB);
 					ps.keywordSearch(keyword, placesSearchCB, {
@@ -354,12 +354,10 @@
 									async: false,
 									success:function(data){
 										console.log(data);
-										if(data == "1"){
+										if(data == "success"){
 											console.log("success");
-											console.log("1");
 										}else{
 											console.log("fail");
-											console.log("0");
 										}
 									},
 									error:function(jqXHR, textStatus, errorThrown){ //

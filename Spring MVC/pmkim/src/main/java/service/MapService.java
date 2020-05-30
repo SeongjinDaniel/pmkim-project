@@ -39,13 +39,14 @@ public class MapService {
 					if(oldShopCode.equals(vo.getShop_code().trim()) && 
 							oldShopNameDetail.equals(vo.getShop_name_detail().trim())) {
 						logger.info("service success");
-						response.getWriter().print("1");
+						response.getWriter().print("success");
 					}	
 					else {
 						logger.info("service fail");
-						response.getWriter().print("0");
+						response.getWriter().print("fail");
 					}
-					
+				}else {
+					logger.info("vo is null(service)");
 				}
 			}
 		}	
