@@ -1,5 +1,7 @@
+<%@page import="vo.GoodsEventShopMemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"%>	
+	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"
+	import = "vo.GoodsEventShopMemberVO"%>	
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +35,6 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
 
-
-
-
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -50,7 +49,9 @@
 	<%
 		String keyword = (String) request.getAttribute("searchKeyword");
 		String keywordProduct = (String) request.getAttribute("searchProduct");
-		List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
+		//List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
+		GoodsEventShopMemberVO mapAlgorithmDB = 
+				(GoodsEventShopMemberVO) request.getAttribute("mapAlgorithmDB");
 	%>
 	<header class="main-header">
 		<!-- Start Navigation -->
@@ -202,13 +203,14 @@
 			</form>
 			<div id="map" style="width: 100%; height: 500px;"></div>
 			<script>
+				var goodId = ${mapAlgorithmDB.good_id}
+				console.log(goodId);
+				//console.log(mapAlgorithmDBList.getGood_id);
 				// 카카오 맵에서 넘어 오는 편의점명 -> CU, GS25, 세븐일레븐, 이마트24, 미니스톱
 				const EMART24 = "EM", CU = "CU", GS25 = "GS", SEVENELEVEN = "SE", MINISTOP = "MS";
 				var keyword = '<%=keyword%>';
 				var productName = '<%=keywordProduct%>';
-				// alert('<%=keywordProduct%>');
-				// console.log('<%=keywordProduct%>');
-
+				console.log(productName);
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
                 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -314,6 +316,7 @@
                         var bounds = new kakao.maps.LatLngBounds();
 
                         for (var i=0; i<data.length; i++) {
+							// 추가!!
 							// data[i].place_name 해당하지 않는 곳은 제외하기!
 							var str = data[i].place_name; 
 							var pass1 = str.search("이마트");
@@ -322,14 +325,82 @@
 							var nopass2 = str.search("emart24");
 							// 추후 gs칼텍스, gs건설 등 제외하기!!
 
+							// 추가!!
  	 						var res = str.split(" ");
 							// ex) cu, gs25 등..
-							var shop_code = res[0]; 
+							var shop_code = res[0];
+							if(shop_code == '이마트24') shop_code = EMART24;
+							else if(shop_code == 'GS25') shop_code = GS25;
+							else if(shop_code == '세븐일레븐') shop_code = SEVENELEVEN;
+							else if(shop_code == '미니스톱') shop_code = MINISTOP;
+							else if(shop_code == 'CU') shop_code = CU;
 							// ex) 테헤란로점, 종로1가점 등..
 							var shop_name_detail = res[1];
-							// console.log(shop_code);
-							// console.log(shop_name_detail);
+							console.log("shop_code : " + shop_code);
+							console.log("shop_name_detail : " + shop_name_detail);
 
+							//map algorithm start
+							if(productName == undefined || productName == null || productName == ""){
+							}else{
+								console.log("shop_code:"+shop_code,
+											"shop_name_detail: "+shop_name_detail);
+								$.ajax({
+									url:"/pmkim/map",
+									type:'post',
+									data: {
+											"shop_code":shop_code,
+											"shop_name_detail":shop_name_detail},
+									dataType: "text",
+									async: false,
+									success:function(data){
+										console.log(data);
+										if(data == "1"){
+											console.log("success");
+											console.log("1");
+										}else{
+											console.log("fail");
+											console.log("0");
+										}
+									},
+									error:function(jqXHR, textStatus, errorThrown){ //
+										console.log("에러 발생!! \n textStatus: " + textStatus + " errorThrown: " + errorThrown + " jqXHR: "  + jqXHR);
+									}
+						    	});
+							}
+							
+
+							// //클릭 상품 저장
+							// function add(good_id){
+							// 	$.ajax({
+							// 		type :"post",
+							// 		url :"/pmkim/cart",  
+							// 		data : {"action" : "insert",
+							// 			"good_id" : good_id},
+							// 		dataType : "json",   // text, xml, html, script, json, jsonp 가능 
+							// 		success : function(data){   
+							// 		if(data=="1"){
+
+							// 			var key = [];         //id값 담을 변수 선언
+							// 			var num = document.getElementsByClassName('good_id').length
+							// 			for(var i=0; i<num; i++){
+							// 				key[i] = document.getElementsByClassName('good_id')[i].value;
+							// 			}
+							// 			var good_name = document.getElementsByClassName('good_name')[key.indexOf(good_id)].innerHTML;
+							// 			var good_img = document.getElementsByClassName('img-fluid')[key.indexOf(good_id)].getAttribute('src');
+
+							// 			document.getElementById('cart-View').innerHTML = "<p id='result_name'>"+ good_name + "</p> <br>"+"<img src = '"+good_img+"' class ='img-fluid'>";
+
+							// 		}else{
+							// 			alert("상품이 선택되지 않았습니다.");
+							// 		}
+							// 		},
+							// 		error : function(){
+							// 		alert("프로그램 에러가 발생했습니다.");
+							// 		}
+							// 	});
+								
+							// }
+							
 							if(nopass1 >= 0 || nopass2 >= 0){
 								//console.log("+");
 							}else{
@@ -352,7 +423,7 @@
 								}
 							});
                         }       
-
+						
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                         map.setBounds(bounds);
                     } 

@@ -18,23 +18,35 @@ public class MapDAO {
     SqlSession sqlSession; // mybatis 실행 객체
 
 	public List<MemberVO> memberListAll() {
-		logger.info("Mybatis memberListAll");
+		//logger.info("Mybatis memberListAll");
 		List<MemberVO> list = null;
 		String statement = "resource.MapMapper.selectMemberList";
 		list = sqlSession.selectList(statement);
 		return list;
 	}
 	
-	public List<GoodsEventShopMemberVO> mapAlgorithmDBList() {
-		logger.info("Mybatis mapAlgorithmDBList");
-		List<GoodsEventShopMemberVO> list = null;
+	public GoodsEventShopMemberVO mapAlgorithmDB(GoodsEventShopMemberVO vo) {
+		//logger.info("Mybatis mapAlgorithmDBList");
 		String statement = "resource.MapMapper.mapAlgorithmDBList";
-		list = sqlSession.selectList(statement);
-		return list;
+		//logger.info("mapAlgorithmDB dao: "+vo.getGood_name());
+		vo = sqlSession.selectOne(statement, vo);
+		// null 수정후 확인할것 !!
+		//logger.info("mapAlgorithmDB dao: "+vo.getGood_name());
+		return vo;
+	}
+	//selShopCodeNameDetail
+	
+	public GoodsEventShopMemberVO shopCodeName(GoodsEventShopMemberVO vo) {
+		//logger.info("Mybatis shopCodeName");
+		String statement = "resource.MapMapper.selShopCodeNameDetail";
+		vo = sqlSession.selectOne(statement, vo);
+//		logger.info("Mybatis shopCode : ", vo.getShop_code());
+//		logger.info("Mybatis getShop_name_detail : ", vo.getShop_name_detail());
+		return vo;
 	}
 	
 	public List<GoodsEventShopMemberVO> shopCodeTableList() {
-		logger.info("Mybatis shopCodeTableList");
+		//logger.info("Mybatis shopCodeTableList");
 		List<GoodsEventShopMemberVO> list = null;
 		String statement = "resource.MapMapper.shopCodeTableList";
 		list = sqlSession.selectList(statement);
@@ -69,3 +81,4 @@ public class MapDAO {
 //    	return result;
 //    }
 }
+

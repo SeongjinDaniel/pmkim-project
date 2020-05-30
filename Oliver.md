@@ -109,3 +109,279 @@ https://www.adams.ai/apiPage;jsessionid=0FA2148C1FF03727EC544F0DEEB7ECD7?sentsim
 
 
 - 오늘따라 프로젝트 기간에 촉박함을 느껴 최대한 내일 Map site를 끝내기로 결정!!
+
+# 20200528
+
+Git과 이클립스 연동이 우리팀들은 나와 다른 현상이다.. 문제는 내가 인텔리제이를 설치하면서 무엇인가가 달라진 현상인지 잘 모르겠다.........
+
+# 20200529
+
+JSP에서 VO 객체를 주입하려고 했다니 참 바보같은 생각이었다.
+
+#### Session
+
+```java
+// human 객체 생성
+Human human = new Human("parker", 26, 178);
+
+// 세션을 가져온다.
+HttpSession session = req.getSession(true);
+session.setAttribute("parker", human);
+```
+
+￭ 세션(Session) 객체 사용하여 값을 저장하고 얻어오기
+
+ -. 웹 브라우저 당 한개씩 자동 생성되는 세션에 값을 저장하거나 세션에 저장된 값을 사용해 본다.
+
+ -. 세션에 값 저장하기 위해서는 session 객체의 setAttribute 메소드를 사용
+
+ -. 세션에 저장된 값을 얻기 위해서는 session 객체의 getAttribute 메소드를 사용
+
+
+
+\01. 세션(Session)에 값 저장하기
+
+| 형식 | session.setAttribute(String name, Object value); |
+| ---- | ------------------------------------------------ |
+|      |                                                  |
+
+ -. session에 값을 저장하기 위해서는 그 값을 저장하는 대상을 식별하기 위한 키가 있어야 한다.
+
+ -. name이 바로 세션에 저장된 특정 값을 찾아오기 위한 키로 사용된다.
+
+ -. 이 키와 일대일 대응으로 저장하고 싶은 값을 value 위치에 지정한다.
+
+ -. name과 value는 1:1 대응이다.
+
+ -. name은 String 형으로 들어가고 value는 Object형이어야만 한다.
+
+  (즉 int, doublic, char등의 primitive 형은 사용할 수 없다.)
+
+ -. 동일한 이름으로 세션에 저장하게 되면, 항상 덮어씌우게 된다.
+
+
+
+\02. 세션(Session)에 저장된 값 얻어오기
+
+| 형식 | Object getAttribute(String name) |
+| ---- | -------------------------------- |
+|      |                                  |
+
+ -. 세션에 저장된 값을 얻어오기 위해 사용되는 getAttribute 메소드를 사용한다.
+
+ -. 세션 객체 안에 지정한 name에 해당되는 속성이 없으면 getAttribute가 null 값을 되돌린다.
+
+ -. 주의할 점은 반환되는 값이 Object형이기 때문에 반드시 적절한 형변환을 해야한다.
+
+ -. 세션에 저장된 값을 String 형태로 얻어오려면 cast 연산자로 형 변환을 해야한다.
+
+   왜냐하면 getAttribute 메소드는 결과값을 Object 형으로 되돌리기 때문이다.
+
+ -. 세션 내부에서는 이를 Object 형으로 관리하고 이를 되돌려질 때에도 Object형으로 되돌린다.
+
+ -. 만일 primitive 형인 int변수에 저장하려면 레퍼 클래스인 Integer 형으로 변환해야 한다.
+
+
+
+출처: https://wickedmagic.tistory.com/129 [사악미소의 현대마법의 공방]
+
+#### ArrayList**
+
+- ArrayList의 디폴트 크기는??
+  Java.util.ArrayList, Java.util 패키지에 속한 클래스이며,
+  List인터페이스를 구현한 가변길이 배열입니다.  
+
+  - 특징 
+  배열처럼 인덱스를 통한 접근이 가능하며, 배열은 크기에 제한을 받지만 ArrayList는 원소의 개수가 크기에 다다르면 자동으로 
+  initial Capacity만큼 증가하기 때문에 추가적인 원소를 입력하더라도 ArrayIndexOutOfBoundsException 에러가 발생하지 않습니다.
+
+  ```java
+  //기본 생성자
+  
+  List<Integer> list1 = new ArrayList<Integer>();
+  
+  
+  
+  //초기 수용량을 지정하는 생성자
+  
+  ArrayList<Integer> list2 = new ArrayList<Integer>(10);
+  
+  
+  
+  /*
+  
+   * 다른 ArrayList객체를 생성자의 매개변수에 입력하여 ArrayList객체를 생성하는 경우
+  
+   */
+  
+  ArrayList<Integer> list3 = new ArrayList<Integer>(list1);
+  ```
+
+  첫번재 생성자는 기본생성자입니다. 
+
+  기본생성자는 initial capacity default값이 10이기 때문에 10으로 설정되서 생성이 됩니다. 
+
+  
+
+  \* 여기서 <>를 처음보시는 분들도 계실텐데 이것을 Generic이라고 합니다. 
+
+  Generic은 클래스 외부에서 클래스의 타입을 결정해주는 것이며, 기본자료형의 경우에는 Wrapper클래스를 입력해야 합니다.
+
+  
+
+  두번째 생성자는 initial capacity값을 생성자의 매개변수로 입력하여 ArrayList 객체를 생성합니다. (솔직히 두 번째 생성자는 많이 안 써봤습니다.) 
+
+  
+
+  세번째 생성자는 Collection 인터페이스를 구현한 클래스의 객체를 매개변수로 입력합니다. 
+
+  이 때 입력된 객체의 모든 원소를 생성되는 ArrayList 객체가 할당받습니다. 
+
+  예를 들면 위의 사진에 나온대로 매개변수로 들어온 list1에 원소의 개수가 10개 있었다면 list3는 생성과 동시에 10개의 원소를 갖게 됩니다. 
+  
+  # 20200530
+  
+  Ajax는 Asynchronous Javascript And XML 의 약자로, 일반적으로 클라이언트와 서버측의 데이터 전송 및 처리를 비동기적(Asynchronous)으로 처리하는 것에 그 목적이 있습니다.
+  
+   
+  
+  Ajax를 사용함으로써, 서버측에 데이터를 요청한 후, 그 데이터의 수신이 완료될 때까지 기다리지 않고, 다른 작업을 바로 진행할 수 있습니다. 그러한 이유로 좀더 웹페이지를 자유롭게 구성할 수 있게 되었고, 불필요한 잦은 페이지 로딩을 줄일 수 있습니다.
+  
+   
+  
+  여기서 설명하려는 것은 이런 Ajax는 대부분 비동기방식 그대로 사용하지만, 경우에 따라서는 동기(Synchronous)방식으로 사용할 경우도 종종 생긴다는 것입니다.
+  
+  이는 Ajax를 통해 서버측에 데이터를 요청하고, 이 데이터의 결과를 모두 수신 받은 다음 단계로 진행하도록 하는 경우가 있을 수 있다는 이야기입니다.
+  
+   
+  
+  예를 들면 아래와 같은 코드가 있다고 가정합니다.
+  
+  ```javascript
+  function proc_test() {
+   
+  
+       $('#table > tbody  > tr').each(function() {
+            $this = $(this);
+  
+   
+  
+            var grade = $this.find("input.grade").val();
+            var point = $this.find("input.point").val();
+            var param = "&grade=" + grade + "&point=" + point;
+  
+      
+  
+            $.ajax({
+                 type: 'POST',
+                 url: 'interface/grade_process.aspx',
+                 data: "worktype=1&" + param,
+                 success: function(data) {
+                      if(data != null) {
+                           // Do somothing when data is not null
+                      }
+                 }
+            });
+       });
+  
+  }
+  
+  ```
+  
+  위 코드는 테이블의 한 줄(Row)마다 input grade와 point값을 읽어서 서버측에 Ajax로 데이터를 전달하여 처리를 하는 예제 코드입니다.
+  
+   
+  
+  테이블의 20개의 줄(Row)를 가지고 있다고 하면 위의 코드는 20번의 Ajax를 호출하게 됩니다.
+  
+  Ajax는 비동기 처리이므로 위의 20번 호출은 매우 빠른 속도로 (단순 루프 도는 속도) 서버측에 처리를 요청하게 됩니다.
+  
+   
+  
+   
+  
+  만약 처리 순서를 중요시하는 코드라면 (반드시 첫번째 단계가 끝난다음 두번째 단계가 처리되어야 한다면) 위의 코드는 반드시 문제가 생기게 됩니다. 20번의 Ajax 호출이 인터넷 망을 타고 서버로 전달되는데, 반드시 첫번째 호출한 것이 두번째 호출한 것보다 먼저 도착한다고 장담할 수 없습니다.
+  
+   
+  
+  또한 위의 코드처럼 서버측에 무작위로 데이터 처리를 요청하는 것은 경우에 따라 문제가 발생할 소지가 많습니다. 단시간내에 많은 양의 처리를 요구하면 서버측 부하도 많이 발생할 것입니다.
+  
+   
+  
+  또 다른 코드를 보겠습니다.
+  
+  ```javascript
+  function proc_test2() {
+   
+  
+       var grade = $this.find("input.grade").val();
+       var point = $this.find("input.point").val();
+       var param = "&grade=" + grade + "&point=" + point;
+  
+      
+  
+       $.ajax({
+            type: 'POST',
+            url: 'interface/grade_process.aspx',
+            data: "worktype=2&" + param,
+            success: function(data) {
+                 if(data != null) {
+  
+                      // Do Something;
+  
+                       ...
+  
+                 }
+            }
+       });
+  
+   
+  
+       location.href = 'http://www.daum.net';
+  
+  }
+  
+  ```
+  
+  사실 위와 같은 코드를 짜는 것은 조금 바보같지만, 단순히 예를 들기 위해 작성하였습니다. 위의 코드에서 빨간색으로 된 부분은 절대 실행되지 않을 것입니다. 비동기 방식이므로 ajax의 결과를 기다리지 않고, 바로 하단의 코드가 실행되어 현재의 페이지가 다음 메인 페이지로 이동해버리기 때문입니다.
+  
+   
+  
+  서버측 응답이 아무리 빠르더라도 클라이언트 코드 처리보다는 느리겠죠.
+  
+  (location.href = 'http://www.daum.net' 코드 바로 위에 시간이 오래걸리는 산술 연산 같은 것이 있지 않는한은요)
+  
+   
+  
+  \---------------------------------------------------------------------------------------------
+  
+  그러면 Ajax의 처리결과가 모두 완료된 후에 진행되도록 하면 될 것입니다. Ajax는 이름 그대로 비동기 처리 방식이지만 동기 방식도 지원합니다.
+  
+   
+  
+  간단히, async 속성 값을 false로 해주시면 됩니다.
+  
+  그러면 ajax는 더이상 ajax가 아닌 sjax(?)로 동작하게 됩니다.
+  
+  ```java
+  $.ajax({
+      type: 'POST',
+      url: 'interface/grade_process.aspx',
+      data: "worktype=1&" + param,
+  
+      async: false,
+      success: function(data) {
+          if(data != null) {
+              // Do somothing when data is not null
+          }
+      }
+  });
+  ```
+  
+  ajax니까 이름 그대로 비동기 처리만 되겠지 하지만, 동기 처리 방식도 제공하는 것은 분명 이유가 있습니다. (방법이 간단하지만 잘 모르시는 분들도 많았습니다.)
+  
+  아직 동기 처리 써보지 못하신 분들은 과연 Ajax를 동기 방식으로 쓰는 경우가 생길까 하시겠지만,
+  
+  막상 써야 되는 경우가 발생한다면 당황하지 마시고, 간단히 async : false 만 ajax 속성으로 설정해주세요~
+  
+  출처: https://ooz.co.kr/58 [이러쿵저러쿵]
