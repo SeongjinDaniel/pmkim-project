@@ -18,7 +18,7 @@ public class MapDAO {
     SqlSession sqlSession; // mybatis 실행 객체
 
 	public List<MemberVO> memberListAll() {
-		//logger.info("Mybatis memberListAll");
+		logger.info("Mybatis memberListAll");
 		List<MemberVO> list = null;
 		String statement = "resource.MapMapper.selectMemberList";
 		list = sqlSession.selectList(statement);

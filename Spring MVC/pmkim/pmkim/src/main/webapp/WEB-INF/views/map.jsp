@@ -203,14 +203,23 @@
 			</form>
 			<div id="map" style="width: 100%; height: 500px;"></div>
 			<script>
+<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 				//var goodId = ${mapAlgorithmDB.good_id}
 				//console.log(goodId);
 				//console.log(mapAlgorithmDBList.getGood_id);
+=======
+>>>>>>> ad18acfe5a34c1f54897aff034addaa20902e61b:Spring MVC/pmkim/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 				// 카카오 맵에서 넘어 오는 편의점명 -> CU, GS25, 세븐일레븐, 이마트24, 미니스톱
 				const EMART24 = "EM", CU = "CU", GS25 = "GS", SEVENELEVEN = "SE", MINISTOP = "MS";
 				var keyword = '<%=keyword%>';
 				var productName = '<%=keywordProduct%>';
+<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 				//console.log(productName);
+=======
+				// alert('<%=keywordProduct%>');
+				// console.log('<%=keywordProduct%>');
+
+>>>>>>> ad18acfe5a34c1f54897aff034addaa20902e61b:Spring MVC/pmkim/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
                 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -273,7 +282,11 @@
 					//----------------------------------------------------------
 				}else{
 					console.log(curPositionFlag);
+<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 					console.log("키워드: " + keyword);
+=======
+					console.log(keyword);
+>>>>>>> ad18acfe5a34c1f54897aff034addaa20902e61b:Spring MVC/pmkim/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 					// 키워드로 장소를 검색합니다
                     //ps.keywordSearch(keyword, placesSearchCB);
 					ps.keywordSearch(keyword, placesSearchCB, {
@@ -316,7 +329,10 @@
                         var bounds = new kakao.maps.LatLngBounds();
 
                         for (var i=0; i<data.length; i++) {
+<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 							// 추가!!
+=======
+>>>>>>> ad18acfe5a34c1f54897aff034addaa20902e61b:Spring MVC/pmkim/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 							// data[i].place_name 해당하지 않는 곳은 제외하기!
 							var str = data[i].place_name; 
 							var pass1 = str.search("이마트");
@@ -325,6 +341,7 @@
 							var nopass2 = str.search("emart24");
 							// 추후 gs칼텍스, gs건설 등 제외하기!!
 
+<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 							// 추가!!
  	 						var res = str.split(" ");
 							// ex) cu, gs25 등..
@@ -399,6 +416,16 @@
 								
 							// }
 							
+=======
+ 	 						var res = str.split(" ");
+							// ex) cu, gs25 등..
+							var shop_code = res[0]; 
+							// ex) 테헤란로점, 종로1가점 등..
+							var shop_name_detail = res[1];
+							// console.log(shop_code);
+							// console.log(shop_name_detail);
+
+>>>>>>> ad18acfe5a34c1f54897aff034addaa20902e61b:Spring MVC/pmkim/pmkim/src/main/webapp/WEB-INF/views/map.jsp
 							if(nopass1 >= 0 || nopass2 >= 0){
 								//console.log("+");
 							}else{

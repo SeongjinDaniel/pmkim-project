@@ -71,6 +71,7 @@
  		from member_customer
  		where id = #{id}
  	</select>
+<<<<<<< HEAD
  	
  	<select id="mapAlgorithmDBList" resultType="vo.GoodsEventShopMemberVO">
  		select distinct s.shop_code "shop_code", sc.shop_name "shop_name", s.shop_name_detail "shop_name_detail",
@@ -95,5 +96,8 @@
  		where shop_code = #{shop_code} and
  			  shop_name_detail = #{shop_name_detail}
  	</select>
+=======
+ 
+>>>>>>> ad18acfe5a34c1f54897aff034addaa20902e61b
 	
  </mapper>
