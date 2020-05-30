@@ -85,7 +85,7 @@ emart24_noun %>%
   count(emart24_noun,sort=T)->emart24.counting
 mini_noun %>% 
   count(mini_noun,sort=T)->mini.counting
-
+ 
 ##펭 한글자 나온거 펭수로 변경
 ###원하는 문자 들어가있는 행 찾아서 데이터 바꿔주기..어려웟음 데이터프레임에서
 cu.index<-which(cu.counting$cu_noun=="펭")
@@ -102,59 +102,105 @@ mini.counting$mini_noun[mini.index]<-"펭수"
 counting %>% 
   filter(!nchar(gs25_noun)==1)->gs25.cnt
 cu.counting %>% 
-  filter(cu_noun=="차"|cu_noun=="면"|cu_noun=="술"|cu_noun=="떡"|cu_noun=="콘"|cu_noun=="빵"|cu_noun=="쌀"|!nchar(cu_noun)==1)->cu
+  filter(cu_noun=="차"|cu_noun=="면"|cu_noun=="술"|cu_noun=="떡"|cu_noun=="콘"|cu_noun=="빵"|cu_noun=="쌀"|!nchar(cu_noun)==1)->insta.cu
 emart24.counting %>% 
-  filter(emart24_noun=="차"|emart24_noun=="면"|emart24_noun=="술"|emart24_noun=="떡"|emart24_noun=="콘"|emart24_noun=="빵"|emart24_noun=="쌀"|!nchar(emart24_noun)==1)->emart24
+  filter(emart24_noun=="차"|emart24_noun=="면"|emart24_noun=="술"|emart24_noun=="떡"|emart24_noun=="콘"|emart24_noun=="빵"|emart24_noun=="쌀"|!nchar(emart24_noun)==1)->insta.emart24
 mini.counting %>% 
-  filter(mini_noun=="차"|mini_noun=="면"|mini_noun=="술"|mini_noun=="떡"|mini_noun=="콘"|mini_noun=="빵"|mini_noun=="쌀"|!nchar(mini_noun)==1)->mini
+  filter(mini_noun=="차"|mini_noun=="면"|mini_noun=="술"|mini_noun=="떡"|mini_noun=="콘"|mini_noun=="빵"|mini_noun=="쌀"|!nchar(mini_noun)==1)->insta.mini
+컬럼명 바꿔주기
+names(insta.cu)<-c("word","freq")
+names(insta.emart24)<-c("word","freq")
+names(insta.mini)<-c("word","freq")
+
 
 #### 표 만들기
 theme_set(theme_bw(base_family = "AppleGothic"))
-ggplot(gs25.cnt %>% filter(n > 280), aes(reorder(gs25_noun, n), n)) + 
+ggplot(gs25.cnt %>% filter(freq > 280), aes(reorder(word, freq), freq)) + 
   geom_bar(stat="identity", width = 0.5, fill="tomato2") + 
   coord_flip() + 
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
-ggplot(cu %>% filter(n > 2000), aes(reorder(cu_noun, n), n)) + 
+ggplot(insta.cu %>% filter(freq > 2000), aes(reorder(word, freq), freq)) + 
   geom_bar(stat="identity", width = 0.5, fill="tomato2") + 
   coord_flip() + 
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
-ggplot(emart24 %>% filter(n > 500), aes(reorder(emart24_noun, n), n)) + 
+ggplot(insta.emart24 %>% filter(freq > 500), aes(reorder(word, freq), freq)) + 
   geom_bar(stat="identity", width = 0.5, fill="tomato2") + 
   coord_flip() + 
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
-ggplot(mini %>% filter(n > 800), aes(reorder(mini_noun, n), n)) + 
+ggplot(insta.mini %>% filter(freq > 800), aes(reorder(word, freq), freq)) + 
   geom_bar(stat="identity", width = 0.5, fill="tomato2") + 
   coord_flip() + 
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
 
-####워드클라우드
+####워드클라우드((이거 안씀))
 font_add_google("Noto Sans", "notosans")
 pal = redmonder.pal(6, "sPBIRdPu") #색 파레트 
 showtext_auto()
 gs25.cnt %>% 
   filter(n>150) %>% 
-  with(wordcloud(gs25_noun
-                 , n
+  with(wordcloud(word
+                 , freq
                  , family = "notosans"
                  ,colors = pal))
-cu %>% 
+insta.cu %>% 
   filter(n>1000) %>% 
-  with(wordcloud(cu_noun
-                 , n
+  with(wordcloud(word
+                 , freq
                  , family = "notosans"
                  ,colors = pal))
-emart24 %>% 
+insta.emart24 %>% 
   filter(n>200) %>% 
-  with(wordcloud(emart24_noun
-                 , n
+  with(wordcloud(word
+                 , freq
                  , family = "notosans"
                  ,colors = pal))
-mini %>% 
+insta.mini %>% 
   filter(n>300) %>% 
-  with(wordcloud(mini_noun
-                 , n
+  with(wordcloud(word
+                 , freq
                  , family = "notosans"
                  ,colors = pal))
+
+
+###워드클라우드 참고
+wordcloud(words$keyword, words$freq, 
+          min.freq = 2, 
+          random.order = F,
+          rot.per = 0.3, scale = c(3, 1), 
+          colors = rainbow(7)) 
+# min.freq = 최소값 이 이상 출력
+# rot.per = 세로로 출력되는 %
+# random.order = 색깔, 사이즈, 가장 큰수의 센터
+
+
+##figpath 위한 패키지 로딩  htmlwidgets, htmltools, jsonlite, yaml, base64enc
+library(htmlwidgets)
+library(htmltools)
+library(jsonlite)
+library(yaml)
+library(base64enc)
+wordcloud2(words,size=0.5,col="random-dark", figPath="book/peace.png")
+letterCloud(word, word = "CU", size = 2)
+
+head(insta.cu)
+insta.cu %>% 
+  filter(freq>158) %>% 
+  with(wordcloud2(.
+                 , size=0.5
+                 ,col = "random-dark"))->wc.cu
+saveWidget(wc.cu,"cu.html",selfcontained = F)
+insta.emart24 %>% 
+  filter(freq>92) %>% 
+  with(wordcloud2(.
+                  , size=0.5
+                  ,col = "random-dark"))->wc.emart24
+saveWidget(wc.emart24,"emart24.html",selfcontained = F)
+insta.mini %>% 
+  filter(freq>121) %>% 
+  with(wordcloud2(.
+                  , size=0.5
+                  ,col = "random-dark"))->wc.mini
+saveWidget(wc.mini,"ministop.html",selfcontained = F)
 
 
 ###감성분석###
@@ -176,29 +222,69 @@ senti_dic_kr <- SentimentDictionary(senti_words_kr2$term[senti_words_kr2$score >
 #head(senti_dic_kr) summary(senti_dic_kr) 확인
 
 #data.frame to corpus
-corp <- VCorpus(VectorSource(gs25$article)) #inspect(corp)
-res_sentiment <- analyzeSentiment(corp, #대신에 corpus,
+##cu
+corp.cu <- VCorpus(VectorSource(insta_cu$article[1:5000])) #inspect(corp)
+res_sentiment.cu <- analyzeSentiment(corp.cu, #대신에 corpus,
                                   language="korean",
                                   rules=list("KoreanSentiment"=list(ruleSentiment, senti_dic_kr)),
                                   removeStopwords = F, stemming = F)
 
-df2 <- data.frame(round(res_sentiment, 3), gs25) #head(df2)
+cu.df_1 <- data.frame(round(res_sentiment.cu, 3), insta_cu[1:5000,]) #head(df2)
+
+##emart24
+corp.emart24 <- VCorpus(VectorSource(insta_emart24$article[1:5000])) #inspect(corp)
+res_sentiment.emart24 <- analyzeSentiment(corp.emart24, #대신에 corpus,
+                                  language="korean",
+                                  rules=list("KoreanSentiment"=list(ruleSentiment, senti_dic_kr)),
+                                  removeStopwords = F, stemming = F)
+
+emart24.df_1 <- data.frame(round(res_sentiment.emart24, 3), insta_emart24[1:5000,]) #head(df2)
+
+
+##ministop
+corp.mini <- VCorpus(VectorSource(insta_mini$article[1:5000])) #inspect(corp)
+res_sentiment.mini <- analyzeSentiment(corp.mini, #대신에 corpus,
+                                  language="korean",
+                                  rules=list("KoreanSentiment"=list(ruleSentiment, senti_dic_kr)),
+                                  removeStopwords = F, stemming = F)
+
+mini.df_1 <- data.frame(round(res_sentiment.mini, 3), insta_mini[1:5000,]) #head(df2)
+
+##theme setting
 theme_set(theme_minimal(base_family = "AppleGothic"))
-## 긍정인지 부정인지 알려줌
-df3 <- df2 %>% 
+### 긍정인지 부정인지 알려줌
+##cu
+cu.df_2 <- cu.df_1 %>% 
   mutate(pos_neg = if_else(KoreanSentiment >= 0, "Positive", "Negative")) %>%
-  select(pos_neg, everything()) # head(df3)
-## 데이터 테이블로 변환
-DT::datatable(head(df3 %>% select(article, KoreanSentiment, pos_neg), n = 200), 
-              class = 'cell-border stripe', 
-              options = list(pageLength = 5, autoWidth = TRUE, scrollX = TRUE))
-
-df3 %>% filter(!is.na(df3$pos_neg))->df3
-
-##막대 그래프로 표현
-ggplot(df3, aes(x = factor(pos_neg))) + 
+  select(pos_neg, everything()) # head(cu.df)
+cu.df_2 %>% filter(is.na(cu.df_2$pos_neg))->cu.df_3
+##emart24
+emart24.df_2 <- emart24.df_1 %>% 
+  mutate(pos_neg = if_else(KoreanSentiment >= 0, "Positive", "Negative")) %>%
+  select(pos_neg, everything()) # head(emart24.df)
+emart24.df_2 %>% filter(!is.na(emart24.df_2$pos_neg))->emart24.df_3
+##ministop
+mini.df_2 <- mini.df_1 %>% 
+  mutate(pos_neg = if_else(KoreanSentiment >= 0, "Positive", "Negative")) %>%
+  select(pos_neg, everything()) # head(mini.df)
+mini.df_2 %>% filter(!is.na(mini.df_2$pos_neg))->mini.df_3
+###막대 그래프로 표현
+##cu
+ggplot(cu.df_3, aes(x = factor(pos_neg))) + 
   geom_bar(stat = "count", width = 0.7, fill = "steelblue") + 
   theme_minimal()
+##emart24
+ggplot(emart24.df_3, aes(x = factor(pos_neg))) + 
+  geom_bar(stat = "count", width = 0.7, fill = "steelblue") + 
+  theme_minimal()
+##ministop
+ggplot(mini.df_3, aes(x = factor(pos_neg))) + 
+  geom_bar(stat = "count", width = 0.7, fill = "steelblue") + 
+  theme_minimal()
+##XXXX 데이터 테이블로 변환(여기선 필요 없을듯)
+DT::datatable(head(cu.df %>% select(article, KoreanSentiment, pos_neg), n = 200), 
+              class = 'cell-border stripe', 
+              options = list(pageLength = 5, autoWidth = TRUE, scrollX = TRUE))
 
 
 ##################################################################################################
