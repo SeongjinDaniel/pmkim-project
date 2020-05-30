@@ -42,10 +42,10 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
 <body>
 <% 
-		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
+		   
 		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
-		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
-		   List<GoodsCategoryEventShopMemberVO> gesList2 = (ArrayList<GoodsCategoryEventShopMemberVO>) request.getAttribute("gesList2");
+		   List<GoodsCategoryEventShopMemberVO> gesList = (ArrayList<GoodsCategoryEventShopMemberVO>) request.getAttribute("gesList");
+		   
 %>
     <!-- Start Main Top -->
     <header class="main-header">
@@ -123,22 +123,31 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                     <div class="special-menu text-center">
                         <form method="GET" action="/pmkim/event">
                         	<div class="button-group filter-button-group">
-                        		<input type="hidden" name= "action" value="sort">
-                        		
-
-								<div class="toolbar-sorter-right">    	
-									<span>행사 종류 </span>
-										<select name="event_name" class="event-button" >
-											<option value="1+1">1+1</option>
-											<option value="2+1">2+1</option>
-											<option value="PB">PB</option>
+                        		<input type="hidden" name= "action" value="sort"><br>
+								<div class="button-group filter-button-group">    	
+									<span>편의점  </span>
+										<select name="shop_code" class ="event-button">
+											<option value="GS">GS25</option>
+											<option value="CU">CU</option>
+											<option value="MS">미니스톱</option>
+											<option value="SE">세븐일레븐</option>
+											<option value="EM">emart24</option>
 										</select>
 								</div>
 								
-								<div class="toolbar-sorter-right">
+								
+								<div class="button-group filter-button-group">
+								<span>행사 종류 </span>
+									<select name="event_name" class ="event-button">
+										<option value="1+1">1+1</option>
+										<option value="2+1">2+1</option>
+										<option value="PB">PB</option>
+									</select>
+		                        </div>
+
+								<div class="button-group filter-button-group">
 									<span>카테고리</span>
 									<select name="ctg_1" class ="event-button">
-										<option >전체보기</option>
 										<option value="식품">식품</option>
 										<option value="패션의류">패션의류</option>
 										<option value="패션잡화">패션잡화</option>
@@ -152,29 +161,23 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 										<option value="생활/건강">생활/건강</option>
 										<option value="기타">기타</option>
 									</select>
-									<!-- <button type="submit"><i class="fa fa-search"></i></button> -->
-								</div><br><br>
+								</div> 
 								
-								<div class="toolbar-sorter-right">
-									<span>편의점</span>
-	                           		<!--<a href="/pmkim/event"><option class="active">전체보기</button></a>-->
-										<button  name="shop_code" value ="GS" type="submit">GS</button>
-										<button  name="shop_code" value = "CU" type="submit">CU</button>
-										<button  name="shop_code" value = "MS"  type="submit">ministop </button>
-										<button  name="shop_code" value = "SE"  type="submit">7eleven </button>
-										<button  name="shop_code" value = "EM"  type="submit">emart24 </button>
-								</div><br><br>
+		                        <button type="submit">
+										<i class="fa fa-search"></i>
+								</button>
+
+		                        <br><br><a>선택범위-  편의점: ${param.shop_code }, 행사종류:${param.event_name}, 카테고리:${param.ctg_1 }</a>
                          	</div>
 						</form>	
 					</div>   
                 </div>
             </div>
-            
-            
-            <div class="row special-list">
+
+           <div class="row special-list">
 			<c:forEach var="vo" items="${gesList}">
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
-                    <div class="products-single2 fix">
+                    <div class="products-single fix">
                         <div class="box-img-hover2">
                             <div class="type-lb">
                                 <p class="sale">${vo.shop_name} ${vo.event_name}</p> <!-- FROM EVENT --> 

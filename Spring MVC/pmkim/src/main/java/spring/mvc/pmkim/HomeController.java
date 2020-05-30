@@ -43,7 +43,7 @@ public class HomeController {
 		if (action != null && good_name != null) {
 			onelist = edao.homeEventOne(event_name,shop_code);	
 			twolist = edao.homeEventTwo(event_name,shop_code);	
-			pblist = edao.homeEventTwo(event_name,shop_code);	
+			pblist = edao.homeEventPB(event_name,shop_code);	
 		}
 
 		mav.addObject("onelist", onelist);
