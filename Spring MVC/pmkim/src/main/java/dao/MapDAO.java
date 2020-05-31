@@ -40,8 +40,17 @@ public class MapDAO {
 		//logger.info("Mybatis shopCodeName");
 		String statement = "resource.MapMapper.selShopCodeNameDetail";
 		vo = sqlSession.selectOne(statement, vo);
-//		logger.info("Mybatis shopCode : ", vo.getShop_code());
-//		logger.info("Mybatis getShop_name_detail : ", vo.getShop_name_detail());
+		return vo;
+	}
+	
+	public GoodsEventShopMemberVO eventName(GoodsEventShopMemberVO vo) {
+		//logger.info("Mybatis eventName");
+		String statement = "resource.MapMapper.selEventName";
+		try{
+			vo = sqlSession.selectOne(statement, vo);
+		}catch(Exception e) {
+			logger.info("eventName exception : " + e);
+		}
 		return vo;
 	}
 	
@@ -52,33 +61,6 @@ public class MapDAO {
 		list = sqlSession.selectList(statement);
 		return list;
 	}
-    
-//    // 01_01. 회원 로그인체크
-//    public boolean loginCheck(WeetCustomerInfoVO vo) {
-//    	System.out.println("Mybatis loginCheck");
-//        String name = sqlSession.selectOne("resource.WeetMapper.loginCheck", vo);
-//        return (name == null) ? false : true;
-//    }
-//    
-//    // 01_02. 회원 로그인 정보
-//    public WeetCustomerInfoVO viewCustomer(WeetCustomerInfoVO vo) {
-//    	System.out.println("Mybatis viewCustomer");
-//        return sqlSession.selectOne("resource.WeetMapper.viewCustomer", vo);
-//    }
-//    
-//    // 02. 회원 로그아웃
-//    public void logout(HttpSession session) {
-//    }
-//    
-//    // 회원가입
-//    public boolean signup(WeetCustomerInfoVO vo) {
-//    	System.out.println("Mybatis signup");
-//    	boolean result = false;
-//    	String statement = "resource.WeetMapper.insertCustomerId";
-//    	if(sqlSession.insert(statement, vo) == 1)
-//    		result = true;
-//
-//    	return result;
-//    }
+	
 }
 
