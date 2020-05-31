@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,vo.GoodsCategoryEventShopMemberVO,java.util.List,java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -39,6 +40,8 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
     <![endif]-->
 
 </head>
+
+
 
 <body>
 <% 
@@ -100,6 +103,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
     <!-- Start Gallery  -->
     <div class="products-box2">
+    
         <div class="container">
             <div class=""row>
                 <div class="col-lg-12"><br><br><br>
@@ -117,65 +121,70 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 					<button type="submit"><i class="fa fa-search"></i></button>
 				</form>
 			</div>
-            
+			
+          
             <div class="row">
+            	
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
-                        <form method="GET" action="/pmkim/event">
+                    	<form method="GET" action="/pmkim/event">
                         	<div class="button-group filter-button-group">
                         		<input type="hidden" name= "action" value="sort"><br>
 								<div class="button-group filter-button-group">    	
-									<span>편의점  </span>
-										<select name="shop_code" class ="event-button">
-											<option value="GS">GS25</option>
-											<option value="CU">CU</option>
-											<option value="MS">미니스톱</option>
-											<option value="SE">세븐일레븐</option>
-											<option value="EM">emart24</option>
+									<label for ="shop_code">편의점</label><br>
+										<select id= "shop_code" name="shop_code" class ="event-button" onchange="myFunction1()">
+											<option value='CU' selected>-- 선택 --</option>
+											<option label="CU" value="CU">CU</option>
+											<option label="GS" value="GS">GS25</option>
+											<option label="MS" value="MS">미니스톱</option>
+											<option label="SE" value="SE">세븐일레븐</option>
+											<option label="EM" value="EM">emart24</option>
 										</select>
 								</div>
 								
 								
 								<div class="button-group filter-button-group">
-								<span>행사 종류 </span>
-									<select name="event_name" class ="event-button">
-										<option value="1+1">1+1</option>
-										<option value="2+1">2+1</option>
-										<option value="PB">PB</option>
-									</select>
+									<label for ="event_name">행사종류</label><br>
+										<select id="event_name" name="event_name" class ="event-button" onchange="myFunction2()">
+											<option value='1+1' selected>-- 선택 --</option>
+											<option value="1+1">1+1</option>
+											<option value="2+1">2+1</option>
+											<option value="PB">PB</option>
+										</select>
 		                        </div>
 
 								<div class="button-group filter-button-group">
-									<span>카테고리</span>
-									<select name="ctg_1" class ="event-button">
-										<option value="식품">식품</option>
-										<option value="패션의류">패션의류</option>
-										<option value="패션잡화">패션잡화</option>
-										<option value="화장품/미용">화장품/미용</option>
-										<option value="가구/인테리어">가구/인테리어</option>
-										<option value="스포츠/레저">스포츠/레저</option>
-										<option value="출산/육아">출산/육아</option>
-										<option value="여가/생활편의">여가/생활편의</option>
-										<option value="디지털/가전">디지털/가전</option>
-										<option value="면세점">면세점</option>
-										<option value="생활/건강">생활/건강</option>
-										<option value="기타">기타</option>
-									</select>
+									<label for ="ctg_1">카테고리</label><br>
+										<select id="ctg_1" name="ctg_1" class ="event-button" onchange="myFunction3()">
+											<option value='식품' selected>-- 선택 --</option>
+											<option value="식품">식품</option>
+											<option value="패션의류">패션의류</option>
+											<option value="패션잡화">패션잡화</option>
+											<option value="화장품/미용">화장품/미용</option>
+											<option value="가구/인테리어">가구/인테리어</option>
+											<option value="스포츠/레저">스포츠/레저</option>
+											<option value="출산/육아">출산/육아</option>
+											<option value="여가/생활편의">여가/생활편의</option>
+											<option value="디지털/가전">디지털/가전</option>
+											<option value="면세점">면세점</option>
+											<option value="생활/건강">생활/건강</option>
+											<option value="기타">기타</option>
+										</select>
 								</div> 
 								
 		                        <button type="submit">
 										<i class="fa fa-search"></i>
 								</button>
 
-		                        <br><br><a>선택범위-  편의점: ${param.shop_code }, 행사종류:${param.event_name}, 카테고리:${param.ctg_1 }</a>
+		                        <br><br><a id="demo1"></a> <a id="demo2"></a> <a id="demo3"></a>
                          	</div>
-						</form>	
+                         </form>
 					</div>   
                 </div>
             </div>
-
+			
            <div class="row special-list">
-			<c:forEach var="vo" items="${gesList}">
+			 <c:forEach var="vo" items="${gesList}">
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
                     <div class="products-single fix">
                         <div class="box-img-hover2">
@@ -191,28 +200,37 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                         </div>
                     </div>
                 </div>
-				</c:forEach>
+			  </c:forEach>
         	</div>
-
+        	
+			
         	<div id="paging" style="text-align : center; font-size : 16pt;" >
-					<c:if test="${ pgNum != 1 }">
-						<a href ="/pmkim/event?pgNum=1"> &laquo; </a>
-						<a href = "/pmkim/event?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
+        			<input type="hidden" name= "action" value="sort">
+					<c:if test="${ preData }">
+						<%-- <a href ="/pmkim/event?pgNum=1${ oldQ }&action=sort&shop_code=${shop_code}&event_name=${event_name}"> &laquo; </a> --%>
+						 <a href ="/pmkim/event?pgNum=1${ oldQ }"> &laquo; </a>  
+						<%-- <a href = "/pmkim/event?pgNum=${ pgNum - 1 }${ oldQ }&action=sort&shop_code=${shop_code}&event_name=${event_name}"> &nbsp; &lt; &nbsp;</a>--%>
+						<a href = "/pmkim/event?pgNum=${ pgNum - 1 }${ oldQ }"> &nbsp; &lt; &nbsp;</a> --%>
 					</c:if>
 								
 					<c:forEach var="num" begin="${ pageStart }" end="${ pageEnd }">
-						<a href = "/pmkim/event?pgNum=${ num }">${ num } &nbsp;</a>
+						<%-- <a href = "/pmkim/event?pgNum=${ num }${ oldQ }&action=sort&shop_code=${shop_code}&event_name=${event_name}">${ num } &nbsp;</a>  --%>
+						<a href = "/pmkim/event?pgNum=${ num }${ oldQ }">${ num } &nbsp;</a>
 					</c:forEach>
 								
 					<c:if test="${ nextData }">
-						<a href = "/pmkim/event?pgNum=${ pgNum + 1 }"> &gt; &nbsp;</a>
+						<%-- <a href = "/pmkim/event?&pgNum=${ pgNum + 1 }${ oldQ }&action=sort&shop_code=${shop_code}&event_name=${event_name}"> &gt; &nbsp;</a>--%>
+						<a href = "/pmkim/event?&pgNum=${ pgNum + 1 }${ oldQ }"> &gt; &nbsp;</a> 
 					</c:if>
 								
 					<c:if test = "${ pgNum != end }">
-						<a href ="/pmkim/event?pgNum=${ end }"> &raquo; </a>
+						<%-- <a href ="/pmkim/event?pgNum=${ end }${ oldQ }&action=sort&shop_code=${shop_code}&event_name=${event_name}"> &raquo; </a>--%>
+						<a href ="/pmkim/event?pgNum=${ end }${ oldQ }"> &raquo; </a> 
 					</c:if>
 			</div>
+			
 		</div>
+		
     </div>
     <!-- End Gallery  -->
 
@@ -324,24 +342,72 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
-    <script src="resources/js/jquery-3.2.1.min.js"></script>
-    <script src="resources/js/popper.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
+    <script type="Text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="/pmkim/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="/pmkim/resources/js/popper.min.js"></script>
+    <script src="/pmkim/resources/js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
-    <script src="resources/js/jquery.superslides.min.js"></script>
-    <script src="resources/js/bootstrap-select.js"></script>
-    <script src="resources/js/inewsticker.js"></script>
-    <script src="resources/js/bootsnav.js"></script>
-    <script src="resources/js/images-loded.min.js"></script>
-    <script src="resources/js/isotope.min.js"></script>
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/baguetteBox.min.js"></script>
-    <script src="resources/js/form-validator.min.js"></script>
-    <script src="resources/js/contact-form-script.js"></script>
-    <script src="resources/js/custom.js"></script>
+    <script src="/pmkim/resources/js/jquery.superslides.min.js"></script>
+    <script src="/pmkim/resources/js/bootstrap-select.js"></script>
+    <script src="/pmkim/resources/js/inewsticker.js"></script>
+    <script src="/pmkim/resources/js/bootsnav.js"></script>
+    <script src="/pmkim/resources/js/images-loded.min.js"></script>
+    <script src="/pmkim/resources/js/isotope.min.js"></script>
+    <script src="/pmkim/resources/js/owl.carousel.min.js"></script>
+    <script src="/pmkim/resources/js/baguetteBox.min.js"></script>
+    <script src="/pmkim/resources/js/form-validator.min.js"></script>
+    <script src="/pmkim/resources/js/contact-form-script.js"></script>
+    <script src="/pmkim/resources/js/custom.js"></script>
+    
+    <script type="text/javascript">
+	    function myFunction1() {
+	    	  var x = document.getElementById("shop_code");
+	    	  var y = x.options[x.selectedIndex].value;
+	    	  var z = x.options[x.selectedIndex].text;
+	    }	  
+	    	  function myFunction2() {
+		    	  var x = document.getElementById("event_name");
+		    	  var y = x.options[x.selectedIndex].value;
+		    	  var z = x.options[x.selectedIndex].text;
+	    	  }	  
+	    	  function myFunction3() {
+		    	  var x = document.getElementById("ctg_1");
+		    	  var y = x.options[x.selectedIndex].value;
+		    	  var z = x.options[x.selectedIndex].text;
+	    	  }
+    </script>
+    <!-- <script>
+		function stay1(){
+			var itemidSelect=document.getElementById("shop");
+			
+			var itemID= itemidSelect.options[itemidSelect.selectedIndex].value;
+			console.log('itemID: '+itemID);
+			var itemName= itemidSelect.options[itemidSelect.selectedIndex].text;
+			console.log('itemName: '+itemName);
+		}
+		
+		function stay2(){
+			var itemidSelect=document.getElementById("event");
+			
+			var itemID= itemidSelect.options[itemidSelect.selectedIndex].value;
+			console.log('itemID: '+itemID);
+			var itemName= itemidSelect.options[itemidSelect.selectedIndex].text;
+			console.log('itemName: '+itemName);
+		}
+		
+		function stay3(){
+			var itemidSelect=document.getElementById("category");
+			
+			var itemID= itemidSelect.options[itemidSelect.selectedIndex].value;
+			console.log('itemID: '+itemID);
+			var itemName= itemidSelect.options[itemidSelect.selectedIndex].text;
+			console.log('itemName: '+itemName);
+		}
+	</script> -->
+    
 </body>
 
-</html>ipt>
+</html>
 </body>
 
 </html>>

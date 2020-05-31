@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.CartDAO;
 import dao.EventDAO;
 import service.PagingService2;
 import vo.GoodsCategoryEventShopMemberVO;
@@ -20,11 +19,10 @@ import vo.GoodsEventShopMemberVO;
 @Controller
 public class EventController {
 
-	@Autowired
-	CartDAO cdao;
 	
 	@Autowired
 	EventDAO edao;
+	GoodsCategoryEventShopMemberVO gcesmvo;
 	
 	@Autowired
 	PagingService2 ps2;
@@ -41,56 +39,17 @@ public class EventController {
 			shop_code = "CU";
 			event_name = "2+1";
 			ctg_1 = "식품";
-		}else if(shop_code=="GS") {
-			shop_code = "GS";
-			if(event_name=="1+1") {
-				event_name = "1+1";
-			}else if(event_name=="2+1"){
-				event_name = "2+1";
-			}else if(event_name=="PB"){
-				event_name = "PB";
-			}
-		}else if(shop_code=="CU") {
-			shop_code = "CU";
-			if(event_name=="1+1") {
-				event_name = "1+1";
-			}else if(event_name=="2+1"){
-				event_name = "2+1";
-			}else if(event_name=="PB"){
-				event_name = "PB";
-			}
-		}else if(shop_code=="MS") {
-			shop_code = "MS";
-			if(event_name=="1+1") {
-				event_name = "1+1";
-			}else if(event_name=="2+1"){
-				event_name = "2+1";
-			}else if(event_name=="PB"){
-				event_name = "PB";
-			}
-		}else if(shop_code=="SE") {
-			shop_code = "SE";
-			if(event_name=="1+1") {
-				event_name = "1+1";
-			}else if(event_name=="2+1"){
-				event_name = "2+1";
-			}else if(event_name=="PB"){
-				event_name = "PB";
-			}
-		}else if(shop_code=="EM") {
-			shop_code = "EM";
-			if(event_name=="1+1") {
-				event_name = "1+1";
-			}else if(event_name=="2+1"){
-				event_name = "2+1";
-			}else if(event_name=="PB"){
-				event_name = "PB";
-			}
+
+			if(shop_code=="GS"){shop_code="GS";if(event_name=="1+1"){event_name="1+1";}else if(event_name=="2+1"){event_name="2+1";}else if(event_name=="PB"){event_name="PB";}}
+			else if(shop_code=="CU"){shop_code="CU";if(event_name=="1+1"){event_name="1+1";}else if(event_name=="2+1"){event_name="2+1";}else if(event_name=="PB"){event_name="PB";}}
+			else if(shop_code=="MS"){shop_code="MS";if(event_name=="1+1"){event_name="1+1";}else if(event_name=="2+1"){event_name="2+1";}else if(event_name=="PB"){event_name="PB";}}
+			else if(shop_code=="SE"){shop_code="SE";if(event_name=="1+1"){event_name="1+1";}else if(event_name=="2+1"){event_name="2+1";}else if(event_name=="PB"){event_name="PB";}}
+			else if(shop_code=="EM"){shop_code="EM";if(event_name=="1+1"){event_name="1+1";}else if(event_name=="2+1"){event_name="2+1";}else if(event_name=="PB"){event_name="PB";}}
+			
 		}
 		
 		//List <GoodsEventShopMemberVO> eventAllView = eventDAO.eventAllView();
 		List<GoodsCategoryEventShopMemberVO> geslist = edao.goodsShopEvent(event_name,shop_code,startNum,endNum);
-		
 		
 		if (action != null && good_name != null) {
 			//geslist = edao.goodsAll();
@@ -102,8 +61,11 @@ public class EventController {
 				geslist = edao.goodsShopEventCategory(event_name,shop_code,ctg_1,startNum,endNum);
 			}
 		}
-
+		
+		
 		mav.addObject("pgNum",pgNum);
+		//mav.addObject("shop_code");
+		//mav.addObject("event_name");
 		mav.addObject("end",ps2.getPageCount(event_name, shop_code));
 		mav.addObject("pageStart",ps2.getPageStart(pgNum));
 		mav.addObject("pageEnd",ps2.getPageEnd(pgNum,event_name,shop_code));

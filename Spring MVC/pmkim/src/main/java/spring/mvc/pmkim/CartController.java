@@ -1,22 +1,25 @@
 package spring.mvc.pmkim;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.CartDAO;
+import service.ManHappy;
 import service.PagingService;
-import vo.CartVO;
-import vo.EventVO;
 import vo.GoodsEventShopMemberVO;
-import vo.GoodsShopVO;
-import vo.GoodsVO;
-import vo.MemberVO;
+import vo.GoodsInformVO;
 
 @Controller
 public class CartController {
@@ -26,6 +29,9 @@ public class CartController {
 	
 	@Autowired
 	PagingService ps;
+	
+	@Autowired
+	ManHappy mh;
 	
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	// delete search listone
@@ -50,11 +56,7 @@ public class CartController {
 		} else if (action != null && keyword ==null){
 			if (action.equals("sort")) {
 				geslist = cdao.goodsShopEvent(event_name,shop_code,startNum,endNum);
-			} else if (action.equals("delete")) {
-				cdao.cartDelete(gesmvo.getId());
-				if(cdao.cartDelete(gesmvo.getId()))
-					System.out.println("cart 삭제 성공");
-			}else if (action.equals("cartOne")) {
+			} else if (action.equals("cartOne")) {
 				clist = cdao.cartView(gesmvo.getId());
 			}
 		}
@@ -75,24 +77,36 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "/cart", method = RequestMethod.POST)
+	@ResponseBody
 	// insert update
-	public ModelAndView cartPost(String action, CartVO cvo, GoodsShopVO gsvo, EventVO evo, GoodsVO gvo, MemberVO mvo) {
-		ModelAndView mav = new ModelAndView();
+	public void cartPost(Model model,String action, GoodsEventShopMemberVO vo, HttpServletResponse response) throws ServletException, IOException{		
+		List<GoodsEventShopMemberVO> newVO = cdao.getNameImg(vo.getGood_id());
 
-		List<GoodsEventShopMemberVO> clist = null;
-		List<GoodsEventShopMemberVO> geslist = cdao.goodsAll();
-		boolean flag = false;
 		if (action.equals("insert")) {
-			flag = cdao.cartInsert(cvo);
-			if (flag)
-				clist = cdao.cartView(mvo.getId());
+			mh.insertCart(vo,response);
+			
+			model.addAttribute("newVO",newVO);
+			//model.addAttribute("good_id",vo.getGood_id());
+			
+			System.out.println("name"+newVO.get(0).getGood_name()+"\t img"+newVO.get(0).getGood_img() +"\t id"+vo.getGood_id());
+		}else if (action.equals("delete")) {
+			mh.deleteCart(response);
 		}
 
-		//mav.addObject("gvo", gvo);
-		mav.addObject("cartList", clist);
-		mav.addObject("gesList", geslist);
-		mav.setViewName("mycart");
-		return mav;
 	}
-
+	
+	//만원의 행복
+	@RequestMapping(value="/happy", method = RequestMethod.GET)
+	@ResponseBody
+	public void happyGet(String maxM, String minM, GoodsInformVO givo, HttpServletResponse response) throws ServletException, IOException{
+		List<GoodsInformVO> gilist= null;
+		int max = Integer.parseInt(maxM.replace(",", ""));
+		int min = Integer.parseInt(minM.replace(",",""));
+		gilist = cdao.recomGoodsList(givo.getCtg_3(), min, max);
+		int num = cdao.countCtg3(givo.getCtg_3());
+		int rand = (int)Math.random() * num+1;
+		System.out.println("랜덤 num : "+rand);
+		gilist.get(rand);
+	}
+	
 }
