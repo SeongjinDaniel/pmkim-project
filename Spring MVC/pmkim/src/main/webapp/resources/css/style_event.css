@@ -510,7 +510,7 @@ body {
  nav.navbar.bootsnav ul.nav > li > a{
      position: relative;
      font-weight: 700;
-     font-size: 16px;
+     font-size: 25px;
      color: #000000;
 	 text-transform: uppercase;
      padding-top: 10px;
@@ -585,6 +585,7 @@ body {
      nav.navbar.navbar-inverse .dropdown-tabs .tab-menu > ul{
          border-top: solid 1px #303030;
     }
+    
      nav.navbar.navbar-inverse.navbar-mobile .navbar-collapse{
          background-color: #222;
     }
@@ -898,8 +899,8 @@ body {
      padding: 70px 0px;
 }
 .products-box2{
-    margin-left:2%;
-    margin-right:2%;
+    margin-left:15%;
+    margin-right:15%;
 }
  .special-menu{
      margin-bottom: 40px;
@@ -947,6 +948,7 @@ body {
 }
  .type-lb{
      position: absolute;
+     margin-bottom:100px;
      top: 0px;
      right: 0px;
      z-index:8;
@@ -955,6 +957,7 @@ body {
      color:  #0F694D;
      padding: 2px 10px;
      font-weight: 700;
+     font-size:19px;
      text-transform: uppercase;
 }
  .type-lb .new{
@@ -968,6 +971,16 @@ body {
      background: #f5f5f5;
      padding: 15px;
 }
+.why-text2{
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 15px;
+}
+.why-text h3{
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 15px;
+}
  .why-text h4{
      font-size: 16px;
      font-weight: 700;
@@ -978,7 +991,8 @@ body {
      font-family: 'Poppins', sans-serif;
      padding: 4px;
 	 display: inline-block;
-	 color: #0F694D;
+	 background-color:none;
+     color: #0F694D;
      font-weight: 600;
 }
  .mask-icon{

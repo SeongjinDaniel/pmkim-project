@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/style.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
     <link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
@@ -57,28 +58,18 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="/pmkim/main"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="/pmkim/main">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/pmkim/map">지도</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a>
-                            <ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
-								<li><a href="shop-detail.html">Shop Detail</a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/pmkim/event">행사</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">장바구니</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/main">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/map">지도</a></li> <!--성진오빠파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/theme">테마</a></li> <!-- 세호-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/cart">만원의 행복</a></li> <!-- 규영언니파트♡ -->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -192,181 +183,10 @@
 		</div>
 	</div>
 
-    <!-- Start Products  -->
-    <div class="products-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1 href="/pmkim/event">행사상품</h1>
-                        <p>Get your best Product</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="special-menu text-center">
-                        <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">전체보기</button>
-                            <button data-filter=".top-featured">1+1</button>
-                            <button data-filter=".twoOne">2+1</button>
-                        	<button data-filter=".pb">PB</button>
-                        </div>
-                        
-                        <!-- <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">All</button>
-                            <button name="shop_code" value="GS" data-filter=".gs">GS25</button>
-                            <button name="shop_code" value="CU" data-filter=".cu">CU</button>
-							<button name="shop_code" value="MS" data-filter=".ms">미니스탑</button>
-							<button name="shop_code" value="SE" data-filter=".se">세븐일레븐</button>
-                            <button name="shop_code" value="EM" data-filter=".em">emart24</button>
-                        </div> -->
-                        
-                    </div>
-                </div>
-            </div>
-			
-			
-			
-            <div class="row special-list">
-            
-            
-            
-             <c:forEach var="vo2" items="${twolist}" begin="0" end="10">
-                <div class="col-lg-3 col-md-6 special-grid twoOne">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">${vo2.shop_name} ${vo2.event_name }</p>
-                            </div>
-                            <img src="${vo2.good_img}" class="img-fluid" alt="Image">
-                        </div>
-                        <div class="why-text">
-                            <h3>${vo2.good_name}</h3> <!-- FROM GOODS -->
-                            <h4>${vo2.mfg_name}</h4>
-                            <h5>${vo2.good_price}원</h5> <!-- FROM GOODS -->
-                        </div>
-                    </div>
-                </div>
-             </c:forEach>
-                
-             <c:forEach var="vo" items="${onelist}" begin="0" end="10">
-                <div class="col-lg-3 col-md-6 special-grid top-featured">
-                    <div class="products-single fix">
-                   
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">${vo.shop_name} ${vo.event_name }</p>
-                            </div>
-                            <img src="${vo.good_img}" class="img-fluid" alt="Image">
-                        </div>
-                        <div class="why-text">
-                            <h3>${vo.good_name}</h3> <!-- FROM GOODS -->
-                            <h4>${vo.mfg_name}</h4>
-                            <h5>${vo.good_price}원</h5> <!-- FROM GOODS -->
-                        </div>
-                        
-                    </div> 
-                </div>
-               </c:forEach>
-               
-               <c:forEach var="vo3" items="${pblist}" begin="0" end="10">
-                <div class="col-lg-3 col-md-6 special-grid pb">
-                    <div class="products-single fix">
-                   
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">${vo3.shop_name} ${vo3.event_name }</p>
-                            </div>
-                            <img src="${vo3.good_img}" class="img-fluid" alt="Image">
-                        </div>
-                        <div class="why-text">
-                            <h3>${vo3.good_name}</h3> <!-- FROM GOODS -->
-                            <h4>${vo3.mfg_name}</h4>
-                            <h5>${vo3.good_price}원</h5> <!-- FROM GOODS -->
-                        </div>
-                        
-                    </div> 
-                </div>
-               </c:forEach>
-            </div>
-        </div> 
-    </div>
-    <!-- End Products  -->
-
-    <!-- Start Blog  -->
-    <div class="latest-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>latest blog</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="/pmkim/resources/images/blog-img.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="images/blog-img-01.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="images/blog-img-02.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Blog  -->
 
 
-    <!-- Start Instagram Feed  -->
+
+<!-- Start Instagram Feed  -->
     <div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
@@ -443,7 +263,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="/pmkim/resources/images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -453,6 +273,174 @@
     </div>
     <!-- End Instagram Feed  -->
 
+    <!-- Start Products  -->
+    <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1 href="/pmkim/event">행사상품</h1>
+                        <p>Get your best Product</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="special-menu text-center">
+                    	<!-- <div class="button-group filter-button-group">
+                            <button class="active">All</button>
+                            <button name="shop_code" value="GS" >GS25</button>
+                            <button name="shop_code" value="CU" >CU</button>
+							<button name="shop_code" value="MS" >미니스탑</button>
+							<button name="shop_code" value="SE" >세븐일레븐</button>
+                            <button name="shop_code" value="EM" >emart24</button>
+                        </div> -->
+                        
+                        <div class="button-group filter-button-group">
+                            <button class="active" data-filter="*">전체보기</button>
+                            <button data-filter=".oneOne">1+1</button>
+                            <button data-filter=".twoOne">2+1</button>
+                        	<button data-filter=".pb">PB</button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+			
+			
+			
+            <div class="row special-list">
+             <c:forEach var="vo2" items="${twolist}" begin="1" end="5">
+                <div class="col-lg-3 col-md-6 special-grid twoOne">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">${vo2.shop_name} ${vo2.event_name }</p>
+                            </div>
+                            <img src="${vo2.good_img}" style="height:280px;" class="img-fluid" alt="Image">
+                        </div>
+                        <div class="why-text">
+                            <h3>${vo2.good_name}</h3> <!-- FROM GOODS -->
+                            <h4>${vo2.mfg_name}</h4>
+                            <h5>${vo2.good_price}원</h5> <!-- FROM GOODS -->
+                        </div>
+                    </div>
+                </div>
+             </c:forEach>
+                
+             <c:forEach var="vo1" items="${onelist}" begin="1" end="5">
+                <div class="col-lg-3 col-md-6 special-grid oneOne">
+                    <div class="products-single fix">
+                   
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">${vo1.shop_name} ${vo1.event_name }</p>
+                            </div>
+                            <img src="${vo1.good_img}" style="height:280px;"class="img-fluid" alt="Image">
+                        </div>
+                        <div class="why-text">
+                            <h3>${vo1.good_name}</h3> <!-- FROM GOODS -->
+                            <h4>${vo1.mfg_name}</h4>
+                            <h5>${vo1.good_price}원</h5> <!-- FROM GOODS -->
+                        </div>
+                        
+                    </div> 
+                </div>
+               </c:forEach>
+               
+               <c:forEach var="vo3" items="${pblist}" begin="1" end="5">
+                <div class="col-lg-3 col-md-6 special-grid pb">
+                    <div class="products-single fix">
+                   
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">${vo3.shop_name} ${vo3.event_name }</p>
+                            </div>
+                            <img src="${vo3.good_img}" style="height:280px;" class="img-fluid" alt="Image">
+                        </div>
+                        <div class="why-text">
+                            <h3>${vo3.good_name}</h3> <!-- FROM GOODS -->
+                            <h4>${vo3.mfg_name}</h4>
+                            <h5>${vo3.good_price}원</h5> <!-- FROM GOODS -->
+                        </div>
+                        
+                    </div> 
+                </div>
+               </c:forEach>
+            </div>
+        </div> 
+    </div>
+    <!-- End Products  -->
+
+    <!-- Start Blog  -->
+    <div class="latest-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>latest blog</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 col-xl-4">
+                    <div class="blog-box">
+                        <div class="blog-img">
+                            <img class="img-fluid" src="/pmkim/resources/images/blog-img.jpg" alt="" />
+                        </div>
+                        <div class="blog-content">
+                            <div class="title-blog">
+                                <h3>Fusce in augue non nisi fringilla</h3>
+                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                            </div>
+                            <ul class="option-blog">
+                                <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#"><i class="far fa-comments"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-4">
+                    <div class="blog-box">
+                        <div class="blog-img">
+                            <img class="img-fluid" src="/pmkim/resources/images/blog-img-01.jpg" alt="" />
+                        </div>
+                        <div class="blog-content">
+                            <div class="title-blog">
+                                <h3>Fusce in augue non nisi fringilla</h3>
+                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                            </div>
+                            <ul class="option-blog">
+                                <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#"><i class="far fa-comments"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-4">
+                    <div class="blog-box">
+                        <div class="blog-img">
+                            <img class="img-fluid" src="/pmkim/resources/images/blog-img-02.jpg" alt="" />
+                        </div>
+                        <div class="blog-content">
+                            <div class="title-blog">
+                                <h3>Fusce in augue non nisi fringilla</h3>
+                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                            </div>
+                            <ul class="option-blog">
+                                <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#"><i class="far fa-comments"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog  -->
 
     <!-- 20200521_oliver.yoo -->
 	<!-- Start Footer  -->

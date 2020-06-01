@@ -34,7 +34,7 @@ public class EventDAO {
 			return list;
 		}
 
-	//paging
+	//paging(sort)
 	public int listCount(String event_name, String shop_code) {
 		int count = 0;
 		String statement = "resource.EventMapper.listCount";
@@ -48,10 +48,22 @@ public class EventDAO {
 		}
 		return count;
 	}
+	
+	//paging (search)
+	   public int listCount2(String good_name) {
+	      int count = 0;
+	      String statement = "resource.EventMapper.listCount_search";
+	      if(session.selectOne(statement)!=null) {
+	         count = session.selectOne(statement,good_name);
+	      }else {
+	         System.out.println("null이에유");
+	      }
+	      return count;
+	   }
 	//상품 전체 리스트 출력
 	public List<GoodsCategoryEventShopMemberVO> goodsAll(){
 		List<GoodsCategoryEventShopMemberVO> list = new ArrayList<GoodsCategoryEventShopMemberVO>();
-		String statement = "resource.CartMapper.goodsListAll";
+		String statement = "resource.EventMapper.goodsListAll";
 		list = session.selectList(statement);
 		return list;
 	}
@@ -64,8 +76,8 @@ public class EventDAO {
 		}
 		
 		//eventName으로 찾아오기
-		public List<GoodsEventShopMemberVO> goodsSortEvent(String event_name){
-			List<GoodsEventShopMemberVO> list = new ArrayList<GoodsEventShopMemberVO>();
+		public List<GoodsCategoryEventShopMemberVO> goodsSortEvent(String event_name){
+			List<GoodsCategoryEventShopMemberVO> list = new ArrayList<GoodsCategoryEventShopMemberVO>();
 			String statement = "resource.EventMapper.goodsList_eventName";
 			list = session.selectList(statement,event_name);
 			return list;
@@ -136,6 +148,18 @@ public class EventDAO {
 				//System.out.println("list : "+ list);
 				return list;
 			}
+			//2020.05.29 추가
+			   //상품검색_paging
+			   public List<GoodsCategoryEventShopMemberVO> searchGoodsPaging(String good_name, int startNum, int endNum){
+			      List<GoodsCategoryEventShopMemberVO> list = new ArrayList<GoodsCategoryEventShopMemberVO>();
+			      Map<String,Object> map = new HashMap<String,Object>();
+			      map.put("startNum",startNum);
+			      map.put("endNum", endNum);
+			      map.put("good_name", good_name);
+			      String statement = "resource.EventMapper.goodsList_search_paging";
+			      list = session.selectList(statement,map);
+			      return list;
+			   }
 							
 			
 	//=======================Home===============================================//		

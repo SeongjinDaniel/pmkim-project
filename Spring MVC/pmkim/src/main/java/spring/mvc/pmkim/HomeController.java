@@ -34,7 +34,7 @@ public class HomeController {
 		
 		if(event_name==null && shop_code==null) {
 			event_name = "1+1";
-			shop_code = "GS";
+			shop_code = "CU";
 		}
 		List<GoodsEventShopMemberVO> onelist = edao.homeEventOne(event_name,shop_code);
 		List<GoodsEventShopMemberVO> twolist = edao.homeEventTwo(event_name,shop_code);

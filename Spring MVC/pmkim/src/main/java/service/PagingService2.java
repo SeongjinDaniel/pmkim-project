@@ -21,6 +21,11 @@ public class PagingService2 {
 		//System.out.println("postCnt : "+postCnt);
 		return ((postCnt-1)/lineCnt)+1;		
 	}
+	public int getPageCount(String good_name) {	// 글의 개수에 따른 페이지 개수 계산
+		int postCnt = edao.listCount2(good_name);
+		//System.out.println("postCnt : "+postCnt);
+		return ((postCnt-1)/lineCnt)+1;		
+	}
 	public int getPageStart(int pgNum) {	// 각 화면별 시작 페이지 번호
 		this.pgNum = pgNum;
 		return ((pgNum-1)/pageCnt)*pageCnt+1;
@@ -29,6 +34,15 @@ public class PagingService2 {
 		this.pgNum = pgNum;
 		int result1 = getPageStart(pgNum)+pageCnt-1;
 		int result2 = getPageCount(event_name,shop_code);
+		if(result1>result2)
+			return result2;
+		else
+			return result1;
+	}
+	public int getPageEnd(int pgNum,String good_name) {	//각 화면별 종료 페이지 번호
+		this.pgNum = pgNum;
+		int result1 = getPageStart(pgNum)+pageCnt-1;
+		int result2 = getPageCount(good_name);
 		if(result1>result2)
 			return result2;
 		else
@@ -45,6 +59,13 @@ public class PagingService2 {
 		boolean result = false;
 		this.pgNum = pgNum;
 		if(getPageEnd(pgNum,event_name,shop_code)<getPageCount(event_name,shop_code))
+			result = true;
+		return result;
+	}
+	public boolean isNextData(int pgNum,String good_name) {	//이전 페이지들을 출력하는 right 이미지 출력 여부 결정
+		boolean result = false;
+		this.pgNum = pgNum;
+		if(getPageEnd(pgNum,good_name)<getPageCount(good_name))
 			result = true;
 		return result;
 	}

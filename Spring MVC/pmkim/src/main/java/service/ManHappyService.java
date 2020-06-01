@@ -49,8 +49,8 @@ public class ManHappyService {
       return cdao.getNameImg(good_id);
    }
    
-   public void recomGoods(String ctg_3,int min, int max, HttpServletResponse response) throws IOException{
-      List<GoodsInformVO> list = cdao.recomGoodsList(ctg_3, min, max);
+   public void recomGoods(String ctg_3, int max, HttpServletResponse response) throws IOException{
+      List<GoodsInformVO> list = cdao.recomGoodsList(ctg_3, max);
       if(list != null) {
          response.getWriter().print("1");
       }else {
@@ -58,9 +58,12 @@ public class ManHappyService {
       }
    }
    
-	/*
-	 * public void test(String ctg_3, HttpServletResponse response) throws
-	 * IOException{ List<GoodsInformVO> list = cdao.test(ctg_3); if(list != null) {
-	 * response.getWriter().print("1"); }else { response.getWriter().print("0"); } }
-	 */
+   public void selectCtg_3(String ctg_3,String shop_name, HttpServletResponse response) throws IOException{
+      List<GoodsInformVO> list = cdao.selectCtg_3(ctg_3,shop_name);
+      if(list != null) {
+         response.getWriter().print("1");
+      }else {
+         response.getWriter().print("0");
+      }
+   }
 }
