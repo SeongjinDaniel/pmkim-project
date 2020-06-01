@@ -14,7 +14,6 @@ public class ShopVO {
     // 판매점 코드
     private String shop_code;
 
-
     // 판매점 명 상세 
     private String shop_name_detail;
 
@@ -42,7 +41,6 @@ public class ShopVO {
 		this.tel_num = tel_num;
 	}
 
-
 	public String getShop_code() {
 		return shop_code;
 	}
@@ -63,7 +61,7 @@ public class ShopVO {
 	public String toString() {
 		return "ShopVO [shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num + ", shop_code="
 				+ shop_code + ", shop_name_detail=" + shop_name_detail + "]";
-
 	}
+    
     
 }
