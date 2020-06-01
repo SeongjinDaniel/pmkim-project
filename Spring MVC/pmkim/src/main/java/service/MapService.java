@@ -1,7 +1,7 @@
 package service;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,40 +54,55 @@ public class MapService {
 
 	}
 	
-	public void searchEventName(GoodsEventShopMemberVO vo, HttpServletResponse response) throws IOException{
+//	public void searchEventName(GoodsEventShopMemberVO vo, HttpServletResponse response) throws IOException{
+//		// DB에 EventName을 얻어와서 검색한 상품과 같은게 있는지 검색한다.
+//		if(vo != null) {
+//			logger.info("vo not null(service_searchEventName)");
+//			String oldGoodName = null;
+//			if(vo.getGood_name() != null && vo.getShop_code() != null) {
+//				oldGoodName = vo.getGood_name().trim();
+//				logger.info("service_oldGoodName : " + oldGoodName);
+//				vo = dao.eventName(vo);
+//				if(vo != null) {
+//					String eventName = vo.getEvent_name();
+//					String newGoodName = vo.getGood_name();
+//					if(eventName != null) eventName.trim();
+//					if(newGoodName != null) newGoodName.trim(); 
+//					logger.info("service_newGoodName : " + newGoodName);
+//					logger.info("service_searchEventName : " + eventName);
+//
+//					if(eventName != null) {
+//						logger.info("service_searchEventName success");
+//						//2+1, 1+1만 행사이다!!
+//						if(eventName.equals("2+1") || eventName.equals("1+1")) {
+//							//String message = new String(newGoodName.getBytes("ISO-8859-1"), "UTF-8");
+//							String message = URLEncoder.encode(eventName + "," + newGoodName, "UTF-8");
+//							response.getWriter().print(message);
+//						}else {
+//							response.getWriter().print("notEvent");
+//						}
+//					}else {
+//						logger.info("service_searchEventName fail");
+//						response.getWriter().print("fail");
+//					}
+//				}
+//			}
+//		}
+//	}
+	
+	public List<GoodsEventShopMemberVO> searchEventName(GoodsEventShopMemberVO vo, HttpServletResponse response) throws IOException{
 		// DB에 EventName을 얻어와서 검색한 상품과 같은게 있는지 검색한다.
+		List<GoodsEventShopMemberVO> list = null;
 		if(vo != null) {
 			logger.info("vo not null(service_searchEventName)");
 			String oldGoodName = null;
 			if(vo.getGood_name() != null && vo.getShop_code() != null) {
 				oldGoodName = vo.getGood_name().trim();
 				logger.info("service_oldGoodName : " + oldGoodName);
-				vo = dao.eventName(vo);
-				if(vo != null) {
-					String eventName = vo.getEvent_name();
-					String newGoodName = vo.getGood_name();
-					if(eventName != null) eventName.trim();
-					if(newGoodName != null) newGoodName.trim(); 
-					logger.info("service_newGoodName : " + newGoodName);
-					logger.info("service_searchEventName : " + eventName);
-
-					if(eventName != null) {
-						logger.info("service_searchEventName success");
-						//2+1, 1+1만 행사이다!!
-						if(eventName.equals("2+1") || eventName.equals("1+1")) {
-							//String message = new String(newGoodName.getBytes("ISO-8859-1"), "UTF-8");
-							String message = URLEncoder.encode(eventName + "," + newGoodName, "UTF-8");
-							response.getWriter().print(message);
-						}else {
-							response.getWriter().print("notEvent");
-						}
-					}else {
-						logger.info("service_searchEventName fail");
-						response.getWriter().print("fail");
-					}
-				}
+				list = dao.eventName(vo);
 			}
 		}
+		return list;
 	}
 
 }

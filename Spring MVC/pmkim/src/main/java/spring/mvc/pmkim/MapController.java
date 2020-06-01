@@ -1,6 +1,7 @@
 package spring.mvc.pmkim;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import dao.MapDAO;
 import service.MapService;
 import vo.GoodsEventShopMemberVO;
-import vo.MemberVO;
 
 @Controller
 public class MapController {
@@ -67,6 +67,16 @@ public class MapController {
 		}
 	}
 	
+	@RequestMapping(value = "/map/data", method = RequestMethod.POST)
+	@ResponseBody
+	public List<GoodsEventShopMemberVO> mapPostData(String searchProduct,
+			GoodsEventShopMemberVO goodsEvtShopMemberVO, HttpServletResponse response) throws ServletException, IOException{
+
+		if(goodsEvtShopMemberVO != null) {		
+			if(searchProduct != null) goodsEvtShopMemberVO.setGood_name(searchProduct);
+		}
+		return mapService.searchEventName(goodsEvtShopMemberVO, response);
+	}
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(Model model) {
 

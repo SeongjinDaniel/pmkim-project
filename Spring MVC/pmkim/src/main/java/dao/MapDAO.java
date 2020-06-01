@@ -43,15 +43,27 @@ public class MapDAO {
 		return vo;
 	}
 	
-	public GoodsEventShopMemberVO eventName(GoodsEventShopMemberVO vo) {
+//	public GoodsEventShopMemberVO eventName(GoodsEventShopMemberVO vo) {
+//	//logger.info("Mybatis eventName");
+//	String statement = "resource.MapMapper.selEventName";
+//	try{
+//		vo = sqlSession.selectOne(statement, vo);
+//	}catch(Exception e) {
+//		logger.info("eventName exception : " + e);
+//	}
+//	return vo;
+//}
+
+	public List<GoodsEventShopMemberVO> eventName(GoodsEventShopMemberVO vo) {
 		//logger.info("Mybatis eventName");
 		String statement = "resource.MapMapper.selEventName";
+		List<GoodsEventShopMemberVO> list = null;
 		try{
-			vo = sqlSession.selectOne(statement, vo);
+			list = sqlSession.selectList(statement, vo);
 		}catch(Exception e) {
 			logger.info("eventName exception : " + e);
 		}
-		return vo;
+		return list;
 	}
 	
 	public List<GoodsEventShopMemberVO> shopCodeTableList() {
