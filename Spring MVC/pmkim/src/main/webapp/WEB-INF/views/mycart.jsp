@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,java.util.List,java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -45,8 +46,6 @@
 
 <body>
 	<%
-		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
-		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) session.getAttribute("goodsList");
 		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
 	%>
 	<!-- Start Main Top -->
@@ -212,7 +211,7 @@
 									id="grid-view">
 									<div class="row">
 									<!-- 상품출력 반복문 -->
-									<c:forEach var="vo" items="${ gesList }">
+									<c:forEach var="vo" items="${ gesList }" varStatus="status">
 										<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 											<div class="products-single fix">
 												<div class="box-img-hover">
@@ -220,16 +219,15 @@
 														<p class="sale">${ vo.shop_name }</p>
 													</div>
 													<img src= "${ vo.good_img }" class="img-fluid" alt="Image">
-													
 													<div class="mask-icon">
 														<a class="cart" onclick="add('${vo.good_id}'); return false;">Add</a>
 													</div>
 												</div>
 												<div class="why-text">
-													<input type="hidden" id="good_id" value="${ vo.good_id }">
-													<h4 id="good_name">${ vo.good_name }</h4>
-													<h5 id="good_price">${ vo.good_price }원</h5>
-													<h5 id="event_name">${ vo.event_name }</h5>
+													<input type="hidden" name="good_id" value="${ vo.good_id }" class="good_id">
+													<h4 class="good_name">${ vo.good_name }</h4>
+													<h5 class="good_price">${ vo.good_price }원</h5>
+													<h5 class="event_name">${ vo.event_name }</h5>
 												</div>
 											</div>
 										</div>
@@ -239,25 +237,26 @@
 							</div>
 <!-- 							</form>										
  -->							
-							<!-- paging -->
+							<!-- start paging -->
 							<div id="paging" style="text-align : center; font-size : 16pt;">
-								<c:if test="${ pgNum != 1 }">
-									<a href ="/pmkim/cart?pgNum=1"> &laquo; </a>
-									<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
+								<c:if test="${ preData }">
+									<a href ="/pmkim/cart?pgNum=1${ oldQ }"> &laquo; </a>
+									<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }${ oldQ }"> &nbsp; &lt; &nbsp;</a>
 								</c:if>
 								
 								<c:forEach var="num" begin="${ pageStart }" end="${ pageEnd }">
-									<a href = "/pmkim/cart?pgNum=${ num }">${ num } &nbsp;</a>
+									<a href = "/pmkim/cart?pgNum=${ num }${ oldQ }">${ num } &nbsp;</a>
 								</c:forEach>
 								
 								<c:if test="${ nextData }">
-									<a href = "/pmkim/cart?pgNum=${ pgNum + 1 }"> &gt; &nbsp;</a>
+									<a href = "/pmkim/cart?pgNum=${ pgNum + 1 }${ oldQ }"> &gt; &nbsp;</a>
 								</c:if>
 								
 								<c:if test = "${ pgNum != end }">
-								<a href ="/pmkim/cart?pgNum=${ end }"> &raquo; </a>
-							</c:if>
+								<a href ="/pmkim/cart?pgNum=${ end }${ oldQ }"> &raquo; </a>
+								</c:if>
 							</div>
+							<!-- end paging -->
 						</div>
 					</div>
 				</div>
@@ -279,36 +278,16 @@
 		                                    <button class="btn hvr-hover" onclick="recommend(); return false;">Filter</button>
 		                                    <button class="btn hvr-hover" onclick="deleteCart(); return false;">Reset</button>		                                    
 		                                </p>
+		                                <div id ="cart-View" class="list-group-collapse sub-men">
+		                           		 상품을 클릭하세요.
+			                            <!-- 담은 상품 여기에 나타내기  = add함수의 결과 여기로 가져옴 -->
+			                            </div>
+			                            <div id = "recommend-View" class="list-group-collapse sub-men">
+			                            	<!-- 추천 상품 여기에 -->
+			                            </div>
 		                            </div>
-		                            <div id ="cart-View">
-		                            <!-- 담은 상품 여기에 나타내기 -->
-		                            	<c:if test="${requestScope.newVO != null }">
-		                            		<c:forEach var="nvo" items="${ newVO }">
-		                            			<%= request.getAttribute("newVO") %>
-		                            			<img src="${ requestScope.good_img }" class="img-fluid" alt="Image">
-		                            		</c:forEach>
-		                            		
-		                            	</c:if>
-		                            	<c:if test="${requestScope.newVO == null }">
-		                            		상품을 클릭하세요.
-		                            	</c:if>
-		                            </div>
+		                            
 		                        </div>
-								
-								<%-- <c:forEach var="cvo" items="<%= cartList %>">
-									<c:if test = "${cvo.id ==null}">
-									"로그인이 필요한 서비스입니다."
-									</c:if>
-									<div class="list-group-collapse sub-men">
-										<a class="list-group-item list-group-item-action"
-											href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
-											${cvo.good_name} 
-											<small class="text-muted">(100)</small>
-										</a>
-										
-									</div>
-								</c:forEach> --%>
-								
 							</div>
 					</div>
 				</div>
@@ -426,7 +405,6 @@
 		</p>
 	</div>
 	<!-- End copyright  -->
-
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 	<!-- ALL JS FILES -->
@@ -452,51 +430,125 @@
 
 	<!-- custom js -->
 	<script>
-		function recommend(){
-			//alert("hi");
-			
+		function recommend(){			
 			//클릭한 아이템 받아오기
 			//그 아이템에 대해서 추천 아이템 가져오기
+			//var good_id = document.getElementByClassName('good_id');
+			console.log(document.getElementById('selectId'));
+			var good_id = document.getElementById('selectId').value;
+			var shop_name = document.getElementById('shop_name').value;
+			var maxM = $('#amount').val().split('-')[0].replace('원',"")*1;
 			$.ajax({
 				type :"get",// 전송 방식 
 				url :"/pmkim/happy",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
-				data : {"good_id" : listform.good_id.value,
-						"minM" : 1000,
-						"maxM" : 3000},
+				data : {"good_id" : good_id,
+						"shop_name" : shop_name,
+						"maxM" : maxM
+						},
 				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
 				success : function(data){	
 					if(data=="1"){
-						alert("추천");
+						/* if( ${ recomPrice } <= 0){
+							alert(${ msg });
+						}else{
+							document.getElementById('recommend-View').innerHTML = ${recomGoods1};
+						} */
+						postHappy(good_id,shop_name,maxM);
 					}else{
-						alert("추천 실패");
+						alert("추천 상품이 없습니다.");
 					}
 				},
 				error : function(){
-					alert("ajax 실행 실패");
+					alert("프로그램 에러가 발생했습니다.");
 				}
+				//console.log(document.querySelector("#cart-View > img"));
 			});
 			
+			var x = $('#amount').val().split('-')[0].replace('원',"")*1;
+			console.log(x);
+			//console.log($('#slider-range').slide());	
+
 		}
 		
+		//ajax function
+		function postHappy(good_id,shop_name,maxM){
+			
+			var good_price = document.getElementById('good_price').value;
+			var recomPrice = maxM*1-good_price.replace("원","").replace(",","")*1;
+			document.getElementById('recommend-View').innerHTML = "";
+			$.ajax({
+				type :"post",// 전송 방식 
+				url :"/pmkim/happy",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"good_id" : good_id,
+						"shop_name" : shop_name,
+						"maxM" : maxM
+						},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					//console.log(data[0].good_name);
+					document.getElementById('recommend-View').innerHTML = "<p>함께 즐기면 좋은 상품</p> <hr>";
+					if ( data != null){
+						if(recomPrice <=0 ){
+							alert('금액내에 알맞는 추천 상품이 없습니다.');
+						}else if(recomPrice <= 5000){
+							document.getElementById('recommend-View').innerHTML += data[0].good_name 
+																				+ "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
+																				+ data[0].good_price +"원" ;
+						}else{
+							document.getElementById('recommend-View').innerHTML += data[0].good_name 
+																				+ "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
+																				+ data[0].good_price +"원"+ "<br>";
+							document.getElementById('recommend-View').innerHTML += data[1].good_name
+																				+ "<img src = '"+data[1].good_img+"' class ='img-fluid'>"
+																				+ data[1].good_price +"원" ;
+						}
+					}else{
+						alert('상품을 선택해주세요.');
+					}
+				},
+				error : function(){
+					alert("프로그램 에러가 발생했습니다.");
+				}
+				//console.log(document.querySelector("#cart-View > img"));
+			});
+		}
+	
 		//클릭 상품 저장
 		function add(good_id){
 			$.ajax({
-				type :"post",// 전송 방식 
-				url :"/pmkim/cart",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				type :"post",
+				url :"/pmkim/cart",  
 				data : {"action" : "insert",
 						"good_id" : good_id},
 				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				//async : false,
 				success : function(data){	
 					if(data=="1"){
-						//alert("추천");
+
+						var key = [];			//id값 담을 변수 선언
+						var num = document.getElementsByClassName('good_id').length
+						for(var i=0; i<num; i++){
+							key[i] = document.getElementsByClassName('good_id')[i].value;
+						}
+						var good_name = document.getElementsByClassName('good_name')[key.indexOf(good_id)].innerHTML;
+						var good_img = document.getElementsByClassName('img-fluid')[key.indexOf(good_id)].getAttribute('src');
+						var shop_name = document.getElementsByClassName('sale')[key.indexOf(good_id)].innerHTML;
+						var good_price = document.getElementsByClassName('good_price')[key.indexOf(good_id)].innerHTML;
+
+						document.getElementById('cart-View').innerHTML = "<p id='result_name'>"+ good_name + "</p> <br>"+"<img src = '"+good_img+"' class ='img-fluid'>"
+																		+"<input type='hidden' value = '"+good_id+"' id = 'selectId' name='selectId'>"
+																		+"<input type='hidden' value = '"+shop_name+"' id = 'shop_name'>"
+																		+"<input type='hidden' value = '"+good_price+"' id = 'good_price'>";
+
 					}else{
-						//alert("추천 실패");
+						alert("상품이 선택되지 않았습니다.");
 					}
 				},
 				error : function(){
-					alert("ajax 실행 실패");
+					alert("프로그램 에러가 발생했습니다.");
 				}
 			});
+			
 		}
 		
 		//클릭상품 해제
@@ -508,13 +560,13 @@
 				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
 				success : function(data){	
 					if(data=="1"){
-						//alert("추천");
+						document.getElementById('cart-View').innerHTML = '상품을 클릭하세요.';
 					}else{
-						//alert("추천 실패");
+						alert("선택한 상품이 없습니다.");
 					}
 				},
 				error : function(){
-					alert("ajax 실행 실패");
+					alert("프로그램 에러가 발생했습니다.");
 				}
 			});
 		}
