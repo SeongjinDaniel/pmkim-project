@@ -1,5 +1,7 @@
+<%@page import="vo.GoodsEventShopMemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"%>	
+	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"
+	import = "vo.GoodsEventShopMemberVO"%>	
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +35,6 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
 
-
-
-
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -50,7 +49,9 @@
 	<%
 		String keyword = (String) request.getAttribute("searchKeyword");
 		String keywordProduct = (String) request.getAttribute("searchProduct");
-		List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
+		//List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
+		GoodsEventShopMemberVO mapAlgorithmDB = 
+				(GoodsEventShopMemberVO) request.getAttribute("mapAlgorithmDB");
 	%>
 	<header class="main-header">
 		<!-- Start Navigation -->
@@ -202,6 +203,21 @@
 			</form>
 			<div id="map" style="width: 100%; height: 500px;"></div>
 			<script>
+
+				//var goodId = ${mapAlgorithmDB.good_id}
+				//console.log(goodId);
+				//console.log(mapAlgorithmDBList.getGood_id);
+
+				// 카카오 맵에서 넘어 오는 편의점명 -> CU, GS25, 세븐일레븐, 이마트24, 미니스톱
+				const EMART24 = "EM", CU = "CU", GS25 = "GS", SEVENELEVEN = "SE", MINISTOP = "MS";
+				var keyword = '<%=keyword%>';
+				var productName = '<%=keywordProduct%>';
+
+				//console.log(productName);
+
+				// alert('<%=keywordProduct%>');
+				// console.log('<%=keywordProduct%>');
+
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
                 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -211,64 +227,67 @@
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			        level: 4 // 지도의 확대 레벨 
 			    }; 
-
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 				// 주소-좌표 변환 객체를 생성합니다
 				var geocoder = new kakao.maps.services.Geocoder();
                 //-------------------------------------------------------------------------------------------
-                var keyword = '<%=keyword%>';
-				var productName = '<%=keywordProduct%>';
-				// alert('<%=keywordProduct%>');
-				// console.log('<%=keywordProduct%>');
-                if(keyword == 'null' || keyword == ""){ // 로그인 안했을시!
-                    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-                    if (navigator.geolocation) {
-                        
-                        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-                        navigator.geolocation.getCurrentPosition(function(position) {
-                            
-                            var lat = position.coords.latitude, // 위도
-                                lon = position.coords.longitude; // 경도
-                            
-							//----------------------------------------------------------
-							//현재위치 기반으로 편의점 검색!!! 
-							//----------------------------------------------------------
-							
-                            var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-                                message = '<div style="padding:5px;">검색할 상품을 적어보세요!</div>'; // 인포윈도우에 표시될 내용입니다
-                            
-                            // 마커와 인포윈도우를 표시합니다   
-                            oneDisplayMarker(locPosition, message);
-                        });
-                        
-                    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-                        
-                        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-                            message = '현재 위치를 찾을 수 없어요..'
-                            
-                        oneDisplayMarker(locPosition, message);
-                    }
-                }else{ // keyword 있을시 // 로그인 했을시(선호상품있음)
-					// /GS/i.test(place.place_name)
-					if(/서울/.test(keyword)){
-						console.log("서울 키워드다!")
-					}else{
-						if(keyword == '내위치'){ // 키워드에 내위치라고 썼을 경우
-							// 내위치 기반 서칭!!
-						}else if(ekyword == ''){
-							// 주소만 서칭 하면 + 편의점 해서 검색
-						}
-						keyword = "서울 " + keyword;
-					}
-                	
-    				//alert(keyword);
-                    // 장소 검색 객체를 생성합니다
-                    var ps = new kakao.maps.services.Places(); 
 
-                    // 키워드로 장소를 검색합니다
-                    ps.keywordSearch(keyword, placesSearchCB); 
+				var lat, lon;
+				var curPositionFlag = false;
+				// 장소 검색 객체를 생성합니다
+				var ps = new kakao.maps.services.Places(); 
+				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+				if (navigator.geolocation) {
+					
+					// GeoLocation을 이용해서 접속 위치를 얻어옵니다
+					navigator.geolocation.getCurrentPosition(function(position) {
+						lat = position.coords.latitude, // 위도
+						lon = position.coords.longitude; // 경도
+						
+						// var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+						//     message = '<div style="padding:5px;">편의점 명을 정확히 기재해주세요!</div>'; // 인포윈도우에 표시될 내용입니다
+						
+						// //마커와 인포윈도우를 표시합니다   
+						// oneDisplayMarker(locPosition, message);
+					});
+					
+				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+					var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+						message = '현재 위치를 찾을 수 없어요..'
+						
+					oneDisplayMarker(locPosition, message);
+				}
+
+                if(keyword == "null" || keyword == "" || keyword == "내위치" || keyword == "내 위치"){
+					curPositionFlag = true;
+                }else{ // keyword 있을시
+
+					/* if(/서울/.test(keyword)){
+						console.log("서울 키워드다!");
+					}else{
+						console.log("서울 키워드가 아니다!")
+					} */
+                	                    
                 }
-				
+				if(curPositionFlag == true){
+					//console.log(curPositionFlag);
+					//----------------------------------------------------------
+					//현재위치 기반으로 편의점 검색!!! 
+					ps.keywordSearch("편의점", placesSearchCB, {
+						// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
+						location: new kakao.maps.LatLng(lat, lon)
+					});
+					//----------------------------------------------------------
+				}else{
+					//console.log(curPositionFlag);
+					//console.log("키워드: " + keyword);
+					// 키워드로 장소를 검색합니다
+                    //ps.keywordSearch(keyword, placesSearchCB);
+					ps.keywordSearch(keyword, placesSearchCB, {
+						// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
+						location: new kakao.maps.LatLng(lat, lon)
+					});
+				}
                 //kakao 메서드 start------------------------
 				// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 				function oneDisplayMarker(locPosition, message) {
@@ -295,6 +314,7 @@
 				    map.setCenter(locPosition);      
 				}
 				
+				var markerImage;
                 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
                 function placesSearchCB (data, status, pagination) {
                     if (status === kakao.maps.services.Status.OK) {
@@ -302,24 +322,137 @@
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                         // LatLngBounds 객체에 좌표를 추가합니다
                         var bounds = new kakao.maps.LatLngBounds();
-
+						
                         for (var i=0; i<data.length; i++) {
+							// 추가!!
+							// data[i].place_name 해당하지 않는 곳은 제외하기!
+							var str = data[i].place_name; 
+							var pass1 = str.search("이마트");
+							var pass2 = str.search("이마트에브리데이");
+							var nopass1 = str.search("이마트24");
+							var nopass2 = str.search("emart24");
+							// 추후 gs칼텍스, gs건설 등 제외하기!!
+
+							// 추가!!
+ 	 						var res = str.split(" ");
+							// ex) cu, gs25 등..
+							var shop_code = res[0];
+							if(shop_code == '이마트24') shop_code = EMART24;
+							else if(shop_code == 'GS25') shop_code = GS25;
+							else if(shop_code == '세븐일레븐') shop_code = SEVENELEVEN;
+							else if(shop_code == '미니스톱') shop_code = MINISTOP;
+							else if(shop_code == 'CU') shop_code = CU;
+							// ex) 테헤란로점, 종로1가점 등..
+							var shop_name_detail = res[1];
+							console.log("--------------------------------");
+							console.log("shop_code : " + shop_code);
+							console.log("shop_name_detail : " + shop_name_detail);
+
+							//map algorithm start
+							if(productName == undefined || productName == null || productName == ""){
+							}else{
+								$.ajax({
+									url:"/pmkim/map",
+									type:'post',
+									data: {
+											"shop_code":shop_code,
+											"shop_name_detail":shop_name_detail},
+									dataType: "text",
+									async: false,
+									success:function(data){
+										//console.log(data);
+										if(data == "success"){
+											//console.log("success");
+											
+											// success면 카카오 맵에서 나온 편의점이 있다 라는것!!
+											// 이제 부터는 이 편의점에 해당 상품이 행사하는지를 확인해서 
+											// 마커로 맵에 알려주면 끄~읏!
+											var resultName = getEventName(shop_code, productName);
+											//console.log("event_name + good_name: " + resultName);
+											//console.log("typeof: "+typeof(resultName));
+											var event_name = null;
+											var good_name = null;
+											
+											if(isEmpty(resultName)){
+											}else{
+												var res = resultName.split(",");
+												event_name = res[0];
+												good_name = res[1];
+											}
+											markerImage = null; // 행사 상품만 새로운 Image를 마커로 나타내기 위해!! 
+											var imageSrc = null;
+											if(isEmpty(event_name) || isEmpty(good_name)){
+												console.log("nothing event_name or good_name");							
+											}else{
+												
+												console.log("event_name + good_name: " + event_name + ", " + good_name);
+												console.log("shop_code: " + shop_code);
+												// 맵에 event 마커 등록!! ↓↓↓↓↓↓↓↓↓
+												//--------------------------------------------------------------------------------------
+												 // 마커의 이미지 주소입니다.
+												if(event_name == '1+1' && shop_code == SEVENELEVEN){
+													imageSrc = '/pmkim/resources/images/map/7eleven_1+1.png';
+												}else if(event_name == '2+1' && shop_code == SEVENELEVEN){
+													imageSrc = '/pmkim/resources/images/map/7eleven_2+1.png';
+												}else if(event_name == '1+1' && shop_code == CU){
+													imageSrc = '/pmkim/resources/images/map/cu_1+1.png';
+												}else if(event_name == '2+1' && shop_code == CU){
+													imageSrc = '/pmkim/resources/images/map/cu_2+1.png';
+												}else if(event_name == '1+1' && shop_code == EMART24){
+													imageSrc = '/pmkim/resources/images/map/emart24_1+1.png';
+												}else if(event_name == '2+1' && shop_code == EMART24){
+													imageSrc = '/pmkim/resources/images/map/emart24_2+1.png';
+												}else if(event_name == '1+1' && shop_code == GS25){
+													imageSrc = '/pmkim/resources/images/map/GS25_1+1.png';
+												}else if(event_name == '2+1' && shop_code == GS25){
+													imageSrc = '/pmkim/resources/images/map/GS25_2+1.png';
+												}else if(event_name == '1+1' && shop_code == MINISTOP){
+													imageSrc = '/pmkim/resources/images/map/ministop_1+1.png';
+												}else if(event_name == '2+1' && shop_code == MINISTOP){
+													imageSrc = '/pmkim/resources/images/map/ministop_2+1.png';
+												} 
+												// 마커이미지의 크기입니다
+												imageSize = new kakao.maps.Size(64, 69),
+												// 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+												imageOption = {offset: new kakao.maps.Point(27, 69)}; 
+												
+												// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+												markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+											}
+										
+										}else{
+											//console.log("fail");
+										}
+									},
+									error:function(jqXHR, textStatus, errorThrown){ //
+										console.log("에러 발생!! \n textStatus: " + textStatus + " errorThrown: " + errorThrown + " jqXHR: "  + jqXHR);
+									}
+						    	});
+							}
+							
+							if(nopass1 >= 0 || nopass2 >= 0){
+								//console.log("+");
+							}else{
+								//console.log("-");
+								if(pass1 != -1 || pass2 != -1){
+									continue;
+								}
+							}
+							
                             searchDisplayMarker(data[i]);
 							var location = new kakao.maps.LatLng(data[i].y, data[i].x); 
                             bounds.extend(location);
-							console.log(location.getLat + location.getLng + "");
+
+							//search 좌표 -> 주소
 							searchDetailAddrFromCoords(location, function(result, status) {
 								if (status === kakao.maps.services.Status.OK) {
 									var detailAddr = !!result[0].road_address ? '도로명주소 : ' + result[0].road_address.address_name : '';
 									detailAddr += '\n\r지번 주소 : ' + result[0].address.address_name;
-									console.log(detailAddr);
-									var content = '<div class="bAddr">' +
-														detailAddr + 
-													'</도로명주소>';
+									//console.log(detailAddr);
 								}
 							});
                         }       
-
+						
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                         map.setBounds(bounds);
                     } 
@@ -329,52 +462,20 @@
                 function searchDisplayMarker(place) {
                     //new kakao.maps.LatLng(place.y, place.x)  다름
                     // 마커를 생성하고 지도에 표시합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map,
-                        position: new kakao.maps.LatLng(place.y, place.x) 
-                    });
-
-					// 대소문자 구분 하지 않음
-					// 만약 GS 실행
-					if(/GS/i.test(place.place_name)){
-						console.log("GS입니다!" + place.place_name);
-					}else if(/GS25/.test(place.place_name)){
-						console.log("GS25입니다!" + place.place_name);
-					}else if(/지에스/.test(place.place_name)){
-						console.log("지에스입니다!" + place.place_name);
-					}else if(/지에스25/.test(place.place_name)){
-						console.log("지에스25입니다!" + place.place_name);
-					}else if(/CU/i.test(place.place_name)){
-						console.log("CU입니다!" + place.place_name);
-					}else if(/씨유/.test(place.place_name)){
-						console.log("씨유입니다!" + place.place_name);
-					}else if(/세븐일레븐/.test(place.place_name)){
-						console.log("세븐일레븐입니다!" + place.place_name);
-					}else if(/sevenEleven/i.test(place.place_name)){
-						console.log("sevenEleven입니다!" + place.place_name);
-					}else if(/7eleven/i.test(place.place_name)){
-						console.log("7eleven입니다!" + place.place_name);
-					}else if(/miniStop/i.test(place.place_name)){
-						console.log("miniStop입니다!" + place.place_name);
-					}else if(/미니스톱/.test(place.place_name)){
-						console.log("미니스톱입니다!" + place.place_name);
-					}else if(/미니스탑/.test(place.place_name)){
-						console.log("미니스톱입니다!" + place.place_name);
-					}else if(/이마트/.test(place.place_name)){
-						console.log("이마트24입니다!" + place.place_name);
-					}else if(/이마트24/.test(place.place_name)){
-						console.log("이마트24입니다!" + place.place_name);
-					}else if(/emart24/i.test(place.place_name)){
-						console.log("emart24입니다!" + place.place_name);
-					}
-
-                    // 마커에 클릭이벤트를 등록합니다
+					var marker = new kakao.maps.Marker({
+							map: map,
+							position: new kakao.maps.LatLng(place.y, place.x),
+							image: markerImage // // 마커이미지 설정
+                    	});
+					
+					// 마커에 클릭이벤트를 등록합니다	
                     kakao.maps.event.addListener(marker, 'click', function() {
                         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
 						//console.log("test"+place.place_name);
                         infowindow.open(map, marker);
                     });
+	
                 }
 
 				function searchDetailAddrFromCoords(coords, callback) {
@@ -382,6 +483,58 @@
 					geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 				}
                 //kakao 메서드 end------------------------
+                
+                function getEventName(shop_code, good_name){
+                	var result;
+                	//console.log("getEventName shop_code : " + shop_code);
+                	//console.log("getEventName good_name : " + good_name);
+                	//console.log("---------");
+                	$.ajax({
+						url:"/pmkim/map",
+						type:'post',
+						data: {
+								"shop_code":shop_code,
+								"good_name":good_name,
+								"goodNameFlag":true},
+						dataType: "text",
+						//contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+						async: false,
+						success:function(data){
+							if(data == "fail"){
+								//console.log("event_name different");
+								
+							}else if(data == null){
+								//console.log("event_name null");
+							}else if(data == undefined){		
+								//console.log("event_name null");
+							}else if(data == ""){		
+								//console.log("event_name null");
+							}else if(data == "notEvent"){
+								
+							}else{
+								// event_name return!! 
+								//console.log("event_name same");
+								var encodData = decodeURIComponent(data);
+								//console.log(encodData);
+								//var res = encodData.split(",");
+								//console.log("jsp event_name: " + res[0]);
+								//console.log("jsp new_good_name: " + res[1]);
+							}
+							result = encodData;
+						},
+						error:function(jqXHR, textStatus, errorThrown){ //
+							console.log("function 에러 발생!! \n textStatus: " + textStatus + " errorThrown: " + errorThrown + " jqXHR: "  + jqXHR);
+						}
+			    	});
+                	return result;
+                }
+
+				function isEmpty(str){
+					if(typeof str == "undefined" || str == null || str == "")
+						return true;
+					else
+						return false ;
+				}
 			</script>
 			<div class="row my-4">
 				<div class="col-12"></div>

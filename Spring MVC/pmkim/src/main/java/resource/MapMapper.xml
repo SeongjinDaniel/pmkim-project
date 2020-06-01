@@ -71,6 +71,52 @@
  		from member_customer
  		where id = #{id}
  	</select>
- 
+ 	
+ 	<select id="mapAlgorithmDBList" resultType="vo.GoodsEventShopMemberVO">
+ 		select distinct s.shop_code "shop_code", sc.shop_name "shop_name", s.shop_name_detail "shop_name_detail",
+ 			   e.event_name "event_name", g.good_name "good_name"
+ 		from shop s, shop_code sc, goods_shop gs, goods g, event e
+ 		where s.shop_code = gs.shop_code and 
+ 			  gs.good_id = e.good_id and
+ 			  gs.good_id = g.good_id and
+ 			  gs.good_id = #{good_id} and
+ 			  s.shop_code = #{shop_code} and
+ 			  s.shop_name_detail = #{shop_name_detail}
+ 	</select>
+ 	
+ 	<select id="selShopCodeName" resultType="vo.GoodsEventShopMemberVO">
+ 	
+ 	</select>
+ 	
+ 	<!-- shop Table List get -->
+ 	<select id="selShopCodeNameDetail" resultType="vo.GoodsEventShopMemberVO">
+ 		select shop_code, shop_name_detail
+ 		from shop
+ 		where shop_code = #{shop_code} and
+ 			  shop_name_detail = #{shop_name_detail}
+	</select>
 	
- </mapper>
+	<select id="selGoodId" resultType="vo.GoodsEventShopMemberVO">
+ 		select gs.good_id
+ 		from shop s, goods_shop gs
+ 		where s.shop_code = #{shop_code} and
+		 	  gs.shop_code = #{shop_code} and
+		 	  s.shop_name_detail = #{shop_name_detail}
+	</select>
+	<!-- g.good_name like '%'||#{keyword}||'%' -->
+	<select id="selEventName" resultType="vo.GoodsEventShopMemberVO">
+		select e.event_name "event_name", g.good_name "good_name"
+		from goods g, goods_shop gs, event e
+		where g.good_name <!--=  #{good_name} and --> like '%'||#{good_name}||'%' and
+			  g.good_id = gs.good_id and
+			  gs.shop_code = #{shop_code} and
+			  gs.good_id = e.good_id
+	</select>
+			   
+ 	<!-- shop_cod Table List get -->
+ 	<select id="shopCodeTableList" resultType="vo.GoodsEventShopMemberVO">
+ 		select shop_code, shop_name
+ 		from shop_code
+ 	</select>
+	
+</mapper>

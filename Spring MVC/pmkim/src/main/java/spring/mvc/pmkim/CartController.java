@@ -1,10 +1,6 @@
 package spring.mvc.pmkim;
 
-import java.io.IOException;
 import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.CartDAO;
-import service.ManHappy;
 import service.PagingService;
+import vo.CartVO;
+import vo.EventVO;
 import vo.GoodsEventShopMemberVO;
-import vo.GoodsInformVO;
+import vo.GoodsShopVO;
+import vo.GoodsVO;
+import vo.MemberVO;
 
 @Controller
 public class CartController {
@@ -29,9 +27,6 @@ public class CartController {
 	
 	@Autowired
 	PagingService ps;
-	
-	@Autowired
-	ManHappy mh;
 	
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	// delete search listone
