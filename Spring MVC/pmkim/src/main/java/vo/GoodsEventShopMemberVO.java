@@ -76,12 +76,6 @@ public class GoodsEventShopMemberVO {
     // 멤버 종류 
     private String member_type;
 
-    // 장바구니 아이디 
-    private int cart_id;
-
-    // 주문 갯수
-    private int cnt;
-    
 	public String getGood_id() {
 		return good_id;
 	}
@@ -273,34 +267,19 @@ public class GoodsEventShopMemberVO {
 	public void setMember_type(String member_type) {
 		this.member_type = member_type;
 	}
-	
-	public int getCart_id() {
-		return cart_id;
-	}
-
-	public void setCart_id(int cart_id) {
-		this.cart_id = cart_id;
-	}
-
-	public int getCnt() {
-		return cnt;
-	}
-
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
-	}
 
 	@Override
 	public String toString() {
-		return "GoodsEventShopMemberVO [good_id=" + good_id + ", good_name=" + good_name + ", search_date="
-				+ search_date + ", good_price=" + good_price + ", mfg_name=" + mfg_name + ", good_img=" + good_img
-				+ ", good_shop_id=" + good_shop_id + ", shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num="
-				+ tel_num + ", shop_code=" + shop_code + ", shop_name_detail=" + shop_name_detail + ", shop_name="
-				+ shop_name + ", event_name=" + event_name + ", event_id=" + event_id + ", id=" + id + ", pw=" + pw
-				+ ", name=" + name + ", email=" + email + ", sign_date=" + sign_date + ", nick_name=" + nick_name
-				+ ", road_addr=" + road_addr + ", login_type=" + login_type + ", member_type=" + member_type
-				+ ", cart_id=" + cart_id + ", cnt=" + cnt + "]";
+		return "GoodsEventShopVO [good_id=" + good_id + ", good_name=" + good_name + ", search_date=" + search_date
+				+ ", good_price=" + good_price + ", mfg_name=" + mfg_name + ", good_img=" + good_img + ", good_shop_id="
+				+ good_shop_id + ", shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num
+				+ ", shop_code=" + shop_code + ", shop_name_detail=" + shop_name_detail + ", shop_name=" + shop_name
+				+ ", event_name=" + event_name + ", event_id=" + event_id + ", id=" + id + ", pw=" + pw + ", name="
+				+ name + ", email=" + email + ", sign_date=" + sign_date + ", nick_name=" + nick_name + ", road_addr="
+				+ road_addr + ", login_type=" + login_type + ", member_type=" + member_type + "]";
 	}
 
+	
+    
     
 }
