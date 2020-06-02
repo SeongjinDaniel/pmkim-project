@@ -275,7 +275,7 @@
                 	                    
                 }
 				if(curPositionFlag == true){
-					console.log(curPositionFlag);
+					//console.log(curPositionFlag);
 					//----------------------------------------------------------
 					//현재위치 기반으로 편의점 검색!!! 
 					ps.keywordSearch("편의점", placesSearchCB, {
@@ -284,8 +284,8 @@
 					});
 					//----------------------------------------------------------
 				}else{
-					console.log(curPositionFlag);
-					console.log("키워드: " + keyword);
+					//console.log(curPositionFlag);
+					//console.log("키워드: " + keyword);
 					// 키워드로 장소를 검색합니다
                     //ps.keywordSearch(keyword, placesSearchCB);
 					ps.keywordSearch(keyword, placesSearchCB, {
@@ -353,15 +353,15 @@
 							else if(shop_code == 'CU') shop_code = CU;
 							// ex) 테헤란로점, 종로1가점 등..
 							var shop_name_detail = res[1];
-							console.log("--------------------------------");
-							console.log("shop_code : " + shop_code);
-							console.log("shop_name_detail : " + shop_name_detail);
+							//console.log("--------------------------------");
+							//console.log("shop_code : " + shop_code);
+							//console.log("shop_name_detail : " + shop_name_detail);
 
 							//map algorithm start
 							if(productName == undefined || productName == null || productName == ""){
 							}else{
-								console.log("shop_code:"+shop_code,
-											"shop_name_detail: "+shop_name_detail);
+								//console.log("shop_code:"+shop_code,
+											//"shop_name_detail: "+shop_name_detail);
 								$.ajax({
 									url:"/pmkim/map",
 									type:'post',
@@ -380,7 +380,7 @@
 											// 마커로 맵에 알려주면 끄~읏!
 											var event_name = null, good_name = null;
 											var resultName = getEventName(shop_code, productName);
-											console.log("resultName: "+resultName);
+											//console.log("resultName: "+resultName);
 											$.each(resultName, function(idx, val) {
 												console.log("good_name11: " + val.good_name);
 												console.log("good_event11: " + val.event_name);
@@ -393,21 +393,22 @@
 											//console.log("event_name + good_name: " + resultName);
 											//console.log("typeof: "+typeof(resultName));
 											
-											console.log(resultName);
+											//console.log(resultName);
 											if(isEmpty(good_name) || isEmpty(event_name)){
-												console.log("1231-"+good_name);
-												console.log("1231-"+event_name)
+												//console.log("1231-"+good_name);
+												//console.log("1231-"+event_name)
 											}else{
-												console.log("resultName " + "is not empty");
+												//console.log("1231-"+good_name);
+												//console.log("1231-"+event_name)
+												//console.log("resultName " + "is not empty");
 												var resGoodName = good_name.split(" ");
 												var resEventName = event_name.split(" ");
-												//console.log("resGoodName: "+resGoodName.length);
-												//console.log("resEventName: "+resEventName.length);
 												
 												printProduct[i] = new Array(resGoodName.length);
 												for(var j = 0; j < resGoodName.length; j++){
 													// 모든 상품들을 여기서 출력할수 있음
 													if(!isEmpty(resGoodName[j]) || !isEmpty(resEventName[j])){
+														//printProduct[i][j] = removeDuplicatesArray(resGoodName[j] + ": " + resEventName[j]);
 														printProduct[i][j] = resGoodName[j] + ": " + resEventName[j];
 														console.log("printProduct -- " + printProduct[i][j]);
 													}
@@ -422,16 +423,14 @@
 												// 해당 지점 마커를 클릭하면 상세 하게 지도 밑에 출력하기로하자!!
 												good_name = resGoodName[0];
 												event_name = resEventName[0];
-												console.log("good_name-"+good_name);
-												console.log("event_name-"+event_name);
 											}
 											markerImage = null; // 행사 상품만 새로운 Image를 마커로 나타내기 위해!! 
 											var imageSrc = null;
 											if(isEmpty(event_name) || isEmpty(good_name)){
 												console.log("nothing event_name or good_name");							
 											}else{
-												console.log("event_name + good_name: " + event_name + ", " + good_name);
-												console.log("shop_code: " + shop_code);
+												//console.log("event_name + good_name: " + event_name + ", " + good_name);
+												//console.log("shop_code: " + shop_code);
 												// 맵에 event 마커 등록!! ↓↓↓↓↓↓↓↓↓
 												//--------------------------------------------------------------------------------------
 												 // 마커의 이미지 주소입니다.
@@ -517,7 +516,7 @@
                         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                         
-                        console.log("test"+place.place_name);
+                        //console.log("test"+place.place_name);
 						// printGoodName = resGoodName;
 						// printEventName = resEventName;
 						// printLength
@@ -526,6 +525,7 @@
 						
 						// 상품 정보 보여주기
 						for(var i = 0; i < printLength; i++){
+							console.log("loggggg("+i+"): "+ printProduct[idx][i]);
 							if(i == printLength - 1){
 								if(!isEmpty(printProduct[idx][i])){
 									document.getElementById('printName').innerHTML += printProduct[idx][i];
@@ -586,7 +586,7 @@
 							
 							//var temp;
 							$.each(data, function(idx, val) {
-								console.log(idx + " " + val.good_name);
+								//console.log(idx + " " + val.good_name);
 								console.log(idx + " " + val.event_name);
 								//document.getElementById('productList').innerHTML += "<p id='result_name'>"+ val.good_name + "</p>";
 								//if(temp == null) sumProductName = val.good_name;

@@ -89,7 +89,7 @@ public class MapService {
 //			}
 //		}
 //	}
-	
+//	
 	public List<GoodsEventShopMemberVO> searchEventName(GoodsEventShopMemberVO vo, HttpServletResponse response) throws IOException{
 		// DB에 EventName을 얻어와서 검색한 상품과 같은게 있는지 검색한다.
 		List<GoodsEventShopMemberVO> list = null;
