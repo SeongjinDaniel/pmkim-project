@@ -34,22 +34,24 @@ public class ApiExamSearchShop {
         Class.forName("oracle.jdbc.driver.OracleDriver");
     	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","pmkim","pmkimbear");
     	Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-    	PreparedStatement ptmt = conn.prepareStatement("insert into GOODS_CATEGORY values (?,?,?,?)");
-    	ResultSet rs = stmt.executeQuery("select good_id, good_name from goods");
+    	PreparedStatement ptmt = conn.prepareStatement("insert into board(write_id, write_date, title, content) values(?,?,?,?)");
+    	ResultSet rs1 = stmt.executeQuery("select shop_name from shop_code");
+    	int i = 1;
     	//rs.last();
     	//System.out.println(rs.getRow());
     
-    	while(rs.next()) {
-    		System.out.println(rs.getString(2));
-        
+    	while(rs1.next()) {
+    		System.out.println(rs1.getString(1));
+    		//System.out.println(rs2.getString(1));
+    		i++;
 	    	try {
-	            text = URLEncoder.encode(rs.getString(2), "UTF-8");
+	            text = URLEncoder.encode(rs1.getString(1), "UTF-8");
 	        } catch (UnsupportedEncodingException e) {
 	        	System.out.println("kkkkkkkkkkk");
 	            throw new RuntimeException("검색어 인코딩 실패",e);
 	        }
 	    	
-	        String apiURL = "https://openapi.naver.com/v1/search/shop?query=" + text;    // json 결과
+	        String apiURL = "https://openapi.naver.com/v1/search/news?query=" + text;    // json 결과
 	        //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 	
 	        requestHeaders.put("X-Naver-Client-Id", clientId);
@@ -62,9 +64,9 @@ public class ApiExamSearchShop {
 	        	JSONParser jsonParser = new JSONParser();
 	        	JSONObject jsonObj = (JSONObject) jsonParser.parse(responseBody);
 	            JSONArray itemsArray = (JSONArray) jsonObj.get("items");
-	        	JSONObject tempObj;
+	        	JSONObject tempObj = null;
 	        	if(itemsArray.isEmpty()) {
-	        		ptmt.setString(1, rs.getString(1));
+	        		ptmt.setInt(1, i);
 		        	ptmt.setString(2, "기타");
 		        	ptmt.setString(3, "기타");
 		        	ptmt.setString(4, "기타");
@@ -80,16 +82,16 @@ public class ApiExamSearchShop {
 	        		System.out.println(itemsArray);
 					*/
 	        		tempObj = (JSONObject) itemsArray.get(0);
-	        		ptmt.setString(1, rs.getString(1));
-		        	ptmt.setString(2, tempObj.get("category1").toString());
-		        	ptmt.setString(3, tempObj.get("category2").toString());
-		        	ptmt.setString(4, tempObj.get("category3").toString());
+	        		ptmt.setInt(1, i);
+		        	ptmt.setString(2, tempObj.get("pubDate").toString());
+		        	ptmt.setString(3, tempObj.get("title").toString());
+		        	ptmt.setString(4, tempObj.get("originallink").toString());
 	        	}
-	        	/*
-	        	System.out.println("아이템 카테고리1 : " + tempObj.get("category1"));
-	        	System.out.println("아이템 카테고리2 : " + tempObj.get("category2"));
-	        	System.out.println("아이템 카테고리3 : " + tempObj.get("category3"));
-	        	*/
+	        	
+	        	System.out.println("아이템 카테고리1 : " + tempObj.get("pubDate").toString());
+	        	System.out.println("아이템 카테고리2 : " + tempObj.get("title").toString());
+	        	System.out.println("아이템 카테고리3 : " + tempObj.get("pubDate").toString());
+	        	
 	        	//stmt.executeUpdate("insert into GOODS_CATEGORY values ('"+rs.getString(1)+"','"+tempObj.get("category1")+"','"+tempObj.get("category2")+"','"+tempObj.get("category3")+"')");
 	        	
 	        	ptmt.executeUpdate();

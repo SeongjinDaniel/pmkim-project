@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -25,7 +25,9 @@
 	
 	<context:component-scan base-package="vo" /> <!-- 내가 넣어준것임 -->
 	<context:component-scan base-package="dao" /> <!-- 내가 넣어준것임 -->
-	<context:component-scan base-package="service" /> <!-- 내가 넣어준것임 -->
+	<context:component-scan base-package="service" />
+	<context:component-scan base-package="naverapp" />
+		
 	
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
@@ -48,7 +50,7 @@
 	
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"  
 	destroy-method="clearCache">
-			<beans:constructor-arg index="0"  ref="sqlSessionFactory" />
+			<beans:constructor-arg index="0"  ref="sqlSessionFactory" /> 
 	</beans:bean>
 	
 </beans:beans>

@@ -2,9 +2,11 @@
     IMPORT FONTS
 -------------------------------------------------------------------*/
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800');
-@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700');
+/*@import url('https://fonts.googleapis.com/css?family=Youth:400,500,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Youth:200,300,400,500,600,700');*/
 
+@import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/Youth.css');
+*{font-family:'Youth', 'Sans-serif';}
 
 /*
 
@@ -39,7 +41,7 @@
 body {
      color: #666666;
      font-size: 15px;
-     font-family: 'Dosis', sans-serif;
+     font-family: 'Youth', sans-serif;
      line-height: 1.80857;
 }
  a {
@@ -236,7 +238,7 @@ body {
      color: #FFFFFF;
      font-size: 13px;
      padding: 2px 15px;
-     font-family: 'Poppins', sans-serif;
+     font-family: 'Youth', sans-serif;
 }
  .offer-box li {
      font-weight: 600;
@@ -510,7 +512,7 @@ body {
  nav.navbar.bootsnav ul.nav > li > a{
      position: relative;
      font-weight: 700;
-     font-size: 25px;
+     font-size: 16px;
      color: #000000;
 	 text-transform: uppercase;
      padding-top: 10px;
@@ -585,7 +587,6 @@ body {
      nav.navbar.navbar-inverse .dropdown-tabs .tab-menu > ul{
          border-top: solid 1px #303030;
     }
-    
      nav.navbar.navbar-inverse.navbar-mobile .navbar-collapse{
          background-color: #222;
     }
@@ -788,7 +789,7 @@ body {
      opacity: 0.5;
 }
  .cover-slides h1{
-     font-family: 'Poppins', sans-serif;
+     font-family: 'Youth', sans-serif;
      font-weight: 500;
      font-size: 64px;
      color: #fff;
@@ -899,9 +900,10 @@ body {
      padding: 70px 0px;
 }
 .products-box2{
-    margin-left:15%;
-    margin-right:15%;
+    margin-left:17%;
+    margin-right:17%;
 }
+
  .special-menu{
      margin-bottom: 40px;
 }
@@ -954,7 +956,8 @@ body {
      z-index:8;
 }
  .type-lb .sale{
-     color:  #0F694D;
+    background: none;
+    color: #0F694D;
      padding: 2px 10px;
      font-weight: 700;
      font-size:19px;
@@ -966,6 +969,13 @@ body {
      padding: 2px 10px;
      font-weight: 700;
      text-transform: uppercase;
+}
+
+.result-text{
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    color:black;
 }
  .why-text{
      background: #f5f5f5;
@@ -988,7 +998,7 @@ body {
 }
  .why-text h5{
      font-size: 18px;
-     font-family: 'Poppins', sans-serif;
+     font-family: 'Youth', sans-serif;
      padding: 4px;
 	 display: inline-block;
 	 background-color:none;
@@ -1298,239 +1308,7 @@ body {
      bottom: 0;
      opacity: 1;
 }
-/*------------------------------------------------------------------ Footer Main -------------------------------------------------------------------*/
- .footer-main{
-     padding: 70px 0px;
-     background: #010101;
-}
-.footer-main hr{
-	border-top: 1px solid rgba(255,255,255,.6);
-}
-.footer-top-box{
-	margin-bottom: 30px;
-}
-.footer-top-box h3{
-	color: #ffffff;
-	position: relative;
-	font-size: 20px;
-}
-.footer-top-box h3::before {
-    border-bottom: 2px solid #0F694D;
-    content: "";
-    height: 3px;
-    width: 50%;
-    position: absolute;
-    bottom: 3px;
-    left: 0px;
-}
-.list-time{
-	margin-top: 15px;
-}
-.footer-top-box .list-time li{
-	color: #ffffff;
-	font-size: 16px;
-	display: block;
-	float: none;
-}
 
-.newsletter-box{
-	margin-top: 15px;
-	position: relative;
-}
-.newsletter-box input{
-	height: 40px;
-	border: none;
-	padding: 0 10px;
-	background: transparent;
-	border-radius: 0;
-	background: #fff;
-	padding: 0 20px;
-	width: 100%;
-}
-.newsletter-box i{
-	position: absolute;
-	right: 15px;
-	top: 10px;
-	font-size: 20px;
-}
-.newsletter-box button{	
-	color: #ffffff;
-	font-size: 16px;
-	font-weight: 500;
-	
-}
- .footer-top-box p{
-	 padding-bottom: 15px;
-	 color: #cccccc;
- }
-
- .footer-top-box ul{
-     display: inline-block;
-}
- .footer-top-box ul li {
-     float: left;
-     margin-right: 5px;
-}
- .footer-top-box ul li a {
-     color: #ffffff;
-     display: inline-block;
-     width: 36px;
-     height: 36px;
-     border: 2px solid #ffffff;
-     text-align: center;
-     line-height: 32px;
-}
- .footer-top-box ul li a:hover {
-     color: #0F694D;
-     border-color: #0F694D;
-}
-.footer-widget, .footer-link, .footer-link-contact{
-	margin-top: 15px;
-}
- .footer-widget h4 {
-     color: #ffffff;
-     font-size: 16px;
-     text-transform: uppercase;
-     letter-spacing: 2px;
-     margin-bottom: 20px;
-     position: relative;
-     font-weight: 700;
-}
- .footer-widget h4::before {
-     border-bottom: 3px solid #0F694D;
-     content: "";
-     height: 3px;
-     width: 100%;
-     position: absolute;
-     bottom: 3px;
-     left: 0px;
-}
- .footer-widget p {
-     color: #cccccc;
-     font-weight: 400;
-     font-size: 14px;
-     padding-bottom: 20px;
-}
-
- .footer-link{
-}
- .footer-link h4{
-     color: #ffffff;
-     font-size: 16px;
-     text-transform: uppercase;
-     letter-spacing: 2px;
-     margin-bottom: 20px;
-     position: relative;
-     font-weight: 700;
-}
- .footer-link h4::before {
-     border-bottom: 3px solid #0F694D;
-     content: "";
-     height: 3px;
-     width: 100%;
-     position: absolute;
-     bottom: 3px;
-     left: 0px;
-}
- .footer-link ul li {
-     margin-right: 5px;
-}
- .footer-link ul li a {
-     color: #ffffff;
-     text-align: left;
-     display: block;
-     line-height: 32px;
-     position: relative;
-     padding-left: 15px;
-     transition: all .3s ease-in-out;
-     -webkit-transition: all .3s ease-in-out;
-     -moz-transition: all .3s ease-in-out;
-     -o-transition: all .3s ease-in-out;
-     -ms-transition: all .3s ease-in-out;
-}
- .footer-link ul li a::before {
-     font-family: FontAwesome;
-     content: "\f105";
-     position: absolute;
-     left: 5px;
-     line-height: 35px;
-     font-size: 16px;
-     transition: all .3s ease-in-out;
-     -webkit-transition: all .3s ease-in-out;
-     -moz-transition: all .3s ease-in-out;
-     -o-transition: all .3s ease-in-out;
-     -ms-transition: all .3s ease-in-out;
-}
- .footer-link ul li a:hover::before {
-     left: 5px;
-}
- .footer-link ul li a:hover {
-     color: #0F694D;
-     border-color: #0F694D;
-     padding-left: 20px;
-}
- .footer-link-contact h4{
-     color: #ffffff;
-     font-size: 16px;
-     text-transform: uppercase;
-     letter-spacing: 2px;
-     margin-bottom: 20px;
-     position: relative;
-     font-weight: 700;
-}
- .footer-link-contact h4::before {
-     border-bottom: 3px solid #0F694D;
-     content: "";
-     height: 3px;
-     width: 100%;
-     position: absolute;
-     bottom: 3px;
-     left: 0px;
-}
- .footer-link-contact ul li{
-     margin-bottom: 12px;
-}
- .footer-link-contact ul li i{
-     position: absolute;
-     left: 0;
-     top: 5px;
-     padding-right: 6px;
-}
- .footer-link-contact ul li p{
-     padding-left: 25px;
-     color: #cccccc;
-     position: relative;
-}
- .footer-link-contact ul li p{
-     font-size: 16px;
-     color: #cccccc;
-     font-weight: 300;
-     padding-right: 16px;
-     line-height: 24px;
-}
- .footer-link-contact ul li p a{
-     color: #cccccc;
-}
- .footer-link-contact ul li p a:hover{
-     color: #0F694D;
-}
-/*------------------------------------------------------------------ Copyright -------------------------------------------------------------------*/
- .footer-copyright{
-     background: #060606;
-     padding: 20px 0px;
-     position: relative;
-}
- .footer-copyright p {
-     text-align: center;
-     color: #ffffff;
-     font-size: 16px;
-}
- .footer-copyright p a{
-     color: #ffffff;
-}
- .footer-copyright p a:hover{
-     color: #0F694D;
-}
 /*------------------------------------------------------------------ All Pages -------------------------------------------------------------------*/
  .all-title-box{
      background: url("../images/all-bg-title.jpg") no-repeat center center;
@@ -1785,7 +1563,9 @@ body {
 }
  .search-product {
      position: relative;
+     text-align:center;
 }
+
  .search-product input[type="text"] {
      background-color:  #ffffff;
      border-radius: 15px;
@@ -1808,12 +1588,16 @@ body {
      color: #ffffff;
      opacity: 1;
 }
+.search-size{
+    width:20px;
+}
  .search-product button {
      background-color: #ffffff;
      border-radius: 15px;
      border-color: #0F694D;
      font-size: 18px;
      color:#0F694D;
+     text-align:center;
      position: absolute;
      right: 0px;
      padding: 12px 1��5px;
@@ -2010,6 +1794,7 @@ body {
      display: inline-block;
      vertical-align: middle;
 }
+
  .product-item-filter li .nav-link {
      border: none;
      border-radius: 0px;
@@ -2641,6 +2426,10 @@ body {
 }
 : 18px;
 	font-weight: 700;
+	padding: 12px 25px;
+	border: none;
+}
+ght: 700;
 	padding: 12px 25px;
 	border: none;
 }

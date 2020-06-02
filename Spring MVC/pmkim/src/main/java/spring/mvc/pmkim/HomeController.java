@@ -27,11 +27,11 @@ public class HomeController {
 	@Autowired
 	PagingService ps;
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home(String action, String good_name, GoodsEventShopMemberVO gesmvo, String event_name,String shop_code, @RequestParam(defaultValue="1")int pgNum) {
 		ModelAndView mav = new ModelAndView();
 		
-		
+		//Event Jihye
 		if(event_name==null && shop_code==null) {
 			event_name = "1+1";
 			shop_code = "CU";
@@ -45,11 +45,12 @@ public class HomeController {
 			twolist = edao.homeEventTwo(event_name,shop_code);	
 			pblist = edao.homeEventPB(event_name,shop_code);	
 		}
+		//Event Jihye 
 
 		mav.addObject("onelist", onelist);
 		mav.addObject("twolist", twolist);
 		mav.addObject("pblist", pblist);
-		mav.setViewName("index");
+		mav.setViewName("home");
 		return mav;
 	}
 	
