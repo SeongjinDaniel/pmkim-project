@@ -1,6 +1,0 @@
-INDEX VERSION 1.4+D:\nana\git\Spring MVC\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3620476061.index
-2666693630.index
-808757933.index
-3773773021.index
-967725044.index
