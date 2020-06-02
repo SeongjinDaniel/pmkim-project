@@ -2,24 +2,29 @@
 ### gs25 분석 ###
 
 #분석할 파일 읽고
-gs25<-read.csv("insta_gs25.csv")
-cu<-read.csv("./data/insta_cu.csv")
+gs25<-read.csv("./data/insta_gs25.csv")
+cu<-read.csv("./data/insta_cu.csv")[c(1:10000),]
 emart24<-read.csv("./data/insta_emart24.csv")
-mini<-read.csv("./data/insta_ministop.csv")
+mini<-read.csv("./data/insta_ministop.csv")[c(1:10000),]
+seven<-read.csv("./data/insta_seven.csv")[c(1:10000),]
 
 #중복 제거
 insta_cu<-unique(cu)
 insta_emart24<-unique(emart24)
 insta_mini<-unique(mini)
+insta_gs25<-unique(gs25)
+insta_seven<-unique(seven)
 
 #결측치 제거
 insta_cu %>% filter(!is.na(article))->insta_cu 
 insta_emart24 %>% filter(!is.na(article))->insta_emart24 
 insta_mini %>% filter(!is.na(article))->insta_mini
+insta_gs25 %>% filter(!is.na(article))->insta_gs25
+insta_seven %>% filter(!is.na(article))->insta_seven
 
 #tibble 객체로 변경
 insta_gs25<-tibble(
-  text = as.vector(gs25$article)
+  text = as.vector(insta_gs25$article)
 )
 insta_cu<-tibble(
   text = as.vector(insta_cu$article)
@@ -29,6 +34,9 @@ insta_emart24<-tibble(
 )
 insta_mini<-tibble(
   text = as.vector(insta_mini$article)
+)
+insta_seven<-tibble(
+  text = as.vector(insta_seven$article)
 )
 
 #unnest 컬럼으로 정렬, pos 형태소로 나누기 실행
@@ -44,6 +52,9 @@ insta_emart24.pos<- insta_emart24 %>%
 insta_mini.pos<-insta_mini %>% 
   mutate(pos_mini = pos(text)) %>% 
   unnest(pos_mini)
+insta_seven.pos<-insta_seven %>% 
+  mutate(pos_seven = pos(text)) %>% 
+  unnest(pos_seven)
 
 ##명사만 뽑기 class(gs25_noun) head(gs25_noun)
 gs25_noun<- insta_gs25.pos %>% 
@@ -58,6 +69,10 @@ emart24_noun<-insta_emart24.pos %>%
 mini_noun<-insta_mini.pos %>% 
   filter(str_detect(pos_mini,"NNG")) %>% 
   mutate(mini_noun = str_replace_all(pos_mini,"/NNG",""))
+seven_noun<-insta_seven.pos %>% 
+  filter(str_detect(pos_seven,"NNG")) %>% 
+  mutate(seven_noun = str_replace_all(pos_seven,"/NNG",""))
+
 
 ##자음 및 불필요한 데이터 지우기
 remove.char  <- c("편의점","그램","스타","앤+JX","신상","구매","본점","스타일","할인","맛집","라이프","푸드","카페","신상","음식","오늘","먹방","추천","간식","일상"
@@ -71,6 +86,8 @@ emart24_noun<-emart24_noun %>%
   filter(!(emart24_noun %in% remove.char))
 mini_noun<-mini_noun %>% 
   filter(!(mini_noun %in% remove.char))
+seven_noun<-seven_noun %>% 
+  filter(!(seven_noun %in% remove.char))
 
 
 ##vec 로 정제
@@ -78,16 +95,20 @@ mini_noun<-mini_noun %>%
 
 ##카운팅하기
 gs25_noun %>% 
-  count(gs25_noun,sort=T)->counting
+  count(gs25_noun,sort=T)->gs.counting
 cu_noun %>% 
   count(cu_noun,sort=T)->cu.counting
 emart24_noun %>% 
   count(emart24_noun,sort=T)->emart24.counting
 mini_noun %>% 
   count(mini_noun,sort=T)->mini.counting
- 
+seven_noun %>% 
+  count(seven_noun,sort=T)->seven.counting
+seven.counting[11:20,]
 ##펭 한글자 나온거 펭수로 변경
 ###원하는 문자 들어가있는 행 찾아서 데이터 바꿔주기..어려웟음 데이터프레임에서
+gs.index<-which(gs.counting$gs25_noun=="펭")
+gs.counting$gs25_noun[gs.index]<-"펭수"
 cu.index<-which(cu.counting$cu_noun=="펭")
 cu.counting$cu_noun[cu.index]<-"펭수"
 cu.counting$cu_noun[which(cu.counting$cu_noun=="만시")]<-"깔라만시"
@@ -99,19 +120,22 @@ mini.index<-which(mini.counting$mini_noun=="펭")
 mini.counting$mini_noun[mini.index]<-"펭수"
 
 ##한글자 지우기 및 한글자중 필요한거 살리기
-counting %>% 
-  filter(!nchar(gs25_noun)==1)->gs25.cnt
+gs.counting %>% 
+  filter(gs25_noun=="차"|gs25_noun=="면"|gs25_noun=="술"|gs25_noun=="떡"|gs25_noun=="콘"|gs25_noun=="빵"|gs25_noun=="쌀"|!nchar(gs25_noun)==1)->insta.gs25
 cu.counting %>% 
   filter(cu_noun=="차"|cu_noun=="면"|cu_noun=="술"|cu_noun=="떡"|cu_noun=="콘"|cu_noun=="빵"|cu_noun=="쌀"|!nchar(cu_noun)==1)->insta.cu
 emart24.counting %>% 
   filter(emart24_noun=="차"|emart24_noun=="면"|emart24_noun=="술"|emart24_noun=="떡"|emart24_noun=="콘"|emart24_noun=="빵"|emart24_noun=="쌀"|!nchar(emart24_noun)==1)->insta.emart24
 mini.counting %>% 
   filter(mini_noun=="차"|mini_noun=="면"|mini_noun=="술"|mini_noun=="떡"|mini_noun=="콘"|mini_noun=="빵"|mini_noun=="쌀"|!nchar(mini_noun)==1)->insta.mini
-컬럼명 바꿔주기
+seven.counting %>% 
+  filter(seven_noun=="차"|seven_noun=="면"|seven_noun=="술"|seven_noun=="떡"|seven_noun=="콘"|seven_noun=="빵"|seven_noun=="쌀"|!nchar(seven_noun)==1)->insta.seven
+#컬럼명 바꿔주기
+names(insta.gs25)<-c("word","freq")
 names(insta.cu)<-c("word","freq")
 names(insta.emart24)<-c("word","freq")
 names(insta.mini)<-c("word","freq")
-
+names(insta.seven)<-c("word","freq")
 
 #### 표 만들기
 theme_set(theme_bw(base_family = "AppleGothic"))
@@ -132,35 +156,6 @@ ggplot(insta.mini %>% filter(freq > 800), aes(reorder(word, freq), freq)) +
   coord_flip() + 
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
 
-####워드클라우드((이거 안씀))
-font_add_google("Noto Sans", "notosans")
-pal = redmonder.pal(6, "sPBIRdPu") #색 파레트 
-showtext_auto()
-gs25.cnt %>% 
-  filter(n>150) %>% 
-  with(wordcloud(word
-                 , freq
-                 , family = "notosans"
-                 ,colors = pal))
-insta.cu %>% 
-  filter(n>1000) %>% 
-  with(wordcloud(word
-                 , freq
-                 , family = "notosans"
-                 ,colors = pal))
-insta.emart24 %>% 
-  filter(n>200) %>% 
-  with(wordcloud(word
-                 , freq
-                 , family = "notosans"
-                 ,colors = pal))
-insta.mini %>% 
-  filter(n>300) %>% 
-  with(wordcloud(word
-                 , freq
-                 , family = "notosans"
-                 ,colors = pal))
-
 
 ###워드클라우드 참고
 wordcloud(words$keyword, words$freq, 
@@ -179,9 +174,6 @@ library(htmltools)
 library(jsonlite)
 library(yaml)
 library(base64enc)
-wordcloud2(words,size=0.5,col="random-dark", figPath="book/peace.png")
-letterCloud(word, word = "CU", size = 2)
-
 head(insta.cu)
 insta.cu %>% 
   filter(freq>158) %>% 
@@ -201,7 +193,18 @@ insta.mini %>%
                   , size=0.5
                   ,col = "random-dark"))->wc.mini
 saveWidget(wc.mini,"ministop.html",selfcontained = F)
-
+insta.gs25 %>% 
+  filter(freq>121) %>% 
+  with(wordcloud2(.
+                  , size=0.5
+                  ,col = "random-dark"))->wc.gs25
+saveWidget(wc.gs25,"gs25.html",selfcontained = F)
+insta.seven %>% 
+  filter(freq>121) %>% 
+  with(wordcloud2(.
+                  , size=0.5
+                  ,col = "random-dark"))->wc.seven
+saveWidget(wc.seven,"seven.html",selfcontained = F)
 
 ###감성분석###
 ##군산대 감성사전 사용
@@ -228,8 +231,8 @@ res_sentiment.cu <- analyzeSentiment(corp.cu, #대신에 corpus,
                                   language="korean",
                                   rules=list("KoreanSentiment"=list(ruleSentiment, senti_dic_kr)),
                                   removeStopwords = F, stemming = F)
-
 cu.df_1 <- data.frame(round(res_sentiment.cu, 3), insta_cu[1:5000,]) #head(df2)
+
 
 ##emart24
 corp.emart24 <- VCorpus(VectorSource(insta_emart24$article[1:5000])) #inspect(corp)
