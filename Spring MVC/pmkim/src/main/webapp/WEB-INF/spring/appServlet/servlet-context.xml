@@ -25,6 +25,7 @@
 	
 	<context:component-scan base-package="vo" /> <!-- 내가 넣어준것임 -->
 	<context:component-scan base-package="dao" /> <!-- 내가 넣어준것임 -->
+	<context:component-scan base-package="service" /> <!-- 내가 넣어준것임 -->
 	
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
@@ -49,5 +50,7 @@
 	destroy-method="clearCache">
 			<beans:constructor-arg index="0"  ref="sqlSessionFactory" />
 	</beans:bean>
-	
+
+
+
 </beans:beans>

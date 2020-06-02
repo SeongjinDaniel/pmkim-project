@@ -1,6 +1,6 @@
 package spring.mvc.pmkim;
 
-import java.text.DecimalFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.ThemeDAO;
-import vo.GoodsVO;
+import vo.GoodsInfoThemeVO;
 
 
 @Controller
@@ -16,26 +16,18 @@ public class ThemeController {
 	
 	@Autowired
 	private ThemeDAO ThemeDAO;
-	
-	/////Seho
-	@RequestMapping(value="/test")
-	public String mapStreet() {
-		return "theme";
-	}
-	
-	//데시멀 포맷 사용하면 하고 아니면 지구이
-	DecimalFormat formatter = new DecimalFormat("###,###");
+
 	
 	@RequestMapping(value="/theme")
-	public ModelAndView report(GoodsVO gvo) {
+	public ModelAndView theme(GoodsInfoThemeVO gitvo) {
 
-		GoodsVO vo1 = ThemeDAO.goods(gvo);
+		List<GoodsInfoThemeVO> li = ThemeDAO.allGoods(gitvo);
 		ModelAndView mav = new ModelAndView();
-
-		
+		//값 확인
+		//System.out.println("Con : " + li.get(0).toString());
 		//goods table
-		mav.addObject("area_coname", vo1.getGoodName());
-
+		mav.addObject("theme", li);
+		mav.setViewName("theme");
 		return mav;
 	}
 	
