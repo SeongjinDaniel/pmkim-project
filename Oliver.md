@@ -492,8 +492,6 @@ var Ca = /\+/g;
 decodeURIComponent( con.replace(Ca, " ") );
 ```
 
-
-
 # 20200601
 
 으 git 브랜치에서 강제로 다른 브랜치로 넘어갔다가 오늘 짠 소스코드 다 날라가버렸음.............
@@ -503,3 +501,4 @@ decodeURIComponent( con.replace(Ca, " ") );
 멘붕 -> 치킨 -> 해결!! 감사합니다!!! To. Haley
 
 Ajax도 참 고마운 프로그램 기술이구나!!!!!!!!!!!!!!!!! 자유자재로 Controller와의 다리를 열어주어서 너무 고마워!!
+
