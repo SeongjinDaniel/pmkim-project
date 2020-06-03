@@ -25,54 +25,47 @@ public class MapDAO {
 		return list;
 	}
 	
-	public GoodsEventShopMemberVO mapAlgorithmDB(GoodsEventShopMemberVO vo) {
-		//logger.info("Mybatis mapAlgorithmDBList");
-		String statement = "resource.MapMapper.mapAlgorithmDBList";
-		//logger.info("mapAlgorithmDB dao: "+vo.getGood_name());
-		vo = sqlSession.selectOne(statement, vo);
-		// null 수정후 확인할것 !!
-		//logger.info("mapAlgorithmDB dao: "+vo.getGood_name());
-		return vo;
-	}
-	//selShopCodeNameDetail
-	
-	public GoodsEventShopMemberVO shopCodeName(GoodsEventShopMemberVO vo) {
-		//logger.info("Mybatis shopCodeName");
-		String statement = "resource.MapMapper.selShopCodeNameDetail";
-		vo = sqlSession.selectOne(statement, vo);
-		return vo;
-	}
-	
-//	public GoodsEventShopMemberVO eventName(GoodsEventShopMemberVO vo) {
-//	//logger.info("Mybatis eventName");
-//	String statement = "resource.MapMapper.selEventName";
-//	try{
-//		vo = sqlSession.selectOne(statement, vo);
-//	}catch(Exception e) {
-//		logger.info("eventName exception : " + e);
-//	}
-//	return vo;
-//}
-
-	public List<GoodsEventShopMemberVO> eventName(GoodsEventShopMemberVO vo) {
-		//logger.info("Mybatis eventName");
-		String statement = "resource.MapMapper.selEventName";
+	public List<GoodsEventShopMemberVO> mapAlgorithmDBList() {
+		logger.info("Mybatis mapAlgorithmDBList");
 		List<GoodsEventShopMemberVO> list = null;
-		try{
-			list = sqlSession.selectList(statement, vo);
-		}catch(Exception e) {
-			logger.info("eventName exception : " + e);
-		}
+		String statement = "resource.MapMapper.mapAlgorithmDBList";
+		list = sqlSession.selectList(statement);
 		return list;
 	}
 	
 	public List<GoodsEventShopMemberVO> shopCodeTableList() {
-		//logger.info("Mybatis shopCodeTableList");
+		logger.info("Mybatis shopCodeTableList");
 		List<GoodsEventShopMemberVO> list = null;
 		String statement = "resource.MapMapper.shopCodeTableList";
 		list = sqlSession.selectList(statement);
 		return list;
 	}
-	
+    
+//    // 01_01. 회원 로그인체크
+//    public boolean loginCheck(WeetCustomerInfoVO vo) {
+//    	System.out.println("Mybatis loginCheck");
+//        String name = sqlSession.selectOne("resource.WeetMapper.loginCheck", vo);
+//        return (name == null) ? false : true;
+//    }
+//    
+//    // 01_02. 회원 로그인 정보
+//    public WeetCustomerInfoVO viewCustomer(WeetCustomerInfoVO vo) {
+//    	System.out.println("Mybatis viewCustomer");
+//        return sqlSession.selectOne("resource.WeetMapper.viewCustomer", vo);
+//    }
+//    
+//    // 02. 회원 로그아웃
+//    public void logout(HttpSession session) {
+//    }
+//    
+//    // 회원가입
+//    public boolean signup(WeetCustomerInfoVO vo) {
+//    	System.out.println("Mybatis signup");
+//    	boolean result = false;
+//    	String statement = "resource.WeetMapper.insertCustomerId";
+//    	if(sqlSession.insert(statement, vo) == 1)
+//    		result = true;
+//
+//    	return result;
+//    }
 }
-
