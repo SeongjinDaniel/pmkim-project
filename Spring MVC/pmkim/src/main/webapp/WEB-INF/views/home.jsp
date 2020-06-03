@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/style.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/style_home.css">
     <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
     <link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
     <!-- Responsive CSS -->
@@ -86,13 +87,13 @@
     <div id="slides-shop" class="cover-slides">
         <ul class="slides-container">
             <li class="text-center">
-                <img src="/pmkim/resources/images/banner-01.jpg" alt="">
+                <img src="/pmkim/resources/images/home2.png" alt="">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
+                            <h1 class="m-b-20"><strong>바쁜세상 편하게 살자!!<br>이곳은 PMKIM</strong></h1>
+                            <p class="m-b-40">편의점 마스터, <strong>김편복</strong> <br> 모든 편의점의 행사상품을 한 곳에서 확인할 수 있다네~</p>
+                            <p><a  href="/pmkim/event">이벤드 상품 둘러보러가기</a></p>
                         </div>
                     </div>
                 </div>
@@ -104,19 +105,18 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
                             <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
+                            <p><a class="btn hvr-hover" href="/pmkim/theme">추천 알고리즘 경험해보러가기</a></p>
                         </div>
                     </div>
                 </div>
             </li>
             <li class="text-center">
-                <img src="/pmkim/resources/images/banner-03.jpg" alt="">
+                <img src="/pmkim/resources/images/home1.png" alt="">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
+                            <h1 class="m-b-20"><strong> <br></strong></h1><br><br><br>
+                            <p class="m-b-40">Linda, Seho, Oliver, Haley<br>서비스 개발자 소개<br>우리 진짜 힘들었어요...ㅎㅎ</p>
                         </div>
                     </div>
                 </div>
@@ -269,23 +269,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
-                        <h1 href="/pmkim/event">행사상품</h1>
-                        <p>Get your best Product</p>
+                        <a class="event-href" href="/pmkim/event">행사상품</a><br>
+                        <a class="event-a" href="/pmkim/event">더 많은</a>
+                         <a class="event-a" href="/pmkim/event" style="color:red">브랜드의 행사</a>
+                         <a class="event-a" href="/pmkim/event">브랜드의 행사를 보기 위해서 이곳을 클릭해주세요!</a><br><br>
+                        <a>
+                        	<img class="event-img" src ="/pmkim/resources/images/gs.png"/>
+                        	<img class="event-img" src ="/pmkim/resources/images/cu1.png"/>
+                        	<img class="event-img" src ="/pmkim/resources/images/emart24.png"/>
+                        	<img class="event-img" src ="/pmkim/resources/images/ministop.png"/>
+                        	<img class="event-img-small" src ="/pmkim/resources/images/seveneleven.png"/>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
-                    	<!-- <div class="button-group filter-button-group">
-                            <button class="active">All</button>
-                            <button name="shop_code" value="GS" >GS25</button>
-                            <button name="shop_code" value="CU" >CU</button>
-							<button name="shop_code" value="MS" >미니스탑</button>
-							<button name="shop_code" value="SE" >세븐일레븐</button>
-                            <button name="shop_code" value="EM" >emart24</button>
-                        </div> -->
-                        
                         <div class="button-group filter-button-group">
                             <button class="active" data-filter="*">전체보기</button>
                             <button data-filter=".oneOne">1+1</button>

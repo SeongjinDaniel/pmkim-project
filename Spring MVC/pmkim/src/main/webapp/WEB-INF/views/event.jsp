@@ -83,8 +83,19 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
-
-    <!-- Start Gallery  -->
+	<!-- Start All Title Box -->
+		<div class="all-title-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<h2>행사상품</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- End All Title Box -->
+	
+	<!-- Start Gallery  -->
     <div class="products-box2">
     
         <div class="container">

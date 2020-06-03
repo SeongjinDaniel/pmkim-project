@@ -1311,7 +1311,8 @@ body {
 
 /*------------------------------------------------------------------ All Pages -------------------------------------------------------------------*/
  .all-title-box{
-     background: url("../images/all-bg-title.jpg") no-repeat center center;
+     background: url("/pmkim/resources/images/banner.jpg") no-repeat center center;
+     height:250px;
      -webkit-background-size: cover;
      -moz-background-size: cover;
      -ms-background-size: cover;

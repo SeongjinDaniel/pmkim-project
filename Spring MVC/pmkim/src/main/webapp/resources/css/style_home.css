@@ -1,0 +1,17 @@
+.event-href{
+    font-size: 40px;
+    font-weight: 700;
+    padding-bottom: 15px;
+}
+.event-a{
+    font-size: 20px;
+    font-weight: none;
+    padding-bottom: 15px;
+}
+.event-img{
+    width:80px;
+}
+.event-img-small{
+    width:58px;
+    border-radius:15px;
+}
