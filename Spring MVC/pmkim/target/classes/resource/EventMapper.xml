@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="resource.EventMapper">
 
-	
   	<select id="goodsList_One" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->
   		select sc.shop_name as shop_name, e.event_name as event_name, g.good_id as good_id, g.good_name as good_name, g.good_price as good_price, g.good_img as good_img , g.search_date as search_date, g.mfg_name as mfg_name 
 		from goods g, event e, shop_code sc, goods_shop gs, goods_category gc
@@ -161,4 +160,13 @@
        			and gc.ctg_1=#{ctg_1})
 		where rnum between #{startNum} and #{endNum}
   	</select>
+
+    <!-- <select id="stringTest"  resultType="string">
+       select good_name from goods where good_id= #{good_id}
+    </select> -->
+    
+    <select id="EventName" resultType="vo.EventVO">
+    	select event_name from event
+    </select>
+ 	 	
 </mapper>

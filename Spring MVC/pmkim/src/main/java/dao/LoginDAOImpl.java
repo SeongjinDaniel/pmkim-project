@@ -22,8 +22,8 @@ public class LoginDAOImpl implements LoginDAO {
 		boolean result = false;
 		String statement = "resource.MemberMapper.loginCheck";
 		logger.info("logincheck dao!!");
-		logger.info(vo.getId());
-		logger.info(vo.getName());
+		logger.info("idLoginCheck:"+vo.getId());	
+		logger.info("NameLoginCheck:"+vo.getName());
 		if(sql.selectOne(statement,vo) != null)
 			result=true;				
 		return result;

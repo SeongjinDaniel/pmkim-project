@@ -20,6 +20,11 @@ public class OwnerpageController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/ask", method = RequestMethod.GET)
+	public String owner() {
+		return "/ask";
+	}
+	
 	@RequestMapping(value = "/memberownerinquiry", method = RequestMethod.GET)
 	public ModelAndView memberOwnerInquiry(MemberVO memberVO) {
 		ModelAndView mav = new ModelAndView();

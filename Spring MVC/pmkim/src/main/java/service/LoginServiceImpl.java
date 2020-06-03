@@ -18,15 +18,16 @@ public class LoginServiceImpl implements LoginService {
 	LoginDAO dao;
 	@Override
 	public boolean loginCheck(MemberVO vo,HttpSession session) {
+		logger.info("vo-id : "+vo.getId());
 		boolean result = dao.loginCheck(vo);
 		logger.info("loginCheck service!!");
 		logger.info("result = " + result);
 		if(result) {
 			MemberVO newVO = viewMember(vo);
 			session.setAttribute("id", newVO.getId());
-			session.setAttribute("name", newVO.getName());
+			//session.setAttribute("name", newVO.getName());
 			logger.info("session id: "+session.getAttribute("id").toString());
-			logger.info("session name: "+session.getAttribute("name").toString());
+			//logger.info("session name: "+session.getAttribute("name").toString());
 		}
 		return result;
 	}

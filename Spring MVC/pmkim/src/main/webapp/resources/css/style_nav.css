@@ -10,8 +10,14 @@ nav.navbar.bootsnav ul.nav > li > a{
     padding-right: 30px;
 }
 
-#login,#signup{
+#login,#signup, #logout, #userView{
 	margin-top: 11px;
 	font-size: 15px;
 	color:black;
+}
+#logout{
+	margin-left: -30px;
+	margin-top: 20px;
+	font-size: 8px;
+	color:#0F694D;
 }
