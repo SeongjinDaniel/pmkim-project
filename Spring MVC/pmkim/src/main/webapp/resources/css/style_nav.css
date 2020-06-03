@@ -1,0 +1,11 @@
+nav.navbar.bootsnav ul.nav > li > a{
+    position: relative;
+    font-weight: 700;
+    font-size: 22px;
+    color: #000000;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 30px;
+}

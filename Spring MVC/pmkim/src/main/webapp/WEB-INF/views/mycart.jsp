@@ -427,7 +427,7 @@
 	<script src="/pmkim/resources/js/contact-form-script.js"></script>
 	<script src="/pmkim/resources/js/custom_linda.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+	
 	<!-- custom js -->
 	<script>
 		function recommend(){			
@@ -512,7 +512,7 @@
 				//console.log(document.querySelector("#cart-View > img"));
 			});
 		}
-	
+		
 		//클릭 상품 저장
 		function add(good_id){
 			$.ajax({
@@ -560,7 +560,9 @@
 				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
 				success : function(data){	
 					if(data=="1"){
-						document.getElementById('cart-View').innerHTML = '상품을 클릭하세요.';
+						document.getElemen
+						
+						tById('cart-View').innerHTML = '상품을 클릭하세요.';
 					}else{
 						alert("선택한 상품이 없습니다.");
 					}
