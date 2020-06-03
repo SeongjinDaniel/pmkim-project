@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/styleOwnerpage.css">
+    <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
     <!-- Custom CSS -->
@@ -35,6 +36,8 @@
 
 <body>
 
+    <c:set var="sessionMemberId" value="${ sessionScope.id }"/>
+    <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -44,79 +47,41 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="/pmkim/resources/images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="/pmkim/main"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
-					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown"
-						data-out="fadeOutUp">
-						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-						<!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
-						<li class="nav-item"><a class="nav-link" href="/pmkim/map">지도</a></li>
-						<!--성진오빠파트-->
-						<li class="dropdown"><a href="#"
-							class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a>
-							<!-- 세호오빠가 원하는 li에다가 href해주세요!-->
-							<ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
-								<li><a href="shop-detail.html">Shop Detail</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-								<li><a href="my-account.html">My Account</a></li>
-								<li><a href="wishlist.html">Wishlist</a></li>
-							</ul></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="event.jsp">행사</a></li>
-						<!-- 지혜파트-->
-						<li class="nav-item"><a class="nav-link" href="mycart.jsp">장바구니</a></li>
-						<!-- 규영언니파트♡ -->
-					</ul>
-				</div>
-                <!-- /.navbar-collapse -->
-
-                <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
-                    <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-							<p>My Cart</p>
-					</a></li>
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/home">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/map">지도</a></li> <!--성진오빠파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/theme">테마</a></li> <!-- 세호-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/cart">만원의 행복</a></li> <!-- 규영언니파트♡ -->
+                        <!-- <li class="nav-item active"><a class="nav-link" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>	                        
+						<li class="nav-item active"><a class="nav-link" href="/pmkim/signup">회원가입</a></li> -->
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+						<c:choose>
+							<c:when test="${msg eq 'success' || !empty sessionMemberId}">
+								<li class="nav-item active"><a class="nav-link" id="userView" href="/pmkim/ownerpage"><img src="/pmkim/resources/images/star.png" style="width:13px;">${sessionMemberId}님</a></li>
+								<li class="nav-item active"><a class="nav-link" id="logout" href="/pmkim/logout"><b>Logout</b></a></li>
+								
+							</c:when>
+							<c:when test="${msg eq 'fail' || msg eq 'logout' || msg eq '' || msg eq null}">
+								<li class="nav-item active"><a class="nav-link" id="login" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>
+								<li class="nav-item active"><a class="nav-link" id="signup" href="/pmkim/signup">회원가입</a></li>	
+						    </c:when>
+						</c:choose>
                     </ul>
                 </div>
-                <!-- End Atribute Navigation -->
+                <!-- /.navbar-collapse -->
+			
             </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="/pmkim/resources/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="/pmkim/resources/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="/pmkim/resources/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
+            
+            <!-- Login -->
+           
+			<!-- Login End-->
         </nav>
         <!-- End Navigation -->
     </header>
@@ -141,7 +106,7 @@
                 <div class="col-lg-12">
                     <h2>Owner Page</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/pmkim/home">Home</a></li>
                         <li class="breadcrumb-item active">Owner Page</li>
                     </ul>
                 </div>
@@ -172,7 +137,7 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fas fa-question"></i> </a>
+                                    <a href="/pmkim/ask"> <i class="fas fa-question"></i> </a>
                                 </div>
                                 <div class="service-desc">
                                     <h4>문의내역</h4>
@@ -198,7 +163,7 @@
                         <div class="account-box">
                             <div class="service-box">
                                 <div class="service-icon">
-                                    <a href="#"> <i class="fas fa-file-upload"></i> </a>
+                                    <a href="/pmkim/upload"> <i class="fas fa-file-upload"></i> </a>
                                 </div>
                                 <div class="service-desc">
                                     <h4>데이터 업로드</h4>

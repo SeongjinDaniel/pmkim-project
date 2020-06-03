@@ -48,7 +48,7 @@
 			//List<GoodsEventShopMemberVO> twolist = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("twolist");
 			//List<GoodsEventShopMemberVO> pblist = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("pblist");
 %>
-	<c:set var="sessionMemberName" value="${ sessionScope.name }"/>
+	<c:set var="sessionMemberId" value="${ sessionScope.id }"/>
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
@@ -75,13 +75,10 @@
 						<li class="nav-item active"><a class="nav-link" href="/pmkim/signup">회원가입</a></li> -->
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						<c:choose>
-							<c:when test="${msg eq 'success' || !empty sessionMemberName}">
-								<a href="/weet/upload.do" style="margin-top:45px;margin-right:30px;">Upload</a>
+							<c:when test="${msg eq 'success' || !empty sessionMemberId}">
+								<li class="nav-item active"><a class="nav-link" id="userView" href="/pmkim/ownerpage"><img src="/pmkim/resources/images/star.png" style="width:13px;">${sessionMemberId}님</a></li>
+								<li class="nav-item active"><a class="nav-link" id="logout" href="/pmkim/logout"><b>Logout</b></a></li>
 								
-								<a style="margin-top:45px;text-decoration: none;"> ${sessionMemberName}님&nbsp;
-											<img src="/pmkim/resources/images/star.png" style="width:16px;">&nbsp;:&nbsp;1</a>
-								
-								<a href="/pmkim/logout"><button type="button">Logout</button></a>
 							</c:when>
 							<c:when test="${msg eq 'fail' || msg eq 'logout' || msg eq '' || msg eq null}">
 								<li class="nav-item active"><a class="nav-link" id="login" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>
@@ -129,12 +126,12 @@
 		        
 		          <form method="post" action="/pmkim/login" id="frmSignin">
 		            <div class="form-group">
-		              <input type="text" class="form-control" name="customer_id" placeholder="Your id...">
+		              <input type="text" class="form-control" name="id" placeholder="Your id...">
 		            </div>
 		            <div class="form-group">
-		              <input type="password" class="form-control" name="customer_pwd" placeholder="Your password...">
+		              <input type="password" class="form-control" name="pw" placeholder="Your password...">
 		            </div>
-		            <button type="submit" class="btn btn-info btn-block btn-round" id="btnLogin">Login</button> <!-- '/weet/signinCheck.do' -->
+		            <button type="submit" class="btn btn-info btn-block btn-round" id="btnLogin" style="background-color:#0F694D">Login</button> <!-- '/weet/signinCheck.do' -->
 		          </form>
 		          
 		          <!-- <div class="text-center text-muted delimiter">or use a social network</div> -->

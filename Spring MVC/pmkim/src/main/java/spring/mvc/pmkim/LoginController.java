@@ -21,10 +21,10 @@ public class LoginController {
 	@Autowired
 	LoginService ms;
 	
-	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public String main(@ModelAttribute MemberVO vo, HttpSession session) {
-		return "main";
-	}
+//	@RequestMapping(value="/main", method = RequestMethod.GET)
+//	public String main(@ModelAttribute MemberVO vo, HttpSession session) {
+//		return "main";
+//	}
 	
 	@RequestMapping(value="/login")
 	public ModelAndView loginCheck(@ModelAttribute MemberVO vo, HttpSession session) {
@@ -36,8 +36,8 @@ public class LoginController {
 		}else {
 			//mav.setViewName("main2");
 			mav.addObject("msg","fail");
-			mav.setViewName("home");
 		}
+		mav.setViewName("home");
 		return mav;
 	}
 	
@@ -52,7 +52,7 @@ public class LoginController {
 	public ModelAndView logout(HttpSession session) {
 		ms.logout(session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
+		mav.setViewName("home");
 		mav.addObject("msg","logout");
 		return mav;
 	}
