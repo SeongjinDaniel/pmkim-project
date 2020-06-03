@@ -1,11 +1,6 @@
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,vo.GoodsCategoryEventShopMemberVO,java.util.List,java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,15 +12,15 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	
     <!-- Site Metas -->
-    <title>업로드</title>
+    <title>편마, 김편복 - event</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
 
+    
     <!-- Site Icons -->
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
 	<!-- <link rel="icon"  href="/pmkim/resources/images/pmkim.ico" type="image/x-icon" sizes="16x16" > -->
 	<link rel="icon" href="/pmkim/resources/images/pmkim.png"  type="image/png" sizes="16X16">
     
@@ -38,17 +33,6 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
     <link rel="stylesheet" href="/pmkim/resources/css/style_event.css">
     <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
     <link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
-=======
-    <link rel="icon" type="image/png" sizes="16x16" href="/pmkim/resources/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<!-- you need to include the ShieldUI CSS and JS assets in order for the Upload widget to work -->
-	<link rel="stylesheet" type="text/css" href="http:/	/www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="/pmkim/resources/css/style_upload.css">
-    <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
     <!-- Custom CSS -->
@@ -64,17 +48,12 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
 
 <body>
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
 <% 
 		   
 		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
 		   List<GoodsCategoryEventShopMemberVO> gesList = (ArrayList<GoodsCategoryEventShopMemberVO>) request.getAttribute("gesList");
 		   
 %>
-=======
-   
-    <c:set var="sessionMemberId" value="${ sessionScope.id }"/>
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
@@ -85,11 +64,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
                     <a class="navbar-brand" href="/pmkim/home"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
-=======
-                    <a class="navbar-brand" href="/pmkim/main"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp
                 </div>
                 <!-- End Header Navigation -->
 
@@ -101,40 +76,14 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/theme">테마</a></li> <!-- 세호-->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/cart">만원의 행복</a></li> <!-- 규영언니파트♡ -->
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
+                   		<li class="nav-item active"><a class="nav-link" href="/pmkim/news">편의점 뉴스</a></li> <!-- 규영언니파트♡ -->
                     </ul>
                 </div>
             </div>
-=======
-                        <!-- <li class="nav-item active"><a class="nav-link" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>	                        
-						<li class="nav-item active"><a class="nav-link" href="/pmkim/signup">회원가입</a></li> -->
-						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-						<c:choose>
-							<c:when test="${msg eq 'success' || !empty sessionMemberId}">
-								<li class="nav-item active"><a class="nav-link" id="userView" href="/pmkim/ownerpage"><img src="/pmkim/resources/images/star.png" style="width:13px;">${sessionMemberId}님</a></li>
-								<li class="nav-item active"><a class="nav-link" id="logout" href="/pmkim/logout"><b>Logout</b></a></li>
-								
-							</c:when>
-							<c:when test="${msg eq 'fail' || msg eq 'logout' || msg eq '' || msg eq null}">
-								<li class="nav-item active"><a class="nav-link" id="login" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>
-								<li class="nav-item active"><a class="nav-link" id="signup" href="/pmkim/signup">회원가입</a></li>	
-						    </c:when>
-						</c:choose>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-			
-            </div>
-            
-            <!-- Login -->
-           
-			<!-- Login End-->
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp
         </nav>
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
 	<!-- Start All Title Box -->
 		<div class="all-title-box">
 			<div class="container">
@@ -317,74 +266,6 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 	</div>
 
     <!-- End Gallery  -->
-=======
-
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- End Top Search -->
-
-    <!-- Start All Title Box -->
-    <div class="all-title-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Upload</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Upload</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End All Title Box -->
-
-    <!-- Start About Page  -->
-    <div class="about-box-main">
-        <div class="container">
-            <div class="row">
-				<div class="col-lg-6">
-                    <div class="banner-frame"> <img class="img-fluid" src="/pmkim/resources/images/cooperation.png" alt="" style="height:100%"/>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h2 class="noo-sh-title-top">프리미엄 <span>서비스</span></h2>
-                    <p>1. 근처 상권 가격 비교 List</p> 
-                    <p>2. My 편의점에서 어떤 식품이 많이 판매</p>
-                    <p>3. 계절 별 식품 판매량 비교</p>
-                    <p>4. 빅데이터 식품별 상관 관계 Insight 정보 제공</p>
-                    <p><b>해당 편의점에 대하여 월별 가격 비교를 위하여 파일을 업로드해 보세요!!</b></p>
-                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-					<!-- <a class="btn hvr-hover" href="#">Read More</a> -->
-					<br><br><br>
-					<div class="container">
-					        <form method="get" action="/pmkim/upload">
-					            <input type="file" id="files" name="files" multiple="multiple"/>
-					            <!-- 버튼 누르면 업로드 되고 결제 안내 Page로 넘어감!! -->
-					            <span style="text-align: right; ">
-					                <input type="submit" value="Upload Files" class="btn" style="background-color:#0F694D;"/>
-					            </span>
-					            
-					        </form>
-					</div>
-				
-					
-					
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- End About Page -->
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp
 
     <!-- 20200521_oliver.yoo -->
 	<!-- Start Footer  -->
@@ -512,31 +393,14 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 	</div>
 	<!-- End copyright  -->
 
-    <!-- Start copyright  -->
-	<div class="footer-copyright">
-		<p class="footer-company">
-			© PMKIM CORP. ALL RIGHTS RESERVED &copy; 2020 <a href="#PMKIM">PMKIM</a>
-		</p>
-	</div>
-	<!-- End copyright  -->
-
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
-    
-    <!-- File Upload -->
-    <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-	<script type="text/javascript">
-	    jQuery(function ($) {
-	        $("#files").shieldUpload();
-	    });
-	</script>
-					
+
     <!-- ALL JS FILES -->
     <script type="Text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="/pmkim/resources/js/jquery-3.2.1.min.js"></script>
     <script src="/pmkim/resources/js/popper.min.js"></script>
     <script src="/pmkim/resources/js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
-<<<<<<< HEAD:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/event.jsp
     <script src="/pmkim/resources/js/jquery.superslides.min.js"></script>
     <script src="/pmkim/resources/js/bootstrap-select.js"></script>
     <script src="/pmkim/resources/js/inewsticker.js"></script>
@@ -555,19 +419,3 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
 
 
 
-=======
-    <script src="resources/js/jquery.superslides.min.js"></script>
-    <script src="resources/js/bootstrap-select.js"></script>
-    <script src="resources/js/inewsticker.js"></script>
-    <script src="resources/js/bootsnav.js."></script>
-    <script src="resources/js/images-loded.min.js"></script>
-    <script src="resources/js/isotope.min.js"></script>
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/baguetteBox.min.js"></script>
-    <script src="resources/js/form-validator.min.js"></script>
-    <script src="resources/js/contact-form-script.js"></script>
-    <script src="resources/js/custom.js"></script>
-</body>
-
-</html>
->>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90:Spring MVC/pmkim/src/main/webapp/WEB-INF/views/upload.jsp

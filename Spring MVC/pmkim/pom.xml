@@ -148,6 +148,22 @@
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis-spring</artifactId>
 		    <version>1.3.2</version>
+<<<<<<< HEAD
+		</dependency>
+		
+		<!-- Rserve -->
+		<dependency>
+	         <groupId>com.github.lucarosellini.rJava</groupId>
+	         <artifactId>JRIEngine</artifactId>
+	         <version>0.9-7</version>
+	    </dependency>
+	    <dependency>
+	         <groupId>net.rforge</groupId>
+	         <artifactId>Rserve</artifactId>
+	         <version>0.6-8.1</version>
+	    </dependency>
+		       
+=======
 		</dependency>    
 		<dependency>
 			<groupId>com.github.lucarosellini.rJava</groupId>
@@ -159,6 +175,7 @@
 			<artifactId>Rserve</artifactId>
 			<version>0.6-8.1</version>
 		</dependency>   
+>>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90
 	</dependencies>
     <build>
         <plugins>
