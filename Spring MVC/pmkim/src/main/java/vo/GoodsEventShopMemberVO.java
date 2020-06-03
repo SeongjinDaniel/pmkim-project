@@ -76,210 +76,231 @@ public class GoodsEventShopMemberVO {
     // 멤버 종류 
     private String member_type;
 
-	public String getGood_id() {
-		return good_id;
-	}
+    // 장바구니 아이디 
+    private int cart_id;
 
-	public void setGood_id(String good_id) {
-		this.good_id = good_id;
-	}
-
-	public String getGood_name() {
-		return good_name;
-	}
-
-	public void setGood_name(String good_name) {
-		this.good_name = good_name;
-	}
-
-	public Date getSearch_date() {
-		return search_date;
-	}
-
-	public void setSearch_date(Date search_date) {
-		this.search_date = search_date;
-	}
-
-	public String getGood_price() {
-		return good_price;
-	}
-
-	public void setGood_price(String good_price) {
-		this.good_price = good_price;
-	}
-
-	public String getMfg_name() {
-		return mfg_name;
-	}
-
-	public void setMfg_name(String mfg_name) {
-		this.mfg_name = mfg_name;
-	}
-
-	public String getGood_img() {
-		return good_img;
-	}
-
-	public void setGood_img(String good_img) {
-		this.good_img = good_img;
-	}
-
-	public String getGood_shop_id() {
-		return good_shop_id;
-	}
-
-	public void setGood_shop_id(String good_shop_id) {
-		this.good_shop_id = good_shop_id;
-	}
-
-	public String getShop_id() {
-		return shop_id;
-	}
-
-	public void setShop_id(String shop_id) {
-		this.shop_id = shop_id;
-	}
-
-	public String getShop_addr() {
-		return shop_addr;
-	}
-
-	public void setShop_addr(String shop_addr) {
-		this.shop_addr = shop_addr;
-	}
-
-	public String getTel_num() {
-		return tel_num;
-	}
-
-	public void setTel_num(String tel_num) {
-		this.tel_num = tel_num;
-	}
-
-	public String getShop_code() {
-		return shop_code;
-	}
-
-	public void setShop_code(String shop_code) {
-		this.shop_code = shop_code;
-	}
-
-	public String getShop_name_detail() {
-		return shop_name_detail;
-	}
-
-	public void setShop_name_detail(String shop_name_detail) {
-		this.shop_name_detail = shop_name_detail;
-	}
-
-	public String getShop_name() {
-		return shop_name;
-	}
-
-	public void setShop_name(String shop_name) {
-		this.shop_name = shop_name;
-	}
-
-	public String getEvent_name() {
-		return event_name;
-	}
-
-	public void setEvent_name(String event_name) {
-		this.event_name = event_name;
-	}
-
-	public int getEvent_id() {
-		return event_id;
-	}
-
-	public void setEvent_id(int event_id) {
-		this.event_id = event_id;
-	}
-	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPw() {
-		return pw;
-	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getSign_date() {
-		return sign_date;
-	}
-
-	public void setSign_date(Date sign_date) {
-		this.sign_date = sign_date;
-	}
-
-	public String getNick_name() {
-		return nick_name;
-	}
-
-	public void setNick_name(String nick_name) {
-		this.nick_name = nick_name;
-	}
-
-	public String getRoad_addr() {
-		return road_addr;
-	}
-
-	public void setRoad_addr(String road_addr) {
-		this.road_addr = road_addr;
-	}
-
-	public String getLogin_type() {
-		return login_type;
-	}
-
-	public void setLogin_type(String login_type) {
-		this.login_type = login_type;
-	}
-
-	public String getMember_type() {
-		return member_type;
-	}
-
-	public void setMember_type(String member_type) {
-		this.member_type = member_type;
-	}
-
-	@Override
-	public String toString() {
-		return "GoodsEventShopVO [good_id=" + good_id + ", good_name=" + good_name + ", search_date=" + search_date
-				+ ", good_price=" + good_price + ", mfg_name=" + mfg_name + ", good_img=" + good_img + ", good_shop_id="
-				+ good_shop_id + ", shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num=" + tel_num
-				+ ", shop_code=" + shop_code + ", shop_name_detail=" + shop_name_detail + ", shop_name=" + shop_name
-				+ ", event_name=" + event_name + ", event_id=" + event_id + ", id=" + id + ", pw=" + pw + ", name="
-				+ name + ", email=" + email + ", sign_date=" + sign_date + ", nick_name=" + nick_name + ", road_addr="
-				+ road_addr + ", login_type=" + login_type + ", member_type=" + member_type + "]";
-	}
-
-	
+    // 주문 갯수
+    private int cnt;
     
+   public String getGood_id() {
+      return good_id;
+   }
+
+   public void setGood_id(String good_id) {
+      this.good_id = good_id;
+   }
+
+   public String getGood_name() {
+      return good_name;
+   }
+
+   public void setGood_name(String good_name) {
+      this.good_name = good_name;
+   }
+
+   public Date getSearch_date() {
+      return search_date;
+   }
+
+   public void setSearch_date(Date search_date) {
+      this.search_date = search_date;
+   }
+
+   public String getGood_price() {
+      return good_price;
+   }
+
+   public void setGood_price(String good_price) {
+      this.good_price = good_price;
+   }
+
+   public String getMfg_name() {
+      return mfg_name;
+   }
+
+   public void setMfg_name(String mfg_name) {
+      this.mfg_name = mfg_name;
+   }
+
+   public String getGood_img() {
+      return good_img;
+   }
+
+   public void setGood_img(String good_img) {
+      this.good_img = good_img;
+   }
+
+   public String getGood_shop_id() {
+      return good_shop_id;
+   }
+
+   public void setGood_shop_id(String good_shop_id) {
+      this.good_shop_id = good_shop_id;
+   }
+
+   public String getShop_id() {
+      return shop_id;
+   }
+
+   public void setShop_id(String shop_id) {
+      this.shop_id = shop_id;
+   }
+
+   public String getShop_addr() {
+      return shop_addr;
+   }
+
+   public void setShop_addr(String shop_addr) {
+      this.shop_addr = shop_addr;
+   }
+
+   public String getTel_num() {
+      return tel_num;
+   }
+
+   public void setTel_num(String tel_num) {
+      this.tel_num = tel_num;
+   }
+
+   public String getShop_code() {
+      return shop_code;
+   }
+
+   public void setShop_code(String shop_code) {
+      this.shop_code = shop_code;
+   }
+
+   public String getShop_name_detail() {
+      return shop_name_detail;
+   }
+
+   public void setShop_name_detail(String shop_name_detail) {
+      this.shop_name_detail = shop_name_detail;
+   }
+
+   public String getShop_name() {
+      return shop_name;
+   }
+
+   public void setShop_name(String shop_name) {
+      this.shop_name = shop_name;
+   }
+
+   public String getEvent_name() {
+      return event_name;
+   }
+
+   public void setEvent_name(String event_name) {
+      this.event_name = event_name;
+   }
+
+   public int getEvent_id() {
+      return event_id;
+   }
+
+   public void setEvent_id(int event_id) {
+      this.event_id = event_id;
+   }
+   
+   public String getId() {
+      return id;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
+   public String getPw() {
+      return pw;
+   }
+
+   public void setPw(String pw) {
+      this.pw = pw;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public Date getSign_date() {
+      return sign_date;
+   }
+
+   public void setSign_date(Date sign_date) {
+      this.sign_date = sign_date;
+   }
+
+   public String getNick_name() {
+      return nick_name;
+   }
+
+   public void setNick_name(String nick_name) {
+      this.nick_name = nick_name;
+   }
+
+   public String getRoad_addr() {
+      return road_addr;
+   }
+
+   public void setRoad_addr(String road_addr) {
+      this.road_addr = road_addr;
+   }
+
+   public String getLogin_type() {
+      return login_type;
+   }
+
+   public void setLogin_type(String login_type) {
+      this.login_type = login_type;
+   }
+
+   public String getMember_type() {
+      return member_type;
+   }
+
+   public void setMember_type(String member_type) {
+      this.member_type = member_type;
+   }
+   
+   public int getCart_id() {
+      return cart_id;
+   }
+
+   public void setCart_id(int cart_id) {
+      this.cart_id = cart_id;
+   }
+
+   public int getCnt() {
+      return cnt;
+   }
+
+   public void setCnt(int cnt) {
+      this.cnt = cnt;
+   }
+
+   @Override
+   public String toString() {
+      return "GoodsEventShopMemberVO [good_id=" + good_id + ", good_name=" + good_name + ", search_date="
+            + search_date + ", good_price=" + good_price + ", mfg_name=" + mfg_name + ", good_img=" + good_img
+            + ", good_shop_id=" + good_shop_id + ", shop_id=" + shop_id + ", shop_addr=" + shop_addr + ", tel_num="
+            + tel_num + ", shop_code=" + shop_code + ", shop_name_detail=" + shop_name_detail + ", shop_name="
+            + shop_name + ", event_name=" + event_name + ", event_id=" + event_id + ", id=" + id + ", pw=" + pw
+            + ", name=" + name + ", email=" + email + ", sign_date=" + sign_date + ", nick_name=" + nick_name
+            + ", road_addr=" + road_addr + ", login_type=" + login_type + ", member_type=" + member_type
+            + ", cart_id=" + cart_id + ", cnt=" + cnt + "]";
+   }
+
     
 }

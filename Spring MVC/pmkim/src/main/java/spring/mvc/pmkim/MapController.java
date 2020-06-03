@@ -34,8 +34,13 @@ public class MapController {
 			GoodsEventShopMemberVO goodsEvtShopMemberVO) {
 		ModelAndView mav = new ModelAndView();
 		
-		logger.info("controller searchProduct: " + searchProduct);
-
+		//logger.info("controller searchProduct: " + searchProduct);
+		if(goodsEvtShopMemberVO != null) {
+			logger.info("controller shop_code: " + goodsEvtShopMemberVO.getShop_code());
+			System.out.println("controller shop_code: " + goodsEvtShopMemberVO.getShop_code());
+		}
+		//logger.info("controller shop_code: " + goodsEvtShopMemberVO.getShop_code());
+		mav.addObject("goodsEvtShopMemberVO", goodsEvtShopMemberVO);
 		mav.addObject("searchKeyword", searchKeyword);
 		mav.addObject("searchProduct", searchProduct);
 		mav.setViewName("/map");
@@ -49,19 +54,19 @@ public class MapController {
 	@ResponseBody
 	public void mapPost(String searchKeyword, String searchProduct, boolean goodNameFlag,
 			GoodsEventShopMemberVO goodsEvtShopMemberVO, HttpServletResponse response) throws ServletException, IOException{
-		logger.info("controller goodNameFlag: " + goodNameFlag);
-		logger.info("controller searchProduct: " + searchProduct);
+		//logger.info("controller goodNameFlag: " + goodNameFlag);
+		//logger.info("controller searchProduct: " + searchProduct);
 		
 		if(goodsEvtShopMemberVO != null) {		
-			System.out.println("Controller : "+ goodsEvtShopMemberVO.getShop_code());
-			System.out.println("Controller : " + goodsEvtShopMemberVO.getShop_name_detail());
+			//System.out.println("Controller : "+ goodsEvtShopMemberVO.getShop_code());
+			//System.out.println("Controller : " + goodsEvtShopMemberVO.getShop_name_detail());
 
 			if(searchProduct != null) goodsEvtShopMemberVO.setGood_name(searchProduct);
 			if(goodNameFlag == true) {
-				logger.info("goodNameFlag : true");
+				//logger.info("goodNameFlag : true");
 				mapService.searchEventName(goodsEvtShopMemberVO, response);
 			}else {
-				logger.info("goodNameFlag : false");
+				//logger.info("goodNameFlag : false");
 				mapService.searchStore(goodsEvtShopMemberVO, response);
 			}
 		}
@@ -77,36 +82,6 @@ public class MapController {
 		}
 		return mapService.searchEventName(goodsEvtShopMemberVO, response);
 	}
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(Model model) {
 
-		
-		return "/test";
-	}
-	
-	@RequestMapping(value = "/mapTemp", method = RequestMethod.GET)
-	public String mapTemp(Model model) {
 
-		
-		return "/mapTemp";
-	}
-	
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
-	public String test2(Model model) {
-
-		return "/test2";
-	}
-	
-	@RequestMapping(value = "/test3", method = RequestMethod.GET)
-	public String test3(Model model) {
-
-		return "/test3";
-	}
-
-	@RequestMapping(value = "/coordToAddr", method = RequestMethod.GET)
-	public String coordToAddr(Model model) {
-
-		return "/coordToAddr";
-	}
-	
 }

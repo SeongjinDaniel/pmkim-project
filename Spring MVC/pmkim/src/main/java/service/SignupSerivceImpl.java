@@ -21,7 +21,7 @@ public class SignupSerivceImpl implements SignupService {
 	
 	@Override
 	public void insertMember(MemberVO vo) {
-		logger.info("mybatis service inserMember");
+		//logger.info("mybatis service inserMember");
 		dao.insertMember(vo);
 	}
 	

@@ -21,27 +21,23 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- favicon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="/pmkim/resources/images/favicon-16x16.png">
 <!-- Site Icons -->
-<!-- <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
-<!-- <link rel="apple-touch-icon" href="images/apple-touch-icon.png"> -->
+<!-- <link rel="icon"  href="/pmkim/resources/images/pmkim.ico" type="image/x-icon" sizes="16x16" > -->
+<link rel="icon" href="/pmkim/resources/images/pmkim.png"  type="image/png" sizes="16X16">
+    
+<!--  Fonts -->
+<link rel="stylesheet" href= '//cdn.rawgit.com/young-ha/webfont-archive/master/css/Youth.css' type='text/css'>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min_map.css">
 <!-- Site CSS -->
-<link rel="stylesheet" href="/pmkim/resources/css/styleMap.css">
+<link rel="stylesheet" href="/pmkim/resources/css/style_map.css">
 <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
+<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
-
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 <!-- kakao map -->
 <script type="text/javascript"
@@ -53,9 +49,10 @@
 		String keyword = (String) request.getAttribute("searchKeyword");
 		String keywordProduct = (String) request.getAttribute("searchProduct");
 		//List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
-		//GoodsEventShopMemberVO mapAlgorithmDB = 
-		//		(GoodsEventShopMemberVO) request.getAttribute("mapAlgorithmDB");
+		//GoodsEventShopMemberVO vo =
+		//		(GoodsEventShopMemberVO) request.getAttribute("goodsEvtShopMemberVO");
 	%>
+	<c:set var="vo" value="${ requestScope.goodsEvtShopMemberVO }"/>
 	<c:set var="sessionMemberId" value="${ sessionScope.id }"/>
     <!-- Start Main Top -->
     <header class="main-header">
@@ -67,7 +64,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="/pmkim/main"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="/pmkim/home"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -76,9 +73,10 @@
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/home">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/map">지도</a></li> <!--성진오빠파트-->
-                        <li class="nav-item active"><a class="nav-link" href="/pmkim/theme">테마</a></li> <!-- 세호-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/analysis">SNS 분석</a></li> <!-- 세호-->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/cart">만원의 행복</a></li> <!-- 규영언니파트♡ -->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/news">편의점 뉴스</a></li> <!-- 규영언니파트♡ -->
                         <!-- <li class="nav-item active"><a class="nav-link" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>	                        
 						<li class="nav-item active"><a class="nav-link" href="/pmkim/signup">회원가입</a></li> -->
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
@@ -106,19 +104,71 @@
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
-
-	<!-- Start Top Search -->
-	<div class="top-search">
-		<div class="container">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-search"></i></span>
-				<input type="text" class="form-control" placeholder="Search">
-				<span class="input-group-addon close-search"><i
-					class="fa fa-times"></i></span>
-			</div>
+	<!-- Start login popup -->
+    <div class="container">
+		<!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal">
+		    Login
+		</button>   -->
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			
+		  <div class="modal-dialog modal-dialog-centered" role="document" >
+		    <div class="modal-content" >
+		      <div class="modal-header border-bottom-0">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body border-bottom-0">
+		      	<div class="form-title text-center"><!--  style="margin-left:auto; margin-right:auto;" -->
+					<img src="/pmkim/resources/images/pmkim_Logo_1.jpg" /> 	
+				</div>
+				<br>
+				
+		        <div class="form-title text-center">
+		          <h4><b>Login</b></h4>
+		        </div>
+		        <div class="d-flex flex-column text-center">
+		        
+		          <form method="post" action="/pmkim/login" id="frmSignin">
+		            <div class="form-group">
+		              <input type="text" class="form-control" name="id" placeholder="Your id...">
+		            </div>
+		            <div class="form-group">
+		              <input type="password" class="form-control" name="pw" placeholder="Your password...">
+		            </div>
+		            <button type="submit" class="btn btn-info btn-block btn-round" id="btnLogin" style="background-color:#0F694D">Login</button> <!-- '/weet/signinCheck.do' -->
+		          </form>
+		          
+		          <!-- <div class="text-center text-muted delimiter">or use a social network</div> -->
+		          <div class="d-flex justify-content-center social-buttons">
+		            <!-- <button type="button" id="btnGoogleSignin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google"
+		           		onclick="
+		           			gauth.signIn().then(function(){
+								console.log('gauth.signIn()');
+								checkLoginStatus();
+								location.reload(true);
+							});
+						" data-dismiss="modal">
+		          		<img src="/pmkim/resources/images/btn_google_light_normal_ios.svg">
+		          	</button> -->
+		          </div>
+		        </div>
+		      </div>
+		      <div class="modal-footer d-flex justify-content-center ">
+			        <div class="signup-section text-center">Not a member yet? 
+			        	<a href="/pmkim/signup">Sign Up</a>.
+			        </div>
+			        <button type="button" class="btn btn-default text-center" data-dismiss="modal">Close</button>
+			        <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signupModal">Open Modal</button> -->
+		      </div>
+		    </div>
+		      
+		  </div>
 		</div>
+		
 	</div>
-	<!-- End Top Search -->
+		<!-- End login popup -->
+    
 
 	<!-- Start All Title Box -->
 	<div class="all-title-box">
@@ -140,115 +190,142 @@
 	<div class="about-box-main">
 		<div class="container">
 			<form action="/pmkim/map" method="GET">
-				<div class="row my-5">
-					<div class="col-sm col">
-						<div class="service-block-inner">
-							<h3>검색할 상품을 적어보세요!</h3>
-								<input class="form-control" name="searchProduct"
-									placeholder="Write product..." type="text">
-						</div>
-					</div>
-				</div>
-				<div class="search-product">
-						<input class="form-control" name="searchKeyword"
-							placeholder="Search here..." type="text">
-						<button type="submit">
-							<i class="fa fa-search"></i>
-						</button>
-				</div>
-			</form>
+            <div class="row my-5">
+               <div class="col-sm col">
+                  <div class="service-block-inner">
+                     <h3>상품</h3>
+                     <div class="search-product">
+                        <input class="form-control" name="searchProduct" placeholder="검색 상품을 적어보세요.." type="text" required>
+                     </div>
+                     
+	                   	   <h3>편의점</h3>
+	                      <div class="button-group filter-button-group">
+		                        <select id= "shop_code" name="shop_code" class="event-button" >
+		                           <option value="ALL" >All</option>
+		                           <option value="CU" >CU</option>
+		                           <option value="GS">GS25</option>
+		                           <option value="MS">미니스톱</option>
+		                           <option value="SE">세븐일레븐</option>
+		                           <option value="EM">emart24</option>
+		                        </select>
+	                      </div><hr>
+	                      
+	                      <h3>주소 </h3>
+	                      <p>설명: 내위치를 검색하고 싶으면 "내위치" 또는 "공백"으로 두고 검색하세요 또는 "특정위치명" 및 "주소"를 검색하세요
+								  <br>&nbsp;&nbsp;주의) PC라면 IP를 기반으로 검색하니 정확한 위치 기반이 아니에요! 정확한 주소를 입력 해보세요!! 또는 모바일 위치 기능을 ON하고 사용하세요!! 
+						  </p>
+	                      <div class="search-product">
+				                  <input class="form-control" name="searchKeyword"  placeholder="검색할 주소를 적어보세요.." type="text">
+				                  <button type="submit" >
+									 <i><img src="/pmkim/resources/images/search.png" class="search-size"></i>
+								</button>
+				         </div>
+				      </div>
+                  </div>
+               </div>
+            </form>
 			<div id="productList"></div>
 			<div id="map" style="width: 100%; height: 500px;"></div>
 			<div id="printName"></div>
 			<script>
-
-				//var goodId = ${mapAlgorithmDB.good_id}
-				//console.log(goodId);
-				//console.log(mapAlgorithmDBList.getGood_id);
-
 				// 카카오 맵에서 넘어 오는 편의점명 -> CU, GS25, 세븐일레븐, 이마트24, 미니스톱
 				const EMART24 = "EM", CU = "CU", GS25 = "GS", SEVENELEVEN = "SE", MINISTOP = "MS";
 				var keyword = '<%=keyword%>';
 				var productName = '<%=keywordProduct%>';
+				var shop_code = '${vo.shop_code}';
+				var lat, lon;
+				var map; // 지도를 보여줄 변수
+				var geocoder; //주소-좌표 변환 객체를 받을 변수
+				var infowindow;
+				var ps; // 장소 검색 객체를 받을 변수 
+
 				var sumProductName = new Array();
+				var printGoodName = [], printEventName = [], printLength = 0;
+				var storeName = [], printProduct = [];
+				var mapContainer;
+				var markerImage;
 
-				//console.log(productName);
-
-				// alert('<%=keywordProduct%>');
-				// console.log('<%=keywordProduct%>');
+				//console.log("keyword: "+keyword);
+				//console.log("shop_code: "+shop_code);
+				
+				// 검색어에 내위치, 내 위치, 공백을 검색하면 keyword가 편의점이 되고 내 위치 기반으로 편의점을 검색한다.
+				if(!isEmpty(keyword)){
+					if(keyword == "내위치" || keyword == "내 위치"){
+						keyword = '편의점';
+					}else{
+						if(isEmpty(shop_code)){
+							console.log('what happen? shop_code error');
+						}else{
+							if(shop_code == 'ALL'){
+								keyword += ' 편의점';
+							}else if(shop_code == EMART24){
+								keyword += ' 이마트24';
+							}else if(shop_code == CU){
+								keyword += ' CU';
+							}else if(shop_code == GS25){
+								keyword += ' GS25';
+							}else if(shop_code == SEVENELEVEN){
+								keyword += ' 세븐일레븐';
+							}else if(shop_code == MINISTOP){
+								keyword += ' 미니스톱';
+							}else{
+								console.log('편의점 검색 에러');
+							}
+						}
+					}
+					
+				}else{
+					keyword = '편의점';
+				}
 
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
-                var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-				var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-				var printGoodName = [], printEventName = [], printLength = 0;
-				var storeName = [], printProduct = [];
+                infowindow = new kakao.maps.InfoWindow({zIndex:1});
+				// 지도를 표시할 div 
+				mapContainer = document.getElementById('map');
+				
 			    mapOption = { 
 			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			        level: 4 // 지도의 확대 레벨 
-			    }; 
-				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			    };
+				// 지도를 생성합니다
+				map = new kakao.maps.Map(mapContainer, mapOption); 
 				// 주소-좌표 변환 객체를 생성합니다
-				var geocoder = new kakao.maps.services.Geocoder();
-                //-------------------------------------------------------------------------------------------
-
-				var lat, lon;
-				var curPositionFlag = false;
+				geocoder = new kakao.maps.services.Geocoder();
 				// 장소 검색 객체를 생성합니다
-				var ps = new kakao.maps.services.Places(); 
+				ps = new kakao.maps.services.Places();
+				//-----------------------------------------------sssss----------------------------------------------------------
 				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 				if (navigator.geolocation) {
-					
+					//console.log("geolocation!!!!!!!!!!!!!!");
 					// GeoLocation을 이용해서 접속 위치를 얻어옵니다
 					navigator.geolocation.getCurrentPosition(function(position) {
 						lat = position.coords.latitude, // 위도
 						lon = position.coords.longitude; // 경도
-						
+						//console.log("lat1: "+lat);
+						//console.log("lon1: "+lon);
 						// var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 						//     message = '<div style="padding:5px;">편의점 명을 정확히 기재해주세요!</div>'; // 인포윈도우에 표시될 내용입니다
-						
-						// //마커와 인포윈도우를 표시합니다   
+						//마커와 인포윈도우를 표시합니다   
 						// oneDisplayMarker(locPosition, message);
+
+						ps.keywordSearch(keyword, placesSearchCB, {
+							// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
+							location: new kakao.maps.LatLng(lat, lon)
+						});
 					});
-					
 				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 					var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
 						message = '현재 위치를 찾을 수 없어요..'
 						
 					oneDisplayMarker(locPosition, message);
-				}
 
-                if(keyword == "null" || keyword == "" || keyword == "내위치" || keyword == "내 위치"){
-					curPositionFlag = true;
-                }else{ // keyword 있을시
-
-					if(/서울/.test(keyword)){
-						console.log("서울 키워드다!");
-					}else{
-						console.log("서울 키워드가 아니다!")
-					}
-                	                    
-                }
-				if(curPositionFlag == true){
-					//console.log(curPositionFlag);
-					//----------------------------------------------------------
-					//현재위치 기반으로 편의점 검색!!! 
-					ps.keywordSearch("편의점", placesSearchCB, {
-						// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
-						location: new kakao.maps.LatLng(lat, lon)
-					});
-					//----------------------------------------------------------
-				}else{
-					//console.log(curPositionFlag);
-					//console.log("키워드: " + keyword);
-					// 키워드로 장소를 검색합니다
-                    //ps.keywordSearch(keyword, placesSearchCB);
 					ps.keywordSearch(keyword, placesSearchCB, {
 						// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
 						location: new kakao.maps.LatLng(lat, lon)
 					});
 				}
+
                 //kakao 메서드 start------------------------
 				// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 				function oneDisplayMarker(locPosition, message) {
@@ -263,7 +340,8 @@
 				        iwRemoveable = true;
 		
 				    // 인포윈도우를 생성합니다
-				    var infowindow = new kakao.maps.InfoWindow({
+				    //var infowindow = new kakao.maps.InfoWindow({
+					infowindow = new kakao.maps.InfoWindow({
 				        content : iwContent,
 				        removable : iwRemoveable
 				    });
@@ -274,30 +352,21 @@
 				    // 지도 중심좌표를 접속위치로 변경합니다
 				    map.setCenter(locPosition);      
 				}
-				var markerImage;
 				
                 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
                 function placesSearchCB (data, status, pagination) {
+					//console.log(data[0].lat);
                     if (status === kakao.maps.services.Status.OK) {
-
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                         // LatLngBounds 객체에 좌표를 추가합니다
                         var bounds = new kakao.maps.LatLngBounds();
 
                         for (var i=0; i<data.length; i++) {
-							// 추가!!
-							// data[i].place_name 해당하지 않는 곳은 제외하기!
-							var str = data[i].place_name; 
-							var pass1 = str.search("이마트");
-							var pass2 = str.search("이마트에브리데이");
-							var nopass1 = str.search("이마트24");
-							var nopass2 = str.search("emart24");
-							// 추후 gs칼텍스, gs건설 등 제외하기!!
+							var str = data[i].place_name;
 							
 							// 클릭시 상품명과 이벤트명 이용!
 							storeName[i] = str;
-							//console.log("storeNameIndex: " + storeName.indexOf(storeName[i]));
-							
+
 							// 추가!!
  	 						var res = str.split(" ");
 							// ex) cu, gs25 등..
@@ -309,15 +378,10 @@
 							else if(shop_code == 'CU') shop_code = CU;
 							// ex) 테헤란로점, 종로1가점 등..
 							var shop_name_detail = res[1];
-							//console.log("--------------------------------");
-							//console.log("shop_code : " + shop_code);
-							//console.log("shop_name_detail : " + shop_name_detail);
 
 							//map algorithm start
-							if(productName == undefined || productName == null || productName == ""){
+							if(isEmpty(productName)){
 							}else{
-								//console.log("shop_code:"+shop_code,
-											//"shop_name_detail: "+shop_name_detail);
 								$.ajax({
 									url:"/pmkim/map",
 									type:'post',
@@ -327,36 +391,23 @@
 									dataType: "text",
 									async: false,
 									success:function(data){
-										//console.log(data);
-										if(data == "success"){
-											//console.log("success");
-											
+										if(data == "success"){											
 											// success면 카카오 맵에서 나온 편의점이 있다 라는것!!
 											// 이제 부터는 이 편의점에 해당 상품이 행사하는지를 확인해서 
 											// 마커로 맵에 알려주면 끄~읏!
 											var event_name = null, good_name = null;
 											var resultName = getEventName(shop_code, productName);
-											//console.log("resultName: "+resultName);
+
 											$.each(resultName, function(idx, val) {
-												console.log("good_name11: " + val.good_name);
-												console.log("good_event11: " + val.event_name);
 												if(good_name == null) good_name = val.good_name + " ";
 												if(event_name == null) event_name = val.event_name + " ";
 
 												if(val.good_name != null) good_name += val.good_name + " ";
 												if(val.event_name != null) event_name += val.event_name + " ";
 											});
-											//console.log("event_name + good_name: " + resultName);
-											//console.log("typeof: "+typeof(resultName));
 											
-											//console.log(resultName);
 											if(isEmpty(good_name) || isEmpty(event_name)){
-												//console.log("1231-"+good_name);
-												//console.log("1231-"+event_name)
 											}else{
-												//console.log("1231-"+good_name);
-												//console.log("1231-"+event_name)
-												//console.log("resultName " + "is not empty");
 												var resGoodName = good_name.split(" ");
 												var resEventName = event_name.split(" ");
 												
@@ -366,7 +417,6 @@
 													if(!isEmpty(resGoodName[j]) || !isEmpty(resEventName[j])){
 														//printProduct[i][j] = removeDuplicatesArray(resGoodName[j] + ": " + resEventName[j]);
 														printProduct[i][j] = resGoodName[j] + ": " + resEventName[j];
-														console.log("printProduct -- " + printProduct[i][j]);
 													}
 													
 												}
@@ -374,9 +424,8 @@
 												printLength = resGoodName.length;
 												printGoodName = resGoodName;
 												printEventName = resEventName;
-												// To do list !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 												// 대표적으로 처음에 나오는 상품 기준으로 지도에 보여주기로함!!
-												// 해당 지점 마커를 클릭하면 상세 하게 지도 밑에 출력하기로하자!!
 												good_name = resGoodName[0];
 												event_name = resEventName[0];
 											}
@@ -385,10 +434,6 @@
 											if(isEmpty(event_name) || isEmpty(good_name)){
 												console.log("nothing event_name or good_name");							
 											}else{
-												//console.log("event_name + good_name: " + event_name + ", " + good_name);
-												//console.log("shop_code: " + shop_code);
-												// 맵에 event 마커 등록!! ↓↓↓↓↓↓↓↓↓
-												//--------------------------------------------------------------------------------------
 												 // 마커의 이미지 주소입니다.
 												if(event_name == '1+1' && shop_code == SEVENELEVEN){
 													imageSrc = '/pmkim/resources/images/map/7eleven_1+1.png';
@@ -429,27 +474,9 @@
 						    	});
 							}
 							
-							if(nopass1 >= 0 || nopass2 >= 0){
-								//console.log("+");
-							}else{
-								//console.log("-");
-								if(pass1 != -1 || pass2 != -1){
-									continue;
-								}
-							}
-							
                             searchDisplayMarker(data[i]);
 							var location = new kakao.maps.LatLng(data[i].y, data[i].x); 
                             bounds.extend(location);
-
-							//search 좌표 -> 주소
-							searchDetailAddrFromCoords(location, function(result, status) {
-								if (status === kakao.maps.services.Status.OK) {
-									var detailAddr = !!result[0].road_address ? '도로명주소 : ' + result[0].road_address.address_name : '';
-									detailAddr += '\n\r지번 주소 : ' + result[0].address.address_name;
-									//console.log(detailAddr);
-								}
-							});
                         }       
 						//-------------//-------------//-------------//-------------//-------------//-------------      
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
@@ -473,42 +500,46 @@
                         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                         
                         //console.log("test"+place.place_name);
-						// printGoodName = resGoodName;
-						// printEventName = resEventName;
 						// printLength
 						document.getElementById('printName').innerHTML = "";
 						var idx = storeName.indexOf(place.place_name);
 						
 						// 상품 정보 보여주기
-						for(var i = 0; i < printLength; i++){
-							console.log("loggggg("+i+"): "+ printProduct[idx][i]);
-							if(i == printLength - 1){
-								if(!isEmpty(printProduct[idx][i])){
-									document.getElementById('printName').innerHTML += printProduct[idx][i];
+						try {
+							//throw "myException"; // generates an exception
+							for(var i = 0; i < printLength; i++){
+								//console.log("loggggg("+i+"): "+ printProduct[idx][i]);
+								if(i == printLength - 1){
+									if(!isEmpty(printProduct[idx][i])){
+										document.getElementById('printName').innerHTML += printProduct[idx][i];
+									}
+								}else{
+									if(!isEmpty(printProduct[idx][i])){
+										document.getElementById('printName').innerHTML += printProduct[idx][i] + ", ";
+									}
 								}
-							}else{
-								if(!isEmpty(printProduct[idx][i])){
-									document.getElementById('printName').innerHTML += printProduct[idx][i] + ", ";
-								}
-							}
 
-							// var id = "ctl03_Tabs1";
-							// var lastFive = id.substr(id.length - 5); // => "Tabs1"
-							// var lastChar = id.substr(id.length - 1); // => "1"
+								// var id = "ctl03_Tabs1";
+								// var lastFive = id.substr(id.length - 5); // => "Tabs1"
+								// var lastChar = id.substr(id.length - 1); // => "1"
+							}
 						}
+						catch (e) {
+							// statements to handle any exceptions
+							//logMyErrors(e); // pass exception object to error handler
+							console.log("오류"+e);
+						}
+						
 						var reName = document.getElementById('printName').innerHTML;
 						var lastChar = reName.substr(reName.length - 2);
 						var lastCharDel;
 						if(lastChar == ', '){
 							lastCharDel = reName.substr(0, reName.length - 2);
 							document.getElementById('printName').innerHTML = lastCharDel;
-							console.log("del----"+lastCharDel);
+							//console.log("del----"+lastCharDel);
 						}else{
 							document.getElementById('printName').innerHTML
 						}
-						
-						
-						
 
 						//console.log("test"+place.place_name);
                         infowindow.open(map, marker);
@@ -516,16 +547,12 @@
 	
                 }
 
-				function searchDetailAddrFromCoords(coords, callback) {
-					// 좌표로 법정동 상세 주소 정보를 요청합니다
-					geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-				}
                 //kakao 메서드 end------------------------
                 function getEventName(shop_code, good_name){
                 	var result;
                 	//console.log("getEventName shop_code : " + shop_code);
                 	//console.log("getEventName good_name : " + good_name);
-                	//console.log("---------");
+                	
                 	$.ajax({
 						url:"/pmkim/map/data",
 						type:'post',
@@ -543,10 +570,10 @@
 							//var temp;
 							$.each(data, function(idx, val) {
 								//console.log(idx + " " + val.good_name);
-								console.log(idx + " " + val.event_name);
+								//console.log(idx + " " + val.event_name);
 								//document.getElementById('productList').innerHTML += "<p id='result_name'>"+ val.good_name + "</p>";
 								//if(temp == null) sumProductName = val.good_name;
-								//else 
+								
 								if(sumProductName == null) sumProductName = val.good_name;
 								else sumProductName.push(val.good_name.trim());
 								
@@ -561,22 +588,18 @@
 							var filterSet;
 							filterSet = removeDuplicatesArray(sumProductName);
 							
-							sumProductName = Array.from(new Set(sumProductName));
+							//sumProductName = Array.from(new Set(sumProductName));
 							//removeDuplicatesArray(sumProductName);
 							//sumProductName
-							document.getElementById('productList').innerHTML = "검색된 상품명: ";
+							
 							if(sumProductName != null){
+								document.getElementById('productList').innerHTML = "검색된 상품명: ";
 								filterSet.forEach( v => {
 									document.getElementById('productList').innerHTML += v + " ";
 								});
+							}else{
+								document.getElementById('productList').innerHTML = "";
 							}
-							
-							// document.getElementById('productList').innerHTML = "검색된 상품: "
-							// sumProductName.forEach( v => { 
-							// 	console.log("productName2: "+v);
-							// 	document.getElementById('productList').innerHTML += v + " ";
-							// });
-
 
 						},
 						error:function(jqXHR, textStatus, errorThrown){ //
@@ -621,51 +644,62 @@
 	</div>
 	<!-- End About Page -->
 
-	<!-- 20200521_oliver.yoo -->
 	<!-- Start Footer  -->
 	<footer>
 		<div class="footer-main">
-			<div class="container">
+			<div class="container3">
 				<div class="row">
-
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>챗봇(Coming Soon)</h3>
-
 						</div>
 					</div>
-
 				</div>
-				<hr>
+				<br><br>
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>We are One ; 곰돌이 감자 </h3>
+						</div>
+					</div>
+				</div>
 
 				<div class="container text-centers">
 					<div class="row">
 						<!-- Footer 1-->
 						<div class="col-lg-422 mb-5 mb-lg-0">
-							<a><img src="/pmkim/resources/images/haley.png" class="profile"  alt="" /></a>
-						<h2>Haley Oh</h2>
-						<a href="https://github.com/JihyeHaley"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a> 
+							<a><img src="/pmkim/resources/images/haley.png" class="profile"  alt="" /></a><br><br>
+							<a href="https://github.com/JihyeHaley" class="result-text">Haley Oh</a><br><br>
+							<a class="result-text">You know? I'm 팀장4;)</a><br><br>
+						<a class= "profile-text">has kinda professional language skills English, Chinese, Japanese. Currently working and studying for full-stack developing skills</a>
+						
 						</div>
 
 						<!-- Footer 2-->
 						<div class="col-lg-422 mb-5 mb-lg-0">
-							<a><img src="/pmkim/resources/images/seho.png" class="profile"   alt="" /></a>
-						<h2>Seho Oh </h2>
-						<a href="https://github.com/sehooh5"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a> 
+							<a><img src="/pmkim/resources/images/seho.png" class="profile"   alt="" /></a><br><br>
+							<a href="https://github.com/sehooh5" class="result-text">Seho Oh </a><br><br>
+							<a class="result-text">You know? I'm 팀장1;)</a><br><br>
+							<a class= "profile-text">is one of the treasurous in gomgam since he has professional analysis skills based on R selenium. His main major was Design. Amazing!</a>
+						
 						</div>
 
 						<!-- Footer 3-->
 						<div class="col-lg-422 mb-5 mb-lg-0">
-							<a><img src="/pmkim/resources/images/linda.png" class="profile" alt="" /></a>
-							<h2>Linda Eom </h2>
-							<a href="https://github.com/GyuyoungEom"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a>
+							<a><img src="/pmkim/resources/images/linda.png" class="profile" alt="" /></a><br><br>
+							<a href="https://github.com/GyuyoungEom" class="result-text">Linda Eom </a><br><br>
+							<a  class="result-text">You know? I'm 팀장3;)</a><br><br>
+							<a class= "profile-text">without her, this work could not be achieved... haha He is superwomen among us. Her diction is based on Austrailia, and she is familiar at super power on everything..!!!! </a>
 						</div>
 
 						<!-- Footer 4-->
 						<div class="col-lg-422 mb-5 mb-lg-0">
-							<a><img src="/pmkim/resources/images/oliver.png" class="profile"  /></a>
-							<h2>Oliver Yoo </h2>
-							<a href="https://github.com/SeongjinOliver"><img src="/pmkim/resources/images/gitprof.png" class="git_img"/></a>
+							<a><img src="/pmkim/resources/images/oliver.png" class="profile"  /></a><br><br>
+							<a href="https://github.com/SeongjinOliver" class="result-text">Oliver Yoo </a><br><br>
+							<a class="result-text">You know? I'm 팀장1;)</a><br><br>
+							<a class= "profile-text">is amazing man because he is familiar with back-frond end, DB, Spring, and Java, C... Cannot count all LOL. Surprise thing is he is even studying himself at every night despite project season :)</a>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -673,30 +707,28 @@
 
 				<div class="row">
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-widget">
+						<div class="footer-widget" ">
 							<h4>About 편마 김편복</h4>
-							<p>편의점 마스터! 김편복
+							<p class="result-text">편의점 마스터! 김편복
 								데이터, 위치기반을 활용한 편의점 상품 추천 서비스</p>
-							<p>편의점에서 점심을 간단히 먹고 싶은 김편복씨는 자신의 위치에서 먹고자하는
+							<p class="result-text">편의점에서 점심을 간단히 먹고 싶은 김편복씨는 자신의 위치에서 먹고자하는
 								상품 어느 편의점에서 행사를 하는지 알고 싶은데 알 수 있는 방법이 없다!!
 								이럴때 필요한 서비스는 "<b>편마 김편복</b>"</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-link">
+						<div class="footer-link result-text">
 							<h4>Information</h4>
-							<ul>
-								<li><a href="#/pmkim/main">HOME</a></li>
-								<li><a href="#/pmkim/map">지도</a></li>
-								<li><a href="#/pmkim/theme">테마</a></li>
-								<li><a href="#/pmkim/event">행사</a></li>
-								<li><a href="#/pmkim/cart">장바구니</a></li>
-								<li><a href="#/pmkim/mypage">마이페이지</a></li>
-							</ul>
+								<a href="#/pmkim/home" >  HOME</a><br>
+								<a href="#/pmkim/map">  지도</a><br>
+								<a href="#/pmkim/analysis">  SNS 분석</a><br>
+								<a href="#/pmkim/event">  행사</a><br>
+								<a href="#/pmkim/cart">  만원의 행복</a><br>
+								<a href="#/pmkim/cart">  편의점 뉴스</a>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-link-contact">
+						<div class="footer-link-contact result-text">
 							<h4>Contact Us</h4>
 							<ul>
 								<li>
@@ -725,15 +757,14 @@
 		</div>
 	</footer>
 	<!-- End Footer  -->
-
 	<!-- Start copyright  -->
 	<div class="footer-copyright">
 		<p class="footer-company">
-			© PMKIM CORP. ALL RIGHTS RESERVED &copy; 2020 <a href="#PMKIM">PMKIM</a>
+			All Rights Jihye Oh. &copy; 2020 <a href="#">PM, KIM</a> Design By GomGam
 		</p>
 	</div>
 	<!-- End copyright  -->
-
+	
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 	<!-- ALL JS FILES -->

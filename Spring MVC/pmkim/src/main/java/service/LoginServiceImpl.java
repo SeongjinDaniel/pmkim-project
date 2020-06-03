@@ -13,20 +13,20 @@ import vo.MemberVO;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	@Autowired
 	LoginDAO dao;
 	@Override
 	public boolean loginCheck(MemberVO vo,HttpSession session) {
-		logger.info("vo-id : "+vo.getId());
+		//logger.info("vo-id : "+vo.getId());
 		boolean result = dao.loginCheck(vo);
-		logger.info("loginCheck service!!");
-		logger.info("result = " + result);
+		//logger.info("loginCheck service!!");
+		//logger.info("result = " + result);
 		if(result) {
 			MemberVO newVO = viewMember(vo);
 			session.setAttribute("id", newVO.getId());
 			//session.setAttribute("name", newVO.getName());
-			logger.info("session id: "+session.getAttribute("id").toString());
+			//logger.info("session id: "+session.getAttribute("id").toString());
 			//logger.info("session name: "+session.getAttribute("name").toString());
 		}
 		return result;

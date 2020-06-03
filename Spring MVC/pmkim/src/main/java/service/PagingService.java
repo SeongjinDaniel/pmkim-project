@@ -21,6 +21,11 @@ public class PagingService {
 		//System.out.println("postCnt : "+postCnt);
 		return ((postCnt-1)/lineCnt)+1;		
 	}
+	public int getPageCount(String keyword) {	// 글의 개수에 따른 페이지 개수 계산
+		int postCnt = dao.listCount2(keyword);
+		//System.out.println("postCnt : "+postCnt);
+		return ((postCnt-1)/lineCnt)+1;		
+	}
 	public int getPageStart(int pgNum) {	// 각 화면별 시작 페이지 번호
 		this.pgNum = pgNum;
 		return ((pgNum-1)/pageCnt)*pageCnt+1;
@@ -29,6 +34,15 @@ public class PagingService {
 		this.pgNum = pgNum;
 		int result1 = getPageStart(pgNum)+pageCnt-1;
 		int result2 = getPageCount(event_name,shop_code);
+		if(result1>result2)
+			return result2;
+		else
+			return result1;
+	}
+	public int getPageEnd(int pgNum,String keyword) {	//각 화면별 종료 페이지 번호
+		this.pgNum = pgNum;
+		int result1 = getPageStart(pgNum)+pageCnt-1;
+		int result2 = getPageCount(keyword);
 		if(result1>result2)
 			return result2;
 		else
@@ -44,7 +58,14 @@ public class PagingService {
 	public boolean isNextData(int pgNum,String event_name, String shop_code) {	//이전 페이지들을 출력하는 right 이미지 출력 여부 결정
 		boolean result = false;
 		this.pgNum = pgNum;
-		if(getPageEnd(pgNum,event_name,shop_code)<getPageCount(event_name,shop_code))
+		if(getPageEnd(pgNum,event_name,shop_code) < getPageCount(event_name,shop_code))
+			result = true;
+		return result;
+	}
+	public boolean isNextData(int pgNum,String keyword) {	//이전 페이지들을 출력하는 right 이미지 출력 여부 결정
+		boolean result = false;
+		this.pgNum = pgNum;
+		if(getPageEnd(pgNum,keyword) < getPageCount(keyword))
 			result = true;
 		return result;
 	}

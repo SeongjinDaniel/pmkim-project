@@ -11,13 +11,13 @@ import vo.MemberVO;
 
 @Repository
 public class SignupDAOImpl implements SignupDAO {
-	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
+	 //private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	 @Autowired
 	 private SqlSession sql;
 	    
 	 @Override
 	 public void insertMember(MemberVO vo){
-		 logger.info("mybatis inserMember DAO");
+		 //logger.info("mybatis inserMember DAO");
 //		 logger.info("id2: " + vo.getId());
 //		 //logger.info("pw: " + vo.getPw());
 //		 logger.info("name2: " + vo.getName());

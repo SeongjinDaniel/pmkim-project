@@ -19,7 +19,8 @@
     <meta name="author" content="">
 
     <!-- Site Icons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/pmkim/resources/images/favicon-16x16.png">
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="/pmkim/resources/images/favicon-16x16.png"> -->
+    <link rel="icon" href="/pmkim/resources/images/pmkim.png"  type="image/png" sizes="16X16">
     <link rel="apple-touch-icon" href="/pmkim/resources/images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->

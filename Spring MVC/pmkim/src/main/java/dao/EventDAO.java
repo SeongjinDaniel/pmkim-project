@@ -171,8 +171,7 @@ public class EventDAO {
 					Map<String,Object> map = new HashMap<String,Object>();
 					map.put("event_name", event_name);
 					map.put("shop_code", shop_code);
-					
-					System.out.println(map.keySet());
+					//System.out.println(map.keySet());
 					list = session.selectList(statement,map);
 					//System.out.println("list : "+ list);
 					return list;

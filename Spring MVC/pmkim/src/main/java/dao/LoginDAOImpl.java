@@ -13,7 +13,7 @@ import vo.MemberVO;
 
 @Repository
 public class LoginDAOImpl implements LoginDAO {
-	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	@Autowired
 	SqlSession sql;
 	
@@ -21,9 +21,9 @@ public class LoginDAOImpl implements LoginDAO {
 	public boolean loginCheck(MemberVO vo) {
 		boolean result = false;
 		String statement = "resource.MemberMapper.loginCheck";
-		logger.info("logincheck dao!!");
-		logger.info("idLoginCheck:"+vo.getId());	
-		logger.info("NameLoginCheck:"+vo.getName());
+//		logger.info("logincheck dao!!");
+//		logger.info("idLoginCheck:"+vo.getId());	
+//		logger.info("NameLoginCheck:"+vo.getName());
 		if(sql.selectOne(statement,vo) != null)
 			result=true;				
 		return result;
