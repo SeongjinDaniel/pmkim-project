@@ -1,51 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO,java.util.List,java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<!-- Mobile Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- Site Metas -->
-	<title>편의점 마스터, 김편복</title>
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	
-	<!-- Site Icons -->
-	<link rel="icon" type="image/png" sizes="16x16"
-	    href="/pmkim/resources/images/favicon-16x16.png">
-	<link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico"
-		type="image/x-icon">
-	<link rel="apple-touch-icon"
-		href="/pmkim/resources/images/apple-touch-icon.png">
-	
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
-	<!-- Site CSS -->
-	<link rel="stylesheet" href="/pmkim/resources/css/style_linda.css">
-	<!-- Responsive CSS -->
-	<link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="/pmkim/resources/css/custom.css">
-	<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
-	
-	<!--[if lt IE 9]>
-	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>편의점 마스터, 김편복</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Site Icons -->
+<link rel="icon" type="image/png" sizes="16x16"
+    href="/pmkim/resources/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico"
+	type="image/x-icon">
+<link rel="apple-touch-icon"
+	href="/pmkim/resources/images/apple-touch-icon.png">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
+<!-- Site CSS -->
+<link rel="stylesheet" href="/pmkim/resources/css/style_linda.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
+
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 
 <body>
 	<%
+		   List<GoodsEventShopMemberVO> cartList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("cartList");
+		   List<GoodsVO> goodsList = (ArrayList<GoodsVO>) request.getAttribute("goodsList");
 		   List<GoodsEventShopMemberVO> gesList = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("gesList");
 	%>
 	<!-- Start Main Top -->
@@ -204,14 +205,14 @@
 						</div>
 					</form>
 						
+
 						<div class="product-categorie-box">
-<!-- 							<form method="GET" action="/pmkim/happy" id="listform" name="listform">
- -->							<div class="tab-content">
+							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane fade show active"
 									id="grid-view">
 									<div class="row">
 									<!-- 상품출력 반복문 -->
-									<c:forEach var="vo" items="${ gesList }" varStatus="status">
+									<c:forEach var="vo" items="${ gesList }">
 										<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
 											<div class="products-single fix">
 												<div class="box-img-hover">
@@ -219,76 +220,71 @@
 														<p class="sale">${ vo.shop_name }</p>
 													</div>
 													<img src= "${ vo.good_img }" class="img-fluid" alt="Image">
+													
 													<div class="mask-icon">
-														<a class="cart" onclick="add('${vo.good_id}'); return false;">Add</a>
+														<a class="cart" href="/pmkim/cart?action=insert">Add to Cart</a>
 													</div>
 												</div>
 												<div class="why-text">
-													<input type="hidden" name="good_id" value="${ vo.good_id }" class="good_id">
-													<h4 class="good_name">${ vo.good_name }</h4>
-													<h5 class="good_price">${ vo.good_price }원</h5>
-													<h5 class="event_name">${ vo.event_name }</h5>
+													<h4>${ vo.good_name }</h4>
+													<h5>${ vo.good_price }원</h5>
+													<h5>${ vo.event_name }</h5>
 												</div>
 											</div>
 										</div>
-									</c:forEach>
+										</c:forEach>
+										
 									</div>
 								</div>
 							</div>
-<!-- 							</form>										
- -->							
-							<!-- start paging -->
+							<!-- paging -->
 							<div id="paging" style="text-align : center; font-size : 16pt;">
-								<c:if test="${ preData }">
-									<a href ="/pmkim/cart?pgNum=1${ oldQ }"> &laquo; </a>
-									<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }${ oldQ }"> &nbsp; &lt; &nbsp;</a>
+								<c:if test="${ pgNum != 1 }">
+									<a href ="/pmkim/cart?pgNum=1"> &laquo; </a>
+									<a href = "/pmkim/cart?pgNum=${ pgNum - 1 }"> &nbsp; &lt; &nbsp;</a>
 								</c:if>
 								
 								<c:forEach var="num" begin="${ pageStart }" end="${ pageEnd }">
-									<a href = "/pmkim/cart?pgNum=${ num }${ oldQ }">${ num } &nbsp;</a>
+									<a href = "/pmkim/cart?pgNum=${ num }">${ num } &nbsp;</a>
 								</c:forEach>
 								
 								<c:if test="${ nextData }">
-									<a href = "/pmkim/cart?pgNum=${ pgNum + 1 }${ oldQ }"> &gt; &nbsp;</a>
+									<a href = "/pmkim/cart?pgNum=${ pgNum + 1 }"> &gt; &nbsp;</a>
 								</c:if>
 								
 								<c:if test = "${ pgNum != end }">
-								<a href ="/pmkim/cart?pgNum=${ end }${ oldQ }"> &raquo; </a>
-								</c:if>
+								<a href ="/pmkim/cart?pgNum=${ end }"> &raquo; </a>
+							</c:if>
 							</div>
-							<!-- end paging -->
 						</div>
 					</div>
 				</div>
 				
 				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
-				<!-- 여기에 만원의 행복 들어옴!! -->
+				<!-- 여기에 장바구니 들어옴!! -->
 					<div class="product-categori">
 						
-						
-							<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-								<div class="filter-price-left">
-		                            <div class="title-left">
-		                                <h3>Price</h3>
-		                            </div>
-		                            <div class="price-box-slider">
-		                                <div id="slider-range"></div>
-		                                <p>
-		                                    <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
-		                                    <button class="btn hvr-hover" onclick="recommend(); return false;">Filter</button>
-		                                    <button class="btn hvr-hover" onclick="deleteCart(); return false;">Reset</button>		                                    
-		                                </p>
-		                                <div id ="cart-View" class="list-group-collapse sub-men">
-		                           		 상품을 클릭하세요.
-			                            <!-- 담은 상품 여기에 나타내기  = add함수의 결과 여기로 가져옴 -->
-			                            </div>
-			                            <div id = "recommend-View" class="list-group-collapse sub-men">
-			                            	<!-- 추천 상품 여기에 -->
-			                            </div>
-		                            </div>
-		                            
-		                        </div>
+						<div class="filter-sidebar-left">
+							<div class="title-left">
+								<h3>장바구니</h3>
 							</div>
+							<div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+								<c:forEach var="cvo" items="<%= cartList %>">
+									<c:if test = "${cvo.id ==null}">
+									"로그인이 필요한 서비스입니다."
+									</c:if>
+									<div class="list-group-collapse sub-men">
+										<a class="list-group-item list-group-item-action"
+											href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
+											${cvo.good_name} 
+											<small class="text-muted">(100)</small>
+										</a>
+										
+									</div>
+								</c:forEach>
+								
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -405,6 +401,7 @@
 		</p>
 	</div>
 	<!-- End copyright  -->
+
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 	<!-- ALL JS FILES -->
@@ -419,7 +416,6 @@
 	<script src="/pmkim/resources/js/images-loded.min.js"></script>
 	<script src="/pmkim/resources/js/isotope.min.js"></script>
 	<script src="/pmkim/resources/js/owl.carousel.min.js"></script>
-	
 	<script src="/pmkim/resources/js/baguetteBox.min.js"></script>
 	<script src="/pmkim/resources/js/jquery-ui.js"></script>
 	<script src="/pmkim/resources/js/jquery.nicescroll.min.js"></script>

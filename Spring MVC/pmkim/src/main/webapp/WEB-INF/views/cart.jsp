@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+=======
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -17,6 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+<<<<<<< HEAD
    <!-- Site Icons -->
 	<link rel="icon" type="image/png" sizes="16x16"
 	    href="/pmkim/resources/images/favicon-16x16.png">
@@ -34,6 +38,21 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="/pmkim/resources/css/custom.css">
 	<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
+=======
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -49,9 +68,15 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="custom-select-box">
                         <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+<<<<<<< HEAD
 							<option>Â¥ JPY</option>
 							<option>$ USD</option>
 							<option>â¬ EUR</option>
+=======
+							<option>¥ JPY</option>
+							<option>$ USD</option>
+							<option>€ EUR</option>
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 						</select>
                     </div>
                     <div class="right-phone-box">

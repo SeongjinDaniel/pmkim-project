@@ -1,11 +1,30 @@
 nav.navbar.bootsnav ul.nav > li > a{
     position: relative;
     font-weight: 700;
+<<<<<<< HEAD
     font-size: 22px;
+=======
+    font-size: 25px;
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
     color: #000000;
     text-transform: uppercase;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 30px;
+<<<<<<< HEAD
+=======
+}
+
+#login,#signup, #logout, #userView{
+	margin-top: 11px;
+	font-size: 15px;
+	color:black;
+}
+#logout{
+	margin-left: -30px;
+	margin-top: 20px;
+	font-size: 8px;
+	color:#0F694D;
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 }

@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -29,6 +30,15 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
+=======
+    <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -39,7 +49,11 @@
 
 <body>
     <!-- Start Main Top -->
+<<<<<<< HEAD
     <div class="main-top">
+=======
+    <!-- <div class="main-top">
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -101,7 +115,11 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </div>
+=======
+    </div> -->
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
     <!-- End Main Top -->
 
     <!-- Start Main Top -->
@@ -159,17 +177,29 @@
                 <li class="cart-box">
                     <ul class="cart-list">
                         <li>
+<<<<<<< HEAD
                             <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+=======
+                            <a href="#" class="photo"><img src="resources/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <h6><a href="#">Delica omtantur </a></h6>
                             <p>1x - <span class="price">$80.00</span></p>
                         </li>
                         <li>
+<<<<<<< HEAD
                             <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+=======
+                            <a href="#" class="photo"><img src="resources/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <h6><a href="#">Omnes ocurreret</a></h6>
                             <p>1x - <span class="price">$60.00</span></p>
                         </li>
                         <li>
+<<<<<<< HEAD
                             <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+=======
+                            <a href="#" class="photo"><img src="resources/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
@@ -258,7 +288,11 @@
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
+<<<<<<< HEAD
                         <div class="our-team"> <img src="images/img-1.jpg" alt="" />
+=======
+                        <div class="our-team"> <img src="resources/images/img-1.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <div class="team-content">
                                 <h3 class="title">Williamson</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -284,7 +318,11 @@
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
+<<<<<<< HEAD
                         <div class="our-team"> <img src="images/img-2.jpg" alt="" />
+=======
+                        <div class="our-team"> <img src="resources/images/img-2.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <div class="team-content">
                                 <h3 class="title">Kristiana</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -310,7 +348,11 @@
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
+<<<<<<< HEAD
                         <div class="our-team"> <img src="images/img-3.jpg" alt="" />
+=======
+                        <div class="our-team"> <img src="resources/images/img-3.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <div class="team-content">
                                 <h3 class="title">Steve Thomas</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -336,7 +378,11 @@
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="hover-team">
+<<<<<<< HEAD
                         <div class="our-team"> <img src="images/img-1.jpg" alt="" />
+=======
+                        <div class="our-team"> <img src="resources/images/img-1.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                             <div class="team-content">
                                 <h3 class="title">Williamson</h3> <span class="post">Web Developer</span> </div>
                             <ul class="social">
@@ -370,7 +416,11 @@
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-01.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-01.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -378,7 +428,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-02.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-02.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -386,7 +440,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-03.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-03.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -394,7 +452,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-04.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-04.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -402,7 +464,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-05.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-05.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -410,7 +476,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-06.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-06.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -418,7 +488,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-07.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-07.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -426,7 +500,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-08.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-08.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -434,7 +512,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-09.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-09.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -442,7 +524,11 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
+<<<<<<< HEAD
                     <img src="images/instagram-img-05.jpg" alt="" />
+=======
+                    <img src="resources/images/instagram-img-05.jpg" alt="" />
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -548,6 +634,7 @@
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
+<<<<<<< HEAD
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -563,6 +650,23 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+=======
+    <script src="resources/js/jquery-3.2.1.min.js"></script>
+    <script src="resources/js/popper.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="resources/js/jquery.superslides.min.js"></script>
+    <script src="resources/js/bootstrap-select.js"></script>
+    <script src="resources/js/inewsticker.js"></script>
+    <script src="resources/js/bootsnav.js."></script>
+    <script src="resources/js/images-loded.min.js"></script>
+    <script src="resources/js/isotope.min.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/baguetteBox.min.js"></script>
+    <script src="resources/js/form-validator.min.js"></script>
+    <script src="resources/js/contact-form-script.js"></script>
+    <script src="resources/js/custom.js"></script>
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 </body>
 
 </html>

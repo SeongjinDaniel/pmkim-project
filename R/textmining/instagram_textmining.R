@@ -1,15 +1,11 @@
 #### 형태소분석 및 감정 분석을 위한 패키지들
-
-##wordcloud 관련 패키지
 library(wordcloud)
 library(wordcloud2)
-library(Redmonder)
-library(showtext)
+library(dplyr)
 
 ##tidyverse 는 전처리 시각화에 특화된 패키지
 install.packages("tidyverse")
 library(tidyverse)
-library(dplyr)
 library(rlang)#tidyverse 설치를 위해 버전 업데이트 필요했음
 
 ##stringr 문자열 전처리 하기위한 패키지
@@ -68,13 +64,6 @@ nlp_result <- gl_nlp(sample_text, language = "ko", encodingType = "UTF8")
 str(nlp_result)
 nlp_result$tokens
 nlp_result$entities
-
-#예시2
-texts <- c("안녕하세요. 구글 언어 분석 데모입니다.",
-           "한글 분석은 아직 모든 기능을 지원하지는 않습니다.")
-nlp_result <- gl_nlp(texts, language = "ko") # 언어를 한국어로 설정하는 것을 잊지 마세요.
-str(nlp_result)
-
 
 # 사전 추가
 useSystemDic()
@@ -251,6 +240,8 @@ ggplot(gs25.cnt %>% filter(n > 280), aes(reorder(gs25_noun, n), n)) +
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
 
 ####워드클라우드
+library(wordcloud)
+library(showtext)
 font_add_google("Noto Sans", "notosans")
 pal = redmonder.pal(6, "sPBIRdPu") #색 파레트 
 showtext_auto()

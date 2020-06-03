@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: User
+=======
+Built-By: SEHO
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 Build-Jdk: 1.8.0_231
 Created-By: Maven Integration for Eclipse
 
