@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.List, java.util.ArrayList, vo.GoodsInfoThemeVO"%>
+	pageEncoding="UTF-8" import="java.util.List, java.util.ArrayList,vo.AnalysisVO"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,17 +69,8 @@
 						<!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
 						<li class="nav-item"><a class="nav-link" href="map.html">지도</a></li>
 						<!--성진오빠파트-->
-						<li class="dropdown"><a href="#"
-							class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a>
-						<!-- 세호오빠가 원하는 li에다가 href해주세요!-->
-							<ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
-								<li><a href="shop-detail.html">Shop Detail</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-								<li><a href="my-account.html">My Account</a></li>
-								<li><a href="wishlist.html">Wishlist</a></li>
-							</ul></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="event.jsp">분석으로 보는 편의점</a></li>
 						<li class="nav-item active"><a class="nav-link"
 							href="event.jsp">행사</a></li>
 						<!-- 지혜파트-->
@@ -246,8 +237,7 @@
 				</div>
 			</div>
 <%
-	List<GoodsInfoThemeVO> li = (ArrayList<GoodsInfoThemeVO>)request.getAttribute("theme");
-	//System.out.print(li.get(0).getGood_name()); 첫번째 상품 이름 출력
+	List<AnalysisVO> li = (ArrayList<AnalysisVO>)request.getAttribute("theme");
 %>
 			<!-- 테마 추천 상품들 -->
 			

@@ -1,3 +1,4 @@
+
 .container3 {
     width: 70%;
     border-radius:20px;
@@ -5,11 +6,19 @@
     padding-left: 3rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
+
     margin-right: auto;
     margin-left: auto; 
     background-color:white;
     color:black;
 }
+
+.container {
+    width: 100%;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    margin-right: auto;
+    margin-left: auto; }
 
 .text-centers{
     text-align:center;}
@@ -43,6 +52,7 @@
     height:200px;
     border-radius:30px;}
 
+
 /*------------------------------------------------------------------ Footer Main -------------------------------------------------------------------*/
 
 .profile-text{
@@ -60,7 +70,7 @@
 .footer-main{
     padding: 70px 0px;
     background: #0F694D;
-}}
+}
 .footer-main hr{
 	border-top: 1px solid rgba(255,255,255,.6);
 }

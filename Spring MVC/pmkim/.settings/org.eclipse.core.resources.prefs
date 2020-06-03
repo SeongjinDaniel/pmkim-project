@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/event.jsp=UTF-8
 encoding//src/main/webapp/resources/css/style_cart.css=UTF-8
 encoding//src/main/webapp/resources/css/style_event.css=UTF-8
+=======
+encoding//src/main/java/vo=UTF-8
+>>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90
 encoding/<project>=UTF-8

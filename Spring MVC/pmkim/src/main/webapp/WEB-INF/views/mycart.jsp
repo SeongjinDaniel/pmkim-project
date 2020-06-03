@@ -424,175 +424,153 @@
 	<script src="/pmkim/resources/js/contact-form-script.js"></script>
 	<script src="/pmkim/resources/js/custom_linda.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+	
 	<!-- custom js -->
 	<script>
-		function recommend() {
+		function recommend(){			
 			//클릭한 아이템 받아오기
 			//그 아이템에 대해서 추천 아이템 가져오기
 			//var good_id = document.getElementByClassName('good_id');
 			console.log(document.getElementById('selectId'));
 			var good_id = document.getElementById('selectId').value;
 			var shop_name = document.getElementById('shop_name').value;
-			var maxM = $('#amount').val().split('-')[0].replace('원', "") * 1;
+			var maxM = $('#amount').val().split('-')[0].replace('원',"")*1;
 			$.ajax({
-				type : "get",// 전송 방식 
-				url : "/pmkim/happy", //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
-				data : {
-					"good_id" : good_id,
-					"shop_name" : shop_name,
-					"maxM" : maxM
-				},
-				dataType : "json", // text, xml, html, script, json, jsonp 가능 
-				success : function(data) {
-					if (data == "1") {
+				type :"get",// 전송 방식 
+				url :"/pmkim/happy",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"good_id" : good_id,
+						"shop_name" : shop_name,
+						"maxM" : maxM
+						},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					if(data=="1"){
 						/* if( ${ recomPrice } <= 0){
 							alert(${ msg });
 						}else{
 							document.getElementById('recommend-View').innerHTML = ${recomGoods1};
 						} */
-						postHappy(good_id, shop_name, maxM);
-					} else {
+						postHappy(good_id,shop_name,maxM);
+					}else{
 						alert("추천 상품이 없습니다.");
 					}
 				},
-				error : function() {
+				error : function(){
 					alert("프로그램 에러가 발생했습니다.");
 				}
-			//console.log(document.querySelector("#cart-View > img"));
+				//console.log(document.querySelector("#cart-View > img"));
 			});
-
-			var x = $('#amount').val().split('-')[0].replace('원', "") * 1;
+			
+			var x = $('#amount').val().split('-')[0].replace('원',"")*1;
 			console.log(x);
 			//console.log($('#slider-range').slide());	
 
 		}
-
+		
 		//ajax function
-		function postHappy(good_id, shop_name, maxM) {
-
+		function postHappy(good_id,shop_name,maxM){
+			
 			var good_price = document.getElementById('good_price').value;
-			var recomPrice = maxM * 1
-					- good_price.replace("원", "").replace(",", "") * 1;
+			var recomPrice = maxM*1-good_price.replace("원","").replace(",","")*1;
 			document.getElementById('recommend-View').innerHTML = "";
-			$
-					.ajax({
-						type : "post",// 전송 방식 
-						url : "/pmkim/happy", //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
-						data : {
-							"good_id" : good_id,
-							"shop_name" : shop_name,
-							"maxM" : maxM
-						},
-						dataType : "json", // text, xml, html, script, json, jsonp 가능 
-						success : function(data) {
-							//console.log(data[0].good_name);
-							document.getElementById('recommend-View').innerHTML = "<p>함께 즐기면 좋은 상품</p> <hr>";
-							if (data != null) {
-								if (recomPrice <= 0) {
-									alert('금액내에 알맞는 추천 상품이 없습니다.');
-								} else if (recomPrice <= 5000) {
-									document.getElementById('recommend-View').innerHTML += data[0].good_name
-											+ "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
-											+ data[0].good_price + "원";
-								} else {
-									document.getElementById('recommend-View').innerHTML += data[0].good_name
-											+ "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
-											+ data[0].good_price + "원" + "<br>";
-									document.getElementById('recommend-View').innerHTML += data[1].good_name
-											+ "<img src = '"+data[1].good_img+"' class ='img-fluid'>"
-											+ data[1].good_price + "원";
-								}
-							} else {
-								alert('상품을 선택해주세요.');
-							}
-						},
-						error : function() {
-							alert("프로그램 에러가 발생했습니다.");
-						}
-					//console.log(document.querySelector("#cart-View > img"));
-					});
-		}
-
-		//클릭 상품 저장
-		function add(good_id) {
-			$
-					.ajax({
-						type : "post",
-						url : "/pmkim/cart",
-						data : {
-							"action" : "insert",
-							"good_id" : good_id
-						},
-						dataType : "json", // text, xml, html, script, json, jsonp 가능 
-						//async : false,
-						success : function(data) {
-							if (data == "1") {
-
-								var key = []; //id값 담을 변수 선언
-								var num = document
-										.getElementsByClassName('good_id').length
-								for (var i = 0; i < num; i++) {
-									key[i] = document
-											.getElementsByClassName('good_id')[i].value;
-								}
-								var good_name = document
-										.getElementsByClassName('good_name')[key
-										.indexOf(good_id)].innerHTML;
-								var good_img = document
-										.getElementsByClassName('img-fluid')[key
-										.indexOf(good_id)].getAttribute('src');
-								var shop_name = document
-										.getElementsByClassName('sale')[key
-										.indexOf(good_id)].innerHTML;
-								var good_price = document
-										.getElementsByClassName('good_price')[key
-										.indexOf(good_id)].innerHTML;
-
-								document.getElementById('cart-View').innerHTML = "<p id='result_name'>"
-										+ good_name
-										+ "</p> <br>"
-										+ "<img src = '"+good_img+"' class ='img-fluid'>"
-										+ "<input type='hidden' value = '"+good_id+"' id = 'selectId' name='selectId'>"
-										+ "<input type='hidden' value = '"+shop_name+"' id = 'shop_name'>"
-										+ "<input type='hidden' value = '"+good_price+"' id = 'good_price'>";
-
-							} else {
-								alert("상품이 선택되지 않았습니다.");
-							}
-						},
-						error : function() {
-							alert("프로그램 에러가 발생했습니다.");
-						}
-					});
-
-		}
-
-		//클릭상품 해제
-		function deleteCart() {
 			$.ajax({
-				type : "post",// 전송 방식 
-				url : "/pmkim/cart", //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
-				data : {
-					"action" : "delete"
+				type :"post",// 전송 방식 
+				url :"/pmkim/happy",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"good_id" : good_id,
+						"shop_name" : shop_name,
+						"maxM" : maxM
+						},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					//console.log(data[0].good_name);
+					document.getElementById('recommend-View').innerHTML = "<p>함께 즐기면 좋은 상품</p> <hr>";
+					if ( data != null){
+						if(recomPrice <=0 ){
+							alert('금액내에 알맞는 추천 상품이 없습니다.');
+						}else if(recomPrice <= 5000){
+							document.getElementById('recommend-View').innerHTML += data[0].good_name 
+																				+ "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
+																				+ data[0].good_price +"원" ;
+						}else{
+							document.getElementById('recommend-View').innerHTML += data[0].good_name 
+																				+ "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
+																				+ data[0].good_price +"원"+ "<br>";
+							document.getElementById('recommend-View').innerHTML += data[1].good_name
+																				+ "<img src = '"+data[1].good_img+"' class ='img-fluid'>"
+																				+ data[1].good_price +"원" ;
+						}
+					}else{
+						alert('상품을 선택해주세요.');
+					}
 				},
-				dataType : "json", // text, xml, html, script, json, jsonp 가능 
-				success : function(data) {
-					if (data == "1") {
-						document.getElemen
+				error : function(){
+					alert("프로그램 에러가 발생했습니다.");
+				}
+				//console.log(document.querySelector("#cart-View > img"));
+			});
+		}
+		
+		//클릭 상품 저장
+		function add(good_id){
+			$.ajax({
+				type :"post",
+				url :"/pmkim/cart",  
+				data : {"action" : "insert",
+						"good_id" : good_id},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				//async : false,
+				success : function(data){	
+					if(data=="1"){
 
+						var key = [];			//id값 담을 변수 선언
+						var num = document.getElementsByClassName('good_id').length
+						for(var i=0; i<num; i++){
+							key[i] = document.getElementsByClassName('good_id')[i].value;
+						}
+						var good_name = document.getElementsByClassName('good_name')[key.indexOf(good_id)].innerHTML;
+						var good_img = document.getElementsByClassName('img-fluid')[key.indexOf(good_id)].getAttribute('src');
+						var shop_name = document.getElementsByClassName('sale')[key.indexOf(good_id)].innerHTML;
+						var good_price = document.getElementsByClassName('good_price')[key.indexOf(good_id)].innerHTML;
+
+						document.getElementById('cart-View').innerHTML = "<p id='result_name'>"+ good_name + "</p> <br>"+"<img src = '"+good_img+"' class ='img-fluid'>"
+																		+"<input type='hidden' value = '"+good_id+"' id = 'selectId' name='selectId'>"
+																		+"<input type='hidden' value = '"+shop_name+"' id = 'shop_name'>"
+																		+"<input type='hidden' value = '"+good_price+"' id = 'good_price'>";
+
+					}else{
+						alert("상품이 선택되지 않았습니다.");
+					}
+				},
+				error : function(){
+					alert("프로그램 에러가 발생했습니다.");
+				}
+			});
+			
+		}
+		
+		//클릭상품 해제
+		function deleteCart(){
+			$.ajax({
+				type :"post",// 전송 방식 
+				url :"/pmkim/cart",  //컨트롤러 사용할 때. 내가 보낼 데이터의 주소. 
+				data : {"action" : "delete"},
+				dataType : "json",	// text, xml, html, script, json, jsonp 가능 
+				success : function(data){	
+					if(data=="1"){
+						document.getElemen
+						
 						tById('cart-View').innerHTML = '상품을 클릭하세요.';
-					} else {
+					}else{
 						alert("선택한 상품이 없습니다.");
 					}
 				},
-				error : function() {
+				error : function(){
 					alert("프로그램 에러가 발생했습니다.");
 				}
 			});
 		}
 	</script>
-
+	
 </body>
 
 </html>

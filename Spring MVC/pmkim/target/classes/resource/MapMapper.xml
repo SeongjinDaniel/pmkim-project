@@ -71,5 +71,22 @@
  		from member_customer
  		where id = #{id}
  	</select>
+ 	
+ 	<select id="mapAlgorithmDBList" resultType="vo.GoodsEventShopMemberVO">
+ 		select s.shop_code "shop_code", sc.shop_name "shop_name", s.shop_name_detail "shop_name_detail",
+ 			   e.event_name "event_name", g.good_name "good_name"
+ 		from shop s, shop_code sc, goods_shop gs, goods g, event e
+ 		where s.shop_code = gs.shop_code and 
+ 			  gs.good_id = e.good_id and
+ 			  gs.good_id = g.good_id and
+ 			  s.shop_code = #{shop_code} and
+ 			  s.shop_name_detail = #{shop_name_detail}
+ 	</select>
+ 	
+ 	<!-- shop_cod Table List get -->
+ 	<select id="shopCodeTableList" resultType="vo.GoodsEventShopMemberVO">
+ 		select shop_code, shop_name
+ 		from shop_code
+ 	</select>
 	
  </mapper>

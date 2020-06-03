@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import = "vo.GoodsEventShopMemberVO,java.util.List,java.util.ArrayList"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+=======
+>>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90
 
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -21,8 +30,26 @@
     <meta name="author" content="">
 
     <!-- Site Icons -->
+<<<<<<< HEAD
     <link rel="icon" type="image/png" sizes="16x16" href="/pmkim/resources/images/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/pmkim/resources/images/apple-touch-icon.png">
+=======
+<<<<<<< HEAD
+    <link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/pmkim/resources/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+=======
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+>>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
@@ -33,7 +60,12 @@
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
     <!-- Custom CSS -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+=======
+    <link rel="stylesheet" href="css/custom.css">
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
+>>>>>>> 4109230ae5a8efc53dcd601a729f99d24ea10e90
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

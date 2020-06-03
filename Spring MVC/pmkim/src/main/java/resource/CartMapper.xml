@@ -63,7 +63,6 @@
 		where g.good_id = e.good_id
         and sc.shop_code = gs.shop_code
         and gs.good_id = g.good_id
-
   	</select>
   	
   	<select id="goodsList_shopEvent" resultType="vo.GoodsEventShopMemberVO" parameterType="java.util.HashMap"> <!-- shop&eventname으로 검색 -->

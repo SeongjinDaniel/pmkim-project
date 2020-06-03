@@ -3,20 +3,40 @@ package dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vo.GoodsEventShopMemberVO;
 import vo.MemberVO;
 
 @Repository
 public class MapDAO {
+	private static final Logger logger = LoggerFactory.getLogger(MapDAO.class);
     @Autowired
     SqlSession sqlSession; // mybatis 실행 객체
 
 	public List<MemberVO> memberListAll() {
-		System.out.println("Mybatis memberListAll");
+		logger.info("Mybatis memberListAll");
 		List<MemberVO> list = null;
 		String statement = "resource.MapMapper.selectMemberList";
+		list = sqlSession.selectList(statement);
+		return list;
+	}
+	
+	public List<GoodsEventShopMemberVO> mapAlgorithmDBList() {
+		logger.info("Mybatis mapAlgorithmDBList");
+		List<GoodsEventShopMemberVO> list = null;
+		String statement = "resource.MapMapper.mapAlgorithmDBList";
+		list = sqlSession.selectList(statement);
+		return list;
+	}
+	
+	public List<GoodsEventShopMemberVO> shopCodeTableList() {
+		logger.info("Mybatis shopCodeTableList");
+		List<GoodsEventShopMemberVO> list = null;
+		String statement = "resource.MapMapper.shopCodeTableList";
 		list = sqlSession.selectList(statement);
 		return list;
 	}

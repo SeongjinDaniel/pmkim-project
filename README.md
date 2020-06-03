@@ -33,4 +33,4 @@ big-data project
    ex)단순히 for 1 ~ 10이 아니라 1 ~ maxCount 이런식으로!! 
 
 # 프로젝트 DB ERD
-![image](https://user-images.githubusercontent.com/55625864/82733544-78082b80-9d4f-11ea-8c8e-e8c792b118dc.png)
+![image](https://user-images.githubusercontent.com/55625864/82813159-79f8f880-9ecf-11ea-8da5-1078f39d4e69.png)

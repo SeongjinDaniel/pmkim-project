@@ -51,6 +51,8 @@
 			List<GoodsEventShopMemberVO> twolist = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("twolist");
 			List<GoodsEventShopMemberVO> pblist = (ArrayList<GoodsEventShopMemberVO>) request.getAttribute("pblist");
 %>
+
+	<c:set var="sessionMemberId" value="${ sessionScope.id }"/>
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
@@ -73,15 +75,111 @@
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/theme">테마</a></li> <!-- 세호-->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
                         <li class="nav-item active"><a class="nav-link" href="/pmkim/cart">만원의 행복</a></li> <!-- 규영언니파트♡ -->
+                        <!-- <li class="nav-item active"><a class="nav-link" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>	                        
+						<li class="nav-item active"><a class="nav-link" href="/pmkim/signup">회원가입</a></li> -->
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+						<c:choose>
+							<c:when test="${msg eq 'success' || !empty sessionMemberId}">
+								<li class="nav-item active"><a class="nav-link" id="userView" href="/pmkim/ownerpage"><img src="/pmkim/resources/images/star.png" style="width:13px;">${sessionMemberId}님</a></li>
+								<li class="nav-item active"><a class="nav-link" id="logout" href="/pmkim/logout"><b>Logout</b></a></li>
+								
+							</c:when>
+							<c:when test="${msg eq 'fail' || msg eq 'logout' || msg eq '' || msg eq null}">
+								<li class="nav-item active"><a class="nav-link" id="login" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>
+								<li class="nav-item active"><a class="nav-link" id="signup" href="/pmkim/signup">회원가입</a></li>	
+						    </c:when>
+						</c:choose>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
-
+			
             </div>
+            
+            <!-- Login -->
+           
+			<!-- Login End-->
         </nav>
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
+    
+    <!-- Start login popup -->
+    <div class="container">
+		<!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal">
+		    Login
+		</button>   -->
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			
+		  <div class="modal-dialog modal-dialog-centered" role="document" >
+		    <div class="modal-content" >
+		      <div class="modal-header border-bottom-0">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body border-bottom-0">
+		      	<div class="form-title text-center"><!--  style="margin-left:auto; margin-right:auto;" -->
+					<img src="/pmkim/resources/images/pmkim_Logo_1.jpg" /> 	
+				</div>
+				<br>
+				
+		        <div class="form-title text-center">
+		          <h4><b>Login</b></h4>
+		        </div>
+		        <div class="d-flex flex-column text-center">
+		        
+		          <form method="post" action="/pmkim/login" id="frmSignin">
+		            <div class="form-group">
+		              <input type="text" class="form-control" name="id" placeholder="Your id...">
+		            </div>
+		            <div class="form-group">
+		              <input type="password" class="form-control" name="pw" placeholder="Your password...">
+		            </div>
+		            <button type="submit" class="btn btn-info btn-block btn-round" id="btnLogin" style="background-color:#0F694D">Login</button> <!-- '/weet/signinCheck.do' -->
+		          </form>
+		          
+		          <!-- <div class="text-center text-muted delimiter">or use a social network</div> -->
+		          <div class="d-flex justify-content-center social-buttons">
+		            <!-- <button type="button" id="btnGoogleSignin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google"
+		           		onclick="
+		           			gauth.signIn().then(function(){
+								console.log('gauth.signIn()');
+								checkLoginStatus();
+								location.reload(true);
+							});
+						" data-dismiss="modal">
+		          		<img src="/pmkim/resources/images/btn_google_light_normal_ios.svg">
+		          	</button> -->
+		          </div>
+		        </div>
+		      </div>
+		      <div class="modal-footer d-flex justify-content-center ">
+			        <div class="signup-section text-center">Not a member yet? 
+			        	<a href="/pmkim/signup">Sign Up</a>.
+			        </div>
+			        <button type="button" class="btn btn-default text-center" data-dismiss="modal">Close</button>
+			        <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signupModal">Open Modal</button> -->
+		      </div>
+		    </div>
+		      
+		  </div>
+		</div>
+		
+	</div>
+		<!-- End login popup -->
+    
+
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Search -->
 
     <!-- Start Slider -->
     <div id="slides-shop" class="cover-slides">
