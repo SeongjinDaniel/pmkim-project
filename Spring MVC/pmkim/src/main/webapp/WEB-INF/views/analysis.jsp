@@ -184,7 +184,7 @@
 						class="single-product-slider carousel slide" data-ride="carousel" data-interval="false">
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active" id="SE">
-							<input type="hidden" class="shop" id="7eleven">
+							<input type="hidden" class="shop" id="SE">
 								<div class="type-lb">
                                 <p class="sale">best 1</p>
                            		</div>
@@ -193,7 +193,7 @@
 									alt="First slide"></a>
 							</div>
 							<div class="carousel-item" id="GS">
-							<input type="hidden" class="shop" id="GS25">
+							<input type="hidden" class="shop" id="GS">
 								<div class="type-lb">
                                 <p class="sale">best 2</p>
                            		</div>
@@ -201,7 +201,7 @@
 									src="/pmkim/resources/images/gs25.png" alt="Second slide">
 							</div>
 							<div class="carousel-item" id="MS">
-							<input type="hidden" class="shop" id="ministop">
+							<input type="hidden" class="shop" id="MS">
 								<div class="type-lb">
                                 <p class="sale">best 3</p>
                            		</div>
@@ -209,7 +209,7 @@
 									src="/pmkim/resources/images/mini.png" alt="Third slide">
 							</div>
 							<div class="carousel-item" id="EM">
-							<input type="hidden" class="shop" id="emart24">
+							<input type="hidden" class="shop" id="EM">
 								<div class="type-lb">
                                 <p class="sale">best 4</p>
                            		</div>
@@ -253,19 +253,36 @@
 					       }
 					}); 
 				} */
-				
-				function wordcloud(shop_code){
+				/* document.getElementsByClassName('wordcloud_p')[0].innerHTML=
+			    	"<iframe id='wordcloud' width = '100%' height = '400' srcdoc='"+$("#wordcloud_p").html(data)+"' seamless></iframe>"
+		    	 */
+				/* function wordcloud(shop_code){
 					var url = "resources/html/"+shop_code+".html";
 					$.ajax({
 					       url: url,
 					       success: function(data)
 					       {
-					    	var wordcloud = [$("#wordcloud").html(data).find('div'), $("#wordcloud").html(data).find('script')[4], $("#wordcloud").html(data).find('script')[5]];
-					    	console.log($("#wordcloud").html(data).find('script')[5]);
+					    	var wordcloud = [$("#wordcloud").html(data)];
+					    	console.log($("#wordcloud").html(data));
 					    	$("#wordcloud").html(wordcloud);
+					    	
 					       }
 					}); 
-				}
+				} */
+			    	function wordcloud(shop_code){
+						var url = "/pmkim/resources/html/"+shop_code+".html";
+						$.ajax({
+							  url:url,
+							  context: document.body,
+							  success: function(response){
+								  console.log(url);
+							    html = response;
+							   console.log(html);
+							    var wordcloud = $('#wordcloud');
+							    wordcloud.attr('srcdoc',html);
+							  }
+							});
+					}
 				
 				function ajax(shop_code){
 					var num = document.getElementsByClassName('event_name').length;
@@ -279,7 +296,6 @@
 				            	//shop name 클릭시 마다 변경
 				            	document.getElementsByClassName('shop_name')[0].innerHTML=data[0].shop_name;
 				            	document.getElementsByClassName('shop_name')[1].innerHTML=data[0].shop_name;
-				            	//이 안에서 html 읽고 wordcloud
 				            	
 				            	//csv 읽고 그래프
 				            	
@@ -300,9 +316,7 @@
 				
 				
 				$(document).ready(function(){
-					var shop_code = document.getElementsByClassName('carousel-item active')[0].id;
-					var shop_name = document.getElementsByClassName('shop')[0].id;
-					console.log(shop_name);
+					var shop_code = document.getElementsByClassName('shop')[0].id;
 		               ajax(shop_code);
 		               wordcloud(shop_code);
 					$("#next-carousel ").click(function(){
@@ -316,13 +330,13 @@
 					}); 
 				});
 				</script>
+				
 				<div class="col-xl-7 col-lg-7 col-md-6">
 					<div class="single-product-details">
 
-						<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						 SNS 에서 가장 인기가 많은 <span class="shop_name"></span> 상품은?</h2>
-
-						
+						<h2>&nbsp;&nbsp;
+						 SNS 포스팅 감성분석 </h2>
+						 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DO YOU LOVE <span class="shop_name"></span> ?</p>
 <!-- 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
 								<a class="btn hvr-hover" data-fancybox-close="" href="#">Best 상품</a>
@@ -336,20 +350,12 @@
 					
 				</div>
 						
-						
-						
-						
-						
-						
-						<!--  <div id="htmlwidget_container">
-  							<div id="htmlwidget-2208bd27a283fa195e79" style="width:960px;height:500px;" class="wordcloud2 html-widget"></div>
-						</div>
-						<script type="application/json" data-for="htmlwidget-2208bd27a283fa195e79">{"x":{"word":["술","소주","깔라만시","마카롱","먹스","과일","반사","안주","한잔","젤리","회식","진로","술집","낮술","딸기","디저트","포차","빵","아이스크림","크림","우유","과자","떡","도시락","상품","우승","소통","신상품","파이","가격","소스","커피","생각","술안주","김밥","치즈","제품","라면","출시","미트","대선","떡볶이","샌드위치","흑임자","느낌","유편","덮밥","이벤트","맥주","메뉴","케이크","고구마","점심","흑당","아침","고기","사진","그릇","면","케익","행복","박스","저녁","식감","라면","탕면","라떼","조합","요리","펭수","콘","사랑","기대","파래","환영","사람","치킨","감태","여행","정도","입맛","소녀","버터","시간","후기","쿠키","육아","사과","야식","택배","데이","망고","컵라면","이상","선물","가성","매운맛","최고","미니","찰떡","인절미","퇴근","전복","하루","친구","타임","엄마","절대","팝콘","가능","초콜릿","이번","샐러드","땅콩","아이","캔디","버거","수란","다이어트","판매","녹차","주말","동네","민트","충전","요즘","참치","참여","유신","아들","거트","당첨","순두부","김치","쿠폰","포켓","소꿉놀이","득템","오리지널","개인","간장","구입","기분","계란","만족","시작","처음","추억","감사","인친","취향","방법","불고기","음료","금요일","행사","유덕","떡집","청년","다음","프로","숙취","식사","고추","만두"],"freq":[8211,8209,2704,2070,1974,1969,1693,1629,1554,1532,1372,1364,1358,1355,1355,1315,1280,1255,1247,1137,1045,976,972,955,833,809,773,740,723,721,718,710,681,681,651,641,630,614,602,582,578,578,559,527,525,517,513,513,512,501,453,441,432,410,405,401,397,393,393,392,385,354,343,339,334,334,333,333,332,332,329,321,316,314,313,312,309,307,304,303,299,298,275,275,270,266,265,262,259,256,255,253,252,251,249,248,248,248,246,246,238,238,237,237,236,236,234,234,234,232,232,230,229,226,223,223,219,214,213,213,212,207,206,206,206,202,202,201,198,197,194,194,194,193,193,192,190,189,189,187,184,181,181,180,179,179,178,176,175,174,173,171,171,171,169,169,168,167,167,165,165,162,162,161,160],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.0109609061015711,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
-						<script type="application/htmlwidget-sizing" data-for="htmlwidget-2208bd27a283fa195e79">{"viewer":{"width":450,"height":350,"padding":0,"fill":true},"browser":{"width":960,"height":500,"padding":0,"fill":true}}</script>
-						-->
 			</div>
-			<div id="wordcloud">
-			</div>
+			
+			<p align="center" id="wordcloud_p">
+			<iframe id="wordcloud" width = "100%" height = "400" srcdoc="" style="border:none">
+			</iframe>
+			</p>
 
 			<div class="row my-5">
 				<div class="col-lg-12">
