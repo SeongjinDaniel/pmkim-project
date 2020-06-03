@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
-	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"%>	
-=======
 	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"
 	import = "vo.GoodsEventShopMemberVO"%>	
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> ae3f73d1a4be198602df03bf938dbc1e94e40336
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,13 +54,7 @@
 	<%
 		String keyword = (String) request.getAttribute("searchKeyword");
 		String keywordProduct = (String) request.getAttribute("searchProduct");
-<<<<<<< HEAD
-		List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
-=======
 		//List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
-		//GoodsEventShopMemberVO mapAlgorithmDB = 
-		//		(GoodsEventShopMemberVO) request.getAttribute("mapAlgorithmDB");
->>>>>>> ae3f73d1a4be198602df03bf938dbc1e94e40336
 	%>
 	<c:set var="sessionMemberId" value="${ sessionScope.id }"/>
     <!-- Start Main Top -->

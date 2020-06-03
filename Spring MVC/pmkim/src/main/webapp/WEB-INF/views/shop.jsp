@@ -18,6 +18,24 @@
     <meta name="author" content="">
 
     <!-- Site Icons -->
+<<<<<<< HEAD
+	<link rel="icon" type="image/png" sizes="16x16"
+	    href="/pmkim/resources/images/favicon-16x16.png">
+	<link rel="shortcut icon" href="/pmkim/resources/images/favicon.ico"
+		type="image/x-icon">
+	<link rel="apple-touch-icon"
+		href="/pmkim/resources/images/apple-touch-icon.png">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/style_linda.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/pmkim/resources/css/custom.css">
+	<link rel="stylesheet" href="/pmkim/resources/css/footerus.css">
+=======
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
@@ -29,6 +47,7 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
+>>>>>>> f6783f64d00cd40c703ee47bcf6856a659b9191e
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
