@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
 	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"%>	
+=======
+	pageEncoding="UTF-8" import = "vo.MemberVO, java.util.List"
+	import = "vo.GoodsEventShopMemberVO"%>	
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> ae3f73d1a4be198602df03bf938dbc1e94e40336
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +35,7 @@
 <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min_map.css">
 <!-- Site CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/styleMap.css">
+<link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
 <!-- Custom CSS -->
@@ -50,105 +58,64 @@
 	<%
 		String keyword = (String) request.getAttribute("searchKeyword");
 		String keywordProduct = (String) request.getAttribute("searchProduct");
+<<<<<<< HEAD
 		List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
+=======
+		//List<MemberVO> memberList = (List<MemberVO>) request.getAttribute("memberList");
+		//GoodsEventShopMemberVO mapAlgorithmDB = 
+		//		(GoodsEventShopMemberVO) request.getAttribute("mapAlgorithmDB");
+>>>>>>> ae3f73d1a4be198602df03bf938dbc1e94e40336
 	%>
-	<header class="main-header">
-		<!-- Start Navigation -->
-		<nav
-			class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-			<div class="container">
-				<!-- Start Header Navigation -->
-				<div class="navbar-header">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbar-menu" aria-controls="navbars-rs-food"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<i class="fa fa-bars"></i>
-					</button>
-					<a class="navbar-brand" href="index.html"><img
-						src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
-				</div>
-				<!-- End Header Navigation -->
+	<c:set var="sessionMemberId" value="${ sessionScope.id }"/>
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="/pmkim/main"><img src="/pmkim/resources/images/pmkim_Logo_1.jpg" class="logo" alt=""></a>
+                </div>
+                <!-- End Header Navigation -->
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="navbar-menu">
-					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown"
-						data-out="fadeOutUp">
-						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-						<!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
-						<li class="nav-item"><a class="nav-link" href="/pmkim/map">지도</a></li>
-						<!--성진오빠파트-->
-						<li class="dropdown"><a href="#"
-							class="nav-link dropdown-toggle arrow" data-toggle="dropdown">테마</a>
-							<!-- 세호오빠가 원하는 li에다가 href해주세요!-->
-							<ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
-								<li><a href="shop-detail.html">Shop Detail</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-								<li><a href="my-account.html">My Account</a></li>
-								<li><a href="wishlist.html">Wishlist</a></li>
-							</ul></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="event.jsp">행사</a></li>
-						<!-- 지혜파트-->
-						<li class="nav-item"><a class="nav-link" href="mycart.jsp">장바구니</a></li>
-						<!-- 규영언니파트♡ -->
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
-
-				<!-- Start Atribute Navigation -->
-				<div class="attr-nav">
-					<ul>
-						<li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-						<li class="side-menu"><a href="#"> <i
-								class="fa fa-shopping-bag"></i> <span class="badge">3</span>
-								<p>My Cart</p>
-						</a></li>
-					</ul>
-				</div>
-				<!-- End Atribute Navigation -->
-			</div>
-			<!-- Start Side Menu -->
-			<div class="side">
-				<a href="#" class="close-side"><i class="fa fa-times"></i></a>
-				<li class="cart-box">
-					<ul class="cart-list">
-						<li><a href="#" class="photo"><img
-								src="resources/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-							<h6>
-								<a href="#">Delica omtantur </a>
-							</h6>
-							<p>
-								1x - <span class="price">$80.00</span>
-							</p></li>
-						<li><a href="#" class="photo"><img
-								src="resources/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-							<h6>
-								<a href="#">Omnes ocurreret</a>
-							</h6>
-							<p>
-								1x - <span class="price">$60.00</span>
-							</p></li>
-						<li><a href="#" class="photo"><img
-								src="resources/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-							<h6>
-								<a href="#">Agam facilisis</a>
-							</h6>
-							<p>
-								1x - <span class="price">$40.00</span>
-							</p></li>
-						<li class="total"><a href="#"
-							class="btn btn-default hvr-hover btn-cart">VIEW CART</a> <span
-							class="float-right"><strong>Total</strong>: $180.00</span></li>
-					</ul>
-				</li>
-			</div>
-			<!-- End Side Menu -->
-		</nav>
-		<!-- End Navigation -->
-	</header>
-	<!-- End Main Top -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/home">Home</a></li> <!-- href는 jsp/html 형식이 아닌, {/매핑명}으로  해주시면돼용! 나중에 고쳐주세요~ -->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/map">지도</a></li> <!--성진오빠파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/theme">테마</a></li> <!-- 세호-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/event">행사</a></li> <!-- 지혜파트-->
+                        <li class="nav-item active"><a class="nav-link" href="/pmkim/cart">만원의 행복</a></li> <!-- 규영언니파트♡ -->
+                        <!-- <li class="nav-item active"><a class="nav-link" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>	                        
+						<li class="nav-item active"><a class="nav-link" href="/pmkim/signup">회원가입</a></li> -->
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+						<c:choose>
+							<c:when test="${msg eq 'success' || !empty sessionMemberId}">
+								<li class="nav-item active"><a class="nav-link" id="userView" href="/pmkim/ownerpage"><img src="/pmkim/resources/images/star.png" style="width:13px;">${sessionMemberId}님</a></li>
+								<li class="nav-item active"><a class="nav-link" id="logout" href="/pmkim/logout"><b>Logout</b></a></li>
+								
+							</c:when>
+							<c:when test="${msg eq 'fail' || msg eq 'logout' || msg eq '' || msg eq null}">
+								<li class="nav-item active"><a class="nav-link" id="login" data-toggle="modal" data-target="#loginModal" href="/pmkim/#">로그인</a></li>
+								<li class="nav-item active"><a class="nav-link" id="signup" href="/pmkim/signup">회원가입</a></li>	
+						    </c:when>
+						</c:choose>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+			
+            </div>
+            
+            <!-- Login -->
+           
+			<!-- Login End-->
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
 
 	<!-- Start Top Search -->
 	<div class="top-search">
