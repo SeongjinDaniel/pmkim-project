@@ -13,8 +13,9 @@
 				or b.title like '%GS%'
 				or b.title like '%이마트24%' or b.title like '%Emart24%'
 				or b.title like '%세븐일레븐%' or b.title like '%7Eleven%'
-				or b.title like '%미니스톱%' or b.title like '%ministop%'))
-		where rnum between #{startNum} and #{endNum}	
+				or b.title like '%미니스톱%' or b.title like '%ministop%') order by b.write_date desc)
+		where rnum between #{startNum} and #{endNum}
+		
 	</select>
 	
 	<select id="newsSort" resultType="vo.NewsVO">

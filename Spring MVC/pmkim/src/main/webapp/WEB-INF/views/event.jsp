@@ -14,7 +14,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
     <!-- Site Metas -->
-    <title>편마, 김편복 - event</title>
+    <title>편마, 김편복 - 행사</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -99,17 +99,7 @@ import="vo.GoodsVO, vo.CartVO, vo.EventVO, vo.MemberVO,vo.GoodsEventShopMemberVO
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
-	<!-- Start All Title Box -->
-		<div class="all-title-box">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<h2>행사</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	<!-- End All Title Box -->
+
 	<!-- Start login popup -->
     <div class="container">
 		<!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal">

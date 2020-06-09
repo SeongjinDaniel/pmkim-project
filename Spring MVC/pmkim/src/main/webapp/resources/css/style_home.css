@@ -895,6 +895,11 @@
  .products-box{
      padding: 70px 0px;
 }
+
+ .products-box33{
+     padding: 70px 0px;
+     background-color:#f5f5f5;
+}
  .special-menu{
      margin-bottom: 40px;
 }
@@ -2615,11 +2620,30 @@
 .event-img{
     width:80px;
 }
+.map-img{
+	width:120px;
+}
+.map-img-small{
+    width:85px;
+    border-radius:18px;
+}
 .event-img-small{
     width:58px;
     border-radius:15px;
 }
-
+.header-words a{
+   font-family:"Youth";
+   font-size: 50px;
+   color:#0F694D;
+   background:white;
+    font-weight: 600;
+    border-radius:10px;
+    padding: 20   20   20   206; 
+}
+.map-border{
+	border: 7px dotted #0F694D;
+	border-radius: 40px;
+}
 
 
 

@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>편마, 김편복</title>
+    <title>편마, 김편복 - Home</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -41,7 +41,8 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da9ee51fb08b7986257790a5d30ebc55&libraries=services,clusterer,drawing"></script>
 </head>
 
 <body>
@@ -164,20 +165,7 @@
 	</div>
 		<!-- End login popup -->
     
-
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- End Top Search -->
-
-    <!-- Start Slider -->
+	<!-- Start Slider -->
     <div id="slides-shop" class="cover-slides">
         <ul class="slides-container">
             <li class="text-center">
@@ -185,9 +173,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="m-b-20"></h1>
-                            <p class="m-b-40"></p>
-                            <p><a href="/pmkim/event">이벤드 상품 둘러보러가기</a></p>
+                            <h1 class="header-words"><a href="/pmkim/event"> 행사상품 둘러보기 </a></h1>
                         </div>
                     </div>
                 </div>
@@ -206,7 +192,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                             <p><a  href="/pmkim/cart">만원의행복 찾아가기</a></p>
+                             <h1 class="header-words"><a href="/pmkim/cart"> 만원의 행복 내가 만들어보기 </a></h1>
                         </div>
                     </div>
                 </div>
@@ -218,6 +204,33 @@
         </div>
     </div>
     <!-- End Slider -->
+
+
+
+	<!-- Start MAP  -->
+    <div class="products-box33">
+        <div class="container">
+        	<br>
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                    <img class="map-img" src ="/pmkim/resources/images/gs.png"/>
+                    <img class="map-img" src ="/pmkim/resources/images/cu1.png"/>
+                    <img class="map-img" src ="/pmkim/resources/images/emart24.png"/>
+                    <img class="map-img" src ="/pmkim/resources/images/ministop.png"/>
+                    <img class="map-img-small" src ="/pmkim/resources/images/seveneleven.png"/><br><br>
+                    <a class="event-href" href="/pmkim/map">지도</a><br>
+                     <a class="event-a" href="/pmkim/map">주변의 편의점을</a>
+                     <a class="event-a" href="/pmkim/map" style="color:red">찾아보세요~</a><br>
+                     <a class="event-a" href="/pmkim/map" style="color:grey">이곳을 클릭해보세요!</a><br><br>
+                    <div id="map" class="map-border" style="width: 100%; height: 500px;"></div>
+                    </div>
+                </div>
+    	</div>
+    </div>
+    <!-- End MAP  -->
+
+
+
 
 	<!-- Start Products  -->
     <div class="products-box">
@@ -317,6 +330,8 @@
         </div> 
     </div>
     <!-- End Products  -->
+    
+    
     <!-- Start Blog  -->
     <div class="latest-blog">
         <div class="container">
@@ -339,7 +354,7 @@
                         <div class="blog-content">
                             <div class="title-blog">
                                 <h3>1위, 세븐일레븐</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                                <p>편의점 7-Eleven, 가맹점주 모집 및 점포개발사업, 예약도시락, 멤버쉽, 택배 서비스 안내.</p>
                             </div>
                         </div>
                     </div>
@@ -352,7 +367,7 @@
                         <div class="blog-content">
                             <div class="title-blog">
                                 <h3>2위, GS25</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                                <p>일상생활의 중심, 하루의 시작 Lifestyle Platform GS25</p>
                             </div>
                         </div>
                     </div>
@@ -365,7 +380,7 @@
                         <div class="blog-content">
                             <div class="title-blog">
                                 <h3>3위, CU</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                                <p>편의점 미니스톱 소개, 소매점 개업 안내, 경영주 모집, 신상품 정보 및 고객정보.</p>
                             </div>
                         </div>
                     </div>
@@ -498,6 +513,125 @@
 	<!-- End copyright  -->
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+    
+    <!-- MAP -->
+    <script>
+		// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+		
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 장소 검색 객체를 생성합니다
+		var ps = new kakao.maps.services.Places(); 
+		
+		// 키워드로 장소를 검색합니다
+		//ps.keywordSearch('편의점', placesSearchCB);
+		
+		var imageSrc = null, 
+    	imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+	    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+	    var markerImage;
+	    
+		if (navigator.geolocation) {
+			//console.log("geolocation!!!!!!!!!!!!!!");
+			// GeoLocation을 이용해서 접속 위치를 얻어옵니다
+			navigator.geolocation.getCurrentPosition(function(position) {
+				lat = position.coords.latitude, // 위도
+				lon = position.coords.longitude; // 경도
+				//console.log("lat1: "+lat);
+				//console.log("lon1: "+lon);
+				// var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				//     message = '<div style="padding:5px;">편의점 명을 정확히 기재해주세요!</div>'; // 인포윈도우에 표시될 내용입니다
+				//마커와 인포윈도우를 표시합니다   
+				// oneDisplayMarker(locPosition, message);
+
+				ps.keywordSearch('편의점', placesSearchCB, {
+					// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
+					location: new kakao.maps.LatLng(lat, lon)
+				});
+			});
+		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+			var locPosition = new kakao.maps.LatLng(37.5012428,127.0373972),
+				message = '현재 위치를 찾을 수 없어요..'
+				
+			oneDisplayMarker(locPosition, message);
+
+			ps.keywordSearch('편의점', placesSearchCB, {
+				// LatLng : 중심 좌표. 특정 지역을 기준으로 검색한다.
+				location: new kakao.maps.LatLng(locPosition)
+			});
+		}
+		
+		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+		function placesSearchCB (data, status, pagination) {
+		    if (status === kakao.maps.services.Status.OK) {
+		
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+		        // LatLngBounds 객체에 좌표를 추가합니다
+		        var bounds = new kakao.maps.LatLngBounds();
+		
+		        for (var i=0; i<data.length; i++) {
+		        	var str = data[i].place_name;
+		        	var res = str.split(" ");
+		        	var shop_code = res[0];
+		        	console.log("shop code  "+shop_code);
+		        	
+		        	// 마커이미지의 주소입니다
+		        	if(shop_code == 'CU'){
+		        		imageSrc = '/pmkim/resources/images/cu1.png';
+		        	}else if(shop_code == 'GS25'){
+		        		imageSrc = '/pmkim/resources/images/map/gs_home.png';
+		        	}else if(shop_code == '이마트24'){
+		        		imageSrc = '/pmkim/resources/images/map/e24.png';
+		        	}else if(shop_code == '세븐일레븐'){
+		        		imageSrc = '/pmkim/resources/images/seveneleven.png';
+		        	}else if(shop_code == '미니스톱'){
+		        		imageSrc = '/pmkim/resources/images/map/ministop_home.png';
+		        	}else imageSrc = null;
+		        	
+		        	markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+		        	//console.log("place name2 : "+data[i].place_name)
+		            displayMarker(data[i]);
+	
+					var location = new kakao.maps.LatLng(data[i].y, data[i].x); 
+                    bounds.extend(location);
+		            //bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+		        }       
+		
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		        map.setBounds(bounds);
+		    } 
+		}
+		
+		// 지도에 마커를 표시하는 함수입니다
+		function displayMarker(place) {
+		    
+		    // 마커를 생성하고 지도에 표시합니다
+		    var marker = new kakao.maps.Marker({
+		        map: map,
+		        image: markerImage,
+		        position: new kakao.maps.LatLng(place.y, place.x) 
+		    });
+
+        	
+		    // 마커에 클릭이벤트를 등록합니다
+		    kakao.maps.event.addListener(marker, 'click', function() {
+		        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+		        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+		        infowindow.open(map, marker);
+		    });
+		}
+	</script>
+    
+    <!-- END MAP -->
 
     <!-- ALL JS FILES -->
     <script src="/pmkim/resources/js/jquery-3.2.1.min.js"></script>

@@ -17,7 +17,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Site Metas -->
-<title>편마 김편복</title>
+<title>편마, 김편복 - 지도</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -38,7 +38,6 @@
 <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/custom.css">
-
 <!-- kakao map -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da9ee51fb08b7986257790a5d30ebc55&libraries=services,clusterer,drawing"></script>
@@ -168,23 +167,6 @@
 		
 	</div>
 		<!-- End login popup -->
-    
-
-	<!-- Start All Title Box -->
-	<div class="all-title-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h2>MAP</h2>
-					<ul class="breadcrumb">
-						<li class="breadcrumb-item"><a href="">Home</a></li>
-						<li class="breadcrumb-item active">Map</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End All Title Box -->
 
 	<!-- Start About Page  -->
 	<div class="about-box-main">
@@ -224,9 +206,9 @@
                   </div>
                </div>
             </form>
-			<div id="productList"></div>
+			<div id="productList" class="productList-reult" ></div>
 			<div id="map" style="width: 100%; height: 500px;"></div>
-			<div id="printName"></div>
+			<div id="printName" ></div>
 			<script>
 				// 카카오 맵에서 넘어 오는 편의점명 -> CU, GS25, 세븐일레븐, 이마트24, 미니스톱
 				const EMART24 = "EM", CU = "CU", GS25 = "GS", SEVENELEVEN = "SE", MINISTOP = "MS";
@@ -255,6 +237,7 @@
 					}else{
 						if(isEmpty(shop_code)){
 							console.log('what happen? shop_code error');
+							keyword = '편의점';
 						}else{
 							if(shop_code == 'ALL'){
 								keyword += ' 편의점';
@@ -277,7 +260,7 @@
 				}else{
 					keyword = '편의점';
 				}
-
+				console.log("keyword: "+keyword);
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
                 // 키워드 장소 검색할 때 필요한 부분!!
                 infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -285,7 +268,7 @@
 				mapContainer = document.getElementById('map');
 				
 			    mapOption = { 
-			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        center: new kakao.maps.LatLng(37.5012428,127.0373972), // 지도의 중심좌표
 			        level: 4 // 지도의 확대 레벨 
 			    };
 				// 지도를 생성합니다
@@ -315,7 +298,7 @@
 						});
 					});
 				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-					var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+					var locPosition = new kakao.maps.LatLng(37.5012428,127.0373972),
 						message = '현재 위치를 찾을 수 없어요..'
 						
 					oneDisplayMarker(locPosition, message);

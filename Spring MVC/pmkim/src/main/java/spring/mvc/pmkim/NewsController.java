@@ -31,6 +31,8 @@ public class NewsController {
 
 		ModelAndView mav = new ModelAndView();
 		List<NewsVO> list = ndao.listAll(vo,startNum, endNum);
+		list.get(0).getWrite_date();
+		//list.sort();
 		
 		String oldQ ="";
 

@@ -47,6 +47,22 @@
 <script src="/pmkim/resources/js/hover.js"></script>
 <script src="/pmkim/resources/js/wordcloud2.js"></script>
 <script src="/pmkim/resources/js/jquery-3.2.1.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset = "utf-8"></script>
+<style>
+#myGraph rect {
+	stroke-width : 1px;
+	fill : orange;
+}
+svg {
+	width : 500px;
+	height : 180px;
+}
+.text {
+        font-weight: bold;
+        color: #ffffff;
+         text-shadow: 2px 2px 2px gray; 
+}
+</style>
 </head>
 
 <body>
@@ -241,149 +257,236 @@
             </div>
             
             
-            <script>
-            
-            /* function wordcloud(shop_code){
-               $.ajax({
-                      type: "GET",
-                      url: "/pmkim/wordcloud",
-                      data : {"shop_code" : shop_code 
-                      },
-                      dataType: "json",
-                      success: function(data)
-                      {
-                         
-                        $('#wordcloud').html(data);
-                      }
-               }); 
-            } */
-            /* document.getElementsByClassName('wordcloud_p')[0].innerHTML=
-                "<iframe id='wordcloud' width = '100%' height = '400' srcdoc='"+$("#wordcloud_p").html(data)+"' seamless></iframe>"
-              */
-            /* function wordcloud(shop_code){
-               var url = "resources/html/"+shop_code+".html";
-               $.ajax({
-                      url: url,
-                      success: function(data)
-                      {
-                      var wordcloud = [$("#wordcloud").html(data)];
-                      console.log($("#wordcloud").html(data));
-                      $("#wordcloud").html(wordcloud);
-                      
-                      }
-               }); 
-            } */
-                function wordcloud(shop_code){
-                  var url = "/pmkim/resources/html/"+shop_code+".html";
-                  $.ajax({
-                       url:url,
-                       context: document.body,
-                       success: function(response){
-                          console.log(url);
-                         html = response;
-                        console.log(html);
-                         var wordcloud = $('#wordcloud');
-                         wordcloud.attr('srcdoc',html);
-                       }
-                     });
-               }
-            
-            function ajax(shop_code){
-               var num = document.getElementsByClassName('event_name').length;
-                $.ajax({
-                        type :"POST",
-                        url :"/pmkim/analysis",  
-                        data : {"shop_code" : shop_code
-                               },
-                        dataType : "json", 
-                        success : function(data){   
-                           //shop name 클릭시 마다 변경
-                           document.getElementsByClassName('shop_name')[0].innerHTML=data[0].shop_name;
-                           document.getElementsByClassName('shop_name')[1].innerHTML=data[0].shop_name;
-                           
-                           //csv 읽고 그래프
-                           
-                           //상품 정보 받아와서 정보 뿌려주기
-                           for(var i=0;i<num;i++){
-                              document.getElementsByClassName('good_name')[i].innerHTML=data[i].good_name;
-                              document.getElementsByClassName('good_price')[i].innerHTML=data[i].good_price+" 원";
-                              document.getElementsByClassName('event_name')[i].innerHTML=data[i].event_name;
-                              document.getElementsByClassName('box-img-hover')[i].innerHTML=
-                                 "<img src='"+data[i].good_img+"' class='img-fluid' alt='Image'>";
-                           }
-                    },
-                    error : function(){
-                       alert("프로그램 에러가 발생했습니다.2");
-                    }
-                 });
-            }
-            
-            
-            $(document).ready(function(){
-               var shop_code = document.getElementsByClassName('shop')[0].id;
-                     ajax(shop_code);
-                     wordcloud(shop_code);
-               $("#next-carousel ").click(function(){
-                  // 시간 지연해줘야 값 받아옴
-                  setTimeout(function(){
-                     //클릭하면 shop_code 받아오기
-                     shop_code = document.getElementsByClassName('carousel-item active')[0].id;
-                       ajax(shop_code);
-                       wordcloud(shop_code);
-                  },800);
-               }); 
-            });
-            </script>
-            
-            <div class="col-xl-7 col-lg-7 col-md-6">
-               <div class="single-product-details">
+<script>
+				
+			    	function wordcloud(shop_code){
+						var url = "/pmkim/resources/html/"+shop_code+".html";
+						$.ajax({
+							  url:url,
+							  context: document.body,
+							  success: function(response){
+								//console.log(url);
+							    html = response;
+							   	//console.log(html);
+							    var wordcloud = $('#wordcloud');
+							    wordcloud.attr('srcdoc',html);
+							  }
+							});
+					}
+				
+					function ajax(shop_code){
+						var num = document.getElementsByClassName('event_name').length;
+						 $.ajax({
+					            type :"POST",
+					            url :"/pmkim/analysis",  
+					            data : {"shop_code" : shop_code
+					                   },
+					            dataType : "json", 
+					            success : function(data){	
+					            	//shop name 클릭시 마다 변경
+					            	document.getElementsByClassName('shop_name')[0].innerHTML=data[0].shop_name;
+					            	document.getElementsByClassName('shop_name')[1].innerHTML=data[0].shop_name;
+					            	
+					            	//csv 읽고 그래프
+					            	
+					            	//상품 정보 받아와서 정보 뿌려주기
+					               for(var i=0;i<num;i++){
+					            	   document.getElementsByClassName('good_name')[i].innerHTML=data[i].good_name;
+					            	   document.getElementsByClassName('good_price')[i].innerHTML=data[i].good_price+" 원";
+					            	   document.getElementsByClassName('event_name')[i].innerHTML=data[i].event_name;
+					            	   document.getElementsByClassName('box-img-hover')[i].innerHTML=
+					            		   "<img src='"+data[i].good_img+"' class='img-fluid' alt='Image'>";
+					               }
+					        },
+					        error : function(){
+					           alert("프로그램 에러가 발생했습니다.2");
+					        }
+					     });
+					}
+					
+					function graph(shop_code){
+						var filecsv= "/pmkim/resources/csv/senti_data.csv";
+						
+						$.ajax({
+							url: filecsv,
+						  	dataType: "text",
+						  	success: function(data){
+						  		d3.csv(filecsv,function(error,data){
+									//console.log(typeof data);
+									//console.log(data);
+									var dataSet = [ ];
+									for(var i=0; i<data.length; i++){
+										dataSet.push(data[i][shop_code]);
+										//console.log(data[i][shop_code]);
+									}
+									
+									
+									var graph = d3.select("#myGraph")
+										.selectAll("rect")
+										.data(dataSet)
+										.enter()
+										.append("rect")
+										.attr("x",60)
+										.attr("y",function(d,i){
+											return (i * 60);
+										})
+										.attr("height","50px")
+										.attr("width", "0px");
+									
+									graph.transition()				
+										.delay(function(d, i){
+											return i * 1000;		
+										})
+										.duration(2500)			
+										.attr("width", function(d, i){
+											return d/3 +"px";		 
+										});
+									
+									
+									var text_data = ["LOVE : "+dataSet[0],"Negative : "+dataSet[1]];
+									var text = d3.select("svg");
+									//console.log(text);
+									console.log(text_data);
+									text.selectAll("text")
+								    .data(text_data)
+								    .enter().append("text")
+								    .text(function(d) {return d})
+								    .attr("class", "text")
+								    .transition()				
+									.delay(function(d, i){
+										return i * 1000;		
+									})
+									.duration(4000)
+								    .attr("x", 70)
+								    .attr("y", function(d, i) {return 30+(i*60)})
+								    ;
+										
+								});
+						  }
+						});
+					}
+					
+					function feed(){
+						var filecsv= "/pmkim/resources/csv/feed.csv";
+						$.ajax({
+							url: filecsv,
+						  	dataType: "text",
+						  	success: function(data){
+						  		
+						  		d3.csv(filecsv,function(error,data){
+									var urlSet = [ ];
+									var imgSet = [ ];
+									for(var i=0; i<data.length; i++){
+										urlSet.push(data[i].url);
+										imgSet.push(data[i].img);
+									}
+									//var num = document.getElementsByClassName('ins-inner-box').length;
+									for(var i =0; i<data.length;i++){
+										document.getElementsByClassName('ins-inner-box')[i].innerHTML += 
+											"<img src='"+imgSet[i]+"'/>"+
+											"<div class='hov-in'><a href='"+urlSet[i]+
+											"'><i class='fab fa-instagram'></i></a></div> ";
+											if(data.length == 4){
+												setTimeOut(function(){
+													
+												},1000);
+											}
+												
+									}
+									
+									
+									//ins-inner-box 400x400px
+									//<div class="hov-in">
+									//<a href="#"><i class="fab fa-instagram"></i></a>
+									//
+									
+								});
+						  }
+						});
+					}
+					
+					
+					$(document).ready(function(){
+						var shop_code = document.getElementsByClassName('shop')[0].id;
+			               ajax(shop_code);
+			               wordcloud(shop_code);
+			               graph(shop_code);
+			               feed();
+						$("#next-carousel ").click(function(){
+							// 그래프 지웟다가 다시 그리려면 svg 내용 지우고 넘겨야함 
+							d3.selectAll("svg > *").remove();
+                     //d3.selectAll(".ins-inner-box > *").remove();
 
-                  <h2>&nbsp;&nbsp;
-                   SNS 포스팅 감성분석 </h2>
-                   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DO YOU LOVE <span class="shop_name"></span> ?</p>
-<!--                   <div class="price-box-bar">
-                     <div class="cart-and-bay-btn">
-                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Best 상품</a>
-                        
-                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Best 상품 그래프</a>
-                        
-                        <a class="btn hvr-hover" data-fancybox-close="" href="#">감성분석 그래프</a>
-                     </div>
-                  </div> -->
-               </div>
-               
-            </div>
-                  
-         </div>
-         
-         <p align="center" id="wordcloud_p">
-         <iframe id="wordcloud" width = "100%" height = "400" srcdoc="" style="border:none">
-         </iframe>
-         </p>
+							// 시간 지연해줘야 값 받아옴
+							setTimeout(function(){
+								//클릭하면 shop_code 받아오기
+								shop_code = document.getElementsByClassName('carousel-item active')[0].id;
+								
+								ajax(shop_code);
+							     wordcloud(shop_code);
+							     graph(shop_code);
+							},800);
+						}); 
+					});
+					
+				</script>
+            
+				
+				<div class="col-xl-7 col-lg-7 col-md-6">
+					<div class="single-product-details">
 
-         <div class="row my-5">
-            <div class="col-lg-12">
-               <div class="title-all text-center">
-                  <h1>SNS 에서 가장 인기가 많은 <span class="shop_name"></span> 상품은?</h1>
-                  <p>최근 SNS 포스팅에서 가장 많이 노출된 상품 리스트</p>
-               </div>
-               <div class="featured-products-box owl-carousel owl-theme">
-                  <div class="item">
-                           <div class="type-lb">
-                                     <p class="event_name"></p>
-                                    </div>
-                     <div class="products-single fix">
-                        <div class="box-img-hover">
-                        <!-- image들어오는곳 -->
-                        </div>
-                        <div class="why-text">
-                           <h4 class="good_name"></h4>
-                           <h5 class="good_price"></h5>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="item">
-                     <div class="type-lb">
+						<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 DO YOU LOVE "<span class="shop_name"></span>" ? </h2>
+						 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 SNS 포스팅 감성분석 : <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 인스타그램 최신 게시물 5000 개를 감성 분석한 그래프
+						 </p>
+						 <svg id = "myGraph"></svg>
+<!-- 						<div class="price-box-bar">
+							<div class="cart-and-bay-btn">
+								<a class="btn hvr-hover" data-fancybox-close="" href="#">Best 상품</a>
+								
+								<a class="btn hvr-hover" data-fancybox-close="" href="#">Best 상품 그래프</a>
+								
+								<a class="btn hvr-hover" data-fancybox-close="" href="#">감성분석 그래프</a>
+							</div>
+						</div> -->
+					</div>
+					
+				</div>
+						
+			</div>
+			
+			
+
+			<div class="row my-5">
+				<div class="col-lg-12">
+					<div class="title-all text-center">
+						<h1>SNS 에서 가장 인기가 많은 <span class="shop_name"></span> 상품은?</h1>
+						<p>최근 SNS 포스팅에서 가장 많이 노출된 상품 리스트</p>
+					<p align="center" id="wordcloud_p">
+			<iframe id="wordcloud" width = "100%" height = "350" srcdoc="" style="border:none">
+			</iframe>
+			</p>
+					</div>
+					
+					<div class="featured-products-box owl-carousel owl-theme">
+						<div class="item">
+									<div class="type-lb">
+                               		<p class="event_name"></p>
+                           			</div>
+							<div class="products-single fix">
+								<div class="box-img-hover">
+								<!-- image들어오는곳 -->
+								</div>
+								<div class="why-text">
+									<h4 class="good_name"></h4>
+									<h5 class="good_price"></h5>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="type-lb">
                                 <p class="event_name"></p>
                               </div>
                      <div class="products-single fix">
@@ -490,6 +593,52 @@
       </div>
    </div>
    <!-- End Cart -->
+	<!-- Start Instagram Feed  -->
+	<div class="instagram-box">
+		<div class="main-instagram owl-carousel owl-theme">
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+			<div class="item">
+				<div class="ins-inner-box">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Instagram Feed  -->
 
 
    <!-- Start Footer  -->

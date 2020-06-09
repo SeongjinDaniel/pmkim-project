@@ -62,15 +62,15 @@
     background: #0F694D;
 }}
 .footer-main hr{
-	border-top: 1px solid rgba(255,255,255,.6);
+   border-top: 1px solid rgba(255,255,255,.6);
 }
 .footer-top-box{
-	margin-bottom: 30px;
+   margin-bottom: 30px;
 }
 .footer-top-box h3{
-	color: black;
-	position: relative;
-	font-size: 20px;
+   color: black;
+   position: relative;
+   font-size: 20px;
 }
 .footer-top-box h3::before {
     border-bottom: 2px solid #0F694D;
@@ -82,44 +82,44 @@
     left: 0px;
 }
 .list-time{
-	margin-top: 15px;
+   margin-top: 15px;
 }
 .footer-top-box .list-time li{
-	color: black;
-	font-size: 16px;
-	display: block;
-	float: none;
+   color: black;
+   font-size: 16px;
+   display: block;
+   float: none;
 }
 
 .newsletter-box{
-	margin-top: 15px;
-	position: relative;
+   margin-top: 15px;
+   position: relative;
 }
 .newsletter-box input{
-	height: 40px;
-	border: none;
-	padding: 0 10px;
-	background: transparent;
-	border-radius: 0;
-	background: #fff;
-	padding: 0 20px;
-	width: 100%;
+   height: 40px;
+   border: none;
+   padding: 0 10px;
+   background: transparent;
+   border-radius: 0;
+   background: #fff;
+   padding: 0 20px;
+   width: 100%;
 }
 .newsletter-box i{
-	position: absolute;
-	right: 15px;
-	top: 10px;
-	font-size: 20px;
+   position: absolute;
+   right: 15px;
+   top: 10px;
+   font-size: 20px;
 }
-.newsletter-box button{	
-	color: black;
-	font-size: 16px;
-	font-weight: 500;
-	
+.newsletter-box button{   
+   color: black;
+   font-size: 16px;
+   font-weight: 500;
+   
 }
  .footer-top-box p{
-	 padding-bottom: 15px;
-	 color: black;
+    padding-bottom: 15px;
+    color: black;
  }
 
  .footer-top-box ul{
@@ -143,7 +143,7 @@
      border-color: #0F694D;
 }
 .footer-widget, .footer-link, .footer-link-contact{
-	margin-top: 15px;
+   margin-top: 15px;
 }
  .footer-widget h4 {
      color: black;
@@ -282,13 +282,13 @@
 }
 .footer-copyright p {
     text-align: center;
-    color: black;
+    color: white;
     font-size: 16px;
 }
 .footer-copyright p a{
-    color: black;
+    color: white;
 }
 .footer-copyright p a:hover{
-    color: #0F694D;
+    color: white;
 }
         

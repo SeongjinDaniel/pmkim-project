@@ -14,7 +14,7 @@
 	<link rel="icon" type="image/png" sizes="16x16"
 		href="/pmkim/resources/images/favicon-16x16.png">
     <!-- Site Metas -->
-    <title>편마 김편복</title>
+    <title>편마, 김편복 - 마이페이지</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">

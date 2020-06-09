@@ -33,7 +33,9 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/bootstrap.min.css">
 <!-- Site CSS -->
+<link rel="stylesheet" href="/pmkim/resources/css/jquery-ui.css">
 <link rel="stylesheet" href="/pmkim/resources/css/style_cart.css">
+<link rel="stylesheet" href="/pmkim/resources/css/style_slider.css">
 <link rel="stylesheet" href="/pmkim/resources/css/style_nav.css">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="/pmkim/resources/css/responsive.css">
@@ -266,7 +268,7 @@
 															class="img-fluid" alt="Image">
 														<div class="mask-icon">
 															<a class="cart"
-																onclick="add('${vo.good_id}'); return false;">Add</a>
+																onclick="add('${vo.good_id}'); return false;">선택</a>
 														</div>
 													</div>
 													<div class="why-text">
@@ -321,14 +323,14 @@
 										<div id="slider-range"></div>
 										<p>
 											<input type="text" id="amount" readonly
-												style="border: 0; color: #fbb714; font-weight: bold;">
+												style="border: 0; color: #fbb714; font-size: 25px;font-weight: 500;">
 											<button class="btn hvr-hover"
-												onclick="recommend(); return false;">Filter</button>
+												onclick="recommend(); return false;">행복사냥</button>&nbsp;&nbsp;
 											<button class="btn hvr-hover"
-												onclick="deleteCart(); return false;">Reset</button>
-										</p>
-										<div id="cart-View" class="list-group-collapse sub-men">
-											상품을 클릭하세요.
+												onclick="deleteCart(); return false;">초기화</button>
+										</p><br><br>
+										<div id="cart-View" class="list-group-collapse sub-men click-style" >
+											&nbsp;상품을 클릭하세요.<br>
 											<!-- 담은 상품 여기에 나타내기  = add함수의 결과 여기로 가져옴 -->
 										</div>
 										<div id="recommend-View" class="list-group-collapse sub-men">
@@ -560,12 +562,18 @@
 											+ "<img src = '"+data[0].good_img+"' class ='img-fluid' width=120>"
 											+ data[0].good_price + "원";
 								} else {
-									document.getElementById('recommend-View').innerHTML += data[0].good_name
-											+ "<img src = '"+data[0].good_img+"' class ='img-fluid' width=120>"
-											+ data[0].good_price + "원" + "<br>";
-									document.getElementById('recommend-View').innerHTML += data[1].good_name
-											+ "<img src = '"+data[1].good_img+"' class ='img-fluid' width=120>"
-											+ data[1].good_price + "원";
+									if(data[0].good_price+data[1].good_price <= recomPrice){
+				                        document.getElementById('recommend-View').innerHTML += data[0].good_name 
+				                                                                  + "<img src = '"+data[0].good_img+"' class ='img-fluid'>"
+				                                                                  + data[0].good_price +"원"+ "<br>";
+				                        document.getElementById('recommend-View').innerHTML += data[1].good_name
+				                                                                  + "<img src = '"+data[1].good_img+"' class ='img-fluid'>"
+				                                                                  + data[1].good_price +"원" ;
+				                     }else{
+				                        document.getElementById('recommend-View').innerHTML += data[1].good_name
+				                                                                  + "<img src = '"+data[1].good_img+"' class ='img-fluid'>"
+				                                                                  + data[1].good_price +"원" ;
+				                     }
 								}
 							} else {
 								alert('상품을 선택해주세요.');
@@ -656,6 +664,7 @@
 			});
 		}
 	</script>
+
 
 </body>
 
